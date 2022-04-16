@@ -19,19 +19,16 @@ package com.avmoga.dpixel.windows;
 
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.scenes.PixelScene;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
-import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.ui.Component;
 
 public class WndTitledMessage extends Window {
 
-	private static final int WIDTH_P = 120;
-	private static final int WIDTH_L = 144;
-	private static final int GAP = 2;
-
-	private BitmapTextMultiline normal;
-	private BitmapTextMultiline highlighted;
+	protected static final int WIDTH_P = 120;
+	protected static final int WIDTH_L = 144;
+	protected static final int GAP = 2;
 
 	public WndTitledMessage(Image icon, String title, String message) {
 
@@ -48,29 +45,11 @@ public class WndTitledMessage extends Window {
 		titlebar.setRect(0, 0, width, 0);
 		add(titlebar);
 
-		Highlighter hl = new Highlighter(message);
+		RenderedTextMultiline text = PixelScene.renderMultiline(6);
+		text.text(message, width);
+		text.setPos(titlebar.left(), titlebar.bottom() + GAP);
+		add(text);
 
-		normal = PixelScene.createMultiline(hl.text, 6);
-		normal.maxWidth = width;
-		normal.measure();
-		normal.x = titlebar.left();
-		normal.y = titlebar.bottom() + GAP;
-		add(normal);
-
-		if (hl.isHighlighted()) {
-			normal.mask = hl.inverted();
-
-			highlighted = PixelScene.createMultiline(hl.text, 6);
-			highlighted.maxWidth = normal.maxWidth;
-			highlighted.measure();
-			highlighted.x = normal.x;
-			highlighted.y = normal.y;
-			add(highlighted);
-
-			highlighted.mask = hl.mask;
-			highlighted.hardlight(TITLE_COLOR);
-		}
-
-		resize(width, (int) (normal.y + normal.height()));
+		resize(width, (int) text.bottom());
 	}
 }

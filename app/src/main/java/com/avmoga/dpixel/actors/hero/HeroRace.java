@@ -1,14 +1,14 @@
 package com.avmoga.dpixel.actors.hero;
 
-import com.avmoga.dpixel.Badges.Badge;
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
+import com.avmoga.dpixel.Badges.Badge;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.blobs.Freezing;
 import com.avmoga.dpixel.actors.buffs.Burning;
 import com.avmoga.dpixel.actors.buffs.Ooze;
 import com.avmoga.dpixel.actors.buffs.Poison;
-import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.items.TomeOfSpecialty;
 import com.avmoga.dpixel.items.scrolls.ScrollOfRegrowth;
 import com.watabou.utils.Bundle;
@@ -20,44 +20,43 @@ public enum HeroRace {
 	
 	private String title;
 	public static HeroRace race;
-	
+
 	public String title() {
-		return title;
+		return Messages.get(HeroRace.class, title);
 	}
 	
 	private HeroRace(String race){
 		this.title = race;
 	}
 	public static final String[] DWF_PERKS = {
-			"A species that is just as wise and cunning as it is cruel and brutal.",
-			"Dwarves gain an increased damage boost from excess strength.",
-			"Dwarves' tough skin gives them a minor reduction in damage from all elemental sources.",
-			"Dwarves are susceptible to corruption; they will take additional damage from evils.",
-			"Dwarves are the only race who know how to use the Chains of Ares to their maximum potential."};
+			"一个机智狡猾又残忍野蛮的种族。",
+			"矮人获得随额外力量增加而增加的伤害加成。",
+			"矮人坚韧的皮肤为他们提供针对所有元素的伤害吸收。",
+			"矮人易受腐败影响，他们会承受更多恶魔的伤害。",
+			"矮人是唯一知道如何发挥战神之链全部力量的种族。"};
 	
 	public static final String[] HUM_PERKS = {
-			"What this species lacks in natural defenses, it makes up for in social standing and intelligence.",
-			"Humans are incredibly religion creatures, and gain a bonus in dealing with Gods (Not yet implemented).",//Will be added with gods
-			"Humans are fairly cunning, and able to use the basic functions of other races' special items.",
-			"Humans are a tad frail, and start with 2 less health.",
-			"Humans are the only race who know how to use Communication Relays to their maximum potential."
+			"社会地位与智力弥补了这个种族在天生防御中的缺陷。",
+			"人类是难以置信的宗教生物，并且在与神打交道中获得加成（暂未实装）",//Will be added with gods
+			"人类相当狡猾，并且能发挥其他种族特殊物品的基本功能。",
+			"人类有点虚弱，开局生命上限降低两点。",
+			"人类是唯一知道如何发挥通信中继器全部力量的种族。"
 	};
 	
 	public static final String[] WRA_PERKS = {
-			"Beings of pure shadow, nobody knows how Wraiths manifested in the dungeon; only that they will stop at nothing to leave.",
-			"Wraiths are dimming creatures, and recieve a small passive increase in evasion chance.",
-			"The insubstantial, shadowy nature of Wraiths make them harder to freeze or ignite.",
-			"Their dark disposition means that they are hurt slightly by the light of Scrolls of Remove Curse and dew bottle Blessings.",
-			"Wraiths are the only race who know how to use Wraithmetal Amulets to their maximum potential."
+			"纯粹的阴影构成的生物，没人知道幽灵如何出现在地牢中，只知道他们补习一切离开这。",
+			"暗淡的的幽灵会获得一小点被动闪避加成。",
+			"非实体而又模糊的幽灵使它们更难被冻结或点燃。",
+			"他们的黑暗倾向使他们会受到闪光卷轴、诅咒移除卷轴和祝福的露水瓶的轻微伤害。",
+			"幽灵是唯一知道如何发挥幽灵金属护符全部力量的种族。"
 	};
 	
 	public static final String[] GNO_PERKS = {
-			"Once a peaceful race, the advances of other races and the destruction of their homelands "
-			+ "has forced them to take up arms.",
-			"Gnolls have a strong mental power that gives them resistance to being Charmed.",//Added
-			"Gnolls start with a scroll of regrowth, as a legacy from their homeland.", //Added
-			"The Gnoll's small bodies require extra nutrition, and they are hurt more by lack of food.",//Added 
-			"Gnolls are the only race who know how to use Wooden Effigies to their maximum potential.", 
+			"豺狼人曾经是一个爱好和平的种族，但其他种族的发展与豺狼人家乡的毁灭迫使他们拿起武器。",
+			"豺狼人强大的精神力量使他们对魅惑有抵抗力。",
+			"豺狼人开局携带他们家乡的遗产-再生卷轴。",
+			"豺狼人的小型身体需要更多食物，也会因食物缺乏收到更多伤害。",
+			"豺狼人是唯一知道如何发挥木质神像全部力量的种族。",
 	};
 	
 	public void raceHero(Hero hero){

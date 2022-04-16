@@ -20,16 +20,20 @@ package com.avmoga.dpixel.scenes;
 import android.opengl.GLES20;
 
 import com.avmoga.dpixel.Assets;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.effects.BannerSprites;
 import com.avmoga.dpixel.effects.Fireball;
 import com.avmoga.dpixel.ui.Archs;
+import com.avmoga.dpixel.ui.ChangesButton;
 import com.avmoga.dpixel.ui.ExitButton;
+import com.avmoga.dpixel.ui.LanguageButton;
 import com.avmoga.dpixel.ui.PrefsButton;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
@@ -38,10 +42,10 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class TitleScene extends PixelScene {
 
-	private static final String TXT_PLAY = "Play";
-	private static final String TXT_HIGHSCORES = "Rankings";
-	private static final String TXT_BADGES = "Badges";
-	private static final String TXT_ABOUT = "About";
+	private static final String TXT_PLAY = "进入地牢";
+	private static final String TXT_HIGHSCORES = "排行榜";
+	private static final String TXT_BADGES = "徽章";
+	private static final String TXT_ABOUT = "关于";
 
 	@Override
 	public void create() {
@@ -104,7 +108,7 @@ public class TitleScene extends PixelScene {
 		signs.y = title.y;
 		add(signs);
 
-		DashboardItem btnBadges = new DashboardItem(TXT_BADGES, 3) {
+		DashboardItem btnBadges = new DashboardItem(Messages.get(this, "badges"), 3) {
 			@Override
 			protected void onClick() {
 				ShatteredPixelDungeon.switchNoFade(BadgesScene.class);
@@ -112,7 +116,7 @@ public class TitleScene extends PixelScene {
 		};
 		add(btnBadges);
 
-		DashboardItem btnAbout = new DashboardItem(TXT_ABOUT, 1) {
+		DashboardItem btnAbout = new DashboardItem(Messages.get(this, "about"), 1) {
 			@Override
 			protected void onClick() {
 				ShatteredPixelDungeon.switchNoFade(AboutScene.class);
@@ -120,7 +124,7 @@ public class TitleScene extends PixelScene {
 		};
 		add(btnAbout);
 
-		DashboardItem btnPlay = new DashboardItem(TXT_PLAY, 0) {
+		DashboardItem btnPlay = new DashboardItem(Messages.get(this, "play"), 0) {
 			@Override
 			protected void onClick() {
 				ShatteredPixelDungeon.switchNoFade(StartScene.class);
@@ -128,7 +132,7 @@ public class TitleScene extends PixelScene {
 		};
 		add(btnPlay);
 
-		DashboardItem btnHighscores = new DashboardItem(TXT_HIGHSCORES, 2) {
+		DashboardItem btnHighscores = new DashboardItem(Messages.get(this, "rankings"), 2) {
 			@Override
 			protected void onClick() {
 				ShatteredPixelDungeon.switchNoFade(RankingsScene.class);
@@ -170,6 +174,14 @@ public class TitleScene extends PixelScene {
 		btnPrefs.setPos(0, 0);
 		add(btnPrefs);
 
+		Button changes = new ChangesButton();
+		changes.setPos(32, 1);
+		add( changes );
+
+		LanguageButton btnLang = new LanguageButton();
+		btnLang.setPos(16, 1);
+		add(btnLang);
+
 		ExitButton btnExit = new ExitButton();
 		btnExit.setPos(w - btnExit.width(), 0);
 		add(btnExit);
@@ -190,7 +202,7 @@ public class TitleScene extends PixelScene {
 		private static final int IMAGE_SIZE = 32;
 
 		private Image image;
-		private BitmapText label;
+		private RenderedText label;
 
 		DashboardItem(String text, int index) {
 			super();
@@ -208,7 +220,7 @@ public class TitleScene extends PixelScene {
 			image = new Image(Assets.DASHBOARD);
 			add(image);
 
-			label = createText(9);
+			label = renderText(9);
 			add(label);
 		}
 
@@ -216,11 +228,13 @@ public class TitleScene extends PixelScene {
 		protected void layout() {
 			super.layout();
 
-			image.x = align(x + (width - image.width()) / 2);
-			image.y = align(y);
+			image.x = x + (width - image.width()) / 2;
+			image.y = y;
+			align(image);
 
-			label.x = align(x + (width - label.width()) / 2);
-			label.y = align(image.y + image.height() + 2);
+			label.x = x + (width - label.width()) / 2;
+			label.y = image.y + image.height() + 2;
+			align(label);
 		}
 
 		@Override

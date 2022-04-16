@@ -17,52 +17,54 @@
  */
 package com.avmoga.dpixel.scenes;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.items.Generator;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.windows.WndError;
 import com.avmoga.dpixel.windows.WndStory;
-import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class InterlevelScene extends PixelScene {
 
-	private static final float TIME_TO_FADE = 0.3f;
+	private static final float TIME_TO_FADE = 0.7f;
 
-	private static final String TXT_DESCENDING = "Descending...";
-	private static final String TXT_ASCENDING = "Ascending...";
-	private static final String TXT_LOADING = "Loading...";
-	private static final String TXT_RESURRECTING = "Resurrecting...";
-	private static final String TXT_RETURNING = "Returning...";
-	private static final String TXT_FALLING = "Falling...";
+	private static final String TXT_DESCENDING = Messages.get(InterlevelScene.class, "descend");
+	private static final String TXT_ASCENDING = Messages.get(InterlevelScene.class, "ascend");
+	private static final String TXT_LOADING = Messages.get(InterlevelScene.class, "load");
+	private static final String TXT_RESURRECTING = Messages.get(InterlevelScene.class, "resurrect");
+	private static final String TXT_RETURNING = Messages.get(InterlevelScene.class, "return");
+	private static final String TXT_FALLING = Messages.get(InterlevelScene.class, "fall");
 	//private static final String TXT_PORT = "Descending...";
-	private static final String TXT_PORTSYOG = "Entering Shadow Den...";
-	private static final String TXT_PORTCATA = "The dead are restless...";
-	private static final String TXT_PORTONI = "Feed us!";
-	private static final String TXT_PORTCHASM = "You dissolve into light...";
-	private static final String TXT_PORTSEWERS = "You hear leaves blowing...";
-	private static final String TXT_PORTPRISON = "Screams and chaos...";
-	private static final String TXT_PORTCAVES = "Let's go fishing...";
-	private static final String TXT_PORTCITY = "Clinking of coins...";
-	private static final String TXT_PORTHALLS = "Prepare to meet doom...";
-	private static final String TXT_PORTCRAB = "A rushing of water...";
-	private static final String TXT_PORTTENGU = "Entering Tengu hideout...";
-	private static final String TXT_PORTCOIN = "Coins spilling...";
-	private static final String TXT_PORTBONE = "War drums and fire...";
+	private static final String TXT_PORTSYOG = Messages.get(InterlevelScene.class, "portsyog");
+	private static final String TXT_PORTCATA = Messages.get(InterlevelScene.class, "portcata");
+	private static final String TXT_PORTONI = Messages.get(InterlevelScene.class, "portoni");
+	private static final String TXT_PORTCHASM = Messages.get(InterlevelScene.class, "portchasm");
+	private static final String TXT_PORTSEWERS = Messages.get(InterlevelScene.class, "portsewers");
+	private static final String TXT_PORTPRISON = Messages.get(InterlevelScene.class, "portprison");
+	private static final String TXT_PORTCAVES = Messages.get(InterlevelScene.class, "portcaves");
+	private static final String TXT_PORTCITY = Messages.get(InterlevelScene.class, "portcity");
+	private static final String TXT_PORTHALLS = Messages.get(InterlevelScene.class, "porthalls");
+	private static final String TXT_PORTCRAB = Messages.get(InterlevelScene.class, "portcrab");
+	private static final String TXT_PORTTENGU = Messages.get(InterlevelScene.class, "porttengu");
+	private static final String TXT_PORTCOIN = Messages.get(InterlevelScene.class, "portcoin");
+	private static final String TXT_PORTBONE = Messages.get(InterlevelScene.class, "portbone");
+	private static final String TXT_JOURNAL = Messages.get(InterlevelScene.class, "journal");
+	private static final String TXT_SOKOBANFAIL = Messages.get(InterlevelScene.class, "sokobanfail");
+	private static final String TXT_PALANTIR = Messages.get(InterlevelScene.class, "palantir");
 
-	private static final String ERR_FILE_NOT_FOUND = "Save file not found. If this error persists after restarting, "
-			+ "it may mean this save game is corrupted. Sorry about that.";
-	private static final String ERR_IO = "Cannot read save file. If this error persists after restarting, "
-			+ "it may mean this save game is corrupted. Sorry about that.";
+	private static final String ERR_FILE_NOT_FOUND = Messages.get(InterlevelScene.class, "file_not_found");
+	private static final String ERR_IO = Messages.get(InterlevelScene.class, "io_error");
 
 	public static enum Mode {
 		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, PORT1, PORT2, PORT3, PORT4,
@@ -85,7 +87,7 @@ public class InterlevelScene extends PixelScene {
 	private Phase phase;
 	private float timeLeft;
 
-	private BitmapText message;
+	private RenderedText message;
 
 	private Thread thread;
 	private Exception error = null;
@@ -156,10 +158,10 @@ public class InterlevelScene extends PixelScene {
 		    break;
 		}
 
-		message = PixelScene.createText(text, 9);
-		message.measure();
+		message = PixelScene.renderText(text, 9);
 		message.x = (Camera.main.width - message.width()) / 2;
 		message.y = (Camera.main.height - message.height()) / 2;
+		align(message);
 		add(message);
 
 		phase = Phase.FADE_IN;

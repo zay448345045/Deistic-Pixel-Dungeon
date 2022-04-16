@@ -17,10 +17,6 @@
  */
 package com.avmoga.dpixel.actors.hero;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Bones;
@@ -30,7 +26,6 @@ import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
-import com.avmoga.dpixel.actors.buffs.Decay;
 import com.avmoga.dpixel.actors.buffs.Barkskin;
 import com.avmoga.dpixel.actors.buffs.Bleeding;
 import com.avmoga.dpixel.actors.buffs.Blindness;
@@ -40,6 +35,7 @@ import com.avmoga.dpixel.actors.buffs.Charm;
 import com.avmoga.dpixel.actors.buffs.Combo;
 import com.avmoga.dpixel.actors.buffs.Counterattack;
 import com.avmoga.dpixel.actors.buffs.Cripple;
+import com.avmoga.dpixel.actors.buffs.Decay;
 import com.avmoga.dpixel.actors.buffs.Dewcharge;
 import com.avmoga.dpixel.actors.buffs.Drowsy;
 import com.avmoga.dpixel.actors.buffs.Fury;
@@ -56,7 +52,6 @@ import com.avmoga.dpixel.actors.buffs.SnipersMark;
 import com.avmoga.dpixel.actors.buffs.Strength;
 import com.avmoga.dpixel.actors.buffs.Vertigo;
 import com.avmoga.dpixel.actors.buffs.Weakness;
-import com.avmoga.dpixel.actors.hero.HeroRace;
 import com.avmoga.dpixel.actors.mobs.Assassin;
 import com.avmoga.dpixel.actors.mobs.Bandit;
 import com.avmoga.dpixel.actors.mobs.BanditKing;
@@ -79,6 +74,7 @@ import com.avmoga.dpixel.actors.mobs.Warlock;
 import com.avmoga.dpixel.actors.mobs.Wraith;
 import com.avmoga.dpixel.actors.mobs.Yog;
 import com.avmoga.dpixel.actors.mobs.npcs.NPC;
+import com.avmoga.dpixel.actors.mobs.pets.PET;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.CheckedCell;
 import com.avmoga.dpixel.effects.Flare;
@@ -88,10 +84,11 @@ import com.avmoga.dpixel.items.Ankh;
 import com.avmoga.dpixel.items.DewVial;
 import com.avmoga.dpixel.items.DewVial2;
 import com.avmoga.dpixel.items.Dewdrop;
+import com.avmoga.dpixel.items.Egg;
 import com.avmoga.dpixel.items.Heap;
+import com.avmoga.dpixel.items.Heap.Type;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.KindOfWeapon;
-import com.avmoga.dpixel.items.Heap.Type;
 import com.avmoga.dpixel.items.armor.glyphs.Viscosity;
 import com.avmoga.dpixel.items.artifacts.CapeOfThorns;
 import com.avmoga.dpixel.items.artifacts.DriedRose;
@@ -126,10 +123,8 @@ import com.avmoga.dpixel.levels.features.AlchemyPot;
 import com.avmoga.dpixel.levels.features.Chasm;
 import com.avmoga.dpixel.levels.features.Sign;
 import com.avmoga.dpixel.plants.Earthroot;
-import com.avmoga.dpixel.actors.mobs.pets.PET;
 import com.avmoga.dpixel.plants.Sungrass;
 import com.avmoga.dpixel.scenes.GameScene;
-import com.avmoga.dpixel.items.Egg;
 import com.avmoga.dpixel.scenes.InterlevelScene;
 import com.avmoga.dpixel.scenes.SurfaceScene;
 import com.avmoga.dpixel.sprites.CharSprite;
@@ -138,35 +133,38 @@ import com.avmoga.dpixel.ui.AttackIndicator;
 import com.avmoga.dpixel.ui.BuffIndicator;
 import com.avmoga.dpixel.ui.QuickSlotButton;
 import com.avmoga.dpixel.utils.GLog;
+import com.avmoga.dpixel.windows.WndDescend;
 import com.avmoga.dpixel.windows.WndDewVial;
 import com.avmoga.dpixel.windows.WndMessage;
 import com.avmoga.dpixel.windows.WndResurrect;
 import com.avmoga.dpixel.windows.WndTradeItem;
 import com.watabou.noosa.Camera;
-import com.avmoga.dpixel.windows.WndDescend;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+
 public class Hero extends Char {
 
-	private static final String TXT_LEAVE = "You accidentally locked the door behind you. Damn.";
-	private static final String TXT_OVERFILL = "HP Overfilled by %s";
+	private static final String TXT_LEAVE = "你不小心锁上了身后的门。 该死！！！";
+	private static final String TXT_OVERFILL = "血量溢出上限%s点。";
 
-	private static final String TXT_LEVEL_UP = "level up!";
-	private static final String TXT_NEW_LEVEL = "Welcome to level %d! Now you are healthier and more focused. "
-			+ "It's easier for you to hit enemies and dodge their attacks.";
+	private static final String TXT_LEVEL_UP = "升级!";
+	private static final String TXT_NEW_LEVEL = "恭喜升到%d级！你现在变得更加健康且专注。命中敌人和躲避敌人攻击都变得更加简单。";
 
-	public static final String TXT_YOU_NOW_HAVE = "You now have %s";
+	public static final String TXT_YOU_NOW_HAVE = "你得到了%s。";
 
-	private static final String TXT_SOMETHING_ELSE = "There is something else here";
-	private static final String TXT_LOCKED_CHEST = "This chest is locked and you don't have matching key";
-	private static final String TXT_LOCKED_DOOR = "You don't have a matching key";
-	private static final String TXT_NOTICED_SMTH = "You noticed something";
+	private static final String TXT_SOMETHING_ELSE = "这里还有其他东西";
+	private static final String TXT_LOCKED_CHEST = "箱子锁着而你没有对应的钥匙";
+	private static final String TXT_LOCKED_DOOR = "你没有对应的钥匙。";
+	private static final String TXT_NOTICED_SMTH = "你注意到了些什么。";
 
 	private static final String TXT_WAIT = "...";
-	private static final String TXT_SEARCH = "search";
+	private static final String TXT_SEARCH = "搜索";
 
 	public static final int STARTING_STR = 10;
 
@@ -177,7 +175,7 @@ public class Hero extends Char {
 	public HeroSubClass subClass = HeroSubClass.NONE;
 	public HeroRace heroRace = HeroRace.HUMAN;
 	public HeroSubRace subRace = HeroSubRace.NONE;
-	
+
 	private int attackSkill = 10;
 	private int defenseSkill = 5;
 
@@ -212,14 +210,14 @@ public class Hero extends Char {
 	public int exp = 0;
 
 	public void yell(String str) {
-		GLog.n("You yell: \"%s\" ", str);
+		GLog.n("你怒吼一声: \"%s\" ", str);
 	}
-	
+
 	private ArrayList<Mob> visibleEnemies;
 
 	public Hero() {
 		super();
-		name = "you";
+		name = "你";
 
 		HP = HT = 20;
 		STR = STARTING_STR;
@@ -229,7 +227,7 @@ public class Hero extends Char {
 
 		visibleEnemies = new ArrayList<Mob>();
 	}
-	
+
 	public ArrayList<Mob> visibleEnemiesContents() {
 		return visibleEnemies;
 	}
@@ -293,7 +291,7 @@ public class Hero extends Char {
 
 		heroClass = HeroClass.restoreInBundle(bundle);
 		subClass = HeroSubClass.restoreInBundle(bundle);
-		
+
 		heroRace = HeroRace.restoreInBundle(bundle);
 		subRace = HeroSubRace.restoreInBundle(bundle);
 
@@ -313,7 +311,7 @@ public class Hero extends Char {
 		petHP = bundle.getInt(PETHP);
 		petExperience = bundle.getInt(PETEXP);
 		petCooldown = bundle.getInt(PETCOOLDOWN);
-		
+
 		belongings.restoreFromBundle(bundle);
 	}
 
@@ -429,13 +427,13 @@ public class Hero extends Char {
 		}
 		if (dmg < 0)
 			dmg = 0;
-		
+
 		if (buff(Fury.class) != null){ dmg *= 1.5f; }
-		
+
 		if (buff(Strength.class) != null){ dmg *= 4f; Buff.detach(this, Strength.class);}
-		
+
 		return dmg;
-		
+
 	}
 
 	@Override
@@ -504,9 +502,9 @@ public class Hero extends Char {
 	public boolean act() {
 
 		super.act();
-		
+
 		Statistics.moves++;
-		
+
 		if(Dungeon.dewDraw){Dungeon.level.currentmoves++;}
 
 		if (paralysed) {
@@ -516,12 +514,12 @@ public class Hero extends Char {
 			spendAndNext(TICK);
 			return false;
 		}
-	
+
 		Egg egg = belongings.getItem(Egg.class);
 		if (egg!=null){
 			egg.moves++;
 		}
-		
+
 		/*
 		Heap heap = Dungeon.level.heaps.get(pos);
 		if (heap != null){
@@ -559,7 +557,7 @@ public class Hero extends Char {
 			} else if (curAction instanceof HeroAction.Interact) {
 
 				return actInteract((HeroAction.Interact) curAction);
-				
+
 			} else if (curAction instanceof HeroAction.InteractPet) {
 
 				return actInteractPet((HeroAction.InteractPet) curAction);
@@ -649,7 +647,7 @@ public class Hero extends Char {
 			return false;
 		}
 	}
-	
+
 	private boolean actInteract(HeroAction.Interact action) {
 
 		NPC npc = action.npc;
@@ -699,7 +697,7 @@ public class Hero extends Char {
 
 		}
 	}
-	
+
 	private boolean actBuy(HeroAction.Buy action) {
 		int dst = action.dst;
 		if (pos == dst || Level.adjacent(pos, dst)) {
@@ -810,7 +808,7 @@ public class Hero extends Char {
 				theKey = null;
 
 				if (heap.type == Type.LOCKED_CHEST
-						|| heap.type == Type.CRYSTAL_CHEST 
+						|| heap.type == Type.CRYSTAL_CHEST
 						//|| heap.type == Type.MONSTERBOX
 						) {
 
@@ -894,16 +892,16 @@ public class Hero extends Char {
 			return false;
 		}
 	}
-	
+
 	private PET checkpet(){
 		for (Mob mob : Dungeon.level.mobs) {
 			if(mob instanceof PET) {
 				return (PET) mob;
 			}
-		}	
+		}
 		return null;
 	}
-	
+
 	private boolean checkpetNear(){
 		for (int n : Level.NEIGHBOURS8) {
 			int c = pos + n;
@@ -916,31 +914,31 @@ public class Hero extends Char {
 
 	private boolean actDescend(HeroAction.Descend action) {
 		int stairs = action.dst;
-		
+
 		if (!Dungeon.level.forcedone && Dungeon.dewDraw && (Dungeon.level.checkdew()>0 || Dungeon.hero.buff(Dewcharge.class) != null)) {
 			GameScene.show(new WndDescend());
 			ready();
 			return false;
 		}
-		
-		
+
+
 		if (pos == stairs && pos == Dungeon.level.exit && (Dungeon.depth!=24) && (Dungeon.depth<Statistics.deepestFloor || !Dungeon.sealedlevel)){
 
 			curAction = null;
-			
+
 			if(Dungeon.dewDraw){
 			 for (int i = 0; i < Level.LENGTH; i++) {
 				Heap heap = Dungeon.level.heaps.get(i);
 				if (heap != null)
 					heap.dryup();
-			  }	
-			}		
-			
+			  }
+			}
+
 			PET pet = checkpet();
 			if(pet!=null && checkpetNear()){
 			  Dungeon.hero.petType=pet.type;
 			  Dungeon.hero.petLevel=pet.level;
-			  Dungeon.hero.petKills=pet.kills;	
+			  Dungeon.hero.petKills=pet.kills;
 			  Dungeon.hero.petHP=pet.HP;
 			  Dungeon.hero.petExperience=pet.experience;
 			  Dungeon.hero.petCooldown=pet.cooldown;
@@ -951,7 +949,7 @@ public class Hero extends Char {
 			} else {
 				petfollow=false;
 			}
-						
+
 			Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
 			if (buff != null) buff.detach();
 
@@ -963,7 +961,7 @@ public class Hero extends Char {
 			Game.switchScene(InterlevelScene.class);
 
 			return false;
-			
+
 		} else if (getCloser(stairs)) {
 
 			return true;
@@ -977,7 +975,7 @@ public class Hero extends Char {
 	private boolean actAscend(HeroAction.Ascend action) {
 		int stairs = action.dst;
 		if (pos == stairs && pos == Dungeon.level.entrance) {
-			
+
 			if (Dungeon.depth == 1) {
 
 				if (belongings.getItem(Amulet.class) == null) {
@@ -988,7 +986,7 @@ public class Hero extends Char {
 					Dungeon.deleteGame(Dungeon.hero.heroClass, true);
 					Game.switchScene(SurfaceScene.class);
 				}
-				
+
 			} else if (Dungeon.depth == 34) {
 				curAction = null;
 
@@ -996,12 +994,12 @@ public class Hero extends Char {
 				if (hunger != null && !hunger.isStarving()) {
 					hunger.satisfy(-Hunger.STARVING / 10);
 				}
-				
+
 				PET pet = checkpet();
 				if(pet!=null && checkpetNear()){
 				  Dungeon.hero.petType=pet.type;
 				  Dungeon.hero.petLevel=pet.level;
-				  Dungeon.hero.petKills=pet.kills;	
+				  Dungeon.hero.petKills=pet.kills;
 				  Dungeon.hero.petHP=pet.HP;
 				  Dungeon.hero.petExperience=pet.experience;
 				  Dungeon.hero.petCooldown=pet.cooldown;
@@ -1012,7 +1010,7 @@ public class Hero extends Char {
 				} else {
 					petfollow=false;
 				}
-				
+
 				Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
 				if (buff != null)
 					buff.detach();
@@ -1020,11 +1018,11 @@ public class Hero extends Char {
 				for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
 					if (mob instanceof DriedRose.GhostHero)
 						mob.destroy();
-                
+
 				InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
 				Game.switchScene(InterlevelScene.class);
-				
-			
+
+
 		    } else if (Dungeon.depth == 41) {
 			curAction = null;
 
@@ -1037,7 +1035,7 @@ public class Hero extends Char {
 			if(pet!=null && checkpetNear()){
 			  Dungeon.hero.petType=pet.type;
 			  Dungeon.hero.petLevel=pet.level;
-			  Dungeon.hero.petKills=pet.kills;	
+			  Dungeon.hero.petKills=pet.kills;
 			  Dungeon.hero.petHP=pet.HP;
 			  Dungeon.hero.petExperience=pet.experience;
 			  Dungeon.hero.petCooldown=pet.cooldown;
@@ -1048,7 +1046,7 @@ public class Hero extends Char {
 			} else {
 				petfollow=false;
 			}
-			
+
 			Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
 			if (buff != null)
 				buff.detach();
@@ -1056,10 +1054,10 @@ public class Hero extends Char {
 			for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
 				if (mob instanceof DriedRose.GhostHero)
 					mob.destroy();
-            
+
 			InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
 			Game.switchScene(InterlevelScene.class);
-			
+
 		   } else if (Dungeon.depth > 26){
 				ready();
 			} else if (Dungeon.depth == 25){
@@ -1077,7 +1075,7 @@ public class Hero extends Char {
 				if(pet!=null && checkpetNear()){
 				  Dungeon.hero.petType=pet.type;
 				  Dungeon.hero.petLevel=pet.level;
-				  Dungeon.hero.petKills=pet.kills;	
+				  Dungeon.hero.petKills=pet.kills;
 				  Dungeon.hero.petHP=pet.HP;
 				  Dungeon.hero.petExperience=pet.experience;
 				  Dungeon.hero.petCooldown=pet.cooldown;
@@ -1088,7 +1086,7 @@ public class Hero extends Char {
 				} else {
 					petfollow=false;
 				}
-				
+
 				Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
 				if (buff != null)
 					buff.detach();
@@ -1096,7 +1094,7 @@ public class Hero extends Char {
 				for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
 					if (mob instanceof DriedRose.GhostHero)
 						mob.destroy();
-                
+
 				InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
 				Game.switchScene(InterlevelScene.class);
 			}
@@ -1232,7 +1230,7 @@ public class Hero extends Char {
 			Buff.detach(this, Drowsy.class);
 			GLog.w("The pain helps you resist the urge to sleep.");
 		}
-		
+
 		if (src instanceof DewVial || src instanceof DewVial2 || src instanceof ScrollOfRemoveCurse){
 			GLog.w("You are hurt by the divine energy!");
 		}
@@ -1296,7 +1294,7 @@ public class Hero extends Char {
 								}
 			}
 		}
-			
+
 			if (closest != null && (QuickSlotButton.lastTarget == null ||
 												!QuickSlotButton.lastTarget.isAlive() ||
 												!Dungeon.visible[QuickSlotButton.lastTarget.pos])){
@@ -1470,18 +1468,18 @@ public class Hero extends Char {
 				HP += value;
 				sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
 			}
-			
+
 			if (subClass == HeroSubClass.WARLOCK) {
 
 				int value2 = lvl;
 				if (value2 > 0) {
 					HP = HT+value2;
 					sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
-					
+
 					GLog.w(TXT_OVERFILL, lvl);
 				}
 
-				
+
 			}
 
 			buff(Hunger.class).satisfy(10);
@@ -1634,7 +1632,7 @@ public class Hero extends Char {
 			reallyDie(cause);
 
 		} else {
-			
+
 			ankh.detach(belongings.backpack);
 			Dungeon.deleteGame(Dungeon.hero.heroClass, false);
 			GameScene.show(new WndResurrect(ankh, cause));
@@ -1716,7 +1714,7 @@ public class Hero extends Char {
 			}
 			Dungeon.level.press(pos, this);
 		}
-		
+
 		if (buff(LichenDrop.class) != null){Lichen.spawnAroundChance(pos);}
 	}
 

@@ -23,9 +23,9 @@ import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.ui.ItemSlot;
 import com.avmoga.dpixel.ui.RedButton;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
 import com.avmoga.dpixel.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndItem extends Window {
 
@@ -52,14 +52,12 @@ public class WndItem extends Window {
 			titlebar.color(ItemSlot.DEGRADED);
 		}
 
-		BitmapTextMultiline info = PixelScene.createMultiline(item.info(), 6);
-		info.maxWidth = WIDTH;
-		info.measure();
-		info.x = titlebar.left();
-		info.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline info = PixelScene.renderMultiline(item.info(), 6);
+		info.maxWidth(WIDTH);
+		info.setPos(titlebar.left(), titlebar.bottom() + GAP);
 		add(info);
 
-		float y = info.y + info.height() + GAP;
+		float y = info.top() + info.height() + GAP;
 		float x = 0;
 
 		if (Dungeon.hero.isAlive() && owner != null) {

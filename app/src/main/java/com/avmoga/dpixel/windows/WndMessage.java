@@ -19,8 +19,8 @@ package com.avmoga.dpixel.windows;
 
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.scenes.PixelScene;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndMessage extends Window {
 
@@ -32,14 +32,13 @@ public class WndMessage extends Window {
 
 		super();
 
-		BitmapTextMultiline info = PixelScene.createMultiline(text, 6);
-		info.maxWidth = (ShatteredPixelDungeon.landscape() ? WIDTH_L : WIDTH_P)
-				- MARGIN * 2;
-		info.measure();
-		info.x = info.y = MARGIN;
+		RenderedTextMultiline info = PixelScene.renderMultiline(text, 6);
+		info.maxWidth((ShatteredPixelDungeon.landscape() ? WIDTH_L : WIDTH_P) - MARGIN * 2);
+		info.setPos(MARGIN, MARGIN);
 		add(info);
 
-		resize((int) info.width() + MARGIN * 2, (int) info.height() + MARGIN
-				* 2);
+		resize(
+				(int) info.width() + MARGIN * 2,
+				(int) info.height() + MARGIN * 2);
 	}
 }

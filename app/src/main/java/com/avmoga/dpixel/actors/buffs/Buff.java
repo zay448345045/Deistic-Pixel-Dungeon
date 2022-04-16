@@ -17,12 +17,12 @@
  */
 package com.avmoga.dpixel.actors.buffs;
 
-import java.text.DecimalFormat;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.ui.BuffIndicator;
+
+import java.text.DecimalFormat;
+import java.util.HashSet;
 
 public class Buff extends Actor {
 
@@ -63,8 +63,8 @@ public class Buff extends Actor {
 	}
 
 	//to handle the common case of showing how many turns are remaining in a buff description.
-	protected String dispTurns(float input){
-		return input == 1 ? "1 more turn" : new DecimalFormat("#.##").format(input) + " more turns";
+	protected String dispTurns(float input) {
+		return input == 1 ? "1" : new DecimalFormat("#.##").format(input);
 	}
 
 	public static <T extends Buff> T append(Char target, Class<T> buffClass) {

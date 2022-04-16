@@ -17,16 +17,14 @@
  */
 package com.avmoga.dpixel.scenes;
 
-import java.util.HashMap;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.actors.hero.HeroRace;
 import com.avmoga.dpixel.effects.BannerSprites;
-import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.effects.BannerSprites.Type;
+import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.ui.Archs;
 import com.avmoga.dpixel.ui.ExitButton;
 import com.avmoga.dpixel.ui.Icons;
@@ -34,23 +32,25 @@ import com.avmoga.dpixel.ui.RedButton;
 import com.avmoga.dpixel.windows.WndChallenges;
 import com.avmoga.dpixel.windows.WndMessage;
 import com.avmoga.dpixel.windows.WndRace;
-import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.Image;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.ui.Button;
 import com.watabou.utils.Callback;
 
+import java.util.HashMap;
+
 public class RaceScene extends PixelScene {
 
 	private static final float BUTTON_HEIGHT = 24;
 
-	private static final String TXT_NEW = "Select Race";
+	private static final String TXT_NEW = "选择种族";
 
-	private static final String TXT_WIN_THE_GAME = "To unlock \"Challenges\", win the game with any character race.";
+	private static final String TXT_WIN_THE_GAME = "要解锁“挑战”，请使用任意角色通关一次。";
 
 	private static final float WIDTH_P = 116;
 	private static final float HEIGHT_P = 220;
@@ -232,7 +232,7 @@ public class RaceScene extends PixelScene {
 		private static final int SECONDARY_COLOR_N = 0xCACFC2;
 		private static final int SECONDARY_COLOR_H = 0xFFFF88;
 
-		private BitmapText secondary;
+		private RenderedText secondary;
 
 		public GameButton(String primary) {
 			super(primary);
@@ -244,7 +244,7 @@ public class RaceScene extends PixelScene {
 		protected void createChildren() {
 			super.createChildren();
 
-			secondary = createText(6);
+			secondary = renderText(6);
 			add(secondary);
 		}
 
@@ -265,10 +265,7 @@ public class RaceScene extends PixelScene {
 
 		public void secondary(String text, boolean highlighted) {
 			secondary.text(text);
-			secondary.measure();
-
-			secondary.hardlight(highlighted ? SECONDARY_COLOR_H
-					: SECONDARY_COLOR_N);
+			secondary.hardlight(highlighted ? SECONDARY_COLOR_H : SECONDARY_COLOR_N);
 		}
 	}
 
@@ -289,7 +286,7 @@ public class RaceScene extends PixelScene {
 		private HeroRace cl;
 
 		private Image avatar;
-		private BitmapText name;
+		private RenderedText name;
 		private Emitter emitter;
 
 		private float brightness;
@@ -313,8 +310,7 @@ public class RaceScene extends PixelScene {
 				highlighted = BASIC_HIGHLIGHTED;
 			}
 
-			name.text(cl.name());
-			name.measure();
+			name.text(cl.title().toUpperCase());
 			name.hardlight(normal);
 
 			brightness = MIN_BRIGHTNESS;
@@ -329,7 +325,7 @@ public class RaceScene extends PixelScene {
 			avatar = new Image(Assets.RACEAVATARS);
 			add(avatar);
 
-			name = PixelScene.createText(9);
+			name = PixelScene.renderText(9);
 			add(name);
 
 			emitter = new Emitter();

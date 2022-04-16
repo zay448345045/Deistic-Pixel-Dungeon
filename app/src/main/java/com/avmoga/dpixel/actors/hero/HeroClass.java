@@ -20,6 +20,7 @@ package com.avmoga.dpixel.actors.hero;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Challenges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.items.Bomb;
 import com.avmoga.dpixel.items.TomeOfMastery;
@@ -46,41 +47,9 @@ public enum HeroClass {
 
 	private String title;
 
-	private HeroClass(String title) {
+	HeroClass(String title) {
 		this.title = title;
 	}
-
-	public static final String[] WAR_PERKS = {
-			"Warriors start with 11 points of Strength.",
-			"Warriors start with a unique short sword. This sword can be later \"reforged\" to upgrade another melee weapon.",
-			"Warriors are less proficient with missile weapons.",
-			"Any piece of food restores more health when eaten.",
-			"Potions of Strength are identified from the beginning.", };
-
-	public static final String[] MAG_PERKS = {
-			"Mages start with a unique Wand of Magic Missile. This wand can be later \"disenchanted\" to upgrade another wand.",
-			"Mages recharge their wands faster.",
-			"When eaten, any piece of food restores 1 charge for all wands in the inventory.",
-			"Mages can use wands as a melee weapon.",
-			"Dew blessings are more effective for mages.",
-			"Scrolls of Identify are identified from the beginning." };
-
-	public static final String[] ROG_PERKS = {
-			"Rogues start with a unique Cloak of Shadows.",
-			"Rogues identify a type of a ring on equipping it.",
-			"Rogues are proficient with light armor, dodging better while wearing one.",
-			"Rogues are proficient in detecting hidden doors and traps.",
-			"Rogues can go without food longer.",
-			"Scrolls of Magic Mapping are identified from the beginning." };
-
-	public static final String[] HUN_PERKS = {
-			"Huntresses start with 15 points of Health.",
-			"Huntresses start with a unique upgradeable boomerang.",
-			"Huntresses are proficient with missile weapons, getting bonus damage from excess strength.",
-			"Huntresses are able to recover a single used missile weapon from each enemy.",
-			"Huntresses gain more health from dewdrops.",
-			"Huntresses sense neighbouring monsters even if they are hidden behind obstacles.",
-			"Potions of Mind Vision are identified from the beginning." };
 
 	public void initHero(Hero hero) {
 
@@ -116,7 +85,7 @@ public enum HeroClass {
 	private static void initCommon(Hero hero) {
 		if (!Dungeon.isChallenged(Challenges.NO_ARMOR))
 			(hero.belongings.armor = new ClothArmor()).identify();
-
+		//new AlchemistsToolkit().quantity(1).identify().collect();
 		if (!Dungeon.isChallenged(Challenges.NO_FOOD))
 			new Food().identify().collect();
 	}
@@ -211,9 +180,9 @@ public enum HeroClass {
 				hero.STR = hero.STR + 20;
 		}
 	}
-	
+
 	public String title() {
-		return title;
+		return Messages.get(HeroClass.class, title);
 	}
 
 	public String spritesheet() {
@@ -235,14 +204,41 @@ public enum HeroClass {
 	public String[] perks() {
 
 		switch (this) {
-		case WARRIOR:
-			return WAR_PERKS;
-		case MAGE:
-			return MAG_PERKS;
-		case ROGUE:
-			return ROG_PERKS;
-		case HUNTRESS:
-			return HUN_PERKS;
+			case WARRIOR:
+				return new String[]{
+						Messages.get(HeroClass.class, "warrior_perk1"),
+						Messages.get(HeroClass.class, "warrior_perk2"),
+						Messages.get(HeroClass.class, "warrior_perk3"),
+						Messages.get(HeroClass.class, "warrior_perk4"),
+						Messages.get(HeroClass.class, "warrior_perk5"),
+				};
+			case MAGE:
+				return new String[]{
+						Messages.get(HeroClass.class, "mage_perk1"),
+						Messages.get(HeroClass.class, "mage_perk2"),
+						Messages.get(HeroClass.class, "mage_perk3"),
+						Messages.get(HeroClass.class, "mage_perk4"),
+						Messages.get(HeroClass.class, "mage_perk5"),
+						Messages.get(HeroClass.class, "mage_perk6"),
+				};
+			case ROGUE:
+				return new String[]{
+						Messages.get(HeroClass.class, "rogue_perk1"),
+						Messages.get(HeroClass.class, "rogue_perk2"),
+						Messages.get(HeroClass.class, "rogue_perk3"),
+						Messages.get(HeroClass.class, "rogue_perk4"),
+						Messages.get(HeroClass.class, "rogue_perk5"),
+						Messages.get(HeroClass.class, "rogue_perk6"),
+				};
+			case HUNTRESS:
+				return new String[]{
+						Messages.get(HeroClass.class, "huntress_perk2"),
+						Messages.get(HeroClass.class, "huntress_perk3"),
+						Messages.get(HeroClass.class, "huntress_perk4"),
+						Messages.get(HeroClass.class, "huntress_perk5"),
+						Messages.get(HeroClass.class, "huntress_perk6"),
+						Messages.get(HeroClass.class, "huntress_perk7"),
+				};
 		}
 
 		return null;

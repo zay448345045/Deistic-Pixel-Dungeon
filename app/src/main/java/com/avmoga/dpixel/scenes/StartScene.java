@@ -17,21 +17,19 @@
  */
 package com.avmoga.dpixel.scenes;
 
-import java.util.HashMap;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.GamesInProgress;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.actors.hero.HeroClass;
 import com.avmoga.dpixel.effects.BannerSprites;
-import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.effects.BannerSprites.Type;
+import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.ui.Archs;
 import com.avmoga.dpixel.ui.ExitButton;
 import com.avmoga.dpixel.ui.Icons;
 import com.avmoga.dpixel.ui.RedButton;
-import com.avmoga.dpixel.utils.Utils;
 import com.avmoga.dpixel.windows.WndChallenges;
 import com.avmoga.dpixel.windows.WndClass;
 import com.avmoga.dpixel.windows.WndMessage;
@@ -42,30 +40,22 @@ import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.Image;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.ui.Button;
 import com.watabou.utils.Callback;
+
+import java.util.HashMap;
 
 public class StartScene extends PixelScene {
 
 	private static final float BUTTON_HEIGHT = 24;
 	private static final float GAP = 2;
 
-	private static final String TXT_LOAD = "Load Game";
-	private static final String TXT_NEW = "New Game";
+	private static final String TXT_UNLOCK = "";
 
-	private static final String TXT_ERASE = "Erase current game";
-	private static final String TXT_DPTH_LVL = "Depth: %d, level: %d";
-
-	private static final String TXT_REALLY = "Do you really want to start new game?";
-	private static final String TXT_WARNING = "Your current game progress will be erased.";
-	private static final String TXT_YES = "Yes, start new game";
-	private static final String TXT_NO = "No, return to main menu";
-
-	private static final String TXT_UNLOCK = "To unlock this character class, slay the 3rd boss with any other class";
-
-	private static final String TXT_WIN_THE_GAME = "To unlock \"Challenges\", win the game with any character class.";
+	private static final String TXT_WIN_THE_GAME = "要想解锁“挑战模式”，请使用任意角色职业通关一次游戏。";
 
 	private static final float WIDTH_P = 116;
 	private static final float HEIGHT_P = 220;
@@ -123,12 +113,15 @@ public class StartScene extends PixelScene {
 		buttonX = left;
 		buttonY = bottom - BUTTON_HEIGHT;
 
-		btnNewGame = new GameButton(TXT_NEW) {
+		btnNewGame = new GameButton(Messages.get(this, "new")) {
 			@Override
 			protected void onClick() {
 				if (GamesInProgress.check(curClass) != null) {
-					StartScene.this.add(new WndOptions(TXT_REALLY, TXT_WARNING,
-							TXT_YES, TXT_NO) {
+					StartScene.this.add(new WndOptions(
+							Messages.get(StartScene.class, "really"),
+							Messages.get(StartScene.class, "warning"),
+							Messages.get(StartScene.class, "yes"),
+							Messages.get(StartScene.class, "no")) {
 						@Override
 						protected void onSelect(int index) {
 							if (index == 0) {
@@ -144,7 +137,7 @@ public class StartScene extends PixelScene {
 		};
 		add(btnNewGame);
 
-		btnLoad = new GameButton(TXT_LOAD) {
+		btnLoad = new GameButton(Messages.get(this, "load")) {
 			@Override
 			protected void onClick() {
 				InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
@@ -257,42 +250,31 @@ public class StartScene extends PixelScene {
 		}
 		shields.get(curClass = cl).highlight(true);
 
-		if (cl != HeroClass.HUNTRESS || huntressUnlocked) {
+		unlock.visible = false;
 
-			unlock.visible = false;
+		GamesInProgress.Info info = GamesInProgress.check(curClass);
+		if (info != null) {
 
-			GamesInProgress.Info info = GamesInProgress.check(curClass);
-			if (info != null) {
+			btnLoad.visible = true;
+			btnLoad.secondary(Messages.format(Messages.get(this, "depth_level"), info.depth, info.level), info.challenges);
+			btnNewGame.visible = true;
+			btnNewGame.secondary(Messages.get(this, "erase"), false);
 
-				btnLoad.visible = true;
-				btnLoad.secondary(
-						Utils.format(TXT_DPTH_LVL, info.depth, info.level),
-						info.challenges);
-				btnNewGame.visible = true;
-				btnNewGame.secondary(TXT_ERASE, false);
+			float w = (Camera.main.width - GAP) / 2 - buttonX;
 
-				float w = (Camera.main.width - GAP) / 2 - buttonX;
-
-				btnLoad.setRect(buttonX, buttonY, w, BUTTON_HEIGHT);
-				btnNewGame.setRect(btnLoad.right() + GAP, buttonY, w,
-						BUTTON_HEIGHT);
-
-			} else {
-				btnLoad.visible = false;
-
-				btnNewGame.visible = true;
-				btnNewGame.secondary(null, false);
-				btnNewGame.setRect(buttonX, buttonY, Camera.main.width
-						- buttonX * 2, BUTTON_HEIGHT);
-			}
+			btnLoad.setRect(
+					buttonX, buttonY, w, BUTTON_HEIGHT);
+			btnNewGame.setRect(
+					btnLoad.right() + GAP, buttonY, w, BUTTON_HEIGHT);
 
 		} else {
-
-			unlock.visible = true;
 			btnLoad.visible = false;
-			btnNewGame.visible = false;
 
+			btnNewGame.visible = true;
+			btnNewGame.secondary(null, false);
+			btnNewGame.setRect(buttonX, buttonY, Camera.main.width - buttonX * 2, BUTTON_HEIGHT);
 		}
+
 	}
 
 	private void startNewGame() {
@@ -309,7 +291,7 @@ public class StartScene extends PixelScene {
 		private static final int SECONDARY_COLOR_N = 0xCACFC2;
 		private static final int SECONDARY_COLOR_H = 0xFFFF88;
 
-		private BitmapText secondary;
+		private RenderedText secondary;
 
 		public GameButton(String primary) {
 			super(primary);
@@ -321,7 +303,7 @@ public class StartScene extends PixelScene {
 		protected void createChildren() {
 			super.createChildren();
 
-			secondary = createText(6);
+			secondary = renderText(6);
 			add(secondary);
 		}
 
@@ -342,10 +324,7 @@ public class StartScene extends PixelScene {
 
 		public void secondary(String text, boolean highlighted) {
 			secondary.text(text);
-			secondary.measure();
-
-			secondary.hardlight(highlighted ? SECONDARY_COLOR_H
-					: SECONDARY_COLOR_N);
+			secondary.hardlight(highlighted ? SECONDARY_COLOR_H : SECONDARY_COLOR_N);
 		}
 	}
 
@@ -366,7 +345,7 @@ public class StartScene extends PixelScene {
 		private HeroClass cl;
 
 		private Image avatar;
-		private BitmapText name;
+		private RenderedText name;
 		private Emitter emitter;
 
 		private float brightness;
@@ -390,8 +369,7 @@ public class StartScene extends PixelScene {
 				highlighted = BASIC_HIGHLIGHTED;
 			}
 
-			name.text(cl.name());
-			name.measure();
+			name.text(cl.title().toUpperCase());
 			name.hardlight(normal);
 
 			brightness = MIN_BRIGHTNESS;
@@ -406,7 +384,7 @@ public class StartScene extends PixelScene {
 			avatar = new Image(Assets.AVATARS);
 			add(avatar);
 
-			name = PixelScene.createText(9);
+			name = PixelScene.renderText(9);
 			add(name);
 
 			emitter = new Emitter();

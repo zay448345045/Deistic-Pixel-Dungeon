@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.items.armor;
 
-import java.util.HashMap;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.hero.HeroClass;
 import com.avmoga.dpixel.actors.mobs.Mob;
@@ -31,12 +30,14 @@ import com.avmoga.dpixel.sprites.MissileSprite;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Callback;
 
+import java.util.HashMap;
+
 public class HuntressArmor extends ClassArmor {
 
-	private static final String TXT_NO_ENEMIES = "No enemies in sight";
-	private static final String TXT_NOT_HUNTRESS = "Only huntresses can use this armor!";
+	private static final String TXT_NO_ENEMIES = Messages.get(HuntressArmor.class, "no_enemies");
+	private static final String TXT_NOT_HUNTRESS = Messages.get(HuntressArmor.class, "not_huntress");
 
-	private static final String AC_SPECIAL = "SPECTRAL BLADES";
+	private static final String AC_SPECIAL = Messages.get(HuntressArmor.class, "ac_special");
 
 	{
 		name = "huntress cloak";
@@ -100,8 +101,6 @@ public class HuntressArmor extends ClassArmor {
 
 	@Override
 	public String desc() {
-		return "A huntress in such cloak can create a fan of spectral blades. Each of these blades "
-				+ "will target a single enemy in the huntress's field of view, inflicting damage depending "
-				+ "on her currently equipped melee weapon.";
+		return Messages.get(this, "desc");
 	}
 }

@@ -17,12 +17,10 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.SnipersMark;
@@ -44,9 +42,13 @@ import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 public class Item implements Bundlable {
 
-	private static final String TXT_PACK_FULL = "Your pack is too full for the %s";
+	private static final String TXT_PACK_FULL = Messages.get(Item.class, "pack_full");
 
 	private static final String TXT_TO_STRING = "%s";
 	private static final String TXT_TO_STRING_X = "%s x%d";
@@ -57,8 +59,8 @@ public class Item implements Bundlable {
 	protected static final float TIME_TO_PICK_UP = 1.0f;
 	protected static final float TIME_TO_DROP = 0.5f;
 
-	public static final String AC_DROP = "DROP";
-	public static final String AC_THROW = "THROW";
+	public static final String AC_DROP = Messages.get(Item.class, "ac_drop");
+	public static final String AC_THROW = Messages.get(Item.class, "ac_throw");
 
 	public String defaultAction;
 

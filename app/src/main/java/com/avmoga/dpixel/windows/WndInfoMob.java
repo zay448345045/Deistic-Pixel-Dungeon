@@ -17,13 +17,13 @@
  */
 package com.avmoga.dpixel.windows;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.sprites.CharSprite;
 import com.avmoga.dpixel.ui.BuffIndicator;
 import com.avmoga.dpixel.ui.HealthBar;
-import com.avmoga.dpixel.utils.Utils;
-import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.ui.Component;
 
 public class WndInfoMob extends WndTitledMessage {
@@ -48,15 +48,15 @@ public class WndInfoMob extends WndTitledMessage {
 		private static final int GAP = 2;
 
 		private CharSprite image;
-		private BitmapText name;
+		private RenderedText name;
 		private HealthBar health;
 		private BuffIndicator buffs;
 
 		public MobTitle(Mob mob) {
 
-			name = PixelScene.createText(Utils.capitalize(mob.name), 9);
+			name =
+					PixelScene.renderText(Messages.titleCase(mob.name)+(" " + (mob.HP) + "/" + mob.HT ), 9);
 			name.hardlight(TITLE_COLOR);
-			name.measure();
 			add(name);
 
 			image = mob.sprite();

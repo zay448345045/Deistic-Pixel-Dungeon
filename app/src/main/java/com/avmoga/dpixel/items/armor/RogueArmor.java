@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.armor;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.buffs.Blindness;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -37,15 +38,16 @@ import com.watabou.noosa.audio.Sample;
 
 public class RogueArmor extends ClassArmor {
 
-	private static final String TXT_FOV = "You can only jump to an empty location in your field of view";
-	private static final String TXT_NOT_ROGUE = "Only rogues can use this armor!";
+	private static final String TXT_FOV = Messages.get(RogueArmor.class, "fov");
+	private static final String TXT_NOT_ROGUE = Messages.get(RogueArmor.class, "not_rogue");
 
-	private static final String AC_SPECIAL = "SMOKE BOMB";
+	private static final String AC_SPECIAL = Messages.get(RogueArmor.class, "ac_special");
 
 	{
-		name = "rogue garb";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARMOR_ROGUE;
 	}
+
 
 	@Override
 	public String special() {
@@ -69,8 +71,7 @@ public class RogueArmor extends ClassArmor {
 
 	@Override
 	public String desc() {
-		return "Wearing this dark garb, a rogue can perform a trick, that is called \"smoke bomb\" "
-				+ "(though no real explosives are used): he blinds enemies who could see him and jumps aside.";
+		return Messages.get(this, "desc");
 	}
 
 	protected static CellSelector.Listener teleporter = new CellSelector.Listener() {
@@ -110,7 +111,7 @@ public class RogueArmor extends ClassArmor {
 
 		@Override
 		public String prompt() {
-			return "Choose a location to jump to";
+			return Messages.get(RogueArmor.class, "prompt");
 		}
 	};
 }

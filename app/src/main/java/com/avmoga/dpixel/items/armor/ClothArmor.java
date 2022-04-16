@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.armor;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class ClothArmor extends Armor {
 
 	{
-		name = "cloth armor";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARMOR_CLOTH;
 
 		bones = false; // Finding them in bones would be semi-frequent and
@@ -35,6 +36,6 @@ public class ClothArmor extends Armor {
 
 	@Override
 	public String desc() {
-		return "This lightweight armor offers basic protection.";
+		return Messages.get(this, "desc");
 	}
 }

@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.items.food;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.buffs.Hunger;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -33,23 +32,27 @@ import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class Food extends Item {
-
-	private static final float TIME_TO_EAT = 3f;
-
-	public static final String AC_EAT = "EAT";
-
-	public float energy = Hunger.HUNGRY;
-	public String message = "That food tasted delicious!";
 
 	public int hornValue = 3;
 
+	private static final float TIME_TO_EAT = 3f;
+
+	public static final String AC_EAT = Messages.get(Food.class, "ac_eat");
+
+	public float energy = Hunger.HUNGRY;
+	public String message = Messages.get(this, "eat_msg");
+
 	{
 		stackable = true;
-		name = "ration of food";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.RATION;
 
 		bones = true;
+
+		defaultAction = AC_EAT;
 	}
 
 	@Override
@@ -119,8 +122,7 @@ public class Food extends Item {
 
 	@Override
 	public String info() {
-		return "Nothing fancy here: dried meat, "
-				+ "some biscuits - things like that.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

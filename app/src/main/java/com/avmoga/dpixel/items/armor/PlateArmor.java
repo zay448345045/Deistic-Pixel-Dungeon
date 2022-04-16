@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.armor;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class PlateArmor extends Armor {
 
 	{
-		name = "plate armor";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARMOR_PLATE;
 	}
 
@@ -32,7 +33,6 @@ public class PlateArmor extends Armor {
 
 	@Override
 	public String desc() {
-		return "Enormous plates of metal are joined together into a suit that provides "
-				+ "unmatched protection to any adventurer strong enough to bear its staggering weight.";
+		return Messages.get(this, "desc");
 	}
 }

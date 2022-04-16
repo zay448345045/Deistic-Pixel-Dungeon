@@ -17,8 +17,7 @@
  */
 package com.avmoga.dpixel.windows;
 
-import java.util.ArrayList;
-
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.potions.Potion;
@@ -30,7 +29,10 @@ import com.avmoga.dpixel.ui.ScrollPane;
 import com.avmoga.dpixel.ui.Window;
 import com.avmoga.dpixel.utils.Utils;
 import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.ui.Component;
+
+import java.util.ArrayList;
 
 public class WndCatalogus extends WndTabbed {
 
@@ -44,11 +46,11 @@ public class WndCatalogus extends WndTabbed {
 
 	private static final int TAB_WIDTH = 50;
 
-	private static final String TXT_POTIONS = "Potions";
-	private static final String TXT_SCROLLS = "Scrolls";
-	private static final String TXT_TITLE = "Catalogus";
+	private static final String TXT_POTIONS = Messages.get(WndCatalogus.class, "potions");
+	private static final String TXT_SCROLLS = Messages.get(WndCatalogus.class, "scrolls");
+	private static final String TXT_TITLE = Messages.get(WndCatalogus.class, "title");
 
-	private BitmapText txtTitle;
+	private RenderedText txtTitle;
 	private ScrollPane list;
 
 	private ArrayList<ListItem> items = new ArrayList<WndCatalogus.ListItem>();
@@ -65,9 +67,8 @@ public class WndCatalogus extends WndTabbed {
 			resize(WIDTH_P, HEIGHT_P);
 		}
 
-		txtTitle = PixelScene.createText(TXT_TITLE, 9);
+		txtTitle = PixelScene.renderText(TXT_TITLE, 9);
 		txtTitle.hardlight(Window.TITLE_COLOR);
-		txtTitle.measure();
 		add(txtTitle);
 
 		list = new ScrollPane(new Component()) {
@@ -113,7 +114,6 @@ public class WndCatalogus extends WndTabbed {
 
 		txtTitle.text(Utils.format(TXT_TITLE, showPotions ? TXT_POTIONS
 				: TXT_SCROLLS));
-		txtTitle.measure();
 		txtTitle.x = PixelScene.align(PixelScene.uiCamera,
 				(width - txtTitle.width()) / 2);
 

@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.actors;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.buffs.Amok;
 import com.avmoga.dpixel.actors.buffs.Bleeding;
@@ -28,7 +27,6 @@ import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Burning;
 import com.avmoga.dpixel.actors.buffs.Charm;
 import com.avmoga.dpixel.actors.buffs.Cripple;
-import com.avmoga.dpixel.actors.buffs.Decay;
 import com.avmoga.dpixel.actors.buffs.EarthImbue;
 import com.avmoga.dpixel.actors.buffs.FireImbue;
 import com.avmoga.dpixel.actors.buffs.Frost;
@@ -42,8 +40,8 @@ import com.avmoga.dpixel.actors.buffs.MindVision;
 import com.avmoga.dpixel.actors.buffs.Paralysis;
 import com.avmoga.dpixel.actors.buffs.Poison;
 import com.avmoga.dpixel.actors.buffs.Roots;
-import com.avmoga.dpixel.actors.buffs.Silence;
 import com.avmoga.dpixel.actors.buffs.Shadows;
+import com.avmoga.dpixel.actors.buffs.Silence;
 import com.avmoga.dpixel.actors.buffs.Sleep;
 import com.avmoga.dpixel.actors.buffs.Slow;
 import com.avmoga.dpixel.actors.buffs.Speed;
@@ -69,6 +67,8 @@ import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.GameMath;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public abstract class Char extends Actor {
 
@@ -253,7 +253,7 @@ public abstract class Char extends Actor {
 	}
 
 	public String defenseVerb() {
-		return "dodged";
+		return Messages.get(this, "dodged");
 	}
 
 	public int dr() {
@@ -310,7 +310,7 @@ public abstract class Char extends Actor {
 			if (Random.Int(dmg) >= Random.Int(HP)) {
 				Buff.detach(this, Paralysis.class);
 				if (Dungeon.visible[pos]) {
-					GLog.i(TXT_OUT_OF_PARALYSIS, name);
+					GLog.i(Messages.get(this, "np"), name);
 				}
 			}
 		}
@@ -409,61 +409,52 @@ public abstract class Char extends Actor {
 			if (buff instanceof Poison) {
 
 				CellEmitter.center(pos).burst(PoisonParticle.SPLASH, 5);
-				sprite.showStatus(CharSprite.NEGATIVE, "poisoned");
+				sprite.showStatus(CharSprite.NEGATIVE, Messages.get(Poison.class, "name"));
 
 			} else if (buff instanceof Amok) {
 
-				sprite.showStatus(CharSprite.NEGATIVE, "amok");
+				sprite.showStatus(CharSprite.NEGATIVE, Messages.get(Amok.class, "name"));
 
 			} else if (buff instanceof Slow) {
 
-				sprite.showStatus(CharSprite.NEGATIVE, "slowed");
+				sprite.showStatus(CharSprite.NEGATIVE, Messages.get(Slow.class, "name"));
 
 			} else if (buff instanceof MindVision) {
 
-				sprite.showStatus(CharSprite.POSITIVE, "mind");
-				sprite.showStatus(CharSprite.POSITIVE, "vision");
+				sprite.showStatus(CharSprite.POSITIVE, Messages.get(MindVision.class, "name"));
 
 			} else if (buff instanceof Paralysis) {
 
 				sprite.add(CharSprite.State.PARALYSED);
-				sprite.showStatus(CharSprite.NEGATIVE, "paralysed");
+				sprite.showStatus(CharSprite.NEGATIVE, Messages.get(Paralysis.class, "name"));
 
 			} else if (buff instanceof Terror) {
 
-				sprite.showStatus(CharSprite.NEGATIVE, "frightened");
+				sprite.showStatus(CharSprite.NEGATIVE, Messages.get(Terror.class, "name"));
 
 			} else if (buff instanceof Roots) {
 
-				sprite.showStatus(CharSprite.NEGATIVE, "rooted");
+				sprite.showStatus(CharSprite.NEGATIVE, Messages.get(Roots.class, "name"));
 
 			} else if (buff instanceof Cripple) {
 
-				sprite.showStatus(CharSprite.NEGATIVE, "crippled");
+				sprite.showStatus(CharSprite.NEGATIVE, Messages.get(Cripple.class, "name"));
 
-			} else if (buff instanceof Decay) {
-				
-				sprite.showStatus(CharSprite.NEGATIVE, "decaying");
-				
 			} else if (buff instanceof Bleeding) {
 
-				sprite.showStatus(CharSprite.NEGATIVE, "bleeding");
+				sprite.showStatus(CharSprite.NEGATIVE, Messages.get(Bleeding.class, "name"));
 
 			} else if (buff instanceof Vertigo) {
 
-				sprite.showStatus(CharSprite.NEGATIVE, "dizzy");
-			 
+				sprite.showStatus(CharSprite.NEGATIVE, Messages.get(Vertigo.class, "name"));
+
 			} else if (buff instanceof Haste) {
 
-				sprite.showStatus(CharSprite.NEGATIVE, "haste");
-				
+				sprite.showStatus(CharSprite.NEGATIVE, Messages.get(Haste.class, "name"));
+
 			} else if (buff instanceof Sleep) {
 				sprite.idle();
-			} else if (buff instanceof Silence) {
-				sprite.showStatus(CharSprite.NEGATIVE, "silenced");
-			}
-
-			else if (buff instanceof Burning) {
+			} else if (buff instanceof Burning) {
 				sprite.add(CharSprite.State.BURNING);
 			} else if (buff instanceof Levitation) {
 				sprite.add(CharSprite.State.LEVITATING);
@@ -472,7 +463,7 @@ public abstract class Char extends Actor {
 			} else if (buff instanceof Invisibility
 					|| buff instanceof CloakOfShadows.cloakStealth) {
 				if (!(buff instanceof Shadows)) {
-					sprite.showStatus(CharSprite.POSITIVE, "invisible");
+					sprite.showStatus(CharSprite.POSITIVE, Messages.get(Invisibility.class, "name"));
 				}
 				sprite.add(CharSprite.State.INVISIBLE);
 			}

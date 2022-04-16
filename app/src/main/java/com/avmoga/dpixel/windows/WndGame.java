@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.windows;
 
-import java.io.IOException;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.scenes.InterlevelScene;
@@ -30,15 +29,17 @@ import com.avmoga.dpixel.ui.RedButton;
 import com.avmoga.dpixel.ui.Window;
 import com.watabou.noosa.Game;
 
+import java.io.IOException;
+
 public class WndGame extends Window {
 
-	private static final String TXT_SETTINGS = "Settings";
-	private static final String TXT_CHALLEGES = "Challenges";
-	private static final String TXT_RANKINGS = "Rankings";
-	private static final String TXT_START = "Start New Game";
-	private static final String TXT_MENU = "Main Menu";
-	private static final String TXT_EXIT = "Exit Game";
-	private static final String TXT_RETURN = "Return to Game";
+	private static final String TXT_SETTINGS = Messages.get(WndGame.class, "settings");
+	private static final String TXT_CHALLEGES = Messages.get(WndGame.class, "challenges");
+	private static final String TXT_RANKINGS = Messages.get(WndGame.class, "rankings");
+	private static final String TXT_START = Messages.get(WndGame.class, "start");
+	private static final String TXT_MENU = Messages.get(WndGame.class, "menu");
+	private static final String TXT_EXIT = Messages.get(WndGame.class, "exit");
+	private static final String TXT_RETURN = Messages.get(WndGame.class, "return");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;

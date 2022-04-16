@@ -1,158 +1,166 @@
 package com.avmoga.dpixel.scenes;
 
-import com.avmoga.dpixel.Badges;
-import com.avmoga.dpixel.Chrome;
+import android.opengl.GLES20;
+
+import com.avmoga.dpixel.Assets;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Rankings;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
-import com.avmoga.dpixel.ui.Archs;
+import com.avmoga.dpixel.effects.BannerSprites;
+import com.avmoga.dpixel.effects.Fireball;
 import com.avmoga.dpixel.ui.RedButton;
-import com.avmoga.dpixel.ui.ScrollPane;
-import com.avmoga.dpixel.ui.Window;
-import com.watabou.noosa.BitmapTextMultiline;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
-import com.watabou.noosa.NinePatch;
-import com.watabou.noosa.ui.Component;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.audio.Sample;
+
+import javax.microedition.khronos.opengles.GL10;
 
 //TODO: update this class with relevant info as new versions come out.
 public class WelcomeScene extends PixelScene {
 
-	private static final String TTL_Welcome = "Welcome!";
-
-	private static final String TTL_Update = "v0.1.5 DPD: Matthew, v0.3.5: SPD, 0.2.4c: PD 1.7.5 and Some Extras!";
-
-	private static final String TTL_Future = "Wait What?";
-
-	private static final String TXT_Welcome = "Deistic Pixel Dungeon\n\nVersion 0.1.5: Matthew"
-			+"This is a rework/expansion of Watabou's Pixel Dungeon.\n\n"
-			+ "Included are all additions from Shattered Pixel Dungeon (0.2.4c) by 00-Evan.\n\n"
-			+ "Additionally, all additions from Sprouted Pixel Dungeon (0.3.5 beta) by dachhack are here.\n\n"
-			+ "This mod will eventually add in Gods, and has currently added in Races and Artifacts based on races.\n\n"
-			+ "Happy Dungeoneering!\n\n"
-			+"\n\n"
-
-
-			+"Many other tweaks and additions have been included!\n\n";
-
-	//TODO: Fix this whenever an update is pushed.
-	private static final String TXT_Update = 
-			"Version 0.1.6: The holiday update Bugfix! \n\n"
-			+ "Fixed a critical error where the game would crash on level 24\n"
-			+ "Fixed a minor text error on the Race scene.\n"
-			+ "Fixed some last artifact glitches"
-			+ "Updated some words hidden in plain signt"
-			;
-
-	private static final String TXT_Future = "It seems that your current saves are from a future version of Sprouted Pixel Dungeon!\n\n"
-			+ "Either you're messing around with older versions of the app, or something has gone buggy.\n\n"
-			+ "Regardless, tread with caution! Your saves may contain things which don't exist in this version, "
-			+ "this could cause some very weird errors to occur."
-			+ " Consider reporting this bug to the developer!";
-
-	private static final String LNK = "https://play.google.com/store/apps/details?id=com.avmoga.dpixel";
+	private static int LATEST_UPDATE = 126;
 
 	@Override
 	public void create() {
 		super.create();
 
-		final int gameversion = ShatteredPixelDungeon.version();
+		final int previousVersion = ShatteredPixelDungeon.version();
 
-		BitmapTextMultiline title;
-		BitmapTextMultiline text;
-
-		if (gameversion == 0) {
-
-			text = createMultiline(TXT_Welcome, 8);
-			title = createMultiline(TTL_Welcome, 16);
-
-		} else if (gameversion <= Game.versionCode) {
-
-			text = createMultiline(TXT_Update, 6);
-			title = createMultiline(TTL_Update, 9);
-
-		} else {
-
-			text = createMultiline(TXT_Future, 8);
-			title = createMultiline(TTL_Future, 16);
-
+		if (ShatteredPixelDungeon.versionCode == previousVersion) {
+			ShatteredPixelDungeon.switchNoFade(TitleScene.class);
+			return;
 		}
+
+		uiCamera.visible = false;
 
 		int w = Camera.main.width;
 		int h = Camera.main.height;
 
-		int pw = w - 10;
-		int ph = h - 50;
+		Image title = BannerSprites.get( BannerSprites.Type.PIXEL_DUNGEON );
+		title.brightness(0.6f);
+		add( title );
 
-		title.maxWidth = pw;
-		title.measure();
-		title.hardlight(Window.SHPX_COLOR);
+		float topRegion = Math.max(95f, h*0.45f);
 
-		title.x = align((w - title.width()) / 2);
-		title.y = align(8);
-		add(title);
+		title.x = (w - title.width()) / 2f;
+		if (ShatteredPixelDungeon.landscape())
+			title.y = (topRegion - title.height()) / 2f;
+		else
+			title.y = 16 + (topRegion - title.height() - 16) / 2f;
 
-		NinePatch panel = Chrome.get(Chrome.Type.WINDOW);
-		panel.size(pw, ph);
-		panel.x = (w - pw) / 2;
-		panel.y = (h - ph) / 2;
-		add(panel);
+		align(title);
 
-		ScrollPane list = new ScrollPane(new Component());
-		add(list);
-		list.setRect(panel.x + panel.marginLeft(), panel.y + panel.marginTop(),
-				panel.innerWidth(), panel.innerHeight());
-		list.scrollTo(0, 0);
+		Image signs = new Image( BannerSprites.get( BannerSprites.Type.PIXEL_DUNGEON_SIGNS ) ) {
+			private float time = 0;
+			@Override
+			public void update() {
+				super.update();
+				am = (float)Math.sin( -(time += Game.elapsed) );
+			}
+			@Override
+			public void draw() {
+				GLES20.glBlendFunc( GL10.GL_SRC_ALPHA, GL10.GL_ONE );
+				super.draw();
+				GLES20.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+			}
+		};
+		signs.x = title.x + (title.width() - signs.width())/2f;
+		signs.y = title.y;
+		add( signs );
 
-		Component content = list.content();
-		content.clear();
-
-		text.maxWidth = (int) panel.innerWidth();
-		text.measure();
-
-		content.add(text);
-
-		content.setSize(panel.innerWidth(), text.height());
-
-		RedButton okay = new RedButton("Okay!") {
+		DarkRedButton okay = new DarkRedButton(Messages.get(this, "continue")){
 			@Override
 			protected void onClick() {
-
-				if (gameversion <= 32) {
-					// removes all bags bought badge from pre-0.2.4 saves.
-					Badges.disown(Badges.Badge.ALL_BAGS_BOUGHT);
-					Badges.saveGlobal();
-
-					// imports new ranking data for pre-0.2.3 saves.
-					if (gameversion <= 29) {
-						Rankings.INSTANCE.load();
-						Rankings.INSTANCE.save();
-					}
-				}
-
-				ShatteredPixelDungeon.version(Game.versionCode);
-				Game.switchScene(TitleScene.class);
+				super.onClick();
+				updateVersion(previousVersion);
+				ShatteredPixelDungeon.switchScene(TitleScene.class);
 			}
 		};
 
-		/*
-		 * okay.setRect(text.x, text.y + text.height() + 5, 55, 18); add(okay);
-		 * 
-		 * RedButton changes = new RedButton("Changes") {
-		 * 
-		 * @Override protected void onClick() { parent.add(new WndChanges()); }
-		 * };
-		 * 
-		 * changes.setRect(text.x + 65, text.y + text.height() + 5, 55, 18);
-		 * add(changes);
-		 */
+		if (previousVersion != 0){
+			DarkRedButton changes = new DarkRedButton(Messages.get(this, "changelist")){
+				@Override
+				protected void onClick() {
+					super.onClick();
+					updateVersion(previousVersion);
+					ShatteredPixelDungeon.switchScene(ChangesScene.class);
+				}
+			};
+			okay.setRect(title.x, h-20, (title.width()/2)-2, 16);
+			okay.textColor(0xBBBB33);
+			add(okay);
 
-		okay.setRect((w - pw) / 2, h - 22, pw, 18);
-		add(okay);
+			changes.setRect(okay.right()+2, h-20, (title.width()/2)-2, 16);
+			changes.textColor(0xBBBB33);
+			add(changes);
+		} else {
+			okay.setRect(title.x, h-20, title.width(), 16);
+			okay.textColor(0xBBBB33);
+			add(okay);
+		}
 
-		Archs archs = new Archs();
-		archs.setSize(Camera.main.width, Camera.main.height);
-		addToBack(archs);
+		RenderedTextMultiline text = PixelScene.renderMultiline(6);
+		String message;
+		if (previousVersion == 0) {
+			message = Messages.get(this, "welcome_msg");
+		} else if (previousVersion <= ShatteredPixelDungeon.versionCode) {
+			if (previousVersion < LATEST_UPDATE){
+				message = Messages.get(this, "update_intro");
+				message += "\n\n" + Messages.get(this, "update_msg");
+			} else {
+				//TODO: change the messages here in accordance with the type of patch.
+				message = Messages.get(this, "patch_intro");
+				message += "\n\n" + Messages.get(this, "patch_bugfixes");
+				//message += "\n" + Messages.get(this, "patch_translations");
+				//message += "\n" + Messages.get(this, "patch_balance");
 
-		fadeIn();
+			}
+		} else {
+			message = Messages.get(this, "what_msg");
+		}
+		text.text(message, w-20);
+		float textSpace = h - title.y - (title.height() - 10) - okay.height() - 2;
+		text.setPos((w - text.width()) / 2f, title.y+(title.height() - 10) + ((textSpace - text.height()) / 2));
+		add(text);
+
+	}
+
+	private void updateVersion(int previousVersion){
+		//rankings conversion
+		if (previousVersion <= 114){
+			Rankings.INSTANCE.load();
+		}
+
+		ShatteredPixelDungeon.version(ShatteredPixelDungeon.versionCode);
+	}
+
+	private void placeTorch( float x, float y ) {
+		Fireball fb = new Fireball();
+		fb.setPos( x, y );
+		add( fb );
+	}
+
+	private class DarkRedButton extends RedButton{
+		{
+			bg.brightness(0.4f);
+		}
+
+		DarkRedButton(String text){
+			super(text);
+		}
+
+		@Override
+		protected void onTouchDown() {
+			bg.brightness(0.5f);
+			Sample.INSTANCE.play( Assets.SND_CLICK );
+		}
+
+		@Override
+		protected void onTouchUp() {
+			super.onTouchUp();
+			bg.brightness(0.4f);
+		}
 	}
 }

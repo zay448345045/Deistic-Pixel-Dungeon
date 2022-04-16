@@ -21,6 +21,7 @@ import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.actors.hero.HeroClass;
 import com.avmoga.dpixel.actors.hero.HeroSubClass;
 import com.avmoga.dpixel.scenes.PixelScene;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.utils.Utils;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.BitmapTextMultiline;
@@ -112,7 +113,7 @@ public class WndClass extends WndTabbed {
 					pos += GAP;
 				}
 
-				BitmapText dot = PixelScene.createText(DOT, 6);
+				BitmapText dot = PixelScene.createText("-", 6);
 				dot.x = MARGIN;
 				dot.y = pos;
 				if (dotWidth == 0) {
@@ -121,12 +122,9 @@ public class WndClass extends WndTabbed {
 				}
 				add(dot);
 
-				BitmapTextMultiline item = PixelScene.createMultiline(items[i],
-						6);
-				item.x = dot.x + dotWidth;
-				item.y = pos;
-				item.maxWidth = (int) (WIDTH - MARGIN * 2 - dotWidth);
-				item.measure();
+				RenderedTextMultiline item = PixelScene.renderMultiline(items[i], 6);
+				item.maxWidth((int) (WIDTH - MARGIN * 2 - dotWidth));
+				item.setPos(dot.x + dotWidth, pos);
 				add(item);
 
 				pos += item.height();

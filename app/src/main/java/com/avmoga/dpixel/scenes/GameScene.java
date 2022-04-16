@@ -22,6 +22,7 @@ import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.DungeonTilemap;
 import com.avmoga.dpixel.FogOfWar;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Actor;
@@ -85,14 +86,14 @@ import java.util.HashSet;
 
 public class GameScene extends PixelScene {
 
-	private static final String TXT_WELCOME = "Welcome to the level %d of Pixel Dungeon!";
-	private static final String TXT_WELCOME_BACK = "Welcome back to the level %d of Pixel Dungeon!";
+	private static final String TXT_WELCOME = Messages.get(GameScene.class, "welcome");
+	private static final String TXT_WELCOME_BACK = Messages.get(GameScene.class, "welcome_back");
 
-	private static final String TXT_CHASM = "Your steps echo across the dungeon.";
-	private static final String TXT_WATER = "You hear water splashing around you.";
-	private static final String TXT_GRASS = "The smell of vegetation is thick in the air.";
-	private static final String TXT_DARK = "You can hear enemies moving in the darkness...";
-	private static final String TXT_SECRETS = "The atmosphere hints that this floor hides many secrets.";
+	private static final String TXT_CHASM = Messages.get(GameScene.class, "chasm");
+	private static final String TXT_WATER = Messages.get(GameScene.class, "water");
+	private static final String TXT_GRASS = Messages.get(GameScene.class, "grass");
+	private static final String TXT_DARK = Messages.get(GameScene.class, "dark");
+	private static final String TXT_SECRETS = Messages.get(GameScene.class, "secrets");
 
 	static GameScene scene;
 

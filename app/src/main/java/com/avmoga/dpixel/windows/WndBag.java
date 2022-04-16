@@ -19,8 +19,6 @@ package com.avmoga.dpixel.windows;
 
 import android.graphics.RectF;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
@@ -63,7 +61,10 @@ import com.watabou.gltextures.TextureCache;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.ColorBlock;
 import com.watabou.noosa.Image;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Sample;
+
+import java.util.HashSet;
 
 public class WndBag extends WndTabbed {
 	public static enum Mode {
@@ -156,10 +157,9 @@ public class WndBag extends WndTabbed {
 		int slotsWidth = SLOT_SIZE * nCols + SLOT_MARGIN * (nCols - 1);
 		int slotsHeight = SLOT_SIZE * nRows + SLOT_MARGIN * (nRows - 1);
 
-		BitmapText txtTitle = PixelScene.createText(title != null ? title
+		RenderedText txtTitle = PixelScene.renderText(title != null ? title
 				: Utils.capitalize(bag.name()), 9);
-		txtTitle.hardlight(TITLE_COLOR);
-		txtTitle.measure();
+		txtTitle.hardlight(Dungeon.challenges > 0 ? SHPX_COLOR : TITLE_COLOR);
 		txtTitle.x = (int) (slotsWidth - txtTitle.width()) / 2;
 		txtTitle.y = (int) (TITLE_HEIGHT - txtTitle.height()) / 2;
 		add(txtTitle);

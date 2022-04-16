@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.armor;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class LeatherArmor extends Armor {
 
 	{
-		name = "leather armor";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARMOR_LEATHER;
 	}
 
@@ -32,6 +33,6 @@ public class LeatherArmor extends Armor {
 
 	@Override
 	public String desc() {
-		return "Armor made from tanned monster hide. Not as light as cloth armor but provides better protection.";
+		return Messages.get(this, "desc");
 	}
 }

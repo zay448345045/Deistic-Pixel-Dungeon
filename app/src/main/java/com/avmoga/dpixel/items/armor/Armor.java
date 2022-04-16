@@ -17,10 +17,8 @@
  */
 package com.avmoga.dpixel.items.armor;
 
-import java.util.ArrayList;
-
-import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -44,18 +42,21 @@ import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class Armor extends EquipableItem {
 
 	private static final int HITS_TO_KNOW = 10;
 
-	private static final String TXT_EQUIP_CURSED = "your %s constricts around you painfully";
+	private static final float TIME_TO_EQUIP = 1f;
 
-	private static final String TXT_IDENTIFY = "you are now familiar enough with your %s to identify it. It is %s.";
+	private static final String TXT_EQUIP_CURSED = Messages.get(Armor.class, "equip_cursed");
+
+	private static final String TXT_IDENTIFY = Messages.get(Armor.class, "identify");
 
 	private static final String TXT_TO_STRING = "%s :%d";
 
-	@SuppressWarnings("unused")
-	private static final String TXT_INCOMPATIBLE = "Interaction of different types of magic has erased the glyph on this armor!";
+	private static final String TXT_INCOMPATIBLE = Messages.get(Armor.class, "incompatible");
 
 	public int tier;
 
@@ -87,7 +88,6 @@ public class Armor extends EquipableItem {
 	@Override
 	public void restoreFromBundle(Bundle bundle) {
 		super.restoreFromBundle(bundle);
-		glyph = (Glyph) bundle.get(GLYPH);
 		if ((hitsToKnow = bundle.getInt(UNFAMILIRIARITY)) == 0) {
 			hitsToKnow = HITS_TO_KNOW;
 		}
@@ -119,7 +119,7 @@ public class Armor extends EquipableItem {
 
 			((HeroSprite) hero.sprite).updateArmor();
 
-			hero.spendAndNext(2 * time2equip(hero));
+			hero.spendAndNext(TIME_TO_EQUIP);
 			return true;
 
 		} else {
@@ -132,7 +132,7 @@ public class Armor extends EquipableItem {
 
 	@Override
 	protected float time2equip(Hero hero) {
-		return hero.speed();
+		return 2;
 	}
 
 	@Override
@@ -163,10 +163,10 @@ public class Armor extends EquipableItem {
 
 	public Item upgrade(boolean inscribe) {
 
-			if (inscribe) {
-				inscribe(Glyph.random());
-			}
-				
+		if (inscribe) {
+			inscribe(Glyph.random());
+		}
+
 		DR += tier;
 		STR--;
 
@@ -191,7 +191,6 @@ public class Armor extends EquipableItem {
 			if (--hitsToKnow <= 0) {
 				levelKnown = true;
 				GLog.w(TXT_IDENTIFY, name(), toString());
-				Badges.validateItemLevelAquired(this);
 			}
 		}
 
@@ -215,48 +214,38 @@ public class Armor extends EquipableItem {
 		StringBuilder info = new StringBuilder(desc());
 
 		if (levelKnown) {
-			info.append("\n\nThis " + name
-					+ " provides damage absorption up to " + ""
-					+ Math.max(DR, 0) + " points per attack. ");
+			info.append(Messages.get(this, "curr_absorb", Math.max(DR, 0)));
 
 			if (STR > Dungeon.hero.STR()) {
 
-				if (isEquipped(Dungeon.hero)) {
-					info.append("\n\nBecause of your inadequate strength your "
-							+ "movement speed and defense skill is decreased. ");
-				} else {
-					info.append("\n\nBecause of your inadequate strength wearing this armor "
-							+ "will decrease your movement speed and defense skill. ");
-				}
+				info.append(Messages.get(this, "too_heavy"));
 
 			}
 		} else {
-			info.append("\n\nTypical " + name
-					+ " provides damage absorption up to " + typicalDR()
-					+ " points per attack " + " and requires " + typicalSTR()
-					+ " points of strength. ");
+			info.append(Messages.get(this, "avg_absorb", typicalDR()));
 			if (typicalSTR() > Dungeon.hero.STR()) {
-				info.append("Probably this armor is too heavy for you. ");
+				info.append(Messages.get(this, "probably_too_heavy"));
 			}
 		}
 
 		if (glyph != null) {
-			info.append("It is inscribed.");
+			info.append(Messages.get(this, "inscribed", glyph.name()));
+			info.append(glyph.desc());
 		}
-		
+
 		if (reinforced) {
-			info.append("\n\nIt is reinforced.");
+			info.append(Messages.get(this, "reinforced"));
 		}
 
 		if (isEquipped(Dungeon.hero)) {
-			info.append("\n\nYou are wearing the "
-					+ name
-					+ (cursed ? ", and because it is cursed, you are powerless to remove it."
-							: "."));
+			if (cursed) {
+				info.append(Messages.get(this, "wearing", name) + Messages.get(this, "cursed_worn"));
+			} else {
+				info.append(Messages.get(this, "wearing", name));
+			}
 		} else {
 			if (cursedKnown && cursed) {
-				info.append("\n\nYou can feel a malevolent magic lurking within the "
-						+ name + ".");
+				info.append(Messages.get(this, "cursed"));
 			}
 		}
 
@@ -354,26 +343,30 @@ public class Armor extends EquipableItem {
 
 	public static abstract class Glyph implements Bundlable {
 
-		private static final Class<?>[] glyphs = new Class<?>[] { Bounce.class,
+		private static final Class<?>[] glyphs = new Class<?>[]{Bounce.class,
 				Affection.class, AntiEntropy.class, Multiplicity.class,
 				Potential.class, Metabolism.class, Stench.class,
-				Viscosity.class, Displacement.class, Entanglement.class };
+				Viscosity.class, Displacement.class, Entanglement.class};
 
-		private static final float[] chances = new float[] { 1, 1, 1, 1, 1, 1,
-				1, 1, 1, 1 };
+		private static final float[] chances = new float[]{1, 1, 1, 1, 1, 1,
+				1, 1, 1, 1};
 
-		private static final float[] chancesAdv = new float[] { 1, 1, 1, 1, 1, 1,
-			1, 1, 1, 1 };
-		
+		private static final float[] chancesAdv = new float[]{1, 1, 1, 1, 1, 1,
+				1, 1, 1, 1};
+
 		public abstract int proc(Armor armor, Char attacker, Char defender,
-				int damage);
+								 int damage);
 
 		public String name() {
-			return name("glyph");
+			return name(Messages.get(Armor.class, "gname"));
 		}
 
 		public String name(String armorName) {
 			return armorName;
+		}
+
+		public String desc() {
+			return Messages.get(this, "desc");
 		}
 
 		@Override
@@ -392,9 +385,8 @@ public class Armor extends EquipableItem {
 			if (!owner.isAlive() && owner instanceof Hero) {
 
 				Dungeon.fail(Utils.format(ResultDescriptions.GLYPH, name()));
-				GLog.n("%s killed you...", name());
+				GLog.n(Messages.get(Armor.class, "gkilled"), name());
 
-				Badges.validateDeathFromGlyph();
 				return true;
 
 			} else {
@@ -411,7 +403,7 @@ public class Armor extends EquipableItem {
 				return null;
 			}
 		}
-		
+
 		@SuppressWarnings("unchecked")
 		public static Glyph randomAdv() {
 			try {

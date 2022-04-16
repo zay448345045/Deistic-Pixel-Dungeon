@@ -31,21 +31,21 @@ public class WndSettings extends Window {
 
 	private static final String TXT_ZOOM_IN = "+";
 	private static final String TXT_ZOOM_OUT = "-";
-	private static final String TXT_ZOOM_DEFAULT = "Default Zoom";
+	private static final String TXT_ZOOM_DEFAULT = "默认缩放";
 
-	private static final String TXT_SCALE_UP = "Scale up UI";
-	private static final String TXT_IMMERSIVE = "Immersive mode";
+	private static final String TXT_SCALE_UP = "缩放调整";
+	private static final String TXT_IMMERSIVE = "沉浸模式";
 
-	private static final String TXT_MUSIC = "Music";
+	private static final String TXT_MUSIC = "游戏音乐";
 
-	private static final String TXT_SOUND = "Sound FX";
+	private static final String TXT_SOUND = "游戏音效";
 
-	private static final String TXT_BRIGHTNESS = "Brightness";
+	private static final String TXT_BRIGHTNESS = "明亮旅程";
 
-	private static final String TXT_QUICKSLOT = "Second QuickSlot";
+	private static final String TXT_QUICKSLOT = "扩展插槽";
 
-	private static final String TXT_SWITCH_PORT = "Switch to portrait";
-	private static final String TXT_SWITCH_LAND = "Switch to landscape";
+	private static final String TXT_SWITCH_PORT = "切换竖屏";
+	private static final String TXT_SWITCH_LAND = "切换横屏";
 
 	private static final int WIDTH = 112;
 	private static final int BTN_HEIGHT = 20;

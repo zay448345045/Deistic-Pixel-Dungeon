@@ -17,17 +17,18 @@
  */
 package com.avmoga.dpixel.items.armor;
 
-import java.util.ArrayList;
-
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+
 abstract public class ClassArmor extends Armor {
 
-	private static final String TXT_LOW_HEALTH = "Your health is too low!";
-	private static final String TXT_NOT_EQUIPPED = "You need to be wearing this armor to use its special power!";
+	private static final String TXT_LOW_HEALTH = Messages.get(ClassArmor.class, "low_hp");
+	private static final String TXT_NOT_EQUIPPED = Messages.get(ClassArmor.class, "not_equipped");
 
 	{
 		levelKnown = true;

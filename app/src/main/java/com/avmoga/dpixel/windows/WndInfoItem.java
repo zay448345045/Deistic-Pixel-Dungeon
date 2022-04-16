@@ -18,15 +18,15 @@
 package com.avmoga.dpixel.windows;
 
 import com.avmoga.dpixel.items.Heap;
-import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.Heap.Type;
+import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.artifacts.Artifact;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.ui.ItemSlot;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
 import com.avmoga.dpixel.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndInfoItem extends Window {
 
@@ -126,13 +126,11 @@ public class WndInfoItem extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline txtInfo = PixelScene.createMultiline(info, 6);
-		txtInfo.maxWidth = WIDTH;
-		txtInfo.measure();
-		txtInfo.x = titlebar.left();
-		txtInfo.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline txtInfo = PixelScene.renderMultiline(info, 6);
+		txtInfo.maxWidth(WIDTH);
+		txtInfo.setPos(titlebar.left(), titlebar.bottom() + GAP);
 		add(txtInfo);
 
-		resize(WIDTH, (int) (txtInfo.y + txtInfo.height()));
+		resize(WIDTH, (int) (txtInfo.top() + txtInfo.height()));
 	}
 }

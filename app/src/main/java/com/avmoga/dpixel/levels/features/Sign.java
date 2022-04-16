@@ -31,54 +31,52 @@ import com.watabou.noosa.audio.Sample;
 
 public class Sign {
 
-	private static final String TXT_DEAD_END = "What are you doing here?!";
+	private static final String TXT_DEAD_END = "你为什么在这里?!";
 
 	private static final String[] TIPS = {
-			"Almost all equipment has a strength requirement. Don't overestimate your strength, using equipment you can't "
-					+ "handle has big penalties!\n\nRaising your strength is not the only way to access better equipment, "
-					+ "you can also lower equipment strength requirements with Scrolls of Upgrade.\n\n\n"
-					+ "Items found in the dungeon will often be unidentified. Some items will have unknown effects, others "
-					+ "may be upgraded, or degraded and cursed! Unidentified items are unpredictable, so be careful!",
-			"Charging forward recklessly is a great way to get killed.\n\n"
-					+ "Slowing down a bit to examine enemies and use the environment and items to your advantage can make a"
-					+ " big difference.\n\nThe dungeon is full of traps and hidden passageways as well, keep your eyes open!",
-			"Levelling up is important!\n\nBeing about the same level as the floor you are on is a good idea. "
-					+ "Hunger may keep you moving in search of more food, but don't be afraid to slow down a little and train."
-					+ "\n\n\nHunger and health are both resources, and using them well can mean starving yourself in order"
-					+ " to help conserve food, if you have some health to spare.",
-			"The rogue isn't the only character that benefits from being sneaky. You can retreat to the other side of a "
-					+ "door to ambush a chasing opponent for a guaranteed hit!"
-					+ "\n\nAny attack on an unaware opponent is guaranteed to hit them.",
+			"几乎所有的装备都有力量需求。 \n" +
+					"不要无视自己的力量来用使用你不能用的装备，这样做会带来巨大的惩罚！\n" +
+					"提高你的力量不是使用更好的装备的唯一途径，你也可以用升级卷轴降低装备的力量要求。\n" +
+					"地牢里面遇见的物品大多数都是未鉴定的。\n" +
+					"有些物品会带有未知的效果，可能是升级，可能是降级，甚至是诅咒！\n" +
+					"未鉴定物品的效果是不可以被预测，所以千万小心！",
+			"不管不顾地向前冲非常容易被杀死。\n" +
+					"放慢一点，小心查看敌人，充分利用好环境和你的物品，可以使游戏产生很大的不同\n" +
+					"这座地牢充满了陷阱和隐藏的通道，睁大眼睛仔细看看！",
+			"升级很重要!\n" +
+					"建议让你的等级和你的当前楼层保持相同。 \n" +
+					"饥饿会让你需要大量地进食，但是不要害怕因此而放慢速度备战。\n" +
+					"饥饿和健康都是你手上有用的资源，你可以为了节省食物来让自己多挨一会饿。",
+			"盗贼不是唯一一个能够利用潜伏的角色。你可以退到到门后边来奇袭敌人，这样你会必定命中。\n" +
+					"对于没有察觉到你的怪物的攻击也会是必定命中的。",
 
-			"Note to all sewer maintenance & cleaning crews: TURN BACK NOW. Some sort of sludge monster has made its home"
-					+ " here and several crews have been lost trying to deal with it.\n\n"
-					+ "Approval has been given to seal off the lower sewers, this area has been condemned, LEAVE NOW.",
+			"给所有下水道维护和清洁人员的注意事项：立即返回。某种粘性怪物在这里安家，有几名工作人员在试图处理时失踪了。\n" +
+					"已批准封锁下水道，该区域已被废弃，请立即离开。",
 
-			"Pixel-Mart - all you need for successful adventure!",
-			"Identify your potions and scrolls as soon as possible. Don't put it off to the moment "
-					+ "when you actually need them.",
-			"Being hungry doesn't hurt, but starving does hurt.",
-			"Surprise attack has a better chance to hit. For example, you can ambush your enemy behind "
-					+ "a closed door when you know it is approaching.",
+			"像素商店 - 成功冒险所需的一切！\n" +
+					"尽快鉴定你的药水和卷轴。不要等到你需要他们的时候再去追悔莫及。\n" +
+					"饥饿不会受伤，极度饥饿才会。\n" +
+					"奇袭能必定命中。例如，当你知道敌人正在接近你时，你可以在关闭的门后面伏击你的敌人。",
 
-			"Don't let The Tengu out!",
+			"别让天狗跑了!",
 
-			"Pixel-Mart. Spend money. Live longer.",
-			"When you're attacked by several monsters at the same time, try to retreat behind a door.",
-			"If you are burning, you can't put out the fire in the water while levitating.",
-			"There is no sense in possessing more than one unblessed Ankh at the same time, "
-					+ "because you will lose them upon resurrecting.",
+			"像素商店 - 充钱使你变强\n" +
+					"当你同时被几个怪物攻击时，尽量退到门后。\n" +
+					"如果你正在燃烧，你不能在飞行的同时在水中把火扑灭。\n" +
+					"同时拥有多个未受祝福的十字架是没有意义的，因为你将在复活后失去他们。",
 
-			"DANGER! Heavy machinery can cause injury, loss of limbs or death!",
+			"危险！此重型机械可能导致受伤、残疾或者死亡，我们对您的遭遇不负有任何责任",
 
-			"Pixel-Mart. A safer life in dungeon.",
-			"When you upgrade an enchanted weapon, there is a chance to destroy that enchantment.",
-			"In a Well of Transmutation you can get an item, that cannot be obtained otherwise.",
-			"The only way to enchant a weapon is by upgrading it with a Scroll of Weapon Upgrade.",
+			"像素商店 - 为你的地牢探险保驾护航\n" +
+					"当你升级一个附了魔的武器时，有几率抹消掉这个附魔。\n" +
+					"\n" +
+					"在转化之井中，你可以得到一个其他地方无法得到的物品。\n" +
+					"\n" +
+					"给武器附魔的唯一方法是用“武器升级卷轴”来升级它。",
 
-			"No weapons allowed in the presence of His Majesty!",
+			"在陛下面前不允许携带武器！",
 
-			"Pixel-Mart. Special prices for demon hunters!",
+			"像素商店 - 猎魔人专属特惠！",
 
 			// hmm.. I wonder what this is?
 			//TODO: update with quotes to tease

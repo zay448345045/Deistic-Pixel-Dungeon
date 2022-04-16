@@ -20,6 +20,7 @@ package com.avmoga.dpixel.windows;
 import com.avmoga.dpixel.actors.hero.HeroRace;
 import com.avmoga.dpixel.actors.hero.HeroSubRace;
 import com.avmoga.dpixel.scenes.PixelScene;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.utils.Utils;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.BitmapTextMultiline;
@@ -27,7 +28,7 @@ import com.watabou.noosa.Group;
 
 public class WndRace extends WndTabbed {
 
-	private static final String TXT_MASTERY = "Specialties";
+	private static final String TXT_MASTERY = "专精";
 
 	private static final int WIDTH = 110;
 
@@ -88,8 +89,6 @@ public class WndRace extends WndTabbed {
 		private static final int MARGIN = 4;
 		private static final int GAP = 4;
 
-		private static final String DOT = "\u007F";
-
 		public float height;
 		public float width;
 
@@ -107,7 +106,7 @@ public class WndRace extends WndTabbed {
 					pos += GAP;
 				}
 
-				BitmapText dot = PixelScene.createText(DOT, 6);
+				BitmapText dot = PixelScene.createText("-", 6);
 				dot.x = MARGIN;
 				dot.y = pos;
 				if (dotWidth == 0) {
@@ -116,12 +115,9 @@ public class WndRace extends WndTabbed {
 				}
 				add(dot);
 
-				BitmapTextMultiline item = PixelScene.createMultiline(items[i],
-						6);
-				item.x = dot.x + dotWidth;
-				item.y = pos;
-				item.maxWidth = (int) (WIDTH - MARGIN * 2 - dotWidth);
-				item.measure();
+				RenderedTextMultiline item = PixelScene.renderMultiline(items[i], 6);
+				item.maxWidth((int) (WIDTH - MARGIN * 2 - dotWidth));
+				item.setPos(dot.x + dotWidth, pos);
 				add(item);
 
 				pos += item.height();

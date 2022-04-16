@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.armor;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class ScaleArmor extends Armor {
 
 	{
-		name = "scale armor";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARMOR_SCALE;
 	}
 
@@ -30,8 +31,9 @@ public class ScaleArmor extends Armor {
 		super(4);
 	}
 
+
 	@Override
 	public String desc() {
-		return "The metal scales sewn onto a leather vest create a flexible, yet protective armor.";
+		return Messages.get(this, "desc");
 	}
 }

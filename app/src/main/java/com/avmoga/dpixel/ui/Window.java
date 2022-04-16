@@ -17,9 +17,6 @@
  */
 package com.avmoga.dpixel.ui;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.avmoga.dpixel.Chrome;
 import com.avmoga.dpixel.effects.ShadowBox;
 import com.avmoga.dpixel.scenes.PixelScene;
@@ -33,6 +30,9 @@ import com.watabou.noosa.NinePatch;
 import com.watabou.noosa.TouchArea;
 import com.watabou.utils.Signal;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Window extends Group implements Signal.Listener<Key> {
 
 	protected int width;
@@ -42,7 +42,7 @@ public class Window extends Group implements Signal.Listener<Key> {
 	protected ShadowBox shadow;
 	protected NinePatch chrome;
 
-	public static final int TITLE_COLOR = 0xFFFF44;
+	public static final int TITLE_COLOR = 0x00ccff;
 	public static final int SHPX_COLOR = 0x00bfff;
 	public static final int HEADER_COLOR = 0x6495ED;
 

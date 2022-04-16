@@ -17,17 +17,17 @@
  */
 package com.avmoga.dpixel.effects;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.DungeonTilemap;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.scenes.PixelScene;
-import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
+import com.watabou.noosa.RenderedText;
 import com.watabou.utils.SparseArray;
 
-public class FloatingText extends BitmapText {
+import java.util.ArrayList;
+
+public class FloatingText  extends RenderedText {
 
 	private static final float LIFESPAN = 1f;
 	private static final float DISTANCE = DungeonTilemap.SIZE;
@@ -38,7 +38,7 @@ public class FloatingText extends BitmapText {
 
 	private float cameraZoom = -1;
 
-	private static SparseArray<ArrayList<FloatingText>> stacks = new SparseArray<ArrayList<FloatingText>>();
+	private static final SparseArray<ArrayList<FloatingText>> stacks = new SparseArray<ArrayList<FloatingText>>();
 
 	public FloatingText() {
 		super();
@@ -62,7 +62,9 @@ public class FloatingText extends BitmapText {
 	@Override
 	public void kill() {
 		if (key != -1) {
-			stacks.get(key).remove(this);
+			synchronized (stacks) {
+				stacks.get(key).remove(this);
+			}
 			key = -1;
 		}
 		super.kill();
@@ -81,14 +83,13 @@ public class FloatingText extends BitmapText {
 		if (cameraZoom != Camera.main.zoom) {
 			cameraZoom = Camera.main.zoom;
 			PixelScene.chooseFont(9, cameraZoom);
-			font = PixelScene.font;
-			scale.set(PixelScene.scale);
+			size(9 * (int) cameraZoom);
+			scale.set(1 / cameraZoom);
 		}
 
 		text(text);
 		hardlight(color);
 
-		measure();
 		this.x = PixelScene.align(x - width() / 2);
 		this.y = y - height();
 
@@ -109,30 +110,32 @@ public class FloatingText extends BitmapText {
 
 	private static void push(FloatingText txt, int key) {
 
-		txt.key = key;
+		synchronized (stacks) {
+			txt.key = key;
 
-		ArrayList<FloatingText> stack = stacks.get(key);
-		if (stack == null) {
-			stack = new ArrayList<FloatingText>();
-			stacks.put(key, stack);
-		}
+			ArrayList<FloatingText> stack = stacks.get(key);
+			if (stack == null) {
+				stack = new ArrayList<FloatingText>();
+				stacks.put(key, stack);
+			}
 
-		if (stack.size() > 0) {
-			FloatingText below = txt;
-			int aboveIndex = stack.size() - 1;
-			while (aboveIndex >= 0) {
-				FloatingText above = stack.get(aboveIndex);
-				if (above.y + above.height() > below.y) {
-					above.y = below.y - above.height();
+			if (stack.size() > 0) {
+				FloatingText below = txt;
+				int aboveIndex = stack.size() - 1;
+				while (aboveIndex >= 0) {
+					FloatingText above = stack.get(aboveIndex);
+					if (above.y + above.height() > below.y) {
+						above.y = below.y - above.height();
 
-					below = above;
-					aboveIndex--;
-				} else {
-					break;
+						below = above;
+						aboveIndex--;
+					} else {
+						break;
+					}
 				}
 			}
-		}
 
-		stack.add(txt);
+			stack.add(txt);
+		}
 	}
 }
