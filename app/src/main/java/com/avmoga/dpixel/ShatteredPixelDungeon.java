@@ -17,8 +17,6 @@
  */
 package com.avmoga.dpixel;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -26,12 +24,18 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
+import com.avmoga.dpixel.Messages.Languages;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.scenes.TitleScene;
 import com.watabou.noosa.Game;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
+
+import java.util.Locale;
+
+import javax.microedition.khronos.opengles.GL10;
 
 public class ShatteredPixelDungeon extends Game {
 
@@ -121,6 +125,9 @@ public class ShatteredPixelDungeon extends Game {
 	/*
 	 * ---> Prefernces
 	 */
+	public static boolean landscape() {
+		return width > height;
+	}
 
 	public static void landscape(boolean value) {
 		Game.instance
@@ -129,13 +136,37 @@ public class ShatteredPixelDungeon extends Game {
 		Preferences.INSTANCE.put(Preferences.KEY_LANDSCAPE, value);
 	}
 
-	public static boolean landscape() {
-		return width > height;
-	}
 
 	public static void scaleUp(boolean value) {
 		Preferences.INSTANCE.put(Preferences.KEY_SCALE_UP, value);
 		switchScene(TitleScene.class);
+	}
+
+	public static void language(Languages lang) {
+		Preferences.INSTANCE.put(Preferences.KEY_LANG, lang.code());
+	}
+
+	public static Languages language() {
+		String code = Preferences.INSTANCE.getString(Preferences.KEY_LANG, null);
+		if (code == null){
+			return Languages.matchLocale(Locale.getDefault());
+		} else {
+			return Languages.matchCode(code);
+		}
+	}
+
+	public static void classicFont(boolean classic) {
+		Preferences.INSTANCE.put(Preferences.KEY_CLASSICFONT, classic);
+		if (classic) {
+			RenderedText.setFont("pixelfont.ttf");
+		} else {
+			RenderedText.setFont(null);
+		}
+	}
+
+	public static boolean classicFont() {
+		return Preferences.INSTANCE.getBoolean(Preferences.KEY_CLASSICFONT,
+				(language() != Languages.CHINESE));
 	}
 
 	// *** IMMERSIVE MODE ****
@@ -190,6 +221,10 @@ public class ShatteredPixelDungeon extends Game {
 				.getBoolean(Preferences.KEY_IMMERSIVE, false);
 	}
 
+	public static int scale() {
+		return Preferences.INSTANCE.getInt(Preferences.KEY_SCALE, 0);
+	}
+
 	// *****************************
 
 	public static boolean scaleUp() {
@@ -237,7 +272,7 @@ public class ShatteredPixelDungeon extends Game {
 	public static void lastClass(int value) {
 		Preferences.INSTANCE.put(Preferences.KEY_LAST_CLASS, value);
 	}
-	
+
 	public static void lastRace(int value) {
 		Preferences.INSTANCE.put(Preferences.KEY_LAST_RACE, value);
 	}
@@ -245,7 +280,7 @@ public class ShatteredPixelDungeon extends Game {
 	public static int lastClass() {
 		return Preferences.INSTANCE.getInt(Preferences.KEY_LAST_CLASS, 0);
 	}
-	
+
 	public static int lastRace() {
 		return Preferences.INSTANCE.getInt(Preferences.KEY_LAST_RACE, 0);
 	}

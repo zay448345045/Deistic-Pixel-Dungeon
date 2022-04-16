@@ -17,6 +17,9 @@
  */
 package com.avmoga.dpixel.utils;
 
+import com.avmoga.dpixel.Messages.Languages;
+import com.avmoga.dpixel.ShatteredPixelDungeon;
+
 import java.util.Locale;
 
 public class Utils {
@@ -32,12 +35,17 @@ public class Utils {
 	public static String VOWELS = "aoeiu";
 
 	public static String indefinite(String noun) {
-		if (noun.length() == 0) {
-			return "a";
+		if (!(ShatteredPixelDungeon.language() == Languages.CHINESE)) {
+			if (noun.length() == 0) {
+				return "a";
+			} else {
+				return (VOWELS.indexOf(Character.toLowerCase(noun.charAt(0))) != -1 ? "an "
+						: "a ")
+						+ noun;
+			}
 		} else {
-			return (VOWELS.indexOf(Character.toLowerCase(noun.charAt(0))) != -1 ? "an "
-					: "a ")
-					+ noun;
+			return noun;
 		}
 	}
 }
+

@@ -17,10 +17,6 @@
  */
 package com.avmoga.dpixel.scenes;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
@@ -70,9 +66,9 @@ import com.avmoga.dpixel.ui.Toolbar;
 import com.avmoga.dpixel.ui.Window;
 import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.windows.WndBag;
+import com.avmoga.dpixel.windows.WndBag.Mode;
 import com.avmoga.dpixel.windows.WndGame;
 import com.avmoga.dpixel.windows.WndStory;
-import com.avmoga.dpixel.windows.WndBag.Mode;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
@@ -82,6 +78,10 @@ import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.utils.Random;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class GameScene extends PixelScene {
 
@@ -585,13 +585,13 @@ public class GameScene extends PixelScene {
 
 	public static void updateMap() {
 		if (scene != null) {
-			scene.tiles.updated.set(0, 0, Level.getWidth(), Level.HEIGHT);
+			scene.tiles.updateMap();
 		}
 	}
 
 	public static void updateMap(int cell) {
 		if (scene != null) {
-			scene.tiles.updated.union(cell % Level.getWidth(), cell / Level.getWidth());
+			scene.tiles.updateMapCell(cell);
 		}
 	}
 

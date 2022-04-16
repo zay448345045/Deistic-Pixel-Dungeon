@@ -25,7 +25,7 @@ import com.watabou.noosa.Game;
 enum Preferences {
 
 	INSTANCE;
-
+	public static final String KEY_CLASSICFONT = "classic_font";
 	public static final String KEY_LANDSCAPE = "landscape";
 	public static final String KEY_IMMERSIVE = "immersive";
 	public static final String KEY_SCALE_UP = "scaleup";
@@ -39,7 +39,8 @@ enum Preferences {
 	public static final String KEY_INTRO = "intro";
 	public static final String KEY_BRIGHTNESS = "brightness";
 	public static final String KEY_VERSION = "version";
-
+	public static final String KEY_LANG = "language";
+	public static final String KEY_SCALE = "scale";
 	private SharedPreferences prefs;
 
 	private SharedPreferences get() {

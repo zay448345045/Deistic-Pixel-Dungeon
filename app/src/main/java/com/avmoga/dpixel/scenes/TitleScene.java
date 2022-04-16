@@ -17,8 +17,6 @@
  */
 package com.avmoga.dpixel.scenes;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import android.opengl.GLES20;
 
 import com.avmoga.dpixel.Assets;
@@ -35,6 +33,8 @@ import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
+
+import javax.microedition.khronos.opengles.GL10;
 
 public class TitleScene extends PixelScene {
 
@@ -192,13 +192,11 @@ public class TitleScene extends PixelScene {
 		private Image image;
 		private BitmapText label;
 
-		public DashboardItem(String text, int index) {
+		DashboardItem(String text, int index) {
 			super();
 
-			image.frame(image.texture.uvRect(index * IMAGE_SIZE, 0, (index + 1)
-					* IMAGE_SIZE, IMAGE_SIZE));
+			image.frame(image.texture.uvRect(index * IMAGE_SIZE, 0, (index + 1) * IMAGE_SIZE, IMAGE_SIZE));
 			this.label.text(text);
-			this.label.measure();
 
 			setSize(SIZE, SIZE);
 		}

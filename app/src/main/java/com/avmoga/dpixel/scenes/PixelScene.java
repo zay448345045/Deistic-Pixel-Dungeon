@@ -17,14 +17,13 @@
  */
 package com.avmoga.dpixel.scenes;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import android.opengl.GLES20;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.effects.BadgeBanner;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.watabou.input.Touchscreen;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.BitmapText.Font;
@@ -32,23 +31,29 @@ import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.ColorBlock;
 import com.watabou.noosa.Game;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.Scene;
 import com.watabou.noosa.Visual;
+import com.watabou.noosa.ui.Component;
 import com.watabou.utils.BitmapCache;
+
+import javax.microedition.khronos.opengles.GL10;
 
 public class PixelScene extends Scene {
 
 	// Minimum virtual display size for portrait orientation
-	public static final float MIN_WIDTH_P = 128;
-	public static final float MIN_HEIGHT_P = 224;
+	public static final float MIN_WIDTH_P = 135;
+	public static final float MIN_HEIGHT_P = 225;
 
 	// Minimum virtual display size for landscape orientation
 	public static final float MIN_WIDTH_L = 224;
 	public static final float MIN_HEIGHT_L = 160;
 
-	public static float defaultZoom = 0;
-	public static float minZoom;
-	public static float maxZoom;
+	public static int defaultZoom = 0;
+	public static int maxDefaultZoom = 0;
+	public static int maxScreenZoom = 0;
+	public static int minZoom;
+	public static int maxZoom;
 
 	public static Camera uiCamera;
 
@@ -57,6 +62,8 @@ public class PixelScene extends Scene {
 	public static BitmapText.Font font2x;
 	public static BitmapText.Font font25x;
 	public static BitmapText.Font font3x;
+
+	public static BitmapText.Font pixelFont;
 
 	@Override
 	public void create() {
@@ -74,20 +81,22 @@ public class PixelScene extends Scene {
 			minHeight = MIN_HEIGHT_P;
 		}
 
-		defaultZoom = (int) Math.ceil(Game.density * 2.5);
-		while ((Game.width / defaultZoom < minWidth || Game.height
-				/ defaultZoom < minHeight)
-				&& defaultZoom > 1) {
+		maxDefaultZoom = (int) Math.min(Game.width / minWidth, Game.height / minHeight);
+		maxScreenZoom = (int) Math.min(Game.dispWidth / minWidth, Game.dispHeight / minHeight);
 
-			defaultZoom--;
-		}
+		maxDefaultZoom = (int) Math.min(Game.width / minWidth, Game.height / minHeight);
+		defaultZoom = ShatteredPixelDungeon.scale();
+		if (defaultZoom < Math.ceil(Game.density * 2) || defaultZoom > maxDefaultZoom) {
+			defaultZoom = (int) Math.ceil(Game.density * 2.5);
+			while ((
+					Game.width / defaultZoom < minWidth ||
+							Game.height / defaultZoom < minHeight
+									&& defaultZoom > 1)) {
 
-		if (ShatteredPixelDungeon.scaleUp()) {
-			while (Game.width / (defaultZoom + 1) >= minWidth
-					&& Game.height / (defaultZoom + 1) >= minHeight) {
-				defaultZoom++;
+				defaultZoom--;
 			}
 		}
+
 		minZoom = 1;
 		maxZoom = defaultZoom * 2;
 
@@ -194,10 +203,14 @@ public class PixelScene extends Scene {
 
 		} else {
 
-			font = font1x;
-			scale = Math.max(1, (int) (pt / 7));
+			font = pixelFont;
+			scale = 1f;
+
+			//font = font1x;
+			//scale = Math.max(1, (int) (pt / 7));
 
 		}
+
 
 		scale /= zoom;
 	}
@@ -230,19 +243,42 @@ public class PixelScene extends Scene {
 		return result;
 	}
 
-	public static float align(Camera camera, float pos) {
-		return ((int) (pos * camera.zoom)) / camera.zoom;
+
+	public static RenderedText renderText(int size) {
+		return renderText("", size);
 	}
 
-	// This one should be used for UI elements
+	public static RenderedText renderText(String text, int size) {
+		RenderedText result = new RenderedText(text, size * defaultZoom);
+		result.scale.set(1 / (float) defaultZoom);
+		return result;
+	}
+
+	public static RenderedTextMultiline renderMultiline(int size) {
+		return renderMultiline("", size);
+	}
+
+	public static RenderedTextMultiline renderMultiline(String text, int size) {
+		RenderedTextMultiline result = new RenderedTextMultiline(text, size * defaultZoom);
+		result.zoom(1 / (float) defaultZoom);
+		return result;
+	}
+
 	public static float align(float pos) {
-		return ((int) (pos * defaultZoom)) / defaultZoom;
+		return Math.round(pos * defaultZoom) / (float) defaultZoom;
+	}
+
+	public static float align(Camera camera, float pos) {
+		return Math.round(pos * camera.zoom) / camera.zoom;
 	}
 
 	public static void align(Visual v) {
-		Camera c = v.camera();
-		v.x = align(c, v.x);
-		v.y = align(c, v.y);
+		v.x = align(v.x);
+		v.y = align(v.y);
+	}
+
+	public static void align(Component c) {
+		c.setPos(align(c.left()), align(c.top()));
 	}
 
 	public static boolean noFade = false;
@@ -257,16 +293,6 @@ public class PixelScene extends Scene {
 
 	protected void fadeIn(int color, boolean light) {
 		add(new Fader(color, light));
-	}
-
-	public static void showBadge(Badges.Badge badge) {
-		BadgeBanner banner = BadgeBanner.show(badge.image);
-		banner.camera = uiCamera;
-		banner.x = align(banner.camera,
-				(banner.camera.width - banner.width) / 2);
-		banner.y = align(banner.camera,
-				(banner.camera.height - banner.height) / 3);
-		Game.scene().add(banner);
 	}
 
 	protected static class Fader extends ColorBlock {
@@ -309,9 +335,22 @@ public class PixelScene extends Scene {
 				GLES20.glBlendFunc(GL10.GL_SRC_ALPHA,
 						GL10.GL_ONE_MINUS_SRC_ALPHA);
 			} else {
-				super.draw();
+				try {
+					super.draw();
+				} catch (Exception e) {
+				}
 			}
 		}
+	}
+
+	public static void showBadge(Badges.Badge badge) {
+		BadgeBanner banner = BadgeBanner.show(badge.image);
+		banner.camera = uiCamera;
+		banner.x = align(banner.camera,
+				(banner.camera.width - banner.width) / 2);
+		banner.y = align(banner.camera,
+				(banner.camera.height - banner.height) / 3);
+		Game.scene().add(banner);
 	}
 
 	private static class PixelCamera extends Camera {
@@ -322,6 +361,7 @@ public class PixelScene extends Scene {
 					(int) (Game.height - Math.ceil(Game.height / zoom) * zoom) / 2,
 					(int) Math.ceil(Game.width / zoom), (int) Math
 							.ceil(Game.height / zoom), zoom);
+			fullScreen = true;
 		}
 
 		@Override

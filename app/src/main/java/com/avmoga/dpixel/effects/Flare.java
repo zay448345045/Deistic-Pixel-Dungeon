@@ -26,9 +26,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 import android.annotation.SuppressLint;
 import android.opengl.GLES20;
-
-import com.watabou.gltextures.Gradient;
 import com.watabou.gltextures.SmartTexture;
+import com.watabou.gltextures.TextureCache;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.NoosaScript;
 import com.watabou.noosa.Visual;
@@ -52,8 +51,8 @@ public class Flare extends Visual {
 
 		super(0, 0, 0, 0);
 
-		int gradient[] = { 0xFFFFFFFF, 0x00FFFFFF };
-		texture = new Gradient(gradient);
+		int gradient[] = {0xFFFFFFFF, 0x00FFFFFF};
+		texture = TextureCache.createGradient(gradient);
 
 		this.nRays = nRays;
 
@@ -81,13 +80,13 @@ public class Flare extends Visual {
 		for (int i = 0; i < nRays; i++) {
 
 			float a = i * 3.1415926f * 2 / nRays;
-			v[0] = (float)Math.cos(a) * radius;
-			v[1] = (float)Math.sin(a) * radius;
+			v[0] = (float) Math.cos(a) * radius;
+			v[1] = (float) Math.sin(a) * radius;
 			vertices.put(v);
 
 			a += 3.1415926f * 2 / nRays / 2;
-			v[0] = (float)Math.cos(a) * radius;
-			v[1] = (float)Math.sin(a) * radius;
+			v[0] = (float) Math.cos(a) * radius;
+			v[1] = (float) Math.sin(a) * radius;
 			vertices.put(v);
 
 			indices.put((short) 0);

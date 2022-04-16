@@ -17,9 +17,6 @@
  */
 package com.avmoga.dpixel.scenes;
 
-import java.nio.FloatBuffer;
-import java.util.Calendar;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
@@ -27,8 +24,8 @@ import com.avmoga.dpixel.actors.hero.HeroClass;
 import com.avmoga.dpixel.sprites.RatSprite;
 import com.avmoga.dpixel.ui.Archs;
 import com.avmoga.dpixel.ui.RedButton;
-import com.watabou.gltextures.Gradient;
 import com.watabou.gltextures.SmartTexture;
+import com.watabou.gltextures.TextureCache;
 import com.watabou.glwrap.Matrix;
 import com.watabou.glwrap.Quad;
 import com.watabou.input.Touchscreen.Touch;
@@ -44,6 +41,9 @@ import com.watabou.noosa.Visual;
 import com.watabou.noosa.audio.Music;
 import com.watabou.utils.Point;
 import com.watabou.utils.Random;
+
+import java.nio.FloatBuffer;
+import java.util.Calendar;
 
 public class SurfaceScene extends PixelScene {
 
@@ -206,7 +206,7 @@ public class SurfaceScene extends PixelScene {
 		public Sky(boolean dayTime) {
 			super(0, 0, 1, 1);
 
-			texture = new Gradient(dayTime ? day : night);
+			texture = TextureCache.createGradient(dayTime ? day : night);
 
 			float[] vertices = new float[16];
 			verticesBuffer = Quad.create();

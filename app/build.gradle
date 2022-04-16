@@ -1,12 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
     buildToolsVersion "26.0.2"
 
     defaultConfig {
         applicationId "com.avmoga.dpixel.ling"
         minSdkVersion 14
+        targetSdkVersion 28
     }
 
     buildTypes {
@@ -14,5 +15,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
+    }
+    dependencies {
+        implementation 'cat.ereza:customactivityoncrash:2.3.0'
     }
 }
