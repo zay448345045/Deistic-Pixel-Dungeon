@@ -17,6 +17,8 @@
  */
 package com.avmoga.dpixel.windows;
 
+import static com.avmoga.dpixel.Dungeon.hero;
+
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
@@ -179,7 +181,7 @@ public class WndHero extends WndTabbed {
 
 	private class StatsTab extends Group {
 
-		private final String TXT_TITLE = Messages.get(WndHero.class, "title");
+		private final String TXT_TITLE = Messages.get(WndHero.class, "title")+hero.className();
 		private final String TXT_CATALOGUS = Messages.get(WndHero.class, "catalogus");
 		private final String TXT_JOURNAL = Messages.get(WndHero.class, "journal");
 
@@ -325,7 +327,7 @@ public class WndHero extends WndTabbed {
 		private float pos;
 
 		public BuffsTab() {
-			for (Buff buff : Dungeon.hero.buffs()) {
+			for (Buff buff : hero.buffs()) {
 				if (buff.icon() != BuffIndicator.NONE) {
 					BuffSlot slot = new BuffSlot(buff);
 					slot.setRect(0, pos, WIDTH, slot.icon.height());
@@ -488,7 +490,7 @@ public class WndHero extends WndTabbed {
 	
 	private boolean checkpetNear(){
 		for (int n : Level.NEIGHBOURS8) {
-			int c = Dungeon.hero.pos + n;
+			int c = hero.pos + n;
 			if (Actor.findChar(c) instanceof PET) {
 				return true;
 			}
@@ -510,7 +512,7 @@ public class WndHero extends WndTabbed {
 		    heropet.sprite.showStatus(CharSprite.POSITIVE, TXT_HEALS, effect);
 		  }
 	      heropet.cooldown=1;  
-		  item.detach(Dungeon.hero.belongings.backpack);
+		  item.detach(hero.belongings.backpack);
 		  GLog.n("Your pet eats the %s.",item.name());
 		}else if (!nearby){
 			GLog.n("Your pet is too far away!");

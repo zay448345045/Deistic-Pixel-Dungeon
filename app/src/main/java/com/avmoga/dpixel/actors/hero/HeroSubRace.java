@@ -25,26 +25,26 @@ public enum HeroSubRace {
 	NONE(null, null),
 
 	WARLOCK(
-			"warlock",
-			"A _Warlock_ has an affinity to magic, increasing the duration of additional effects on wands."), MONK(
-			"monk",
-			"The _Monk_ gains damage penetration when using his fists to deal damage."),
+			"术士",
+			"_术士_与魔力的紧密联系提升他们法杖额外效果的持续时间。" ), MONK(
+			"武僧",
+			"_武僧_在空手造成伤害时获得伤害穿透。"),
 
-	DEMOLITIONIST("demolitionist",
-			"The _demolitionist_ gains access to a wide variety of new bombs."), MERCENARY(
-			"mercenary",
-			"The _mercenary_ is smart about reading his enemies' attacks, and counterattacks at twice the speed."),
+	DEMOLITIONIST("毁灭者",
+			"_毁灭者_会使用非常多种不同的新型炸弹"), MERCENARY(
+			"雇佣兵",
+			"_雇佣兵_可以解读敌方的攻击，并且以双倍速度反击。"),
 
 	RED(
-			"red wraith",
-			"_Red_ _Wraiths_ are surprisingly lucky."), BLUE(
-			"blue wraith",
-			"_Blue_ _Wraiths_ gain vision of all enemies that they have hit."),
+			"红色幽灵",
+			"_红色幽灵_非常的幸运"), BLUE(
+			"蓝色幽灵",
+			"_蓝色幽灵_可以获得他们击中的所有敌人的视野"),
 
-	SHAMAN("shaman",
-			"With an affinity to nature, the _Shaman_ gains natural healing when traveling through tall grass."), BRUTE(
-			"brute",
-			"The warriors of their species, the _Brute_ gains a power buff for all enemies around him.");
+	SHAMAN("豺狼萨满",
+			"由于对自然的亲近，_豺狼萨满_在高草中行走时可以获得自然疗愈"), BRUTE(
+			"豺狼暴徒",
+			"_豺狼暴徒_作为种族中的勇士，在周围有任何敌人时获得能力加成");
 
 	private String title;
 	private String desc;

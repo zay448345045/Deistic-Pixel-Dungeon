@@ -17,8 +17,6 @@
  */
 package com.avmoga.dpixel.actors.hero;
 
-import java.util.Iterator;
-
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.items.Item;
@@ -32,6 +30,8 @@ import com.avmoga.dpixel.items.scrolls.ScrollOfRemoveCurse;
 import com.avmoga.dpixel.items.wands.Wand;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.Iterator;
 
 public class Belongings implements Iterable<Item> {
 
@@ -51,7 +51,7 @@ public class Belongings implements Iterable<Item> {
 
 		backpack = new Bag() {
 			{
-				name = "backpack";
+				name = "背包";
 				size = BACKPACK_SIZE;
 			}
 		};

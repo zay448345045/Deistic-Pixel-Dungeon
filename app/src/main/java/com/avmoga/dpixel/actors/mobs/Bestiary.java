@@ -147,9 +147,9 @@ public class Bestiary {
 					Spinner.class, Elemental.class, BrokenRobot.class };
 			break;
 		case 14:
-			chances = new float[] { 1, 3, 1, 4, 0.02f, 0.01f, 3 };
+			chances = new float[] { 1, 3, 1, 4, 0.02f, 0.01f, 3,1 };
 			classes = new Class<?>[] { Bat.class, Brute.class, Shaman.class,
-					Spinner.class, Elemental.class, Monk.class, BrokenRobot.class  };
+					Spinner.class, Elemental.class, Monk.class, BrokenRobot.class,TorchHustman.class  };
 			break;
 
 		case 15:

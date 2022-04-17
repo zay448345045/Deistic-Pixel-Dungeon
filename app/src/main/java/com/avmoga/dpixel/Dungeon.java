@@ -17,14 +17,6 @@
  */
 package com.avmoga.dpixel;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.HashSet;
-
 import android.content.Context;
 
 import com.avmoga.dpixel.actors.Actor;
@@ -90,6 +82,14 @@ import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 import com.watabou.utils.SparseArray;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.HashSet;
+
 public class Dungeon {
 
 	public static int transmutation; // depth number for a well of transmutation
@@ -150,8 +150,21 @@ public class Dungeon {
 	public static boolean wings = false;
 
 	public static boolean sealedlevel = false;
-	
-	
+	public static long seed;
+	public static long seedForDepth(int depth){
+		Random.seed( seed );
+		for (int i = 0; i < depth; i ++)
+			Random.Long(); //we don't care about these values, just need to go through them
+		long result = Random.Long();
+		Random.seed();
+		return result;
+	}
+
+	public static long seedCurDepth(){
+		return seedForDepth(depth);
+	}
+
+
 	public static int challenges;
 	
 	public static int ratChests = 0;

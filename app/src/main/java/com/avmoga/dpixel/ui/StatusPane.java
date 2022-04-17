@@ -19,6 +19,7 @@ package com.avmoga.dpixel.ui;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.actors.buffs.Hunger;
 import com.avmoga.dpixel.actors.hero.HeroSubRace;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.effects.particles.BloodParticle;
@@ -49,6 +50,7 @@ public class StatusPane extends Component {
 	private HeroSubRace lastSubRace = HeroSubRace.NONE;
 
 	private Image hp;
+	private Image hg;
 	private Image exp;
 
 	private int lastLvl = -1;
@@ -57,7 +59,6 @@ public class StatusPane extends Component {
 	private BitmapText level;
 	private BitmapText depth;
 	private BitmapText keys;
-
 	private DangerIndicator danger;
 	private BuffIndicator buffs;
 	private Compass compass;
@@ -100,8 +101,12 @@ public class StatusPane extends Component {
 		hp = new Image(Assets.HP_BAR);
 		add(hp);
 
+		hg = new Image(Assets.HG_BAR);
+		add(hg);
+
 		exp = new Image(Assets.XP_BAR);
 		add(exp);
+
 
 		level = new BitmapText(PixelScene.font1x);
 		level.hardlight(0xFFEBA4);
@@ -142,6 +147,10 @@ public class StatusPane extends Component {
 		hp.x = 30;
 		hp.y = 3;
 
+		hg.x = 30;
+		hg.y = 8;
+
+
 		depth.x = width - 24 - depth.width() - 18;
 		depth.y = 6;
 
@@ -149,7 +158,7 @@ public class StatusPane extends Component {
 
 		danger.setPos(width - danger.width(), 18);
 
-		buffs.setPos(32, 11);
+		buffs.setPos(31, 13);
 
 		btnMenu.setPos(width - btnMenu.width(), 1);
 	}
@@ -157,8 +166,17 @@ public class StatusPane extends Component {
 	@Override
 	public void update() {
 		super.update();
-
+		int maxHunger = (int) Hunger.STARVING;
 		float health = (float) Dungeon.hero.HP / Dungeon.hero.HT;
+
+		Hunger hungerBuff = Dungeon.hero.buff(Hunger.class);
+		if (hungerBuff != null) {
+			int hunger = Math.max(0, maxHunger - hungerBuff.hunger());
+			hg.scale.x = (float) hunger / (float) maxHunger;
+		}
+		else if (Dungeon.hero.isAlive()) {
+			hg.scale.x = 1.0f;
+		}
 
 		if (health == 0) {
 			avatar.tint(0x000000, 0.6f);

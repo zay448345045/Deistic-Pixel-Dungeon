@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ui.BuffIndicator;
 import com.watabou.utils.Bundle;
 
@@ -55,7 +56,12 @@ public class BerryRegeneration extends Buff {
 
 	@Override
 	public String toString() {
-		return "Regenerating";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", regenleft);
 	}
 	@Override
 	public boolean act() {

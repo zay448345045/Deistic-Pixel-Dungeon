@@ -41,6 +41,7 @@ import com.avmoga.dpixel.actors.buffs.Paralysis;
 import com.avmoga.dpixel.actors.buffs.Poison;
 import com.avmoga.dpixel.actors.buffs.Roots;
 import com.avmoga.dpixel.actors.buffs.Shadows;
+import com.avmoga.dpixel.actors.buffs.ShieldBuff;
 import com.avmoga.dpixel.actors.buffs.Silence;
 import com.avmoga.dpixel.actors.buffs.Sleep;
 import com.avmoga.dpixel.actors.buffs.Slow;
@@ -72,14 +73,14 @@ import java.util.HashSet;
 
 public abstract class Char extends Actor {
 
-	protected static final String TXT_HIT = "%s hit %s";
-	protected static final String TXT_KILL = "%s killed you...";
-	protected static final String TXT_DEFEAT = "%s defeated %s";
+	protected static final String TXT_HIT = "%s攻击了%s";
+	protected static final String TXT_KILL = "%s杀死了你...";
+	protected static final String TXT_DEFEAT = "%s 击败了 %s。";
 
-	private static final String TXT_YOU_MISSED = "%s %s your attack";
-	private static final String TXT_SMB_MISSED = "%s %s %s's attack";
-
-	private static final String TXT_OUT_OF_PARALYSIS = "The pain snapped %s out of paralysis";
+	//private static final String TXT_YOU_MISSED = "%s %s your attack";
+	//private static final String TXT_SMB_MISSED = "%s %s %s's attack";
+//
+	//private static final String TXT_OUT_OF_PARALYSIS = "The pain snapped %s out of paralysis";
 
 	public int pos = 0;
 
@@ -122,6 +123,22 @@ public abstract class Char extends Actor {
 		bundle.put(TAG_HT, HT);
 		bundle.put(BUFFS, buffs);
 	}
+	//used so that buffs(Shieldbuff.class) isn't called every time unnecessarily
+	private int cachedShield = 0;
+	public boolean needsShieldUpdate = true;
+	public int shielding(){
+		if (!needsShieldUpdate){
+			return cachedShield;
+		}
+
+		cachedShield = 0;
+		for (ShieldBuff s : buffs(ShieldBuff.class)){
+			cachedShield += s.shielding();
+		}
+		needsShieldUpdate = false;
+		return cachedShield;
+	}
+
 
 	@Override
 	public void restoreFromBundle(Bundle bundle) {
@@ -172,7 +189,7 @@ public abstract class Char extends Actor {
 			if (!enemy.isAlive()) {
 				return true;
 			}
-			
+
 			if(this instanceof Hero && Dungeon.hero.subRace == HeroSubRace.BLUE){
 				Buff.affect(enemy, Mark.class);
 			}
@@ -224,12 +241,6 @@ public abstract class Char extends Actor {
 			if (visibleFight) {
 				String defense = enemy.defenseVerb();
 				enemy.sprite.showStatus(CharSprite.NEUTRAL, defense);
-				if (this == Dungeon.hero) {
-					GLog.i(TXT_YOU_MISSED, enemy.name, defense);
-				} else {
-					GLog.i(TXT_SMB_MISSED, enemy.name, defense, name);
-				}
-
 				Sample.INSTANCE.play(Assets.SND_MISS);
 			}
 

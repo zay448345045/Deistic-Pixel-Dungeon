@@ -23,7 +23,6 @@ import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.utils.Utils;
 import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Group;
 
 public class WndRace extends WndTabbed {
@@ -136,60 +135,39 @@ public class WndRace extends WndTabbed {
 
 		private static final int MARGIN = 4;
 
-		private BitmapTextMultiline normal;
-		private BitmapTextMultiline highlighted;
-
 		public float height;
 		public float width;
 
 		public MasteryTab() {
 			super();
 
-			String text = null;
+			String message = null;
 			switch (cl) {
-			case HUMAN:
-				text = HeroSubRace.DEMOLITIONIST.desc() + "\n\n"
-						+ HeroSubRace.MERCENARY.desc();
-				break;
-			case DWARF:
-				text = HeroSubRace.WARLOCK.desc() + "\n\n"
-						+ HeroSubRace.MONK.desc();
-				break;
-			case WRAITH:
-				text = HeroSubRace.RED.desc() + "\n\n"
-						+ HeroSubRace.BLUE.desc();
-				break;
-			case GNOLL:
-				text = HeroSubRace.SHAMAN.desc() + "\n\n"
-						+ HeroSubRace.BRUTE.desc();
-				break;
+				case HUMAN:
+					message = HeroSubRace.DEMOLITIONIST.desc() + "\n\n"
+							+ HeroSubRace.MERCENARY.desc();
+					break;
+				case DWARF:
+					message = HeroSubRace.WARLOCK.desc() + "\n\n"
+							+ HeroSubRace.MONK.desc();
+					break;
+				case WRAITH:
+					message = HeroSubRace.RED.desc() + "\n\n"
+							+ HeroSubRace.BLUE.desc();
+					break;
+				case GNOLL:
+					message = HeroSubRace.SHAMAN.desc() + "\n\n"
+							+ HeroSubRace.BRUTE.desc();
+					break;
 			}
 
-			Highlighter hl = new Highlighter(text);
+			RenderedTextMultiline text = PixelScene.renderMultiline(6);
+			text.text(message, WIDTH - MARGIN * 2);
+			text.setPos(MARGIN, MARGIN);
+			add(text);
 
-			normal = PixelScene.createMultiline(hl.text, 6);
-			normal.maxWidth = WIDTH - MARGIN * 2;
-			normal.measure();
-			normal.x = MARGIN;
-			normal.y = MARGIN;
-			add(normal);
-
-			if (hl.isHighlighted()) {
-				normal.mask = hl.inverted();
-
-				highlighted = PixelScene.createMultiline(hl.text, 6);
-				highlighted.maxWidth = normal.maxWidth;
-				highlighted.measure();
-				highlighted.x = normal.x;
-				highlighted.y = normal.y;
-				add(highlighted);
-
-				highlighted.mask = hl.mask;
-				highlighted.hardlight(TITLE_COLOR);
-			}
-
-			height = normal.y + normal.height() + MARGIN;
-			width = normal.x + normal.width() + MARGIN;
+			height = text.bottom() + MARGIN;
+			width = text.right() + MARGIN;
 		}
 	}
 }

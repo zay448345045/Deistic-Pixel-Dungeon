@@ -24,6 +24,9 @@ public class PathFinder {
 	public static int[] NEIGHBOURS8DIST2;
 	public static int[] NEIGHBOURS9DIST2;
 
+	public static int[] CIRCLE4;
+	public static int[] CIRCLE8;
+
 	public static int[] CIRCLE;
 
 	public static void setMapSize(int width, int height) {

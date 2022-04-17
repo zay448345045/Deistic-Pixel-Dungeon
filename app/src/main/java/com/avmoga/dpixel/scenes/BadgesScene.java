@@ -26,10 +26,10 @@ import com.avmoga.dpixel.ui.BadgesList;
 import com.avmoga.dpixel.ui.ExitButton;
 import com.avmoga.dpixel.ui.ScrollPane;
 import com.avmoga.dpixel.ui.Window;
-import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.NinePatch;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Music;
 import com.watabou.utils.Callback;
 
@@ -65,9 +65,8 @@ public class BadgesScene extends PixelScene {
 		panel.y = (h - ph) / 2;
 		add(panel);
 
-		BitmapText title = PixelScene.createText(TXT_TITLE, 9);
+		RenderedText title = PixelScene.renderText(TXT_TITLE, 9);
 		title.hardlight(Window.HEADER_COLOR);
-		title.measure();
 		title.x = align((w - title.width()) / 2);
 		title.y = align((panel.y - title.baseLine()) / 2);
 		add(title);

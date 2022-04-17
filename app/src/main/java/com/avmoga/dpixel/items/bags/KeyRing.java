@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.bags;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.items.CavesKey;
 import com.avmoga.dpixel.items.CityKey;
 import com.avmoga.dpixel.items.HallsKey;
@@ -30,7 +31,7 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 public class KeyRing extends Bag {
 
 	{
-		name = "key ring";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.KEYRING;
 
 		size = 20;
@@ -59,7 +60,7 @@ public class KeyRing extends Bag {
 
 	@Override
 	public String info() {
-		return "This keyring can hold your keys. Very handy!";
+		return Messages.get(this, "desc");
 	}
 }
 

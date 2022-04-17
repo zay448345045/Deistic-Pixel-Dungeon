@@ -46,7 +46,6 @@ import com.avmoga.dpixel.actors.buffs.Light;
 import com.avmoga.dpixel.actors.buffs.Ooze;
 import com.avmoga.dpixel.actors.buffs.Paralysis;
 import com.avmoga.dpixel.actors.buffs.Poison;
-import com.avmoga.dpixel.actors.buffs.Regeneration;
 import com.avmoga.dpixel.actors.buffs.Roots;
 import com.avmoga.dpixel.actors.buffs.SnipersMark;
 import com.avmoga.dpixel.actors.buffs.Strength;
@@ -175,8 +174,9 @@ public class Hero extends Char {
 	public HeroSubClass subClass = HeroSubClass.NONE;
 	public HeroRace heroRace = HeroRace.HUMAN;
 	public HeroSubRace subRace = HeroSubRace.NONE;
+	public ArrayList<Mob> mindVisionEnemies = new ArrayList<>();
 
-	private int attackSkill = 10;
+    private int attackSkill = 10;
 	private int defenseSkill = 5;
 
 	public boolean ready = false;
@@ -329,7 +329,6 @@ public class Hero extends Char {
 	}
 
 	public void live() {
-		Buff.affect(this, Regeneration.class);
 		Buff.affect(this, Hunger.class);
 	}
 
@@ -1272,6 +1271,29 @@ public class Hero extends Char {
 		if (subClass == HeroSubClass.BERSERKER && 0 < HP
 				&& HP <= HT * Fury.LEVEL) {
 			Buff.affect(this, Fury.class);
+		}
+		int preHP = HP + shielding();
+		super.damage( dmg, src );
+		int postHP = HP + shielding();
+		int effectiveDamage = preHP - postHP;
+
+		//flash red when hit for serious damage.
+		float percentDMG = effectiveDamage / (float)preHP; //percent of current HP that was taken
+		float percentHP = 1 - ((HT - postHP) / (float)HT); //percent health after damage was taken
+		// The flash intensity increases primarily based on damage taken and secondarily on missing HP.
+		float flashIntensity = 0.25f * (percentDMG * percentDMG) / percentHP;
+		//if the intensity is very low don't flash at all
+		if (flashIntensity >= 0.05f){
+			flashIntensity = Math.min(1/3f, flashIntensity); //cap intensity at 1/3
+			GameScene.flash( (int)(0xFF*flashIntensity) << 16 );
+			if (isAlive()) {
+				if (flashIntensity > 1/6f) {
+					Sample.INSTANCE.play(Assets.SND_READ);
+					GLog.w("看来我今天要死在这里了！");
+				} else {
+					Sample.INSTANCE.play(Assets.SND_CURSED);
+				}
+			}
 		}
 	}
 

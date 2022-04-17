@@ -17,12 +17,6 @@
  */
 package com.avmoga.dpixel.levels;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Challenges;
 import com.avmoga.dpixel.Dungeon;
@@ -108,9 +102,17 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 import com.watabou.utils.SparseArray;
 
-public abstract class Level implements Bundlable {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 
-	public static enum Feeling {
+public abstract class Level implements Bundlable {
+	public int getHeight() {
+		return HEIGHT;
+	}
+    public static enum Feeling {
 		NONE, CHASM, WATER, GRASS, DARK, HOLY, HEAVY
 	};
 

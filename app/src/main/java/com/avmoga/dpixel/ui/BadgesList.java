@@ -17,18 +17,18 @@
  */
 package com.avmoga.dpixel.ui;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.effects.BadgeBanner;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.windows.WndBadge;
-import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Component;
+
+import java.util.ArrayList;
 
 public class BadgesList extends ScrollPane {
 
@@ -81,7 +81,7 @@ public class BadgesList extends ScrollPane {
 		private Badges.Badge badge;
 
 		private Image icon;
-		private BitmapText label;
+		private RenderedText label;
 
 		public ListItem(Badges.Badge badge) {
 			super();
@@ -96,7 +96,7 @@ public class BadgesList extends ScrollPane {
 			icon = new Image();
 			add(icon);
 
-			label = PixelScene.createText(6);
+			label = PixelScene.renderText(6);
 			add(label);
 		}
 

@@ -17,28 +17,28 @@
  */
 package com.avmoga.dpixel.items.scrolls;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Badges;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Blindness;
 import com.avmoga.dpixel.actors.hero.Hero;
-import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.Heap;
+import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.ItemStatusHandler;
 import com.avmoga.dpixel.items.artifacts.UnstableSpellbook;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public abstract class Scroll extends Item {
 
-	private static final String TXT_BLINDED = "You can't read a scroll while blinded";
+	private static final String TXT_BLINDED = Messages.get(Scroll.class, "blinded");
 
-	private static final String TXT_CURSED = "Your cursed spellbook prevents you from invoking this scroll's magic! "
-			+ "A scroll of remove curse might be strong enough to still work though...";
+	private static final String TXT_CURSED = Messages.get(Scroll.class, "cursed");
 
-	public static final String AC_READ = "READ";
+	public static final String AC_READ = Messages.get(Scroll.class, "ac_read");
 
 	protected static final float TIME_TO_READ = 1f;
 

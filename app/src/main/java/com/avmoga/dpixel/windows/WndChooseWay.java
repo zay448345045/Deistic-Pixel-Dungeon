@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.windows;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.HeroSubClass;
 import com.avmoga.dpixel.actors.hero.HeroSubRace;
 import com.avmoga.dpixel.items.TomeOfMastery;
@@ -24,21 +25,21 @@ import com.avmoga.dpixel.items.TomeOfSpecialty;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.ui.RedButton;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
 import com.avmoga.dpixel.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndChooseWay extends Window {
 
-	private static final String TXT_MESSAGE = "Which way will you follow?";
-	private static final String TXT_CANCEL = "I'll decide later";
+	private static final String TXT_MESSAGE = Messages.get(WndChooseWay.class, "msg");
+	private static final String TXT_CANCEL = Messages.get(WndChooseWay.class, "cancel");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 18;
 	private static final float GAP = 2;
 
 	public WndChooseWay(final TomeOfMastery tome, final HeroSubClass way1,
-			final HeroSubClass way2) {
+						final HeroSubClass way2) {
 
 		super();
 
@@ -48,30 +49,10 @@ public class WndChooseWay extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		Highlighter hl = new Highlighter(way1.desc() + "\n\n" + way2.desc()
-				+ "\n\n" + TXT_MESSAGE);
-
-		BitmapTextMultiline normal = PixelScene.createMultiline(hl.text, 6);
-		normal.maxWidth = WIDTH;
-		normal.measure();
-		normal.x = titlebar.left();
-		normal.y = titlebar.bottom() + GAP;
-		add(normal);
-
-		if (hl.isHighlighted()) {
-			normal.mask = hl.inverted();
-
-			BitmapTextMultiline highlighted = PixelScene.createMultiline(
-					hl.text, 6);
-			highlighted.maxWidth = normal.maxWidth;
-			highlighted.measure();
-			highlighted.x = normal.x;
-			highlighted.y = normal.y;
-			add(highlighted);
-
-			highlighted.mask = hl.mask;
-			highlighted.hardlight(TITLE_COLOR);
-		}
+		RenderedTextMultiline hl = PixelScene.renderMultiline(6);
+		hl.text(way1.desc() + "\n\n" + way2.desc() + "\n\n" + Messages.get(this, "message"), WIDTH);
+		hl.setPos(titlebar.left(), titlebar.bottom() + GAP);
+		add(hl);
 
 		RedButton btnWay1 = new RedButton(Utils.capitalize(way1.title())) {
 			@Override
@@ -80,8 +61,7 @@ public class WndChooseWay extends Window {
 				tome.choose(way1);
 			}
 		};
-		btnWay1.setRect(0, normal.y + normal.height() + GAP, (WIDTH - GAP) / 2,
-				BTN_HEIGHT);
+		btnWay1.setRect(0, hl.bottom() + GAP, (WIDTH - GAP) / 2, BTN_HEIGHT);
 		add(btnWay1);
 
 		RedButton btnWay2 = new RedButton(Utils.capitalize(way2.title())) {
@@ -106,9 +86,9 @@ public class WndChooseWay extends Window {
 
 		resize(WIDTH, (int) btnCancel.bottom());
 	}
-	
+
 	public WndChooseWay(final TomeOfSpecialty tome, final HeroSubRace way1,
-			final HeroSubRace way2) {
+						final HeroSubRace way2) {
 
 		super();
 
@@ -118,30 +98,10 @@ public class WndChooseWay extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		Highlighter hl = new Highlighter(way1.desc() + "\n\n" + way2.desc()
-				+ "\n\n" + TXT_MESSAGE);
-
-		BitmapTextMultiline normal = PixelScene.createMultiline(hl.text, 6);
-		normal.maxWidth = WIDTH;
-		normal.measure();
-		normal.x = titlebar.left();
-		normal.y = titlebar.bottom() + GAP;
-		add(normal);
-
-		if (hl.isHighlighted()) {
-			normal.mask = hl.inverted();
-
-			BitmapTextMultiline highlighted = PixelScene.createMultiline(
-					hl.text, 6);
-			highlighted.maxWidth = normal.maxWidth;
-			highlighted.measure();
-			highlighted.x = normal.x;
-			highlighted.y = normal.y;
-			add(highlighted);
-
-			highlighted.mask = hl.mask;
-			highlighted.hardlight(TITLE_COLOR);
-		}
+		RenderedTextMultiline hl = PixelScene.renderMultiline(6);
+		hl.text(way1.desc() + "\n\n" + way2.desc() + "\n\n" + Messages.get(this, "message"), WIDTH);
+		hl.setPos(titlebar.left(), titlebar.bottom() + GAP);
+		add(hl);
 
 		RedButton btnWay1 = new RedButton(Utils.capitalize(way1.title())) {
 			@Override
@@ -150,8 +110,7 @@ public class WndChooseWay extends Window {
 				tome.choose(way1);
 			}
 		};
-		btnWay1.setRect(0, normal.y + normal.height() + GAP, (WIDTH - GAP) / 2,
-				BTN_HEIGHT);
+		btnWay1.setRect(0, hl.bottom() + GAP, (WIDTH - GAP) / 2, BTN_HEIGHT);
 		add(btnWay1);
 
 		RedButton btnWay2 = new RedButton(Utils.capitalize(way2.title())) {

@@ -20,9 +20,8 @@ package com.avmoga.dpixel.windows;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.effects.BadgeBanner;
 import com.avmoga.dpixel.scenes.PixelScene;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
-import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Image;
 
 public class WndBadge extends Window {
@@ -30,36 +29,29 @@ public class WndBadge extends Window {
 	private static final int WIDTH = 120;
 	private static final int MARGIN = 4;
 
-	public WndBadge(Badges.Badge badge) {
+	public WndBadge( Badges.Badge badge ) {
 
 		super();
 
-		Image icon = BadgeBanner.image(badge.image);
-		icon.scale.set(2);
-		add(icon);
+		Image icon = BadgeBanner.image( badge.image );
+		icon.scale.set( 2 );
+		add( icon );
 
-		BitmapTextMultiline info = PixelScene.createMultiline(
-				badge.description, 8);
-		info.maxWidth = WIDTH - MARGIN * 2;
-		info.measure();
+		//TODO: this used to be centered, should probably figure that out.
+		RenderedTextMultiline info = PixelScene.renderMultiline( badge.description, 8 );
+		info.maxWidth(WIDTH - MARGIN * 2);
+		PixelScene.align(info);
+		add(info);
 
-		float w = Math.max(icon.width(), info.width()) + MARGIN * 2;
+		float w = Math.max( icon.width(), info.width() ) + MARGIN * 2;
 
-		icon.x = (w - icon.width()) / 2;
+		icon.x = (w - icon.width()) / 2f;
 		icon.y = MARGIN;
+		PixelScene.align(icon);
 
-		float pos = icon.y + icon.height() + MARGIN;
-		for (BitmapText line : info.new LineSplitter().split()) {
-			line.measure();
-			line.x = PixelScene.align((w - line.width()) / 2);
-			line.y = PixelScene.align(pos);
-			add(line);
+		info.setPos((w - info.width()) / 2, icon.y + icon.height() + MARGIN);
+		resize( (int)w, (int)(info.bottom() + MARGIN) );
 
-			pos += line.height();
-		}
-
-		resize((int) w, (int) (pos + MARGIN));
-
-		BadgeBanner.highlight(icon, badge.image);
+		BadgeBanner.highlight( icon, badge.image );
 	}
 }

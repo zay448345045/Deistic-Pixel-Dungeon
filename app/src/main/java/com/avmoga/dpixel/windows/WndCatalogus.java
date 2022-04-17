@@ -28,7 +28,6 @@ import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.ui.ScrollPane;
 import com.avmoga.dpixel.ui.Window;
 import com.avmoga.dpixel.utils.Utils;
-import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.ui.Component;
 
@@ -153,7 +152,7 @@ public class WndCatalogus extends WndTabbed {
 		private boolean identified;
 
 		private ItemSprite sprite;
-		private BitmapText label;
+		private RenderedText label;
 
 		public ListItem(Class<? extends Item> cl) {
 			super();
@@ -178,7 +177,7 @@ public class WndCatalogus extends WndTabbed {
 			sprite = new ItemSprite();
 			add(sprite);
 
-			label = PixelScene.createText(8);
+			label = PixelScene.renderText(8);
 			add(label);
 		}
 

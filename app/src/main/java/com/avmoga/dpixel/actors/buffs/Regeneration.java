@@ -1,89 +1,50 @@
-/*
- * Pixel Dungeon
- * Copyright (C) 2012-2014  Oleg Dolya
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>
- */
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
-import com.avmoga.dpixel.ui.BuffIndicator;
-import com.watabou.utils.Bundle;
+import com.avmoga.dpixel.actors.hero.Hero;
+import com.avmoga.dpixel.items.artifacts.ChaliceOfBlood;
 
 public class Regeneration extends Buff {
 
-	private int regenleft = 0;
+    public static final float REGENERATION_DELAY = 10;
 
-	private static final String REGENLEFT = "regenleft";
+    @Override
+    public boolean act() {
+        if (target.isAlive()) {
 
-	@Override
-	public void storeInBundle(Bundle bundle) {
-		super.storeInBundle(bundle);
-		bundle.put(REGENLEFT, regenleft);
-	}
+            if (target.HP < target.HT && !((Hero) target).isStarving()) {
+                target.HP += 1;
+            }
 
-	@Override
-	public void restoreFromBundle(Bundle bundle) {
-		super.restoreFromBundle(bundle);
-		regenleft = bundle.getInt(REGENLEFT);
-	}
+            ChaliceOfBlood.chaliceRegen regenBuff = Dungeon.hero
+                    .buff(ChaliceOfBlood.chaliceRegen.class);
 
-	public int level() {
-		return regenleft;
-	}
+            if (regenBuff != null)
+                if (regenBuff.isCursed())
+                    spend(REGENERATION_DELAY * 1.5f);
+                else
+                    spend(Math
+                            .max(REGENERATION_DELAY - regenBuff.level(), 0.5f));
+            else
+                spend(REGENERATION_DELAY);
 
-	public void level(int value) {
-		if (regenleft < value) {
-			regenleft = value;
-		}
-	}
+        } else {
 
-	@Override
-	public int icon() {
-		return BuffIndicator.REGEN;
-	}
+            diactivate();
 
-	@Override
-	public String toString() {
-		return Messages.get(this, "name");
-	}
+        }
 
-	@Override
-	public String desc() {
-		return Messages.get(this, "desc", regenleft);
-	}
+        return true;
+    }
 
-	@Override
-	public boolean act() {
-		if (target.isAlive()) {
+    @Override
+    public String toString() {
+        return Messages.get(this, "name");
+    }
 
-			if (target.HP < target.HT) {
-				target.HP += Math.min(1 + Math.round(regenleft / 25), (target.HT - target.HP));
-			}
-
-			spend(TICK);
-			if (--regenleft <= 0) {
-				detach();
-			}
-
-		} else {
-
-			detach();
-
-		}
-
-		return true;
-	}
-
+    @Override
+    public String desc() {
+        return Messages.get(this, "desc", dispTurns(REGENERATION_DELAY));
+    }
 }

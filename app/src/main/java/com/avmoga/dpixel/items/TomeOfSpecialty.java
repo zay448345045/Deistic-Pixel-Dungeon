@@ -17,11 +17,10 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Blindness;
 import com.avmoga.dpixel.actors.buffs.Madness;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -36,17 +35,19 @@ import com.avmoga.dpixel.utils.Utils;
 import com.avmoga.dpixel.windows.WndChooseWay;
 import com.watabou.noosa.audio.Sample;
 
+import java.util.ArrayList;
+
 public class TomeOfSpecialty extends Item {
 
-	private static final String TXT_BLINDED = "You can't read while blinded";
+	private static final String TXT_BLINDED = Messages.get(TomeOfMastery.class, "blinded");
 
 	public static final float TIME_TO_READ = 10;
 
-	public static final String AC_READ = "READ";
+	public static final String AC_READ = Messages.get(TomeOfMastery.class, "ac_read");
 
 	{
 		stackable = false;
-		name = "Tome of Specialty";
+		name = "种族之书";
 		image = ItemSpriteSheet.SPECIALTY;
 
 		unique = true;
@@ -117,9 +118,7 @@ public class TomeOfSpecialty extends Item {
 
 	@Override
 	public String info() {
-		return "This worn leather book is not that thick, but you feel somehow, "
-				+ "that you can gather a lot from it. Remember though that reading "
-				+ "this tome may require some time.";
+		return "这本皮封典籍没多厚, 但是你隐约感觉到自己能从中学到不少东西.\n\n不过记住: 阅读这本典籍需要一些时间。";
 	}
 
 	public void choose(HeroSubRace way) {
@@ -133,7 +132,7 @@ public class TomeOfSpecialty extends Item {
 
 		SpellSprite.show(curUser, SpellSprite.MASTERY);
 		curUser.sprite.emitter().burst(Speck.factory(Speck.MASTERY), 12);
-		GLog.w("You have chosen the way of the %s!",
+		GLog.w("你选择了专精了%s的冒险！",
 				Utils.capitalize(way.title()));
 		
 		

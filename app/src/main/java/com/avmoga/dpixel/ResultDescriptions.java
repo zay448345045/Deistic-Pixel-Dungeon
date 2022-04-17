@@ -17,30 +17,29 @@
  */
 package com.avmoga.dpixel;
 
-public class ResultDescriptions {
+import com.avmoga.dpixel.Messages.Messages;
 
+public class ResultDescriptions {
+	public static final String MOB = Messages.get(ResultDescriptions.class, "mob");
+	public static final String ITEM = Messages.get(ResultDescriptions.class, "item");
+	public static final String GLYPH = Messages.get(ResultDescriptions.class, "glyph");
+	public static final String TRAP = Messages.get(ResultDescriptions.class, "trap");
+	public static final String BURNING = Messages.get(ResultDescriptions.class, "burn");
+	public static final String HUNGER = Messages.get(ResultDescriptions.class, "hunger");
+	public static final String POISON = Messages.get(ResultDescriptions.class, "poison");
+	public static final String GAS = Messages.get(ResultDescriptions.class, "gas");
+	public static final String BLEEDING = Messages.get(ResultDescriptions.class, "bleeding");
+	public static final String OOZE = Messages.get(ResultDescriptions.class, "ooze");
+	public static final String FALL = Messages.get(ResultDescriptions.class, "fall");
+	public static final String COUNTDOWN = Messages.get(ResultDescriptions.class, "countdown");
+
+	public static final String WIN = Messages.get(ResultDescriptions.class, "win");
 	// Mobs
-	public static final String MOB = "Killed by %s";
-	public static final String UNIQUE = "Killed by the %s";
-	public static final String NAMED = "Killed by %s";
+	//public static final String MOB = "Killed by %s";
+	public static final String UNIQUE = "死于 %s";
+	public static final String NAMED = "死于 %s";
 
 	// Items
-	public static final String ITEM = "Killed by your own %s";
-	public static final String GLYPH = "Killed by the %s";
 
-	// Dungeon features
-	public static final String TRAP = "Killed by a %s";
-
-	// Debuffs & blobs
-	public static final String BURNING = "Burned to Ash";
-	public static final String HUNGER = "Starved to Death";
-	public static final String POISON = "Succumbed to Poison";
-	public static final String GAS = "Suffocated";
-	public static final String BLEEDING = "Bled to Death";
-	public static final String OOZE = "Melted Away";
-	public static final String FALL = "Died on Impact";
-	public static final String COUNTDOWN = "Died from countdown";
 	public static final String DECAY = "Joined the plague";
-
-	public static final String WIN = "Obtained the Amulet of Yendor";
 }

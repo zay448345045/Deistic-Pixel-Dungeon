@@ -21,18 +21,24 @@ import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
+import com.avmoga.dpixel.scenes.GameScene;
+import com.avmoga.dpixel.windows.WndInfoBuff;
 import com.watabou.gltextures.SmartTexture;
 import com.watabou.gltextures.TextureCache;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.TextureFilm;
 import com.watabou.noosa.tweeners.AlphaTweener;
+import com.watabou.noosa.ui.Button;
 import com.watabou.noosa.ui.Component;
 import com.watabou.utils.SparseArray;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class BuffIndicator extends Component {
 
 	public static final int NONE = -1;
-
+	private LinkedHashMap<Buff, BuffIcon> buffIcons = new LinkedHashMap<>();
 	public static final int MIND_VISION = 0;
 	public static final int LEVITATION = 1;
 	public static final int FIRE = 2;
@@ -97,6 +103,36 @@ public class BuffIndicator extends Component {
 		}
 	}
 
+	private class BuffIcon extends Button {
+		private Buff buff;
+		public Image icon;
+
+		public BuffIcon(Buff buff) {
+			super();
+			this.buff = buff;
+
+			icon = new Image(texture);
+			icon.frame(film.get(buff.icon()));
+			add(icon);
+		}
+
+		public void updateIcon() {
+			icon.frame(film.get(buff.icon()));
+		}
+
+		@Override
+		protected void layout() {
+			super.layout();
+			icon.x = this.x + 1;
+			icon.y = this.y + 2;
+		}
+
+		@Override
+		protected void onClick() {
+			GameScene.show(new WndInfoBuff(buff));
+		}
+	}
+
 	@Override
 	public void destroy() {
 		super.destroy();
@@ -114,26 +150,18 @@ public class BuffIndicator extends Component {
 
 	@Override
 	protected void layout() {
-		clear();
 
-		SparseArray<Image> newIcons = new SparseArray<Image>();
-
+		ArrayList<Buff> newBuffs = new ArrayList<>();
 		for (Buff buff : ch.buffs()) {
-			int icon = buff.icon();
-			if (icon != NONE) {
-				Image img = new Image(texture);
-				img.frame(film.get(icon));
-				img.x = x + members.size() * (SIZE + 2);
-				img.y = y;
-				add(img);
-
-				newIcons.put(icon, img);
+			if (buff.icon() != NONE) {
+				newBuffs.add(buff);
 			}
 		}
 
-		for (Integer key : icons.keyArray()) {
-			if (newIcons.get(key) == null) {
-				Image icon = icons.get(key);
+		//remove any icons no longer present
+		for (Buff buff : buffIcons.keySet().toArray(new Buff[0])) {
+			if (!newBuffs.contains(buff)) {
+				Image icon = buffIcons.get(buff).icon;
 				icon.origin.set(SIZE / 2);
 				add(icon);
 				add(new AlphaTweener(icon, 0, 0.6f) {
@@ -141,12 +169,36 @@ public class BuffIndicator extends Component {
 					protected void updateValues(float progress) {
 						super.updateValues(progress);
 						image.scale.set(1 + 5 * progress);
-					};
+					}
+
+					@Override
+					protected void onComplete() {
+						image.killAndErase();
+					}
 				});
+
+				buffIcons.get(buff).destroy();
+				remove(buffIcons.get(buff));
+				buffIcons.remove(buff);
 			}
 		}
 
-		icons = newIcons;
+		//add new icons
+		for (Buff buff : newBuffs) {
+			if (!buffIcons.containsKey(buff)) {
+				BuffIcon icon = new BuffIcon(buff);
+				add(icon);
+				buffIcons.put(buff, icon);
+			}
+		}
+
+		//layout
+		int pos = 0;
+		for (BuffIcon icon : buffIcons.values()) {
+			icon.updateIcon();
+			icon.setRect(x + pos * (SIZE + 2), y, 9, 13);
+			pos++;
+		}
 	}
 
 	public static void refreshHero() {

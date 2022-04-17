@@ -17,24 +17,22 @@
  */
 package com.avmoga.dpixel.windows;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.ui.RedButton;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
 import com.avmoga.dpixel.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndDewVial extends Window {
 	
 	//if people don't get it after this, I quit. I just quit.
 
-	private static final String TXT_MESSAGE = "The dew vial is much more powerful in this dungeon. "
-			                                  +"Filling it all the way will allow you to bless and upgrade your gear. "
-			                                  +"The deeper you go in the dungeon, the more the dew will upgrade your gear. "
-			                                  +"You can bless your items to +6 or +7 by the time you get to the Goo."; 
-	
-	private static final String TXT_WATER = "Okay! Let's go find 100 dew drops!";
+	private static final String TXT_MESSAGE = Messages.get(WndDewVial.class, "msg");
+
+	private static final String TXT_WATER = Messages.get(WndDewVial.class, "water");
 
 
 	private static final int WIDTH = 120;
@@ -51,11 +49,10 @@ public class WndDewVial extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene
-				.createMultiline(TXT_MESSAGE, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene
+				.renderMultiline(TXT_MESSAGE, 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
 		RedButton btnBattle = new RedButton(TXT_WATER) {
@@ -64,7 +61,7 @@ public class WndDewVial extends Window {
 				hide();
 			}
 		};
-		btnBattle.setRect(0, message.y + message.height() + GAP, WIDTH,
+		btnBattle.setRect(0, message.top() + message.height() + GAP, WIDTH,
 				BTN_HEIGHT);
 		add(btnBattle);
 

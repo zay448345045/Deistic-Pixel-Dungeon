@@ -58,7 +58,6 @@ import com.avmoga.dpixel.ui.ItemSlot;
 import com.avmoga.dpixel.ui.QuickSlotButton;
 import com.avmoga.dpixel.utils.Utils;
 import com.watabou.gltextures.TextureCache;
-import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.ColorBlock;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.RenderedText;
@@ -94,14 +93,14 @@ public class WndBag extends WndTabbed {
 
 	private static Mode lastMode;
 	private static Bag lastBag;
-	
+
 	public WndBag(HashSet<? extends Item> items, Listener listener, Mode mode, String title) {
 		super();
-		
+
 		this.listener = listener;
 		this.mode = mode;
 		this.title = title;
-		
+
 		nCols = ShatteredPixelDungeon.landscape() ? COLS_L : COLS_P;
 		nRows = (Belongings.BACKPACK_SIZE + 4 + 1) / nCols
 				+ ((Belongings.BACKPACK_SIZE + 4 + 1) % nCols > 0 ? 1 : 0);
@@ -109,9 +108,8 @@ public class WndBag extends WndTabbed {
 		int slotsWidth = SLOT_SIZE * nCols + SLOT_MARGIN * (nCols - 1);
 		int slotsHeight = SLOT_SIZE * nRows + SLOT_MARGIN * (nRows - 1);
 
-		BitmapText txtTitle = PixelScene.createText(title, 9);
+		RenderedText txtTitle = PixelScene.renderText("背包", 9);
 		txtTitle.hardlight(TITLE_COLOR);
-		txtTitle.measure();
 		txtTitle.x = (int) (slotsWidth - txtTitle.width()) / 2;
 		txtTitle.y = (int) (TITLE_HEIGHT - txtTitle.height()) / 2;
 		add(txtTitle);
@@ -119,14 +117,14 @@ public class WndBag extends WndTabbed {
 		placeItemsSpecial(items);
 
 		resize(slotsWidth, slotsHeight + TITLE_HEIGHT);
-		
+
 	}
 
 	private void placeItemsSpecial(HashSet<? extends Item> items) {
 		count = nCols;
 		col = 0;
 		row = 1;
-		
+
 		// Items in the bag
 		for (Item item : items) {
 			placeItem(item);
@@ -136,7 +134,7 @@ public class WndBag extends WndTabbed {
 		while (count -  nCols < 12) {
 			placeItem(null);
 		}
-		
+
 	}
 
 	public WndBag(Bag bag, Listener listener, Mode mode, String title) {
@@ -172,8 +170,8 @@ public class WndBag extends WndTabbed {
 		Bag[] bags = { stuff.backpack, stuff.getItem(SeedPouch.class),
 				stuff.getItem(ScrollHolder.class),
 				stuff.getItem(PotionBandolier.class),
-				stuff.getItem(WandHolster.class), 
-				stuff.getItem(KeyRing.class), 
+				stuff.getItem(WandHolster.class),
+				stuff.getItem(KeyRing.class),
 				stuff.getItem(AnkhChain.class),
 				stuff.getItem(ArtifactBox.class)};
 
@@ -421,21 +419,21 @@ public class WndBag extends WndTabbed {
 				if (item.name() == null) {
 					enable(false);
 				} else {
-					
+
 					 int levelLimit = Math.max(5, 5+Math.round(Statistics.deepestFloor/3));
 				     if (Dungeon.hero.heroClass == HeroClass.MAGE){levelLimit++;}
-					
+
 					enable(mode == Mode.FOR_SALE
 							&& (item.price() > 0)
 							&& (!item.isEquipped(Dungeon.hero) || !item.cursed)
-							
+
 							|| mode == Mode.UPGRADEABLE
 							&& ((item.isUpgradable() && item.level<15 && !item.isReinforced())
-									||  item.isUpgradable() && item.isReinforced())		
+									||  item.isUpgradable() && item.isReinforced())
 							|| mode == Mode.UPGRADEDEW
-							&& (item.isUpgradable() && item.level < levelLimit)	
+							&& (item.isUpgradable() && item.level < levelLimit)
 							|| mode == Mode.UPGRADEABLESIMPLE
-							&& item.isUpgradable()			
+							&& item.isUpgradable()
 							|| mode == Mode.ADAMANT
 							&& (item instanceof AdamantArmor || item instanceof AdamantRing || item instanceof AdamantWand || item instanceof AdamantWeapon)
 							|| mode == Mode.REINFORCED
@@ -452,21 +450,21 @@ public class WndBag extends WndTabbed {
 							&& (item instanceof Armor)
 							|| mode == Mode.ENCHANTABLE
 							&& (item instanceof MeleeWeapon	|| item instanceof Boomerang || item instanceof Armor)
-							|| mode == Mode.WAND 
+							|| mode == Mode.WAND
 							&& (item instanceof Wand)
-							|| mode == Mode.SEED 
+							|| mode == Mode.SEED
 							&& (item instanceof Seed)
-							|| mode == Mode.FOOD 
+							|| mode == Mode.FOOD
 							&& (item instanceof Food)
-							|| mode == Mode.POTION 
+							|| mode == Mode.POTION
 							&& (item instanceof Potion)
-							|| mode == Mode.SCROLL 
+							|| mode == Mode.SCROLL
 							&& (item instanceof Scroll)
-							|| mode == Mode.MISSILE 
+							|| mode == Mode.MISSILE
 							&& (item instanceof MissileWeapon)
 							|| mode == Mode.EQUIPMENT
 							&& (item instanceof EquipableItem)
-							|| mode == Mode.SHOWMISSILE 
+							|| mode == Mode.SHOWMISSILE
 							&& (item instanceof MissileWeapon)
 							|| mode == Mode.ALL);
 				}

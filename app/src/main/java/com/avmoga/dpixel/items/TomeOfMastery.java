@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Blindness;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Fury;
@@ -35,17 +34,19 @@ import com.avmoga.dpixel.utils.Utils;
 import com.avmoga.dpixel.windows.WndChooseWay;
 import com.watabou.noosa.audio.Sample;
 
+import java.util.ArrayList;
+
 public class TomeOfMastery extends Item {
 
-	private static final String TXT_BLINDED = "You can't read while blinded";
+	private static final String TXT_BLINDED = Messages.get(TomeOfMastery.class, "blinded");
 
 	public static final float TIME_TO_READ = 10;
 
-	public static final String AC_READ = "READ";
+	public static final String AC_READ = Messages.get(TomeOfMastery.class, "ac_read");
 
 	{
 		stackable = false;
-		name = "Tome of Mastery";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.MASTERY;
 
 		unique = true;
@@ -116,9 +117,7 @@ public class TomeOfMastery extends Item {
 
 	@Override
 	public String info() {
-		return "This worn leather book is not that thick, but you feel somehow, "
-				+ "that you can gather a lot from it. Remember though that reading "
-				+ "this tome may require some time.";
+		return Messages.get(this, "desc");
 	}
 
 	public void choose(HeroSubClass way) {

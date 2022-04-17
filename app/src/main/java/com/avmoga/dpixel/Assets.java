@@ -32,6 +32,7 @@ public class Assets {
 	public static final String ICONS = "icons.png";
 	public static final String STATUS = "status_pane.png";
 	public static final String HP_BAR = "hp_bar.png";
+	public static final String HG_BAR	= "hg_bar.png";
 	public static final String XP_BAR = "exp_bar.png";
 	public static final String TOOLBAR = "toolbar.png";
 	public static final String SHADOW = "shadow.png";
@@ -262,4 +263,6 @@ public class Assets {
 	public static final String SND_BEE = "snd_bee.mp3";
 	public static final String SND_DEGRADE = "snd_degrade.mp3";
 	public static final String SND_MIMIC = "snd_mimic.mp3";
+    public static final String HEALTH_CRITICAL = "health_warn.mp3";
+	public static final String HEALTH_WARN = "health_critical.mp3";
 }
