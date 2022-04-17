@@ -23,13 +23,12 @@ import com.avmoga.dpixel.DungeonTilemap;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.hero.HeroClass;
 import com.avmoga.dpixel.actors.mobs.npcs.Ghost;
-import com.avmoga.dpixel.actors.mobs.npcs.Tinkerer1;
 import com.avmoga.dpixel.actors.mobs.npcs.Ghost.GnollArcher;
+import com.avmoga.dpixel.actors.mobs.npcs.Tinkerer1;
 import com.avmoga.dpixel.items.Bomb;
 import com.avmoga.dpixel.items.DewVial;
 import com.avmoga.dpixel.items.Egg;
 import com.avmoga.dpixel.items.Mushroom;
-import com.avmoga.dpixel.items.bags.SeedPouch;
 import com.avmoga.dpixel.items.food.Blackberry;
 import com.avmoga.dpixel.items.food.Blueberry;
 import com.avmoga.dpixel.items.food.Cloudberry;
@@ -127,8 +126,8 @@ public class SewerLevel extends RegularLevel {
 		if (!Dungeon.limitedDrops.dewVial.dropped()	&& Dungeon.depth == 1) {
 			addItemToSpawn(new DewVial());
 			Dungeon.limitedDrops.dewVial.drop();
-			addItemToSpawn(new SeedPouch());
-			Dungeon.limitedDrops.seedBag.drop();
+			//addItemToSpawn(new SeedPouch());
+			//Dungeon.limitedDrops.seedBag.drop();
 			
 			addItemToSpawn(new Moonberry());
 			addItemToSpawn(new Blueberry());

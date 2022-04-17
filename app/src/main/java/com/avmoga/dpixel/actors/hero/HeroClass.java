@@ -23,12 +23,10 @@ import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.items.Bomb;
-import com.avmoga.dpixel.items.TomeOfSpecialty;
 import com.avmoga.dpixel.items.armor.ClothArmor;
 import com.avmoga.dpixel.items.artifacts.CloakOfShadows;
 import com.avmoga.dpixel.items.bags.KeyRing;
 import com.avmoga.dpixel.items.food.Food;
-import com.avmoga.dpixel.items.potions.PotionOfMending;
 import com.avmoga.dpixel.items.potions.PotionOfMindVision;
 import com.avmoga.dpixel.items.potions.PotionOfStrength;
 import com.avmoga.dpixel.items.scrolls.ScrollOfIdentify;
@@ -86,7 +84,7 @@ public enum HeroClass {
 		if (!Dungeon.isChallenged(Challenges.NO_ARMOR))
 			(hero.belongings.armor = new ClothArmor()).identify();
 		Dungeon.gold+=300;
-		new PotionOfMending().quantity(2).identify().collect();
+		//new ClothArmor().quantity(1).identify().collect();
 		//new WarriorArmor().quantity(1).identify().collect();
 		//new TomeOfMastery().quantity(1).identify().collect();
 		//new TomeOfSpecialty().quantity(1).identify().collect();
@@ -180,15 +178,16 @@ public enum HeroClass {
 		new PotionOfMindVision().setKnown();
 	}
 
-	public void playtest(Hero hero) {
-		if (!Dungeon.playtest){//TODO: Use me to playtest from now on.
-		//Playtest
-		TomeOfSpecialty tome = new TomeOfSpecialty(); tome.collect();
-				
-				hero.HT=hero.HP=999;
-				hero.STR = hero.STR + 20;
-		}
-	}
+	//public void playtest(Hero hero) {
+	//	if (!Dungeon.playtest){
+	// TODO: Use me to playtest from now on.
+	//	//Playtest
+	//	TomeOfSpecialty tome = new TomeOfSpecialty(); tome.collect();
+	//
+	//			hero.HT=hero.HP=999;
+	//			hero.STR = hero.STR + 20;
+	//	}
+	//}
 
 	public String title() {
 		return Messages.get(HeroClass.class, title);

@@ -17,9 +17,6 @@
  */
 package com.avmoga.dpixel.levels.painters;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.hero.Belongings;
 import com.avmoga.dpixel.actors.mobs.Mob;
@@ -45,8 +42,8 @@ import com.avmoga.dpixel.items.artifacts.TimekeepersHourglass;
 import com.avmoga.dpixel.items.bags.ArtifactBox;
 import com.avmoga.dpixel.items.bags.PotionBandolier;
 import com.avmoga.dpixel.items.bags.ScrollHolder;
-import com.avmoga.dpixel.items.bags.SeedPouch;
 import com.avmoga.dpixel.items.bags.WandHolster;
+import com.avmoga.dpixel.items.food.Food;
 import com.avmoga.dpixel.items.potions.Potion;
 import com.avmoga.dpixel.items.potions.PotionOfHealing;
 import com.avmoga.dpixel.items.scrolls.Scroll;
@@ -71,6 +68,9 @@ import com.avmoga.dpixel.levels.Terrain;
 import com.avmoga.dpixel.plants.Plant;
 import com.watabou.utils.Point;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class ShopPainter extends Painter {
 
@@ -122,7 +122,7 @@ public class ShopPainter extends Painter {
 		itemsToSpawn = new ArrayList<Item>();
 
 		switch (Dungeon.depth) {
-		case 6:
+			case 1:case 6:
 			itemsToSpawn.add((Random.Int(2) == 0 ? new Quarterstaff()
 					: new Spear()).identify());
 			itemsToSpawn.add(Random.Int(2) == 0 ? new IncendiaryDart()
@@ -195,7 +195,7 @@ public class ShopPainter extends Painter {
 			break;
 		}
 
-		if (Dungeon.depth == 6) {
+		if (Dungeon.depth == 1 ||Dungeon.depth == 6) {
 			itemsToSpawn.add(new Ankh());
 			itemsToSpawn.add(new Weightstone());
 		} else {
@@ -212,7 +212,7 @@ public class ShopPainter extends Painter {
 			// this way players who get the hourglass late can still max it,
 			// usually.
 			switch (Dungeon.depth) {
-			case 6:
+			case 1:case 6:
 				bags = (int) Math.ceil((5 - hourglass.sandBags) * 0.20f);
 				break;
 			case 11:
@@ -307,7 +307,7 @@ public class ShopPainter extends Painter {
 		if (seeds >= scrolls && seeds >= potions && seeds >= wands && seeds >= artifacts
 				&& !Dungeon.limitedDrops.seedBag.dropped()) {
 			Dungeon.limitedDrops.seedBag.drop();
-			itemsToSpawn.add(new SeedPouch());
+			itemsToSpawn.add(new Food());
 		} else if (scrolls >= potions && scrolls >= wands && scrolls >= artifacts
 				&& !Dungeon.limitedDrops.scrollBag.dropped()) {
 			Dungeon.limitedDrops.scrollBag.drop();

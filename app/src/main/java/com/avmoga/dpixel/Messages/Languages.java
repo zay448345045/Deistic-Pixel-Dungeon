@@ -5,9 +5,14 @@ import java.util.Locale;
 public enum Languages {
     ENGLISH("english", "", Status.REVIEWED, null, null),
     CHINESE("中文", "zh", Status.INCOMPLETE, new String[]{"JDSALing"},
-            new String[]{"JDSALing", "g2159687","不败星辰","洛小乐","仓鼠\n\n_特别鸣谢：\n_-G21的ESPD的汉化参考\n-Catand的Eclipse项目迁移指导\n" +
-                    "-小狐狸-九尾天狐的自主捐赠\n" +
-                    "" +
+            new String[]{"JDSALing", "g2159687-_发芽汉化文本_","Catand-_告示牌翻译_","不败星辰-_杂项翻译_","洛小乐-_角色贴图处理-杂项翻译_","仓鼠-_主要翻译_\n" +
+                    "\n_特别鸣谢：\n_" +
+                    "-G21" +
+                    "的ESPD" +
+                    "的汉化参考\n" +
+                    "-Catand" +
+                    "的Eclipse项目迁移指导\n" +
+                    "-小狐狸-九尾天狐的自主捐赠\n"+
                     "-Evan的多语言系统"});
 
     public enum Status {
