@@ -362,8 +362,8 @@ public class StartScene extends PixelScene {
 			avatar.scale.set(SCALE);
 
 			if (Badges.isUnlocked(cl.masteryBadge())) {
-				normal = MASTERY_NORMAL;
-				highlighted = MASTERY_HIGHLIGHTED;
+				normal = BASIC_NORMAL;
+				highlighted = BASIC_HIGHLIGHTED;
 			} else {
 				normal = BASIC_NORMAL;
 				highlighted = BASIC_HIGHLIGHTED;

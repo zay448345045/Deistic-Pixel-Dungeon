@@ -20,8 +20,7 @@ public enum HeroRace {
 	
 	public String title;
 	public static HeroRace race;
-
-	public String title() {
+    public String title() {
 		return Messages.get(HeroRace.class, title);
 	}
 	

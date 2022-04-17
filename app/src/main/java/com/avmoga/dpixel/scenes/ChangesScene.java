@@ -16,7 +16,14 @@ import com.watabou.noosa.ui.Component;
 public class ChangesScene extends PixelScene {
 
     private static final String TXT_Update =
-            "\n_v0.1.7-0.3自然之神的像素地牢_\n" +
+            "\n_v0.1.7-0.35自然之神的像素地牢_\n" +
+                    "- 将CST崩溃界面改为更为先进的UCE-Handler界面，只要不是后台杀，啥崩溃都能找出来（开发者狂喜 Bushi（）)\n" +
+                    "- 开局追加300金币，商店常驻，追加两瓶小瓶治疗药水\n" +
+                    "- 神秘彩蛋在矿洞大层加入(昨天就加入了，现在公开)\n" +
+                    "- 修复了像素商店选择商品崩溃的Bug\n" +
+                    "- 现在即便解锁了专精徽章，新开局也不会立刻就能专精职业和种族\n" +
+                    "- 修复双重伤害BUG\n"+
+            "\n\n_v0.1.7-0.3自然之神的像素地牢_\n" +
                     "- 汉化了药水和卷轴，有一些新卷轴还没有汉化\n" +
                     "- 对开局界面滚动卡顿修复\n" +
                     "- 血量过低屏幕现在会闪烁红色作为警告\n" +

@@ -36,6 +36,11 @@ public class Assets {
 	public static final String XP_BAR = "exp_bar.png";
 	public static final String TOOLBAR = "toolbar.png";
 	public static final String SHADOW = "shadow.png";
+	public static final String LOADING_COLD	= "loading_cold.png";
+	public static final String LOADING_PRISON	= "loading_prison.png";
+	public static final String LOADING_CAVES	= "loading_caves.png";
+	public static final String LOADING_CITY	    = "loading_city.png";
+	public static final String LOADING_HALLS	= "loading_halls.png";
 	public static final String GODAVATARS = "gods.png";
 
 	public static final String HUMANWARRIOR = "warrior.png";

@@ -27,6 +27,7 @@ import com.avmoga.dpixel.actors.buffs.Dewcharge;
 import com.avmoga.dpixel.actors.buffs.Light;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.hero.HeroClass;
+import com.avmoga.dpixel.actors.hero.HeroRace;
 import com.avmoga.dpixel.actors.mobs.npcs.Blacksmith;
 import com.avmoga.dpixel.actors.mobs.npcs.Ghost;
 import com.avmoga.dpixel.actors.mobs.npcs.Imp;
@@ -173,6 +174,7 @@ public class Dungeon {
 	public static boolean sporkAvail = false;
 
 	public static Hero hero;
+	public static HeroRace race;
 	public static Level level;
 
 	public static QuickSlot quickslot = new QuickSlot();
@@ -682,7 +684,7 @@ public static Level newThiefBossLevel(){
 	}
 
 	public static boolean shopOnLevel() {
-		return depth == 6 || depth == 11 || depth == 16;
+		return depth == 1 ||  depth == 6 || depth == 11 || depth == 16;
 	}
 
 	public static boolean bossLevel() {
@@ -967,8 +969,11 @@ public static Level newThiefBossLevel(){
 				Utils.format(depthFile(hero.heroClass), depth),
 				Context.MODE_PRIVATE);
 		Bundle.write(bundle, output);
+
 		output.close();
 	}
+
+
 
 	public static void saveAll() throws IOException {
 		if (hero.isAlive()) {
@@ -1145,6 +1150,9 @@ public static Level newThiefBossLevel(){
 			int depth = 1;
 			while (Game.instance.deleteFile(Utils.format(depthFile(cl), depth))) {
 				depth++;
+			}
+			for (int i = 1; i < 200; i++) {
+				Game.instance.deleteFile(Utils.format(depthFile(cl), i));
 			}
 		}
 

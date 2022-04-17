@@ -1,13 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 29
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.avmoga.dpixel.ling"
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 29
+    }
+
+    allprojects {
+        repositories {
+            maven { url 'https://jitpack.io' }
+        }
     }
 
     buildTypes {
@@ -17,6 +23,6 @@ android {
         }
     }
     dependencies {
-        implementation 'cat.ereza:customactivityoncrash:2.3.0'
+        implementation 'com.github.RohitSurwase.UCE-Handler:uce_handler:1.4'
     }
 }

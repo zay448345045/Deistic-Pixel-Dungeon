@@ -564,7 +564,7 @@ public class Item implements Bundlable {
 
 		@Override
 		public String prompt() {
-			return "Choose direction of throw";
+			return Messages.get(Item.class, "prompt");
 		}
 	};
 }

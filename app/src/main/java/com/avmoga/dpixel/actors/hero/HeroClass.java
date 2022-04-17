@@ -23,12 +23,12 @@ import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.items.Bomb;
-import com.avmoga.dpixel.items.TomeOfMastery;
 import com.avmoga.dpixel.items.TomeOfSpecialty;
 import com.avmoga.dpixel.items.armor.ClothArmor;
 import com.avmoga.dpixel.items.artifacts.CloakOfShadows;
 import com.avmoga.dpixel.items.bags.KeyRing;
 import com.avmoga.dpixel.items.food.Food;
+import com.avmoga.dpixel.items.potions.PotionOfMending;
 import com.avmoga.dpixel.items.potions.PotionOfMindVision;
 import com.avmoga.dpixel.items.potions.PotionOfStrength;
 import com.avmoga.dpixel.items.scrolls.ScrollOfIdentify;
@@ -76,7 +76,7 @@ public enum HeroClass {
 		}
 
 		if (Badges.isUnlocked(masteryBadge())) {
-			new TomeOfMastery().collect();
+			//new TomeOfMastery().collect();
 		}
 
 		hero.updateAwareness();
@@ -85,7 +85,8 @@ public enum HeroClass {
 	private static void initCommon(Hero hero) {
 		if (!Dungeon.isChallenged(Challenges.NO_ARMOR))
 			(hero.belongings.armor = new ClothArmor()).identify();
-		//new ClothArmor().quantity(1).identify().collect();
+		Dungeon.gold+=300;
+		new PotionOfMending().quantity(2).identify().collect();
 		//new WarriorArmor().quantity(1).identify().collect();
 		//new TomeOfMastery().quantity(1).identify().collect();
 		//new TomeOfSpecialty().quantity(1).identify().collect();

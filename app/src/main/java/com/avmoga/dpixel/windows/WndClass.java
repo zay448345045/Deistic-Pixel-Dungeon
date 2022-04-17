@@ -54,14 +54,7 @@ public class WndClass extends WndTabbed {
 		add(tab);
 
 		if (Badges.isUnlocked(cl.masteryBadge())) {
-			tabMastery = new MasteryTab();
-			add(tabMastery);
-
-			tab = new RankingTab(TXT_MASTERY, tabMastery);
-			add(tab);
-
-			resize((int) Math.max(tabPerks.width, tabMastery.width),
-					(int) Math.max(tabPerks.height, tabMastery.height));
+			resize((int) tabPerks.width, (int) tabPerks.height);
 		} else {
 			resize((int) tabPerks.width, (int) tabPerks.height);
 		}

@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
 
+import com.rohitss.uceh.UCEHandler;
 import com.watabou.glscripts.Script;
 import com.watabou.gltextures.TextureCache;
 import com.watabou.glwrap.Vertexbuffer;
@@ -111,6 +112,9 @@ public class Game extends Activity implements GLSurfaceView.Renderer, View.OnTou
 		view.setRenderer(this);
 		view.setOnTouchListener(this);
 		setContentView(view);
+
+		UCEHandler.Builder builder = new UCEHandler.Builder(this);
+		builder.build();
 	}
 
 	@Override

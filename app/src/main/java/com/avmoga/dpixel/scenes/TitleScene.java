@@ -178,6 +178,10 @@ public class TitleScene extends PixelScene {
 		changes.setPos(32, 1);
 		add( changes );
 
+		//Button btnReset = new ResetButton();
+		//btnReset.setPos(48, 1);
+		//add(btnReset);
+
 		LanguageButton btnLang = new LanguageButton();
 		btnLang.setPos(16, 1);
 		add(btnLang);

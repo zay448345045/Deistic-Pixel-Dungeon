@@ -37,7 +37,7 @@ import java.io.IOException;
 
 public class InterlevelScene extends PixelScene {
 
-	private static final float TIME_TO_FADE = 0.7f;
+	private static final float TIME_TO_FADE = 0.5f;
 
 	private static final String TXT_DESCENDING = Messages.get(InterlevelScene.class, "descend");
 	private static final String TXT_ASCENDING = Messages.get(InterlevelScene.class, "ascend");

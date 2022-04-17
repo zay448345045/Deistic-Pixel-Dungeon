@@ -1266,7 +1266,7 @@ public class Hero extends Char {
 			dmg = dmg * 2;
 		}
 
-		super.damage(dmg, src);
+		//super.damage(dmg, src);
 
 		if (subClass == HeroSubClass.BERSERKER && 0 < HP
 				&& HP <= HT * Fury.LEVEL) {
