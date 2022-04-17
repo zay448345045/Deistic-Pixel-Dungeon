@@ -18,11 +18,12 @@
 package com.avmoga.dpixel.items.scrolls;
 
 import com.avmoga.dpixel.Assets;
-import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Drowsy;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
+import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.items.Heap;
@@ -33,7 +34,7 @@ import com.watabou.noosa.audio.Sample;
 public class ScrollOfLullaby extends Scroll {
 
 	{
-		name = "Scroll of Lullaby";
+		name = Messages.get(this, "name");
 		consumedValue = 5;
 	}
 
@@ -55,7 +56,7 @@ public class ScrollOfLullaby extends Scroll {
 
 		Buff.affect(curUser, Drowsy.class);
 
-		GLog.i("The scroll utters a soothing melody. You feel very sleepy.");
+		GLog.i(Messages.get(this, "sooth"));
 
 		setKnown();
 
@@ -79,7 +80,7 @@ public class ScrollOfLullaby extends Scroll {
 
 		Buff.affect(curUser, Drowsy.class);
 
-		GLog.i("The scroll harmonizes with the flames. You feel very sleepy.");
+		GLog.i("");
 
 		setKnown();
 	}
@@ -99,7 +100,7 @@ public class ScrollOfLullaby extends Scroll {
 	}
 	@Override
 	public String desc() {
-		return "A soothing melody will lull all who hear it into a deep magical sleep ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

@@ -26,12 +26,6 @@ import com.avmoga.dpixel.items.Bomb;
 import com.avmoga.dpixel.items.TomeOfMastery;
 import com.avmoga.dpixel.items.TomeOfSpecialty;
 import com.avmoga.dpixel.items.armor.ClothArmor;
-import com.avmoga.dpixel.items.armor.HuntressArmor;
-import com.avmoga.dpixel.items.armor.LeatherArmor;
-import com.avmoga.dpixel.items.armor.MailArmor;
-import com.avmoga.dpixel.items.armor.PlateArmor;
-import com.avmoga.dpixel.items.armor.ScaleArmor;
-import com.avmoga.dpixel.items.armor.WarriorArmor;
 import com.avmoga.dpixel.items.artifacts.CloakOfShadows;
 import com.avmoga.dpixel.items.bags.KeyRing;
 import com.avmoga.dpixel.items.food.Food;
@@ -91,15 +85,15 @@ public enum HeroClass {
 	private static void initCommon(Hero hero) {
 		if (!Dungeon.isChallenged(Challenges.NO_ARMOR))
 			(hero.belongings.armor = new ClothArmor()).identify();
-		new ClothArmor().quantity(1).identify().collect();
-		new WarriorArmor().quantity(1).identify().collect();
-		new TomeOfMastery().quantity(1).identify().collect();
-		new TomeOfSpecialty().quantity(1).identify().collect();
-		new HuntressArmor().quantity(1).identify().collect();
-		new MailArmor().quantity(1).identify().collect();
-		new PlateArmor().quantity(1).identify().collect();
-		new ScaleArmor().quantity(1).identify().collect();
-		new LeatherArmor().quantity(1).identify().collect();
+		//new ClothArmor().quantity(1).identify().collect();
+		//new WarriorArmor().quantity(1).identify().collect();
+		//new TomeOfMastery().quantity(1).identify().collect();
+		//new TomeOfSpecialty().quantity(1).identify().collect();
+		//new HuntressArmor().quantity(1).identify().collect();
+		//new MailArmor().quantity(1).identify().collect();
+		//new PlateArmor().quantity(1).identify().collect();
+		//new ScaleArmor().quantity(1).identify().collect();
+		//new LeatherArmor().quantity(1).identify().collect();
 		if (!Dungeon.isChallenged(Challenges.NO_FOOD))
 			new Food().identify().collect();
 	}

@@ -3,6 +3,7 @@ package com.avmoga.dpixel.items.food;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.buffs.Barkskin;
 import com.avmoga.dpixel.actors.buffs.Bleeding;
@@ -43,10 +44,10 @@ import com.avmoga.dpixel.plants.Firebloom;
 import com.avmoga.dpixel.plants.Flytrap;
 import com.avmoga.dpixel.plants.Icecap;
 import com.avmoga.dpixel.plants.Phaseshift;
+import com.avmoga.dpixel.plants.Plant.Seed;
 import com.avmoga.dpixel.plants.Sorrowmoss;
 import com.avmoga.dpixel.plants.Stormvine;
 import com.avmoga.dpixel.plants.Sungrass;
-import com.avmoga.dpixel.plants.Plant.Seed;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
@@ -59,14 +60,14 @@ import com.watabou.utils.Random;
  */
 public class Blandfruit extends Food {
 
-	public String message = "You eat the Blandfruit, bleugh!";
-	public String info = "So dry and insubstantial, perhaps stewing it with another ingredient would improve it.";
+	public String message = Messages.get(Blandfruit.class, "raw");
+	public String info = Messages.get(Blandfruit.class, "desc");
 
 	public Potion potionAttrib = null;
 	public ItemSprite.Glowing potionGlow = null;
 
 	{
-		name = "Blandfruit";
+		name = Messages.get(this, "name");
 		stackable = true;
 		image = ItemSpriteSheet.BLANDFRUIT;
 		energy = (Hunger.STARVING - Hunger.HUNGRY) / 2;
@@ -120,42 +121,41 @@ public class Blandfruit extends Food {
 				hero.busy();
 
 				if (potionAttrib instanceof PotionOfFrost) {
-					GLog.i("the Icefruit tastes a bit like Frozen Carpaccio.");
+					GLog.i(Messages.get(Blandfruit.class, "ice_msg"));
 					switch (Random.Int(5)) {
-					case 0:
-						GLog.i("You see your hands turn invisible!");
-						Buff.affect(hero, Invisibility.class,
-								Invisibility.DURATION);
-						break;
-					case 1:
-						GLog.i("You feel your skin harden!");
-						Buff.affect(hero, Barkskin.class).level(hero.HT / 4);
-						break;
-					case 2:
-						GLog.i("Refreshing!");
-						Buff.detach(hero, Poison.class);
-						Buff.detach(hero, Cripple.class);
-						Buff.detach(hero, Weakness.class);
-						Buff.detach(hero, Bleeding.class);
-						break;
-					case 3:
-						GLog.i("You feel better!");
-						if (hero.HP < hero.HT) {
-							hero.HP = Math.min(hero.HP + hero.HT / 4, hero.HT);
-							hero.sprite.emitter().burst(
-									Speck.factory(Speck.HEALING), 1);
-						}
-						break;
+						case 0:
+							GLog.i(Messages.get(PotionOfInvisibility.class, "invisible"));
+							Buff.affect(hero, Invisibility.class,
+									Invisibility.DURATION);
+							break;
+						case 1:
+							GLog.i(Messages.get(FrozenCarpaccio.class, "hard"));
+							Buff.affect(hero, Barkskin.class).level(hero.HT / 4);
+							break;
+						case 2:
+							GLog.i(Messages.get(FrozenCarpaccio.class, "refresh"));
+							Buff.detach(hero, Poison.class);
+							Buff.detach(hero, Cripple.class);
+							Buff.detach(hero, Weakness.class);
+							Buff.detach(hero, Bleeding.class);
+							break;
+						case 3:
+							GLog.i(Messages.get(FrozenCarpaccio.class, "better"));
+							if (hero.HP < hero.HT) {
+								hero.HP = Math.min(hero.HP + hero.HT / 4, hero.HT);
+								hero.sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
+							}
+							break;
 					}
 				} else if (potionAttrib instanceof PotionOfLiquidFlame) {
-					GLog.i("You feel a great fire burning within you!");
+					GLog.i(Messages.get(Blandfruit.class, "fire_msg"));
 					Buff.affect(hero, FireImbue.class).set(FireImbue.DURATION);
 				} else if (potionAttrib instanceof PotionOfToxicGas) {
-					GLog.i("You are imbued with vile toxic power!");
+					GLog.i(Messages.get(Blandfruit.class, "toxic_msg"));
 					Buff.affect(hero, ToxicImbue.class)
 							.set(ToxicImbue.DURATION);
 				} else if (potionAttrib instanceof PotionOfParalyticGas) {
-					GLog.i("You feel the power of the earth coursing through you!");
+					GLog.i(Messages.get(Blandfruit.class, "para_msg"));
 					Buff.affect(hero, EarthImbue.class, EarthImbue.DURATION);
 				} else
 					potionAttrib.apply(hero);
@@ -213,86 +213,72 @@ public class Blandfruit extends Food {
 
 		potionAttrib.image = ItemSpriteSheet.BLANDFRUIT;
 
-		info = "The fruit has plumped up from its time soaking in the pot and has even absorbed the properties "
-				+ "of the seed it was cooked with.\n\n";
+		info = Messages.get(this, "desc_cooked");
 
 		if (potionAttrib instanceof PotionOfHealing) {
 
-			name = "Sunfruit";
+			name = Messages.get(this, "sunfruit");
 			potionGlow = new ItemSprite.Glowing(0x2EE62E);
-			info += "It looks delicious and hearty, ready to be eaten!";
 
 		} else if (potionAttrib instanceof PotionOfStrength) {
 
-			name = "Powerfruit";
+			name = Messages.get(this, "powerfruit");
 			potionGlow = new ItemSprite.Glowing(0xCC0022);
-			info += "It looks delicious and powerful, ready to be eaten!";
-			
+
 		} else if (potionAttrib instanceof PotionOfMight) {
 
-			name = "Mightyfruit";
+			name = Messages.get(this, "mightyfruit");
 			potionGlow = new ItemSprite.Glowing(0xFF3300);
-			info += "It looks delicious and super powerful, ready to be eaten!";
 
 		} else if (potionAttrib instanceof PotionOfParalyticGas) {
 
-			name = "Earthfruit";
+			name = Messages.get(this, "earthfruit");
 			potionGlow = new ItemSprite.Glowing(0x67583D);
-			info += "It looks delicious and firm, ready to be eaten!";
 
 		} else if (potionAttrib instanceof PotionOfInvisibility) {
 
-			name = "Blindfruit";
+			name = Messages.get(this, "blindfruit");
 			potionGlow = new ItemSprite.Glowing(0xE5D273);
-			info += "It looks delicious and shiny, ready to be eaten!";
 
 		} else if (potionAttrib instanceof PotionOfLiquidFlame) {
 
-			name = "Firefruit";
+			name = Messages.get(this, "firefruit");
 			potionGlow = new ItemSprite.Glowing(0xFF7F00);
-			info += "It looks delicious and spicy, ready to be eaten!";
 
 		} else if (potionAttrib instanceof PotionOfFrost) {
 
-			name = "Icefruit";
+			name = Messages.get(this, "icefruit");
 			potionGlow = new ItemSprite.Glowing(0x66B3FF);
-			info += "It looks delicious and refreshing, ready to be eaten!";
 
 		} else if (potionAttrib instanceof PotionOfMindVision) {
 
-			name = "Fadefruit";
+			name = Messages.get(this, "fadefruit");
 			potionGlow = new ItemSprite.Glowing(0xB8E6CF);
-			info += "It looks delicious and shadowy, ready to be eaten!";
 
 		} else if (potionAttrib instanceof PotionOfToxicGas) {
 
-			name = "Sorrowfruit";
+			name = Messages.get(this, "sorrowfruit");
 			potionGlow = new ItemSprite.Glowing(0xA15CE5);
-			info += "It looks delicious and crisp, ready to be eaten!";
 
 		} else if (potionAttrib instanceof PotionOfLevitation) {
 
-			name = "Stormfruit";
+			name = Messages.get(this, "stormfruit");
 			potionGlow = new ItemSprite.Glowing(0x1C3A57);
-			info += "It looks delicious and lightweight, ready to be eaten!";
 
 		} else if (potionAttrib instanceof PotionOfPurity) {
 
-			name = "Dreamfruit";
+			name = Messages.get(this, "dreamfruit");
 			potionGlow = new ItemSprite.Glowing(0x8E2975);
-			info += "It looks delicious and clean, ready to be eaten!";
-			
+
 		} else if (potionAttrib instanceof PotionOfExperience) {
 
-			name = "Starfruit";
-			potionGlow = new ItemSprite.Glowing( 0xA79400 );
-			info += "It looks delicious and glorious, ready to be eaten!";
-			
+			name = Messages.get(this, "starfruit");
+			potionGlow = new ItemSprite.Glowing(0xA79400);
+
 		} else if (potionAttrib instanceof PotionOfOverHealing) {
 
-			name = "Heartfruit";
-			potionGlow = new ItemSprite.Glowing( 0xB20000 );
-			info += "It is pulsating with energy, ready to be eaten!";
+			name = Messages.get(this, "heartfruit");
+			potionGlow = new ItemSprite.Glowing(0xB20000);
 
 		}
 

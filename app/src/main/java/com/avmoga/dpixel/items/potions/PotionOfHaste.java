@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.potions;
 
 import com.avmoga.dpixel.Assets;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Haste;
@@ -31,20 +32,20 @@ public class PotionOfHaste extends Potion {
 	private static final float ALPHA = 0.4f;
 
 	{
-		name = "Potion of Haste";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
 	public void apply(Hero hero) {
 		setKnown();
 		Buff.affect(hero, Haste.class, Haste.DURATION);
-		GLog.i("You are moving much faster!");
+		GLog.i(Messages.get(this, "effect"));
 		Sample.INSTANCE.play(Assets.SND_MELD);
 	}
 
 	@Override
 	public String desc() {
-		return "Drinking this potion will temporarily speed up your actions.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

@@ -19,15 +19,16 @@ package com.avmoga.dpixel.items.scrolls;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Amok;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
 import com.avmoga.dpixel.actors.buffs.Silence;
+import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.mobs.Mimic;
 import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.items.Heap;
-import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.audio.Sample;
@@ -36,7 +37,7 @@ public class ScrollOfRage extends Scroll {
 	private static final String TXT_DET = "You can't think straight!";
 
 	{
-		name = "Scroll of Rage";
+		name = Messages.get(this, "name");
 		consumedValue = 5;
 	}
 	@Override
@@ -89,7 +90,7 @@ public class ScrollOfRage extends Scroll {
 			}
 		}
 
-		GLog.w("The scroll emits an enraging roar that echoes throughout the dungeon!");
+		GLog.w(Messages.get(this, "roar"));
 		setKnown();
 
 		curUser.sprite.centerEmitter().start(Speck.factory(Speck.SCREAM), 0.3f,
@@ -102,7 +103,6 @@ public class ScrollOfRage extends Scroll {
 
 	@Override
 	public String desc() {
-		return "When read aloud, this scroll will unleash a great roar "
-				+ "that draws all enemies to the reader, and enrages nearby ones.";
+		return Messages.get(this, "desc");
 	}
 }

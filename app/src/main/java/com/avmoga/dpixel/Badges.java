@@ -17,15 +17,6 @@
  */
 package com.avmoga.dpixel;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-
 import android.content.Context;
 
 import com.avmoga.dpixel.actors.hero.HeroRace;
@@ -51,67 +42,77 @@ import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+
 public class Badges {
 
 	public static enum Badge {
-		MONSTERS_SLAIN_1("10 enemies slain", 0), MONSTERS_SLAIN_2(
-				"50 enemies slain", 1), MONSTERS_SLAIN_3("150 enemies slain", 2), MONSTERS_SLAIN_4(
-				"250 enemies slain", 3), GOLD_COLLECTED_1("100 gold collected",
-				4), GOLD_COLLECTED_2("500 gold collected", 5), GOLD_COLLECTED_3(
-				"2500 gold collected", 6), GOLD_COLLECTED_4(
-				"7500 gold collected", 7), LEVEL_REACHED_1("Level 6 reached", 8), LEVEL_REACHED_2(
-				"Level 12 reached", 9), LEVEL_REACHED_3("Level 18 reached", 10), LEVEL_REACHED_4(
-				"Level 24 reached", 11), ALL_POTIONS_IDENTIFIED(
-				"All potions identified", 16), ALL_SCROLLS_IDENTIFIED(
-				"All scrolls identified", 17), ALL_RINGS_IDENTIFIED(
-				"All rings identified", 18), ALL_WANDS_IDENTIFIED(
-				"All wands identified", 19), ALL_ITEMS_IDENTIFIED(
-				"All potions, scrolls, rings & wands identified", 35, true), BAG_BOUGHT_SEED_POUCH, BAG_BOUGHT_SCROLL_HOLDER, BAG_BOUGHT_POTION_BANDOLIER, BAG_BOUGHT_WAND_HOLSTER, ALL_BAGS_BOUGHT(
-				"All bags bought", 23), DEATH_FROM_FIRE("Death from fire", 24), DEATH_FROM_POISON(
-				"Death from poison", 25), DEATH_FROM_GAS(
-				"Death from toxic gas", 26), DEATH_FROM_HUNGER(
-				"Death from hunger", 27), DEATH_FROM_GLYPH(
-				"Death from a glyph", 57), DEATH_FROM_FALLING(
-				"Death from falling down", 59), DEATH_FROM_DECAY
-				("Death from zombie decay", 29), YASD(
-				"Death from fire, poison, toxic gas, zombie decay, & hunger", 34, true), BOSS_SLAIN_1_WARRIOR, BOSS_SLAIN_1_MAGE, BOSS_SLAIN_1_ROGUE, BOSS_SLAIN_1_HUNTRESS, BOSS_SLAIN_1(
-				"1st boss slain", 12), BOSS_SLAIN_2("2nd boss slain", 13), BOSS_SLAIN_3(
-				"3rd boss slain", 14), BOSS_SLAIN_4("4th boss slain", 15), BOSS_SLAIN_1_ALL_CLASSES(
-				"1st boss slain by Warrior, Mage, Rogue & Huntress", 32, true), BOSS_SLAIN_3_GLADIATOR, BOSS_SLAIN_3_BERSERKER, BOSS_SLAIN_3_WARLOCK, BOSS_SLAIN_3_BATTLEMAGE, BOSS_SLAIN_3_FREERUNNER, BOSS_SLAIN_3_ASSASSIN, BOSS_SLAIN_3_SNIPER, BOSS_SLAIN_3_WARDEN, BOSS_SLAIN_3_ALL_SUBCLASSES(
-				"3rd boss slain by Gladiator, Berserker, Warlock, Battlemage, "
-						+ "Freerunner, Assassin, Sniper & Warden", 33, true), THIEVES_ARMBAND(
-				"Master Thieves Armband obtained", 20), CLOAK_OF_THORNS(
-				"Cloak of Thorns obtained", 21), STRENGTH_ATTAINED_1(
-				"13 points of Strength attained", 40), STRENGTH_ATTAINED_2(
-				"15 points of Strength attained", 41), STRENGTH_ATTAINED_3(
-				"17 points of Strength attained", 42), STRENGTH_ATTAINED_4(
-				"19 points of Strength attained", 43), FOOD_EATEN_1(
-				"10 pieces of food eaten", 44), FOOD_EATEN_2(
-				"20 pieces of food eaten", 45), FOOD_EATEN_3(
-				"30 pieces of food eaten", 46), FOOD_EATEN_4(
-				"40 pieces of food eaten", 47), MASTERY_WARRIOR, MASTERY_MAGE, MASTERY_ROGUE, MASTERY_HUNTRESS, ITEM_LEVEL_1(
-				"Item of level 3 acquired", 48), ITEM_LEVEL_2(
-				"Item of level 6 acquired", 49), ITEM_LEVEL_3(
-				"Item of level 9 acquired", 50), ITEM_LEVEL_4(
-				"Item of level 12 acquired", 51), RARE_ALBINO, RARE_BANDIT, RARE_SHIELDED, RARE_SENIOR, RARE_ACIDIC, RARE(
-				"All rare monsters slain", 37, true), VICTORY_WARRIOR, VICTORY_MAGE, VICTORY_ROGUE, VICTORY_HUNTRESS, VICTORY(
-				"Amulet of Yendor obtained", 22), VICTORY_ALL_CLASSES(
-				"Amulet of Yendor obtained by Warrior, Mage, Rogue & Huntress",
-				36, true), MASTERY_COMBO("7-hit combo", 56), POTIONS_COOKED_1(
-				"3 potions cooked", 52), POTIONS_COOKED_2("6 potions cooked",
-				53), POTIONS_COOKED_3("9 potions cooked", 54), POTIONS_COOKED_4(
-				"12 potions cooked", 55), NO_MONSTERS_SLAIN(
-				"Level completed without killing any monsters", 28), GRIM_WEAPON(
-				"Monster killed by a Grim weapon", 29), PIRANHAS(
-				"6 piranhas killed", 30), NIGHT_HUNTER(
-				"15 monsters killed at nighttime", 58), GAMES_PLAYED_1(
-				"10 games played", 60, true), GAMES_PLAYED_2(
-				"100 games played", 61, true), GAMES_PLAYED_3(
-				"500 games played", 62, true), GAMES_PLAYED_4(
-				"2000 games played", 63, true), HAPPY_END("Happy end", 38), CHAMPION(
-				"Challenge won", 39, true), SUPPORTER(
-				"Thanks for your support!", 31, true),
-				 ORB("Orb of Zot obtained!", 68), MASTERY_HUMAN, MASTERY_GNOLL, 
+		MONSTERS_SLAIN_1("击杀 10 个敌人", 0), MONSTERS_SLAIN_2(
+				"击杀 50 个敌人", 1), MONSTERS_SLAIN_3("击杀 150 个敌人", 2), MONSTERS_SLAIN_4(
+				"击杀 250 个敌人", 3), GOLD_COLLECTED_1("收集 100 金币",
+				4), GOLD_COLLECTED_2("收集 500 金币", 5), GOLD_COLLECTED_3(
+				"收集 2500 金币", 6), GOLD_COLLECTED_4(
+				"收集 7500 金币", 7), LEVEL_REACHED_1("升级 到 6级", 8), LEVEL_REACHED_2(
+				"升级 到 12级", 9), LEVEL_REACHED_3("升级 到 18级", 10), LEVEL_REACHED_4(
+				"升级 到 24级", 11), ALL_POTIONS_IDENTIFIED(
+				"全部药水鉴定", 16), ALL_SCROLLS_IDENTIFIED(
+				"全部卷轴鉴定", 17), ALL_RINGS_IDENTIFIED(
+				"全部戒指鉴定", 18), ALL_WANDS_IDENTIFIED(
+				"全部法杖鉴定", 19), ALL_ITEMS_IDENTIFIED(
+				"全物品鉴定", 35, true), BAG_BOUGHT_SEED_POUCH, BAG_BOUGHT_SCROLL_HOLDER, BAG_BOUGHT_POTION_BANDOLIER,
+		BAG_BOUGHT_WAND_HOLSTER, ALL_BAGS_BOUGHT(
+				"获得所有包裹", 23), DEATH_FROM_FIRE("死于火焰", 24), DEATH_FROM_POISON(
+				"死于中毒", 25), DEATH_FROM_GAS(
+				"死于毒气", 26), DEATH_FROM_HUNGER(
+				"饥饿至死", 27), DEATH_FROM_GLYPH(
+				"死于延缓伤害", 57), DEATH_FROM_FALLING(
+				"死于坠落楼层", 59), DEATH_FROM_DECAY
+				("腐烂致死", 29), YASD(
+				"死于火焰，毒，毒气，饥饿，护甲刻印，腐烂，和坠落", 34, true), BOSS_SLAIN_1_WARRIOR, BOSS_SLAIN_1_MAGE, BOSS_SLAIN_1_ROGUE,
+		BOSS_SLAIN_1_HUNTRESS, BOSS_SLAIN_1(
+				"斩杀第1个Boss", 12), BOSS_SLAIN_2("斩杀第2个Boss", 13), BOSS_SLAIN_3(
+				"斩杀第3个Boss", 14), BOSS_SLAIN_4("斩杀第4个Boss", 15), BOSS_SLAIN_1_ALL_CLASSES(
+				"分别使用战士、法师、盗贼和女猎手斩杀第1个Boss", 32, true), BOSS_SLAIN_3_GLADIATOR, BOSS_SLAIN_3_BERSERKER, BOSS_SLAIN_3_WARLOCK, BOSS_SLAIN_3_BATTLEMAGE, BOSS_SLAIN_3_FREERUNNER, BOSS_SLAIN_3_ASSASSIN, BOSS_SLAIN_3_SNIPER, BOSS_SLAIN_3_WARDEN, BOSS_SLAIN_3_ALL_SUBCLASSES(
+				"分别使用战士、法师、盗贼和女猎手斩杀第3个Boss", 33, true), THIEVES_ARMBAND(
+				"获得神偷袖章", 20), CLOAK_OF_THORNS(
+				"获得荆棘斗篷", 21), STRENGTH_ATTAINED_1(
+				"达到13点力量", 40), STRENGTH_ATTAINED_2(
+				"达到15点力量", 41), STRENGTH_ATTAINED_3(
+				"达到17点力量", 42), STRENGTH_ATTAINED_4(
+				"达到19点力量", 43), FOOD_EATEN_1(
+				"吃掉10个食物", 44), FOOD_EATEN_2(
+				"吃掉20个食物", 45), FOOD_EATEN_3(
+				"吃掉30个食物", 46), FOOD_EATEN_4(
+				"吃掉40个食物", 47), MASTERY_WARRIOR, MASTERY_MAGE, MASTERY_ROGUE, MASTERY_HUNTRESS, ITEM_LEVEL_1(
+				"获得3级物品", 48), ITEM_LEVEL_2(
+				"获得6级物品", 49), ITEM_LEVEL_3(
+				"获得9级物品", 50), ITEM_LEVEL_4(
+				"获得12级物品", 51), RARE_ALBINO, RARE_BANDIT, RARE_SHIELDED, RARE_SENIOR, RARE_ACIDIC, RARE(
+				"杀死所有稀有怪物", 37, true), VICTORY_WARRIOR, VICTORY_MAGE, VICTORY_ROGUE, VICTORY_HUNTRESS, VICTORY(
+				"取得Yendor护符", 22), VICTORY_ALL_CLASSES(
+				"分别使用战士，法师，盗贼和女猎手取得Yendor护符",
+				36, true), MASTERY_COMBO("达成7连击", 56), POTIONS_COOKED_1(
+				"一场游戏中酿造3瓶药水", 52), POTIONS_COOKED_2("一场游戏中酿造6瓶药水",
+				53), POTIONS_COOKED_3("一场游戏中酿造9瓶药水", 54), POTIONS_COOKED_4(
+				"一场游戏中酿造12瓶药水", 55), NO_MONSTERS_SLAIN(
+				"在不击杀怪物的情况下通过楼层", 28), GRIM_WEAPON(
+				"通过\"残酷\"武器附魔秒杀一个怪物", 29), PIRANHAS(
+				"=消灭6只食人鱼", 30), NIGHT_HUNTER(
+				"在夜间杀死 15 只怪物", 58), GAMES_PLAYED_1(
+				"进行10场游戏", 60, true), GAMES_PLAYED_2(
+				"进行50场游戏", 61, true), GAMES_PLAYED_3(
+				"进行500场游戏", 62, true), GAMES_PLAYED_4(
+				"进行2000场游戏", 63, true), HAPPY_END("幸福结局", 38), CHAMPION(
+				"开启挑战通关", 39, true), SUPPORTER(
+				"感谢游玩", 31, true),
+				 ORB("获得邪神之球！", 68), MASTERY_HUMAN, MASTERY_GNOLL,
 				 MASTERY_DWARF, MASTERY_WRAITH 
 				 ;
 
@@ -888,9 +889,9 @@ public class Badges {
 			saveNeeded = true;
 
 			if (badge.meta) {
-				GLog.h("New super badge: %s", badge.description);
+				GLog.h("新的超级徽章: %s", badge.description);
 			} else {
-				GLog.h("New badge: %s", badge.description);
+				GLog.h("新的徽章: %s", badge.description);
 			}
 			PixelScene.showBadge(badge);
 		}

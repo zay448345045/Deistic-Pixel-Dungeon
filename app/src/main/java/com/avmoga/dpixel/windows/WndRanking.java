@@ -17,6 +17,8 @@
  */
 package com.avmoga.dpixel.windows;
 
+import static com.avmoga.dpixel.Dungeon.hero;
+
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
@@ -50,10 +52,10 @@ public class WndRanking extends WndTabbed {
 	private static final String TXT_STATS = Messages.get(WndRanking.class, "stats");
 	private static final String TXT_ITEMS = Messages.get(WndRanking.class, "items");
 
-	private static final String TXT_BADGES = "Badges";
+	private static final String TXT_BADGES = "徽章";
 
 	private static final int WIDTH = 115;
-	private static final int HEIGHT = 144;
+	private static final int HEIGHT = 160;
 
 	private static final int TAB_WIDTH = 40;
 
@@ -168,13 +170,12 @@ public class WndRanking extends WndTabbed {
 		public StatsTab() {
 			super();
 
-			String heroClass = Messages.get(WndHero.class, "title");
-			String heroRace = Dungeon.hero.heroRace().name();
+			String heroClass = hero.className()+hero.heroRace.title();
 
 			IconTitle title = new IconTitle();
-			title.icon(HeroSprite.avatar(Dungeon.hero.heroClass,
-					Dungeon.hero.tier()));
-			title.label(Utils.format(TXT_TITLE, Dungeon.hero.lvl, heroRace, heroClass)
+			title.icon(HeroSprite.avatar(hero.heroClass,
+					hero.tier()));
+			title.label(Utils.format(TXT_TITLE, hero.lvl, heroClass)
 					.toUpperCase(Locale.ENGLISH));
 			title.color(Window.SHPX_COLOR);
 			title.setRect(0, 0, WIDTH, 0);
@@ -199,9 +200,9 @@ public class WndRanking extends WndTabbed {
 
 			pos += GAP + GAP;
 
-			pos = statSlot(this, TXT_STR, Integer.toString(Dungeon.hero.STR),
+			pos = statSlot(this, TXT_STR, Integer.toString(hero.STR),
 					pos);
-			pos = statSlot(this, TXT_HEALTH, Integer.toString(Dungeon.hero.HT),
+			pos = statSlot(this, TXT_HEALTH, Integer.toString(hero.HT),
 					pos);
 
 			pos += GAP;
@@ -256,7 +257,7 @@ public class WndRanking extends WndTabbed {
 		public ItemsTab() {
 			super();
 
-			Belongings stuff = Dungeon.hero.belongings;
+			Belongings stuff = hero.belongings;
 			if (stuff.weapon != null) {
 				addItem(stuff.weapon);
 			}

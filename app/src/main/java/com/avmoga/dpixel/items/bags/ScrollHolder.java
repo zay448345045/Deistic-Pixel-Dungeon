@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.bags;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.items.ActiveMrDestructo;
 import com.avmoga.dpixel.items.ActiveMrDestructo2;
 import com.avmoga.dpixel.items.Bomb;
@@ -36,7 +37,7 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 public class ScrollHolder extends Bag {
 
 	{
-		name = "scroll holder";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.HOLDER;
 
 		size = 20;
@@ -71,8 +72,6 @@ public class ScrollHolder extends Bag {
 
 	@Override
 	public String info() {
-		return "This tubular container looks like it would hold an astronomer's charts, but your scrolls will fit just as well.\n\n"
-				+ "The holder doesn't look very flammable, so your scrolls should be safe from fire inside it."
-				+ "There is a handy little compartment for your bombs and other explosives too. Nice!";
+		return Messages.get(this, "desc");
 	}
 }

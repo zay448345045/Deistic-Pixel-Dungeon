@@ -17,9 +17,6 @@
  */
 package com.avmoga.dpixel.items.bags;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.Char;
@@ -30,9 +27,12 @@ import com.avmoga.dpixel.windows.WndBag;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Bag extends Item implements Iterable<Item> {
 
-	public static final String AC_OPEN = "OPEN";
+	public static final String AC_OPEN = "打开";
 
 	{
 		image = 11;

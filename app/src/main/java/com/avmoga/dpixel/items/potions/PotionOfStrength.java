@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.potions;
 
 import com.avmoga.dpixel.Badges;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.sprites.CharSprite;
 import com.avmoga.dpixel.utils.GLog;
@@ -25,26 +26,26 @@ import com.avmoga.dpixel.utils.GLog;
 public class PotionOfStrength extends Potion {
 
 	{
-		name = "Potion of Strength";
+		name = Messages.get(this, "name");
 
 		bones = true;
 	}
 
 	@Override
 	public void apply(Hero hero) {
+
 		setKnown();
 
 		hero.STR++;
-		hero.sprite.showStatus(CharSprite.POSITIVE, "+1 str");
-		GLog.p("Newfound strength surges through your body.");
+		hero.sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "msg_1"));
+		GLog.p(Messages.get(this, "msg_2"));
 
 		Badges.validateStrengthAttained();
 	}
 
 	@Override
 	public String desc() {
-		return "This powerful liquid will course through your muscles, "
-				+ "permanently increasing your strength by one point.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

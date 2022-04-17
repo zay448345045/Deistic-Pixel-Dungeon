@@ -17,17 +17,17 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Challenges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Amok;
 import com.avmoga.dpixel.actors.buffs.Buff;
+import com.avmoga.dpixel.actors.buffs.Dewcharge;
 import com.avmoga.dpixel.actors.buffs.Sleep;
 import com.avmoga.dpixel.actors.buffs.Terror;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -38,7 +38,6 @@ import com.avmoga.dpixel.items.Generator;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.RedDewdrop;
 import com.avmoga.dpixel.items.VioletDewdrop;
-import com.avmoga.dpixel.actors.buffs.Dewcharge;
 import com.avmoga.dpixel.items.YellowDewdrop;
 import com.avmoga.dpixel.items.artifacts.AresChains;
 import com.avmoga.dpixel.items.artifacts.TimekeepersHourglass;
@@ -49,18 +48,19 @@ import com.avmoga.dpixel.levels.Level.Feeling;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.sprites.CharSprite;
 import com.avmoga.dpixel.utils.GLog;
-import com.avmoga.dpixel.utils.Utils;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public abstract class Mob extends Char {
 
-	private static final String TXT_DIED = "You hear something died in the distance";
+	private static final String TXT_DIED = Messages.get(Mob.class, "died");
 
 	protected static final String TXT_NOTICE1 = "?!";
-	protected static final String TXT_RAGE = "#$%^";
-	protected static final String TXT_EXP = "%+dEXP";
+	protected static final String TXT_RAGE = Messages.get(Mob.class, "rage");
+	protected static final String TXT_EXP = Messages.get(Mob.class, "exp");
 
 	public AiState SLEEPING = new Sleeping();
 	public AiState HUNTING = new Hunting();
@@ -695,7 +695,7 @@ public abstract class Mob extends Char {
 
 		@Override
 		public String status() {
-			return Utils.format("This %s is sleeping", name);
+			return Messages.get(this, "status", name);
 		}
 	}
 
@@ -734,7 +734,7 @@ public abstract class Mob extends Char {
 
 		@Override
 		public String status() {
-			return Utils.format("This %s is wandering", name);
+			return Messages.get(this, "status", name);
 		}
 	}
 
@@ -773,10 +773,9 @@ public abstract class Mob extends Char {
 
 		@Override
 		public String status() {
-			return Utils.format("This %s is hunting", name);
+			return Messages.get(this, "status", name);
 		}
 	}
-
 	protected class Fleeing implements AiState {
 
 		public static final String TAG = "FLEEING";
@@ -808,7 +807,7 @@ public abstract class Mob extends Char {
 
 		@Override
 		public String status() {
-			return Utils.format("This %s is fleeing", name);
+			return Messages.get(this, "status", name);
 		}
 	}
 
@@ -825,7 +824,7 @@ public abstract class Mob extends Char {
 
 		@Override
 		public String status() {
-			return Utils.format("This %s is passive", name);
+			return Messages.get(this, "status", name);
 		}
 	}
 }

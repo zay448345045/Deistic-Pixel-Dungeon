@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.potions;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.ConfusionGas;
 import com.avmoga.dpixel.actors.blobs.ParalyticGas;
@@ -37,13 +38,13 @@ import com.watabou.utils.PathFinder;
 
 public class PotionOfPurity extends Potion {
 
-	private static final String TXT_FRESHNESS = "You feel uncommon freshness in the air.";
-	private static final String TXT_NO_SMELL = "You've stopped sensing any smells!";
+	private static final String TXT_FRESHNESS = Messages.get(PotionOfPurity.class, "freshness");
+	private static final String TXT_NO_SMELL = Messages.get(PotionOfPurity.class, "no_smell");
 
 	private static final int DISTANCE = 5;
 
 	{
-		name = "Potion of Purification";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -122,8 +123,7 @@ public class PotionOfPurity extends Potion {
 
 	@Override
 	public String desc() {
-		return "This reagent will quickly neutralize all harmful gases in the area of effect. "
-				+ "Drinking it will give you a temporary immunity to such gases.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

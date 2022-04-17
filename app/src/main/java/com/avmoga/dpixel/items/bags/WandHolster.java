@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.bags;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.wands.Wand;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
@@ -24,7 +25,7 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 public class WandHolster extends Bag {
 
 	{
-		name = "wand holster";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.HOLSTER;
 
 		size = 12;
@@ -63,9 +64,6 @@ public class WandHolster extends Bag {
 
 	@Override
 	public String info() {
-		return "This slim holster is made from some exotic animal, and is designed to compactly carry up to "
-				+ size
-				+ " wands.\n\n"
-				+ "The size seems a bit excessive, who would ever have that many wands?";
+		return Messages.get(this, "desc");
 	}
 }

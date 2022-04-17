@@ -19,10 +19,11 @@ package com.avmoga.dpixel.items.scrolls;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Awareness;
 import com.avmoga.dpixel.actors.buffs.Buff;
-import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
+import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.effects.SpellSprite;
@@ -35,11 +36,11 @@ import com.watabou.noosa.audio.Sample;
 
 public class ScrollOfMagicMapping extends Scroll {
 
-	private static final String TXT_LAYOUT = "You are now aware of the level layout.";
-	private static final String TXT_DET = "You faintly catch the image of a map in your mind.";
+	private static final String TXT_LAYOUT = Messages.get(ScrollOfMagicMapping.class, "layout");
+	private static final String TXT_DET = Messages.get(ScrollOfMagicMapping.class, "prevent");
 
 	{
-		name = "Scroll of Magic Mapping";
+		name = Messages.get(this, "name");
 		consumedValue = 10;
 	}
 	@Override
@@ -142,9 +143,7 @@ public class ScrollOfMagicMapping extends Scroll {
 
 	@Override
 	public String desc() {
-		return "When this scroll is read, an image of crystal clarity will be etched into your memory, "
-				+ "alerting you to the precise layout of the level and revealing all hidden secrets. "
-				+ "The locations of items and creatures will remain unknown.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

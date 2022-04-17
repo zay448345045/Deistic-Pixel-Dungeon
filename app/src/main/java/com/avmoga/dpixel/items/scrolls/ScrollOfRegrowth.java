@@ -19,16 +19,15 @@ package com.avmoga.dpixel.items.scrolls;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
-import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.Fire;
 import com.avmoga.dpixel.actors.blobs.Water;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
-import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.effects.SpellSprite;
+import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.levels.Terrain;
@@ -38,10 +37,10 @@ import com.watabou.noosa.audio.Sample;
 
 public class ScrollOfRegrowth extends Scroll {
 
-	private static final String TXT_LAYOUT = "伴随着你的感知能力延伸，植被在你周围生长。";
-	private static final String TXT_RANSACK = "伴随者痛苦的哀嚎充斥在你耳中，地牢开始燃烧！";
+	private static final String TXT_LAYOUT = "Your senses extend as the vegetation grows around you.";
+	private static final String TXT_RANSACK = "A wail of agony fills your ears as the dungeon begins to burn!";
 	{
-		name = "再生卷轴";
+		name = "Scroll of Regrowth";
 		consumedValue = 15;
 	}
 	
@@ -123,7 +122,8 @@ public class ScrollOfRegrowth extends Scroll {
 
 	@Override
 	public String desc() {
-		return Messages.get(this, "desc");
+		return "The magic in the scroll feels powerful and inviting."
+				+ "The dungeon cries out for you to read it. ";
 	}
 
 	@Override

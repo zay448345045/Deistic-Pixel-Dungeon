@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.food;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.BerryRegeneration;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Hunger;
@@ -30,10 +31,10 @@ import com.watabou.utils.Random;
 public class Blackberry extends Food {
 
 	{
-		name = "dungeon black berry";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SEED_BLACKBERRY;
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
-		message = "Juicy!";
+		message = Messages.get(this, "eat");
 		hornValue = 1;
 		bones = false;
 	}
@@ -47,21 +48,21 @@ public class Blackberry extends Food {
 
 			switch (Random.Int(10)) {
 			case 1:
-				GLog.w("Trippy!");
+				GLog.w("多汁美味！");
 				Buff.affect(hero, MindVision.class, MindVision.DURATION);
 				Dungeon.observe();
 
 				if (Dungeon.level.mobs.size() > 0) {
-					GLog.i("You can somehow feel the presence of other creatures' minds!");
+					GLog.i("你可以感受到其他生物的存在！");
 				} else {
-					GLog.i("You can somehow tell that you are alone on this level at the moment.");
+					GLog.i("你能判定现在本层内就只有你一个人。");
 				}
 				Buff.affect(hero, BerryRegeneration.class).level(hero.HT+hero.HT);
 				GLog.w("The berry releases energy your body!");
 				break;
 			case 0: case 2: case 3: case 4: case 5: 
 			case 6: case 7: case 8: case 9: case 10:
-				GLog.w("The berry releases energy into your body!");
+				GLog.w("莓果将能量注入了你的体内！");
 				Buff.affect(hero, BerryRegeneration.class).level(hero.HT/2);
 				break;
 			}
@@ -70,8 +71,7 @@ public class Blackberry extends Food {
 	
 	@Override
 	public String info() {
-		return "A delectable berry found in the depths of the dungeon. "
-				+"These berries harvest the magical dew around them to grow healthy ";
+		return "一种能够在地牢内发现的莓果。它们通过吸取魔法露珠来获得能量并茁壮成长。";
 	}
 
 	@Override

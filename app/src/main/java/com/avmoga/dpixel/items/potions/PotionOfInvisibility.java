@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.potions;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
@@ -32,24 +33,22 @@ public class PotionOfInvisibility extends Potion {
 	private static final float ALPHA = 0.4f;
 
 	{
-		name = "Potion of Invisibility";
+		name = Messages.get(this, "name");
 	}
 
-	private static final String TXT_PREVENTING = "Enemies on this level are all blind. No point using invisibility.";
+	private static final String TXT_PREVENTING = Messages.get(PotionOfInvisibility.class, "prevent");
 	
 	@Override
 	public void apply(Hero hero) {
 		setKnown();
 		Buff.affect(hero, Invisibility.class, Invisibility.DURATION);
-		GLog.i("You see your hands turn invisible!");
+		GLog.i(Messages.get(this, "invisible"));
 		Sample.INSTANCE.play(Assets.SND_MELD);
 	}
 
 	@Override
 	public String desc() {
-		return "Drinking this potion will render you temporarily invisible. While invisible, "
-				+ "enemies will be unable to see you. Attacking an enemy, as well as using a wand or a scroll "
-				+ "before enemy's eyes, will dispel the effect.";
+		return Messages.get(this, "desc");
 	}
 	
 	@Override

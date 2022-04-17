@@ -34,6 +34,7 @@ import java.util.HashSet;
 
 public abstract class Scroll extends Item {
 
+
 	private static final String TXT_BLINDED = Messages.get(Scroll.class, "blinded");
 
 	private static final String TXT_CURSED = Messages.get(Scroll.class, "cursed");
@@ -48,9 +49,20 @@ public abstract class Scroll extends Item {
 			ScrollOfUpgrade.class, ScrollOfRage.class, ScrollOfTerror.class,
 			ScrollOfLullaby.class, ScrollOfMagicalInfusion.class,
 			ScrollOfPsionicBlast.class, ScrollOfMirrorImage.class, ScrollOfRegrowth.class };
-	private static final String[] runes = { "KAUNAN", "SOWILO", "LAGUZ",
-			"YNGVI", "GYFU", "RAIDO", "ISAZ", "MANNAZ", "NAUDIZ", "BERKANAN",
-			"NCOSRANE", "TIWAZ", "NENDIL" };
+	private static final String[] runes = {
+			Messages.get(Scroll.class, "kaunan"),
+			Messages.get(Scroll.class, "sowilo"),
+			Messages.get(Scroll.class, "laguz"),
+			Messages.get(Scroll.class, "yngvi"),
+			Messages.get(Scroll.class, "gyfu"),
+			Messages.get(Scroll.class, "raido"),
+			Messages.get(Scroll.class, "isaz"),
+			Messages.get(Scroll.class, "mannaz"),
+			Messages.get(Scroll.class, "naudiz"),
+			Messages.get(Scroll.class, "berkanan"),
+			Messages.get(Scroll.class, "ncosrane"),
+			Messages.get(Scroll.class, "tiwaz"),
+			Messages.get(Scroll.class, "nendil")};
 	private static final Integer[] images = { ItemSpriteSheet.SCROLL_KAUNAN,
 			ItemSpriteSheet.SCROLL_SOWILO, ItemSpriteSheet.SCROLL_LAGUZ,
 			ItemSpriteSheet.SCROLL_YNGVI, ItemSpriteSheet.SCROLL_GYFU,
@@ -161,16 +173,12 @@ public abstract class Scroll extends Item {
 
 	@Override
 	public String name() {
-		return isKnown() ? name : "scroll \"" + rune + "\"";
+		return isKnown() ? name : Messages.get(this, "unknown_name", rune);
 	}
-
 	@Override
 	public String info() {
 		return isKnown() ? desc()
-				: "This parchment is covered with indecipherable writing, and bears a title "
-						+ "of rune "
-						+ rune
-						+ ". Who knows what it will do when read aloud?";
+				: Messages.get(this, "unknown_desc", rune);
 	}
 
 	@Override

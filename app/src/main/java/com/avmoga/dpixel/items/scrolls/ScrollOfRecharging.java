@@ -17,28 +17,29 @@
  */
 package com.avmoga.dpixel.items.scrolls;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.mobs.Mob;
+import com.avmoga.dpixel.effects.CellEmitter;
+import com.avmoga.dpixel.effects.Lightning;
+import com.avmoga.dpixel.effects.SpellSprite;
+import com.avmoga.dpixel.effects.particles.EnergyParticle;
+import com.avmoga.dpixel.effects.particles.SparkParticle;
 import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.levels.traps.LightningTrap;
-import com.avmoga.dpixel.effects.SpellSprite;
-import com.avmoga.dpixel.effects.CellEmitter;
-import com.avmoga.dpixel.effects.Lightning;
-import com.avmoga.dpixel.effects.particles.EnergyParticle;
-import com.avmoga.dpixel.effects.particles.SparkParticle;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class ScrollOfRecharging extends Scroll{
 	private static final String LIGHTNING = "Scroll of Recharging Detonation";
@@ -49,7 +50,7 @@ public class ScrollOfRecharging extends Scroll{
 	private int nPoints;
 	
 	{
-		name = "Scroll of Recharging";
+		name = Messages.get(this, "name");
 		consumedValue = 10;
 	}
 
@@ -149,12 +150,12 @@ public class ScrollOfRecharging extends Scroll{
 		Sample.INSTANCE.play(Assets.SND_READ);
 		Invisibility.dispel();
 
+
 		if (count > 0) {
-			GLog.i("a surge of energy courses through your pack, recharging your wand"
-					+ (count > 1 ? "s" : ""));
+			GLog.i(Messages.get(this, "surge"));
 			SpellSprite.show(curUser, SpellSprite.CHARGE);
 		} else {
-			GLog.i("a surge of energy courses through your pack, but nothing happens");
+			GLog.i(Messages.get(this, "surge"));
 		}
 		setKnown();
 
@@ -163,8 +164,7 @@ public class ScrollOfRecharging extends Scroll{
 
 	@Override
 	public String desc() {
-		return "The raw magical power bound up in this parchment will, when released, "
-				+ "recharge all of the reader's wands to full power.";
+		return Messages.get(this, "desc");
 	}
 
 	public static void charge(Hero hero) {

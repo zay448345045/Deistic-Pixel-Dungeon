@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.potions;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Bleeding;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Cripple;
@@ -30,7 +31,7 @@ import com.avmoga.dpixel.utils.GLog;
 public class PotionOfOverHealing extends Potion {
 
 	{
-		name = "Potion of Life";
+		name = Messages.get(this, "name");
 
 		bones = true;
 	}
@@ -49,16 +50,16 @@ public class PotionOfOverHealing extends Potion {
 		Buff.detach(hero, Cripple.class);
 		Buff.detach(hero, Weakness.class);
 		Buff.detach(hero, Bleeding.class);
-		
-		GLog.p("You heal completely and fill with a magical inner strength! ");
-		GLog.p("Your HP overfills by %s! ",hero.HP-hero.HT);
+
+		GLog.p(Messages.get(PotionOfOverHealing.class, "effect"));
+		GLog.p(Messages.get(PotionOfOverHealing.class, "fill", hero.HP - hero.HT));
 
 		hero.sprite.emitter().start(Speck.factory(Speck.HEALING), 0.4f, 4);
 	}
 
 	@Override
 	public String desc() {
-		return "An elixir that will instantly return you to full health, cures ailments, and overfills your health.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

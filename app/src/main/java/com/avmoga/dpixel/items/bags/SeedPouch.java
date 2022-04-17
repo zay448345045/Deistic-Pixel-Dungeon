@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.bags;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.Rice;
 import com.avmoga.dpixel.items.food.Blackberry;
@@ -33,7 +34,7 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 public class SeedPouch extends Bag {
 
 	{
-		name = "seed pouch";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.POUCH;
 
 		size = 24;
@@ -63,6 +64,6 @@ public class SeedPouch extends Bag {
 
 	@Override
 	public String info() {
-		return "This small velvet pouch allows you to store any number of seeds in it. Very convenient.";
+		return Messages.get(this, "desc");
 	}
 }

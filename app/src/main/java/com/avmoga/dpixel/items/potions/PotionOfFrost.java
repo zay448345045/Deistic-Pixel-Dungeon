@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.potions;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.blobs.Fire;
 import com.avmoga.dpixel.actors.blobs.Freezing;
 import com.avmoga.dpixel.levels.Level;
@@ -31,7 +32,7 @@ public class PotionOfFrost extends Potion {
 	private static final int DISTANCE = 2;
 
 	{
-		name = "Potion of Frost";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -59,9 +60,7 @@ public class PotionOfFrost extends Potion {
 
 	@Override
 	public String desc() {
-		return "Upon exposure to open air this chemical will evaporate into a freezing cloud, causing "
-				+ "any creature that contacts it to be frozen in place unable to act and move. "
-				+ "The freezing effect is much stronger if the environment is wet.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

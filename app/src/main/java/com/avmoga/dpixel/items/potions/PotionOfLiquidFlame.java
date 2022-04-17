@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.potions;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.Fire;
@@ -31,7 +32,7 @@ import com.watabou.noosa.audio.Sample;
 public class PotionOfLiquidFlame extends Potion {
 
 	{
-		name = "Potion of Liquid Flame";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -61,9 +62,9 @@ public class PotionOfLiquidFlame extends Potion {
 
 	@Override
 	public String desc() {
-		return "This flask contains an unstable compound which will burst "
-				+ "violently into flame upon exposure to open air.";
+		return Messages.get(this, "desc");
 	}
+
 
 	@Override
 	public int price() {

@@ -17,31 +17,32 @@
  */
 package com.avmoga.dpixel.items.scrolls;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.Fire;
-import com.avmoga.dpixel.actors.hero.Hero;
-import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
+import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.mobs.npcs.MirrorImage;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.particles.FlameParticle;
+import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.items.wands.WandOfBlink;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class ScrollOfMirrorImage extends Scroll {
 
 	private static final int NIMAGES = 3;
 
 	{
-		name = "Scroll of Mirror Image";
+		name = Messages.get(this, "name");
 		consumedValue = 5;
 	}
 	
@@ -139,6 +140,6 @@ public class ScrollOfMirrorImage extends Scroll {
 
 	@Override
 	public String desc() {
-		return "The incantation on this scroll will create illusionary twins of the reader, which will chase his enemies.";
+		return Messages.get(this, "desc");
 	}
 }

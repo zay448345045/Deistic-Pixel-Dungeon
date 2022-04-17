@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.potions;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.ConfusionGas;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -31,7 +32,7 @@ import com.watabou.noosa.audio.Sample;
 public class PotionOfLevitation extends Potion {
 
 	{
-		name = "Potion of Levitation";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -51,14 +52,12 @@ public class PotionOfLevitation extends Potion {
 	public void apply(Hero hero) {
 		setKnown();
 		Buff.affect(hero, Levitation.class, Levitation.DURATION);
-		GLog.i("You float into the air!");
+		GLog.i(Messages.get(this, "float"));
 	}
 
 	@Override
 	public String desc() {
-		return "Drinking this curious liquid will cause you to hover in the air, "
-				+ "able to drift effortlessly over traps and pits. Throwing this potion "
-				+ "will create a cloud of unrefined gas, disorienting anything caught in it.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

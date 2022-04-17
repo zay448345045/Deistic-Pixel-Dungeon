@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.scrolls;
 
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.items.Heap;
@@ -30,11 +31,11 @@ import com.avmoga.dpixel.windows.WndBag;
 
 public class ScrollOfMagicalInfusion extends InventoryScroll {
 
-	private static final String TXT_INFUSE = "your %s is infused with arcane energy!";
+	private static final String TXT_INFUSE = Messages.get(ScrollOfMagicalInfusion.class, "infuse");
 
 	{
-		name = "Scroll of Magical Infusion";
-		inventoryTitle = "Select an item to infuse";
+		name = Messages.get(this, "name");
+		inventoryTitle = Messages.get(this, "inv_title");
 		mode = WndBag.Mode.ENCHANTABLE;
 		consumedValue = 15;
 
@@ -88,8 +89,6 @@ public class ScrollOfMagicalInfusion extends InventoryScroll {
 
 	@Override
 	public String desc() {
-		return "This scroll will infuse a weapon or armor with powerful magical energy.\n\n"
-				+ "In addition to being upgraded, A weapon will gain a magical enchantment, or armor will be imbued with a magical glyph.\n\n"
-				+ "If the item already has an enchantment or glyph, it will be erased and replaced by the upgrade.";
+		return Messages.get(this, "desc");
 	}
 }

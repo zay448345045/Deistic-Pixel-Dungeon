@@ -19,15 +19,16 @@ package com.avmoga.dpixel.items.scrolls;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.buffs.Blindness;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
 import com.avmoga.dpixel.actors.buffs.Paralysis;
+import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.actors.mobs.Singularity;
 import com.avmoga.dpixel.items.Heap;
-import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.utils.GLog;
@@ -38,14 +39,13 @@ import com.watabou.utils.Random;
 public class ScrollOfPsionicBlast extends Scroll {
 
 	{
-		name = "Scroll of Psionic Blast";
+		name = Messages.get(this, "name");
 
 		bones = true;
 		consumedValue = 10;
 	}
-	private final String TXT_DET = "The fire adds power to the psionic explosion!";
-	private final String TXT_UNBOUND = "Without a mind to channel the power to, the blast "
-			+ "becomes chaotic and random!";
+	private final String TXT_DET = "火焰加剧了灵能爆炸的威力。";
+	private final String TXT_UNBOUND = "失去了精神力引导这股力量，爆炸变得混沌而随机！";
 	@Override
 	public void detonate(Heap heap){
 		GLog.w(TXT_UNBOUND);

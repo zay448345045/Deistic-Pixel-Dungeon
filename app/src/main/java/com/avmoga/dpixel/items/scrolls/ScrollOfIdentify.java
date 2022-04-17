@@ -18,18 +18,19 @@
 package com.avmoga.dpixel.items.scrolls;
 
 import com.avmoga.dpixel.Badges;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.effects.Identification;
+import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.utils.GLog;
-import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.windows.WndBag;
 
 public class ScrollOfIdentify extends InventoryScroll {
 
 	{
-		name = "Scroll of Identify";
-		inventoryTitle = "Select an item to identify";
+		name = Messages.get(this, "name");
+		inventoryTitle = Messages.get(this, "inv_title");
 		mode = WndBag.Mode.UNIDENTIFED;
 		consumedValue = 10;
 
@@ -59,14 +60,14 @@ public class ScrollOfIdentify extends InventoryScroll {
 				.offset(0, -16)));
 
 		item.identify();
-		GLog.i("It is " + item);
+		GLog.i(Messages.get(this, "it_is", item));
 
 		Badges.validateItemLevelAquired(item);
 	}
 
 	@Override
 	public String desc() {
-		return "Permanently reveals all of the secrets of a single item.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

@@ -18,7 +18,7 @@ public enum HeroRace {
 	
 	DWARF("dwarf"), HUMAN("human"), WRAITH("wraith"), GNOLL("gnoll");
 	
-	private String title;
+	public String title;
 	public static HeroRace race;
 
 	public String title() {

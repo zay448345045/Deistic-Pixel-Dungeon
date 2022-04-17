@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.scrolls;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
 import com.avmoga.dpixel.actors.buffs.Weakness;
@@ -26,8 +27,8 @@ import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.hero.HeroRace;
 import com.avmoga.dpixel.effects.Flare;
 import com.avmoga.dpixel.effects.particles.ShadowParticle;
-import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.Heap;
+import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.bags.Bag;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.audio.Sample;
@@ -35,11 +36,11 @@ import com.watabou.utils.Random;
 
 public class ScrollOfRemoveCurse extends Scroll {
 
-	private static final String TXT_PROCCED = "Your pack glows with a cleansing light, and a malevolent energy disperses.";
-	private static final String TXT_NOT_PROCCED = "Your pack glows with a cleansing light, but nothing happens.";
+	private static final String TXT_PROCCED = Messages.get(ScrollOfRemoveCurse.class, "cleansed");
+	private static final String TXT_NOT_PROCCED = Messages.get(ScrollOfRemoveCurse.class, "not_cleansed");
 
 	{
-		name = "Scroll of Remove Curse";
+		name = Messages.get(this, "name");
 		consumedValue = 15;
 	}
 	@Override
@@ -91,10 +92,7 @@ public class ScrollOfRemoveCurse extends Scroll {
 
 	@Override
 	public String desc() {
-		return "The incantation on this scroll will instantly strip from "
-				+ "the reader's weapon, armor, rings and carried items any evil "
-				+ "enchantments that might prevent the wearer from removing them."
-				+ "The powerful magic in this scroll also upgrades cursed items.";
+		return Messages.get(this, "desc");
 	}
 
 	public static boolean uncurse(Hero hero, Item... items) {

@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.bags;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.items.AdamantRing;
 import com.avmoga.dpixel.items.Ankh;
 import com.avmoga.dpixel.items.Item;
@@ -27,7 +28,7 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 public class AnkhChain extends Bag {
 
 	{
-		name = "chain";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.CHAIN;
 
 		size = 20;
@@ -48,11 +49,9 @@ public class AnkhChain extends Bag {
 	public int price() {
 		return 50;
 	}
-
 	@Override
 	public String info() {
-		return "This chain can hold your amulets and other small jewelery.\n\n"
-				+"Must be a pretty scary dungeon you are heading into!";
+		return Messages.get(this, "desc");
 	}
 }
 

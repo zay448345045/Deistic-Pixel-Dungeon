@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.potions;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 
 public class PotionOfExperience extends Potion {
 
 	{
-		name = "Potion of Experience";
+		name = Messages.get(this, "name");
 
 		bones = true;
 	}
@@ -35,8 +36,7 @@ public class PotionOfExperience extends Potion {
 
 	@Override
 	public String desc() {
-		return "The storied experiences of multitudes of battles reduced to liquid form, "
-				+ "this draught will instantly raise your experience level.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

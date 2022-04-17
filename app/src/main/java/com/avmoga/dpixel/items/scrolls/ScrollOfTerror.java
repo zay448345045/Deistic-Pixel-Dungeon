@@ -19,14 +19,12 @@ package com.avmoga.dpixel.items.scrolls;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
 import com.avmoga.dpixel.actors.buffs.Terror;
-import com.avmoga.dpixel.actors.buffs.Vertigo;
 import com.avmoga.dpixel.actors.mobs.Mob;
-import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.effects.Flare;
-import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.audio.Sample;
@@ -34,25 +32,10 @@ import com.watabou.noosa.audio.Sample;
 public class ScrollOfTerror extends Scroll {
 
 	{
-		name = "Scroll of Terror";
+		name = Messages.get(this, "name");
 		consumedValue = 5;
 	}
-	private static final String TXT_DET = "You are suddenly filled with pure terror!";
-	@Override
-	public void detonate(Heap heap){
-		for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])){
-			if (Level.fieldOfView[mob.pos]){
-				Buff.affect(mob, Terror.class, Terror.DURATION);
-			}
-		}
-		Buff.affect(Dungeon.hero, Vertigo.class, Vertigo.DURATION);
-		GLog.w(TXT_DET);
-	}
-	@Override
-	public void detonateIn(Hero hero){
-		Buff.affect(hero, Vertigo.class, Vertigo.DURATION);
-		GLog.w(TXT_DET);
-	}
+
 	@Override
 	protected void doRead() {
 
@@ -67,21 +50,22 @@ public class ScrollOfTerror extends Scroll {
 				Buff.affect(mob, Terror.class, Terror.DURATION).object = curUser
 						.id();
 
-				count++;
-				affected = mob;
+				if (mob.buff(Terror.class) != null) {
+					count++;
+					affected = mob;
+				}
 			}
 		}
 
 		switch (count) {
-		case 0:
-			GLog.i("The scroll emits a brilliant flash of red light");
-			break;
-		case 1:
-			GLog.i("The scroll emits a brilliant flash of red light and the "
-					+ affected.name + " flees!");
-			break;
-		default:
-			GLog.i("The scroll emits a brilliant flash of red light and the monsters flee!");
+			case 0:
+				GLog.i(Messages.get(this, "none"));
+				break;
+			case 1:
+				GLog.i(Messages.get(this, "one", affected.name));
+				break;
+			default:
+				GLog.i(Messages.get(this, "many"));
 		}
 		setKnown();
 
@@ -90,8 +74,7 @@ public class ScrollOfTerror extends Scroll {
 
 	@Override
 	public String desc() {
-		return "A flash of red light will overwhelm all creatures in your field of view with terror, "
-				+ "and they will turn and flee. Attacking a fleeing enemy will dispel the effect.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

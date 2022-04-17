@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.potions;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.ParalyticGas;
 import com.avmoga.dpixel.scenes.GameScene;
@@ -27,7 +28,7 @@ import com.watabou.noosa.audio.Sample;
 public class PotionOfParalyticGas extends Potion {
 
 	{
-		name = "Potion of Paralytic Gas";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -45,12 +46,8 @@ public class PotionOfParalyticGas extends Potion {
 
 	@Override
 	public String desc() {
-		return "Upon exposure to open air, the liquid in this flask will vaporize "
-				+ "into a numbing yellow haze. Anyone who inhales the cloud will be paralyzed "
-				+ "instantly, unable to move for some time after the cloud dissipates. This "
-				+ "item can be thrown at distant enemies to catch them within the effect of the gas.";
+		return Messages.get(this, "desc");
 	}
-
 	@Override
 	public int price() {
 		return isKnown() ? 40 * quantity : super.price();

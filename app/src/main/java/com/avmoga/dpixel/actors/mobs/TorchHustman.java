@@ -15,12 +15,10 @@ import com.watabou.utils.Random;
 
 public class TorchHustman extends Mob {
     private static final String COMBO = "combo";
-    private String[] attackCurse = {"烧，快烧起来！", "扭曲的世界",
-            "滚开！", "冒险家，肮脏的冒险家！",
-            "去死，你这肮脏的冒险者！"};
+    private String[] attackCurse = {"烧，快烧起来！", "为ZOT大人清除杂碎",
+            "扬了你的骨灰！为ZOT大人上贡！"};
     private int combo = 0;
-    private String[] deathCurse = {"快停下...", "你这怪物", "神啊...帮帮我吧...",
-            "四周好冷", "诅咒你这怪物", "相信我的同伴今晚会为我复仇"};
+    private String[] deathCurse = {"ZOT是唯一真神","没有人能打败ZOT","停下，你不能再前进了！"};
 
     public TorchHustman() {
         name = Messages.get(this, "name");
@@ -48,7 +46,7 @@ public class TorchHustman extends Mob {
     }
 
     public int attackProc(Char enemy, int damage) {
-        if (Random.Int(0, 10) > 7) {
+        if (1==1) {
             this.sprite.showStatus(0x00ff00, this.attackCurse[Random.Int(this.attackCurse.length)], new Object[0]);
         }
         int damage2 = TorchHustman.super.attackProc(enemy, this.combo + damage);

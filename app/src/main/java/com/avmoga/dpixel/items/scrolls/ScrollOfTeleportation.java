@@ -19,10 +19,11 @@ package com.avmoga.dpixel.items.scrolls;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
+import com.avmoga.dpixel.actors.blobs.Blob;
+import com.avmoga.dpixel.actors.blobs.Fire;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
 import com.avmoga.dpixel.actors.hero.Hero;
-import com.avmoga.dpixel.actors.blobs.Fire;
-import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.wands.WandOfBlink;
@@ -32,14 +33,14 @@ import com.watabou.noosa.audio.Sample;
 
 public class ScrollOfTeleportation extends Scroll {
 
-	public static final String TXT_TELEPORTED = "In a blink of an eye you were teleported to another location of the level.";
+	public static final String TXT_TELEPORTED = Messages.get(ScrollOfTeleportation.class, "tele");
 
-	public static final String TXT_DET = "Your backpack feels suddenly lighter!";
-	
-	public static final String TXT_NO_TELEPORT = "Strong magic aura of this place prevents you from teleporting!";
+	public static final String TXT_NO_TELEPORT = Messages.get(ScrollOfTeleportation.class, "no_tele");
+
+	public static final String TXT_DET = Messages.get(ScrollOfTeleportation.class, "deact");
 
 	{
-		name = "Scroll of Teleportation";
+		name = Messages.get(this, "name");
 		consumedValue = 10;
 	}
 
@@ -106,11 +107,9 @@ public class ScrollOfTeleportation extends Scroll {
 
 	@Override
 	public String desc() {
-		return "The spell on this parchment instantly transports the reader "
-				+ "to a random location on the dungeon level. It can be used "
-				+ "to escape a dangerous situation, but the unlucky reader might "
-				+ "find himself in an even more dangerous place.";
+		return Messages.get(this, "desc");
 	}
+
 
 	@Override
 	public int price() {

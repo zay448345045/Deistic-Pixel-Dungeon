@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.potions;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
 import com.avmoga.dpixel.scenes.GameScene;
@@ -27,7 +28,7 @@ import com.watabou.noosa.audio.Sample;
 public class PotionOfToxicGas extends Potion {
 
 	{
-		name = "Potion of Toxic Gas";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -45,10 +46,7 @@ public class PotionOfToxicGas extends Potion {
 
 	@Override
 	public String desc() {
-		return "Uncorking or shattering this pressurized glass will cause "
-				+ "its contents to explode into a deadly cloud of toxic green gas. "
-				+ "You might choose to fling this potion at distant enemies "
-				+ "instead of uncorking it by hand.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

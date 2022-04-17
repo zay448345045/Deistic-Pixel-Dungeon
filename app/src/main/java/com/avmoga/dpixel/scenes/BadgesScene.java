@@ -35,7 +35,7 @@ import com.watabou.utils.Callback;
 
 public class BadgesScene extends PixelScene {
 
-	private static final String TXT_TITLE = "Your Badges";
+	private static final String TXT_TITLE = "你的徽章";
 
 	private static final int MAX_PANE_WIDTH = 160;
 

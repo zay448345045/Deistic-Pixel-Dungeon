@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.potions;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Bleeding;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Cripple;
@@ -30,7 +31,7 @@ import com.avmoga.dpixel.utils.GLog;
 public class PotionOfHealing extends Potion {
 
 	{
-		name = "Potion of Healing";
+		name = Messages.get(this, "name");
 
 		bones = true;
 	}
@@ -39,7 +40,7 @@ public class PotionOfHealing extends Potion {
 	public void apply(Hero hero) {
 		setKnown();
 		heal(Dungeon.hero);
-		GLog.p("Your wounds heal completely.");
+		GLog.p(Messages.get(this, "heal"));
 	}
 
 	public static void heal(Hero hero) {
@@ -55,7 +56,7 @@ public class PotionOfHealing extends Potion {
 
 	@Override
 	public String desc() {
-		return "An elixir that will instantly return you to full health and cure poison.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override
