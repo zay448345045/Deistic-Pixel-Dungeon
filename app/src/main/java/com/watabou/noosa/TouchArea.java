@@ -32,13 +32,13 @@ public class TouchArea extends Visual implements Signal.Listener<Touchscreen.Tou
 	}
 
 	@Override
-	public void onSignal(Touch touch) {
+	public boolean onSignal(Touch touch) {
 
 		boolean hit = touch != null && target.overlapsScreenPoint((int) touch.current.x, (int) touch.current.y);
 
 		if (!isActive()) {
 			if (hit && blockWhenInactive) Touchscreen.event.cancel();
-			return;
+			return hit;
 		}
 
 		if (hit) {
@@ -73,6 +73,7 @@ public class TouchArea extends Visual implements Signal.Listener<Touchscreen.Tou
 			}
 
 		}
+		return hit;
 	}
 
 	protected void onTouchDown(Touch touch) {

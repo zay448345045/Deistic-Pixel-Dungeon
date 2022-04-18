@@ -8,6 +8,8 @@ import com.avmoga.dpixel.actors.blobs.Fire;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Burning;
 import com.avmoga.dpixel.items.Egg;
+import com.avmoga.dpixel.items.potions.Potion;
+import com.avmoga.dpixel.items.potions.PotionOfHealing;
 import com.avmoga.dpixel.levels.features.Chasm;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.sprites.TorchHustmanSprites;
@@ -23,13 +25,13 @@ public class TorchHustman extends Mob {
     public TorchHustman() {
         name = Messages.get(this, "name");
         this.spriteClass = TorchHustmanSprites.class;
-        HP = HT = 75+(adj(0)*Random.NormalIntRange(4, 7));
+        HP = HT = 75+(adj(0)*Random.NormalIntRange(24, 36));
         defenseSkill =8;
         this.defenseSkill = 7;
         this.EXP = 10;
         this.state = this.SLEEPING;
-        this.loot = new Egg();
-        this.lootChance = 0.05f;
+        this.loot = new PotionOfHealing();
+        this.lootChance = 0.01f;
     }
 
     @Override
@@ -42,7 +44,7 @@ public class TorchHustman extends Mob {
     }
 
     public int damageRoll() {
-        return Random.NormalIntRange(11, 12);
+        return Random.NormalIntRange(11, 12)*(adj(0)*Random.NormalIntRange(1, 2));
     }
 
     public int attackProc(Char enemy, int damage) {

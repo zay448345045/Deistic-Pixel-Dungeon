@@ -19,10 +19,12 @@ package com.avmoga.dpixel.windows;
 
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.DungeonTilemap;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.levels.Terrain;
 import com.avmoga.dpixel.scenes.PixelScene;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
 import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Image;
@@ -33,7 +35,7 @@ public class WndInfoCell extends Window {
 
 	private static final int WIDTH = 120;
 
-	private static final String TXT_NOTHING = "There is nothing here.";
+	private static final String TXT_NOTHING = Messages.get(WndInfoCell.class, "nothing");
 
 	public WndInfoCell(int cell) {
 
@@ -58,7 +60,7 @@ public class WndInfoCell extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline info = PixelScene.createMultiline(6);
+		RenderedTextMultiline info = PixelScene.renderMultiline(6);
 		add(info);
 
 		StringBuilder desc = new StringBuilder(Dungeon.level.tileDesc(tile));
@@ -73,11 +75,9 @@ public class WndInfoCell extends Window {
 		}
 
 		info.text(desc.length() > 0 ? desc.toString() : TXT_NOTHING);
-		info.maxWidth = WIDTH;
-		info.measure();
-		info.x = titlebar.left();
-		info.y = titlebar.bottom() + GAP;
+		info.maxWidth(WIDTH);
+		info.setPos(titlebar.left(), titlebar.bottom() + GAP);
 
-		resize(WIDTH, (int) (info.y + info.height()));
+		resize(WIDTH, (int) (info.top() + info.height()));
 	}
 }

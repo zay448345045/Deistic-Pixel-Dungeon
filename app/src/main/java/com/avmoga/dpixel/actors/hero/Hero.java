@@ -1289,7 +1289,7 @@ public class Hero extends Char {
 			if (isAlive()) {
 				if (flashIntensity > 1/6f) {
 					Sample.INSTANCE.play(Assets.SND_READ);
-					GLog.w("看来我今天要死在这里了！");
+					//GLog.w("看来我今天要死在这里了！");
 				} else {
 					Sample.INSTANCE.play(Assets.SND_CURSED);
 				}

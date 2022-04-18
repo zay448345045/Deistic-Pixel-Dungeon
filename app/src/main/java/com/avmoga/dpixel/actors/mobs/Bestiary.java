@@ -163,14 +163,14 @@ public class Bestiary {
 					Monk.class };
 			break;
 		case 17:
-			chances = new float[] { 1, 1, 1 };
+			chances = new float[] { 1, 1, 1,0.01f };
 			classes = new Class<?>[] { Elemental.class, Monk.class,
-					Warlock.class };
+					Warlock.class,MolotovHuntsman.class };
 			break;
 		case 18:
-			chances = new float[] { 1, 2, 1, 1, 0.5f };
+			chances = new float[] { 1, 2, 1, 1, 0.5f,0.02f };
 			classes = new Class<?>[] { Elemental.class, Monk.class,
-					Golem.class, Warlock.class, DwarfLich.class };
+					Golem.class, Warlock.class, DwarfLich.class,MolotovHuntsman.class };
 			break;
 		case 19:
 			

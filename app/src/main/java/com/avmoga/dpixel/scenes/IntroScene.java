@@ -17,18 +17,13 @@
  */
 package com.avmoga.dpixel.scenes;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.windows.WndStory;
 import com.watabou.noosa.Game;
 
 public class IntroScene extends PixelScene {
 
-	private static final String TEXT = "Many heroes have ventured into the dungeon before you from the city above. Some "
-			+ "have returned with treasures and magical artifacts, most have never been heard from again.\n\n"
-			+ "None, however, have ventured to the bottom and retrieved the Amulet of Yendor, "
-			+ "which is said to be guarded by an ancient evil in the depths. "
-			+ "Even now dark energy radiates from below, making its way up into the city.\n\n"
-			+ "You consider yourself ready for the challenge. Most importantly, "
-			+ "you feel that fortune smiles upon you. It's time to start your own adventure!";
+	private static final String TEXT = Messages.get(IntroScene.class, "text");
 
 	@Override
 	public void create() {

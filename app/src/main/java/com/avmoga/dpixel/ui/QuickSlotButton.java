@@ -32,7 +32,7 @@ import com.watabou.noosa.ui.Button;
 
 public class QuickSlotButton extends Button implements WndBag.Listener {
 
-	private static final String TXT_SELECT_ITEM = "Select an item for the quickslot";
+	private static final String TXT_SELECT_ITEM = "选择需要的物品以放入快捷栏";
 
 	private static QuickSlotButton[] instance = new QuickSlotButton[4];
 	private int slotNum;

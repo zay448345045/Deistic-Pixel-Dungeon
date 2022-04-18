@@ -39,6 +39,14 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class ShatteredPixelDungeon extends Game {
 
+	public static void seamlessResetScene(){
+		seamlessResetScene(null);
+	}
+
+	private static void seamlessResetScene(Object o) {
+	}
+
+
 	public ShatteredPixelDungeon() {
 		super(TitleScene.class);
 

@@ -129,7 +129,7 @@ public class Window extends Group implements Signal.Listener<Key> {
 	}
 
 	@Override
-	public void onSignal(Key key) {
+	public boolean onSignal(Key key) {
 		if (key.pressed) {
 			switch (key.code) {
 			case Keys.BACK:
@@ -142,6 +142,8 @@ public class Window extends Group implements Signal.Listener<Key> {
 		}
 
 		Keys.event.cancel();
+        //return false;
+		return false;
 	}
 
 	public void onBackPressed() {

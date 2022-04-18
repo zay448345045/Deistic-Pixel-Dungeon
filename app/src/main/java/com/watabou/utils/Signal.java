@@ -69,6 +69,6 @@ public class Signal<T> {
 	}
 
 	public interface Listener<T> {
-		void onSignal(T t);
+		boolean onSignal(T t);
 	}
 }
