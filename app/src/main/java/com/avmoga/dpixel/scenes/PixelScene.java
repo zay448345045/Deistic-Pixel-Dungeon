@@ -40,6 +40,10 @@ import com.watabou.utils.BitmapCache;
 import javax.microedition.khronos.opengles.GL10;
 
 public class PixelScene extends Scene {
+	//SPD MOVE
+	public static boolean landscape(){
+		return Game.width > Game.height;
+	}
 
 	// Minimum virtual display size for portrait orientation
 	public static final float MIN_WIDTH_P = 135;

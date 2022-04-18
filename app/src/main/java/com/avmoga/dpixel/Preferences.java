@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.watabou.noosa.Game;
+import com.watabou.utils.GameMath;
 
 enum Preferences {
 
@@ -41,6 +42,10 @@ enum Preferences {
 	public static final String KEY_VERSION = "version";
 	public static final String KEY_LANG = "language";
 	public static final String KEY_SCALE = "scale";
+	public static final String KEY_MAPSIZE = "map_size";
+	public static final String KEY_FLIPTAGS = "flip_tags";
+	public static final String KEY_FLIPTOOLBAR = "flipped_ui";
+	public static final String KEY_BARMODE = "toolbar_mode";
 	private SharedPreferences prefs;
 
 	private SharedPreferences get() {
@@ -72,5 +77,22 @@ enum Preferences {
 
 	void put(String key, String value) {
 		get().edit().putString(key, value).commit();
+	}
+
+    public int getInt(String key, int defValue, int min, int max) {
+		try {
+			int i = get().getInt(key, defValue);
+			if (i < min || i > max) {
+				int val = (int) GameMath.gate(min, i, max);
+				put(key, val);
+				return val;
+			} else {
+				return i;
+			}
+		} catch (ClassCastException e) {
+			ShatteredPixelDungeon.reportException(e);
+			put(key, defValue);
+			return defValue;
+		}
 	}
 }

@@ -29,6 +29,10 @@ public class Tag extends Button {
 	private float b;
 	protected NinePatch bg;
 
+	public void flip(boolean value) {
+		bg.flipHorizontal(value);
+	}
+
 	protected float lightness = 0;
 
 	public Tag(int color) {

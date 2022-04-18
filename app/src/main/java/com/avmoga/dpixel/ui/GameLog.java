@@ -20,8 +20,6 @@ package com.avmoga.dpixel.ui;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.sprites.CharSprite;
 import com.avmoga.dpixel.utils.GLog;
-import com.avmoga.dpixel.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.ui.Component;
 import com.watabou.utils.Signal;
 
@@ -30,26 +28,41 @@ import java.util.regex.Pattern;
 
 public class GameLog extends Component implements Signal.Listener<String> {
 
-	private static final int MAX_MESSAGES = 3;
 	private static final int MAX_LINES = 3;
+
 	private static final Pattern PUNCTUATION = Pattern.compile(".*[.,;?! ]$");
 
 	private RenderedTextMultiline lastEntry;
 	private int lastColor;
+
 	private static ArrayList<Entry> entries = new ArrayList<>();
+
 	public GameLog() {
 		super();
-		GLog.update.add(this);
+		GLog.update.replace(this);
 
-		newLine();
+		recreateLines();
 	}
 
-	public void newLine() {
+	private synchronized void recreateLines() {
+		for (Entry entry : entries) {
+			lastEntry = PixelScene.renderMultiline(entry.text, 6);
+			lastEntry.hardlight(lastColor = entry.color);
+			add(lastEntry);
+		}
+	}
+
+	public synchronized void newLine() {
 		lastEntry = null;
 	}
 
 	@Override
-	public void onSignal(String text) {
+	public synchronized void onSignal(String text) {
+
+		if (length != entries.size()) {
+			clear();
+			recreateLines();
+		}
 
 		int color = CharSprite.DEFAULT;
 		if (text.startsWith(GLog.POSITIVE)) {
@@ -65,9 +78,6 @@ public class GameLog extends Component implements Signal.Listener<String> {
 			text = text.substring(GLog.HIGHLIGHT.length());
 			color = CharSprite.NEUTRAL;
 		}
-
-		text = Utils.capitalize(text)
-				+ (PUNCTUATION.matcher(text).matches() ? "" : "");
 
 		if (lastEntry != null && color == lastColor && lastEntry.nLines < MAX_LINES) {
 
@@ -87,8 +97,25 @@ public class GameLog extends Component implements Signal.Listener<String> {
 
 		}
 
-		if (length > MAX_MESSAGES) {
-			remove(members.get(0));
+		if (length > 0) {
+			int nLines;
+			do {
+				nLines = 0;
+				for (int i = 0; i < length - 1; i++) {
+					nLines += ((RenderedTextMultiline) members.get(i)).nLines;
+				}
+
+				if (nLines > MAX_LINES) {
+					RenderedTextMultiline r = ((RenderedTextMultiline) members.get(0));
+					remove(r);
+					r.destroy();
+
+					entries.remove(0);
+				}
+			} while (nLines > MAX_LINES);
+			if (entries.isEmpty()) {
+				lastEntry = null;
+			}
 		}
 
 		layout();
@@ -105,6 +132,12 @@ public class GameLog extends Component implements Signal.Listener<String> {
 		}
 	}
 
+	@Override
+	public void destroy() {
+		GLog.update.remove(this);
+		super.destroy();
+	}
+
 	private static class Entry {
 		public String text;
 		public int color;
@@ -113,12 +146,6 @@ public class GameLog extends Component implements Signal.Listener<String> {
 			this.text = text;
 			this.color = color;
 		}
-	}
-
-	@Override
-	public void destroy() {
-		GLog.update.remove(this);
-		super.destroy();
 	}
 
 	public static void wipe() {

@@ -343,6 +343,9 @@ public class GameScene extends PixelScene {
 		fadeIn();
 	}
 
+	private void brightness(int brightness) {
+	}
+
 	@Override
 	public void destroy() {
 

@@ -150,6 +150,10 @@ public class ItemSprite extends MovieClip {
 		return this;
 	}
 
+	public ItemSprite view(Item item) {
+		return view(item.image(), item.glowing());
+	}
+
 	@Override
 	public void update() {
 		super.update();

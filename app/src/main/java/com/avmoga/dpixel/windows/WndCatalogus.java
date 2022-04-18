@@ -25,34 +25,28 @@ import com.avmoga.dpixel.items.scrolls.Scroll;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.sprites.ItemSprite;
+import com.avmoga.dpixel.sprites.ItemSpriteSheet;
+import com.avmoga.dpixel.ui.RedButton;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.ScrollPane;
 import com.avmoga.dpixel.ui.Window;
-import com.avmoga.dpixel.utils.Utils;
-import com.watabou.noosa.RenderedText;
+import com.watabou.noosa.ColorBlock;
 import com.watabou.noosa.ui.Component;
 
 import java.util.ArrayList;
 
 public class WndCatalogus extends WndTabbed {
 
-	private static final int WIDTH_P = 112;
-	private static final int HEIGHT_P = 160;
+	private static final int WIDTH    = 112;
+	private static final int HEIGHT    = 141;
 
-	private static final int WIDTH_L = 128;
-	private static final int HEIGHT_L = 128;
+	private static final int ITEM_HEIGHT	= 17;
 
-	private static final int ITEM_HEIGHT = 18;
-
-	private static final int TAB_WIDTH = 50;
-
-	private static final String TXT_POTIONS = Messages.get(WndCatalogus.class, "potions");
-	private static final String TXT_SCROLLS = Messages.get(WndCatalogus.class, "scrolls");
-	private static final String TXT_TITLE = Messages.get(WndCatalogus.class, "title");
-
-	private RenderedText txtTitle;
+	private RedButton btnJournal;
+	private RedButton btnTitle;
 	private ScrollPane list;
 
-	private ArrayList<ListItem> items = new ArrayList<WndCatalogus.ListItem>();
+	private ArrayList<ListItem> items = new ArrayList<>();
 
 	private static boolean showPotions = true;
 
@@ -60,90 +54,95 @@ public class WndCatalogus extends WndTabbed {
 
 		super();
 
-		if (ShatteredPixelDungeon.landscape()) {
-			resize(WIDTH_L, HEIGHT_L);
-		} else {
-			resize(WIDTH_P, HEIGHT_P);
-		}
+		resize( WIDTH, HEIGHT );
 
-		txtTitle = PixelScene.renderText(TXT_TITLE, 9);
-		txtTitle.hardlight(Window.TITLE_COLOR);
-		add(txtTitle);
-
-		list = new ScrollPane(new Component()) {
+		btnJournal = new RedButton( Messages.get(WndJournal.class, "title"), 9 ){
 			@Override
-			public void onClick(float x, float y) {
+			protected void onClick() {
+				hide();
+				GameScene.show(new WndJournal());
+			}
+		};
+		btnJournal.setRect(0, 0, WIDTH/2f - 1, btnJournal.reqHeight());
+		PixelScene.align( btnJournal );
+		add( btnJournal );
+
+		//does nothing, we're already in the catalog
+		btnTitle = new RedButton( Messages.get(this, "title"), 9 );
+		btnTitle.textColor( Window.TITLE_COLOR );
+		btnTitle.setRect(WIDTH/2f+1, 0, WIDTH/2f - 1, btnTitle.reqHeight());
+		PixelScene.align(btnTitle);
+		add( btnTitle );
+
+		list = new ScrollPane( new Component() ) {
+			@Override
+			public void onClick( float x, float y ) {
 				int size = items.size();
-				for (int i = 0; i < size; i++) {
-					if (items.get(i).onClick(x, y)) {
+				for (int i=0; i < size; i++) {
+					if (items.get( i ).onClick( x, y )) {
 						break;
 					}
 				}
 			}
 		};
-		add(list);
-		list.setRect(0, txtTitle.height(), width, height - txtTitle.height());
+		add( list );
+		list.setRect( 0, btnTitle.height() + 1, width, height - btnTitle.height() - 1 );
 
 		boolean showPotions = WndCatalogus.showPotions;
-		Tab[] tabs = { new LabeledTab(TXT_POTIONS) {
-			@Override
-			protected void select(boolean value) {
-				super.select(value);
-				WndCatalogus.showPotions = value;
-				updateList();
-			};
-		}, new LabeledTab(TXT_SCROLLS) {
-			@Override
-			protected void select(boolean value) {
-				super.select(value);
-				WndCatalogus.showPotions = !value;
-				updateList();
-			};
-		} };
+		Tab[] tabs = {
+				new LabeledTab( Messages.get(this, "potions") ) {
+					protected void select( boolean value ) {
+						super.select( value );
+						WndCatalogus.showPotions = value;
+						updateList();
+					};
+				},
+				new LabeledTab( Messages.get(this, "scrolls") ) {
+					protected void select( boolean value ) {
+						super.select( value );
+						WndCatalogus.showPotions = !value;
+						updateList();
+					};
+				}
+		};
 		for (Tab tab : tabs) {
-			add(tab);
+			add( tab );
 		}
 
 		layoutTabs();
 
-		select(showPotions ? 0 : 1);
+		select( showPotions ? 0 : 1 );
 	}
 
 	private void updateList() {
-
-		txtTitle.text(Utils.format(TXT_TITLE, showPotions ? TXT_POTIONS
-				: TXT_SCROLLS));
-		txtTitle.x = PixelScene.align(PixelScene.uiCamera,
-				(width - txtTitle.width()) / 2);
 
 		items.clear();
 
 		Component content = list.content();
 		content.clear();
-		list.scrollTo(0, 0);
+		list.scrollTo( 0, 0 );
 
 		float pos = 0;
-		for (Class<? extends Item> itemClass : showPotions ? Potion.getKnown()
-				: Scroll.getKnown()) {
-			ListItem item = new ListItem(itemClass);
-			item.setRect(0, pos, width, ITEM_HEIGHT);
-			content.add(item);
-			items.add(item);
+		for (Class<? extends Item> itemClass : showPotions ? Potion.getKnown() : Scroll.getKnown()) {
+			ListItem item = new ListItem( itemClass );
+			item.setRect( 0, pos, width, ITEM_HEIGHT );
+			content.add( item );
+			items.add( item );
 
 			pos += item.height();
 		}
 
-		for (Class<? extends Item> itemClass : showPotions ? Potion
-				.getUnknown() : Scroll.getUnknown()) {
-			ListItem item = new ListItem(itemClass);
-			item.setRect(0, pos, width, ITEM_HEIGHT);
-			content.add(item);
-			items.add(item);
+		for (Class<? extends Item> itemClass : showPotions ? Potion.getUnknown() : Scroll.getUnknown()) {
+			ListItem item = new ListItem( itemClass );
+			item.setRect( 0, pos, width, ITEM_HEIGHT );
+			content.add( item );
+			items.add( item );
 
 			pos += item.height();
 		}
 
-		content.setSize(width, pos);
+		content.setSize( width, pos );
+		list.setSize( list.width(), list.height() );
 	}
 
 	private static class ListItem extends Component {
@@ -152,46 +151,60 @@ public class WndCatalogus extends WndTabbed {
 		private boolean identified;
 
 		private ItemSprite sprite;
-		private RenderedText label;
+		private RenderedTextMultiline label;
+		private ColorBlock line;
 
-		public ListItem(Class<? extends Item> cl) {
+		public ListItem( Class<? extends Item> cl ) {
 			super();
 
 			try {
 				item = cl.newInstance();
 				if (identified = item.isIdentified()) {
-					sprite.view(item.image(), null);
-					label.text(item.name());
+					sprite.view( item.image(), null );
+					label.text( Messages.titleCase(item.name()) );
 				} else {
-					sprite.view(127, null);
-					label.text(item.trueName());
-					label.hardlight(0xCCCCCC);
+					sprite.view( ItemSpriteSheet.WEAPON, null );
+					label.text( Messages.titleCase(item.trueName()) );
+					label.hardlight( 0xCCCCCC );
 				}
 			} catch (Exception e) {
-				// Do nothing
+				ShatteredPixelDungeon.reportException(e);
 			}
 		}
 
 		@Override
 		protected void createChildren() {
 			sprite = new ItemSprite();
-			add(sprite);
+			add( sprite );
 
-			label = PixelScene.renderText(8);
-			add(label);
+			label = PixelScene.renderMultiline( 7 );
+			add( label );
+
+			line = new ColorBlock( 1, 1, 0xFF222222);
+			add(line);
 		}
 
 		@Override
 		protected void layout() {
-			sprite.y = PixelScene.align(y + (height - sprite.height) / 2);
+			sprite.y = y + 1 + (height - 1 - sprite.height) / 2f;
+			PixelScene.align(sprite);
 
-			label.x = sprite.x + sprite.width;
-			label.y = PixelScene.align(y + (height - label.baseLine()) / 2);
+			line.size(width, 1);
+			line.x = 0;
+			line.y = y;
+
+			label.maxWidth((int)(width - sprite.width - 1));
+			label.setPos(sprite.x + sprite.width + 1,  y + 1 + (height - 1 - label.height()) / 2f);
+			PixelScene.align(label);
 		}
 
-		public boolean onClick(float x, float y) {
-			if (identified && inside(x, y)) {
-				GameScene.show(new WndInfoItem(item));
+		public boolean onClick( float x, float y ) {
+			if (inside( x, y )) {
+				if (identified)
+					GameScene.show( new WndInfoItem( item ) );
+				else
+					GameScene.show( new WndTitledMessage( new ItemSprite(ItemSpriteSheet.WEAPON, null),
+							Messages.titleCase(item.trueName()), item.desc() ));
 				return true;
 			} else {
 				return false;

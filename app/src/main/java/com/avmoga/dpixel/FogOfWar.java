@@ -17,8 +17,6 @@
  */
 package com.avmoga.dpixel;
 
-import java.util.Arrays;
-
 import android.graphics.Bitmap;
 
 import com.avmoga.dpixel.scenes.GameScene;
@@ -26,9 +24,12 @@ import com.watabou.gltextures.SmartTexture;
 import com.watabou.gltextures.TextureCache;
 import com.watabou.glwrap.Texture;
 import com.watabou.noosa.Image;
+import com.watabou.utils.Rect;
+
+import java.util.Arrays;
 
 public class FogOfWar extends Image {
-
+	private volatile Rect updated;
 	private static final int VISIBLE = 0x00000000;
 	private static final int VISITED = 0xcc111111;
 	private static final int MAPPED = 0xcc442211;
@@ -100,7 +101,10 @@ public class FogOfWar extends Image {
 		texture.pixels(width2, height2, pixels);
 	}
 
-	private class FogTexture extends SmartTexture {
+	public synchronized void updateFog(){
+		updated.set( 0, 0, pWidth, pHeight );
+	}
+    private class FogTexture extends SmartTexture {
 
 		public FogTexture() {
 			super(Bitmap.createBitmap(width2, height2, Bitmap.Config.ARGB_8888));

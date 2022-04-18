@@ -59,6 +59,19 @@ public class ShatteredPixelDungeon extends Game {
 
 	}
 
+	public static void brightness(int value) {
+		Preferences.INSTANCE.put(Preferences.KEY_BRIGHTNESS, value);
+	}
+
+	public static int brightness() {
+		return Preferences.INSTANCE.getInt(Preferences.KEY_BRIGHTNESS, 2, -2, 2);
+	}
+
+	public static void scale(int value) {
+		Preferences.INSTANCE.put(Preferences.KEY_SCALE, value);
+		switchScene(TitleScene.class);
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -244,6 +257,14 @@ public class ShatteredPixelDungeon extends Game {
 		Preferences.INSTANCE.put(Preferences.KEY_MUSIC, value);
 	}
 
+	public static void mapSize(int value) {
+		Preferences.INSTANCE.put(Preferences.KEY_MAPSIZE, value);
+	}
+
+	public static int mapSize() {
+		return Preferences.INSTANCE.getInt(Preferences.KEY_MAPSIZE, 1, 1, 3);
+	}
+
 	public static boolean music() {
 		return Preferences.INSTANCE.getBoolean(Preferences.KEY_MUSIC, true);
 	}
@@ -263,11 +284,14 @@ public class ShatteredPixelDungeon extends Game {
 			((GameScene) scene()).brightness(value);
 		}
 	}
-
-	public static boolean brightness() {
-		return Preferences.INSTANCE.getBoolean(Preferences.KEY_BRIGHTNESS,
-				false);
+	public static void flipTags(boolean value) {
+		Preferences.INSTANCE.put(Preferences.KEY_FLIPTAGS, value);
 	}
+
+	public static boolean flipTags() {
+		return Preferences.INSTANCE.getBoolean(Preferences.KEY_FLIPTAGS, false);
+	}
+
 
 	public static void lastClass(int value) {
 		Preferences.INSTANCE.put(Preferences.KEY_LAST_CLASS, value);
@@ -301,8 +325,24 @@ public class ShatteredPixelDungeon extends Game {
 		return Preferences.INSTANCE.getInt(Preferences.KEY_QUICKSLOTS, 1);
 	}
 
+	public static void toolbarMode(String value) {
+		Preferences.INSTANCE.put(Preferences.KEY_BARMODE, value);
+	}
+
+	public static String toolbarMode() {
+		return Preferences.INSTANCE.getString(Preferences.KEY_BARMODE, !landscape() ? "SPLIT" : "GROUP");
+	}
+
 	public static void intro(boolean value) {
 		Preferences.INSTANCE.put(Preferences.KEY_INTRO, value);
+	}
+
+	public static void flipToolbar(boolean value) {
+		Preferences.INSTANCE.put(Preferences.KEY_FLIPTOOLBAR, value);
+	}
+
+	public static boolean flipToolbar() {
+		return Preferences.INSTANCE.getBoolean(Preferences.KEY_FLIPTOOLBAR, false);
 	}
 
 	public static boolean intro() {

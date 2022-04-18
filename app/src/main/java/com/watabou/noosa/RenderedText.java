@@ -16,6 +16,16 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 public class RenderedText extends Image {
+	private int maxWidth = Integer.MAX_VALUE;
+	protected boolean multiline = false;
+	//移植破碎
+	public void maxWidth(int maxWidth){
+		if (this.maxWidth != maxWidth){
+			this.maxWidth = maxWidth;
+			multiline = true;
+			text(text);
+		}
+	}
 
 	private static Canvas canvas = new Canvas();
 	private static Paint painter = new Paint();
@@ -223,6 +233,9 @@ public class RenderedText extends Image {
 
 	public static Typeface getFont() {
 		return font;
+	}
+
+	public void setPos(int i, float v) {
 	}
 
 	private static class CachedText {

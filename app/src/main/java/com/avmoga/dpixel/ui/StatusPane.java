@@ -17,6 +17,8 @@
  */
 package com.avmoga.dpixel.ui;
 
+import static com.avmoga.dpixel.scenes.PixelScene.font1x;
+
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.buffs.Hunger;
@@ -32,6 +34,7 @@ import com.avmoga.dpixel.windows.WndHero;
 import com.watabou.input.Touchscreen.Touch;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Camera;
+import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.NinePatch;
 import com.watabou.noosa.TouchArea;
@@ -63,6 +66,7 @@ public class StatusPane extends Component {
 	private BuffIndicator buffs;
 	private Compass compass;
 
+	private BitmapText version;
 	private MenuButton btnMenu;
 
 	@Override
@@ -108,18 +112,18 @@ public class StatusPane extends Component {
 		add(exp);
 
 
-		level = new BitmapText(PixelScene.font1x);
+		level = new BitmapText(font1x);
 		level.hardlight(0xFFEBA4);
 		add(level);
 
 		depth = new BitmapText(Integer.toString(Dungeon.depth),
-				PixelScene.font1x);
+				font1x);
 		depth.hardlight(0xCACFC2);
 		depth.measure();
 		add(depth);
 
 		Dungeon.hero.belongings.countIronKeys();
-		keys = new BitmapText(PixelScene.font1x);
+		keys = new BitmapText(font1x);
 		keys.hardlight(0xCACFC2);
 		add(keys);
 
@@ -128,6 +132,13 @@ public class StatusPane extends Component {
 
 		buffs = new BuffIndicator(Dungeon.hero);
 		add(buffs);
+
+		version =new BitmapText("v" + Game.version + "", font1x);
+		version.measure();
+		version.hardlight(0xCCCCCC);
+		version.x = width - -78 - keys.width()-3;
+		version.y = 5;
+		add(version);
 	}
 
 	@Override

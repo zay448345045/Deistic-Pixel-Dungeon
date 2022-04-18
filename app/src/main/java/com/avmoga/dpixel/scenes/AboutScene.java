@@ -17,35 +17,32 @@
  */
 package com.avmoga.dpixel.scenes;
 
-import android.content.Intent;
-import android.net.Uri;
-
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.effects.Flare;
 import com.avmoga.dpixel.ui.Archs;
 import com.avmoga.dpixel.ui.ExitButton;
 import com.avmoga.dpixel.ui.Icons;
 import com.avmoga.dpixel.ui.RenderedTextMultiline;
-import com.avmoga.dpixel.ui.Window;
-import com.watabou.input.Touchscreen.Touch;
 import com.watabou.noosa.Camera;
-import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.RenderedText;
-import com.watabou.noosa.TouchArea;
 
 public class AboutScene extends PixelScene {
 
-	private static final String TTL_SHPX = "自然之神的像素地牢";
+	private static final String TTL_SHPX = "Deistic Pixel Dungeon";
 
 	private static final String TXT_SHPX =
-			"原作者: Dachhack\n\n" +
+			"One-Go-Ling-汉化组\n\n鸣谢以下所有人员：\n\n" +
+					"发芽作者: Dachhack\n\n" +
+					"自然作者: Cipheus\n\n" +
 					"ESPD作者: G2159687\n\n" +
-					"多语言迁移：JDSALing";
+					"破碎地牢：Evan\n\n" +
+					"DPD汉化总监：JDSA Ling\n\n" +
+					"翻译组详见翻译名单";
 
-	private static final String LNK_SHPX = "ShatteredPixel.com";
+	private static final String TTL_LOPX = "汉化采用ESPD,SHPD双重汉化\n\n";
 
-	private static final String TTL_WATA = "Pixel Dungeon";
+	private static final String TTL_WATA = "Pixel Dungeon & Shattered Pixel Dungeon";
 
 	private static final String TXT_WATA =
 			"Code & Graphics: Watabou\n" +
@@ -77,70 +74,39 @@ public class AboutScene extends PixelScene {
 		shpxtitle.y = shpx.y + shpx.height + 5;
 		align(shpxtitle);
 
-		RenderedTextMultiline shpxtext = renderMultiline( TXT_SHPX, 8 );
+		RenderedText shpxetitle = renderText( TTL_LOPX, 6 );
+		shpxetitle.hardlight( 0x00ffff );
+		add( shpxetitle );
+
+		shpxetitle.x = (colWidth - shpxetitle.width()) / 2;
+		shpxetitle.y = shpx.y + shpx.height + 20;
+		align(shpxetitle);
+
+
+		RenderedTextMultiline shpxtext = renderMultiline( TXT_SHPX, 7 );
 		shpxtext.maxWidth((int)Math.min(colWidth, 120));
 		add( shpxtext );
 
 		shpxtext.setPos((colWidth - shpxtext.width()) / 2, shpxtitle.y + shpxtitle.height() + 12);
 		align(shpxtext);
 
-		RenderedTextMultiline shpxlink = renderMultiline( "本地化特别鸣谢ESPD工程\n\n以及Evan的破碎地牢V0.4.2", 8 );
-		shpxlink.maxWidth(shpxtext.maxWidth());
-		shpxlink.hardlight( Window.SHPX_COLOR );
-		add( shpxlink );
-
-		shpxlink.setPos((colWidth - shpxlink.width()) / 2, shpxtext.bottom() + 6);
-		align(shpxlink);
-
-		TouchArea shpxhotArea = new TouchArea( shpxlink.left(), shpxlink.top(), shpxlink.width(), shpxlink.height() ) {
-			@Override
-			protected void onClick( Touch touch ) {
-			}
-		};
-		add( shpxhotArea );
-
-		Image wata = Icons.WATA.get();
+		Image wata = Icons.BOX.get();
 		wata.x = wataOffset + (colWidth - wata.width()) / 2;
 		wata.y = ShatteredPixelDungeon.landscape() ?
 				colTop:
-				shpxlink.top() + wata.height + 20;
+				shpxtext.top() + wata.height + 120;
 		align(wata);
 		add( wata );
 
-		new Flare( 7, 64 ).color( 0x112233, true ).show( wata, 0 ).angularSpeed = +20;
+		new Flare( 7, 64 ).color( 0xffff00, true ).show( wata, 0 ).angularSpeed = +20;
 
 		RenderedText wataTitle = renderText( TTL_WATA, 8 );
-		wataTitle.hardlight(Window.TITLE_COLOR);
+		wataTitle.hardlight(0xbbbb00);
 		add( wataTitle );
 
 		wataTitle.x = wataOffset + (colWidth - wataTitle.width()) / 2;
 		wataTitle.y = wata.y + wata.height + 11;
 		align(wataTitle);
-
-		RenderedTextMultiline wataText = renderMultiline( TXT_WATA, 8 );
-		wataText.maxWidth((int)Math.min(colWidth, 120));
-		add( wataText );
-
-		wataText.setPos(wataOffset + (colWidth - wataText.width()) / 2, wataTitle.y + wataTitle.height() + 12);
-		align(wataText);
-
-		RenderedTextMultiline wataLink = renderMultiline( LNK_WATA, 8 );
-		wataLink.maxWidth((int)Math.min(colWidth, 120));
-		wataLink.hardlight(Window.TITLE_COLOR);
-		add(wataLink);
-
-		wataLink.setPos(wataOffset + (colWidth - wataLink.width()) / 2 , wataText.bottom() + 6);
-		align(wataLink);
-
-		TouchArea hotArea = new TouchArea( wataLink.left(), wataLink.top(), wataLink.width(), wataLink.height() ) {
-			@Override
-			protected void onClick( Touch touch ) {
-				Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "http://" + LNK_WATA ) );
-				Game.instance.startActivity( intent );
-			}
-		};
-		add( hotArea );
-
 
 		Archs archs = new Archs();
 		archs.setSize( Camera.main.width, Camera.main.height );

@@ -39,6 +39,9 @@ public class Belongings implements Iterable<Item> {
 
 	private Hero owner;
 
+	public int[] ironKeys = new int[26];
+	public int[] specialKeys = new int[26]; //golden or boss keys
+
 	public Bag backpack;
 
 	public KindOfWeapon weapon = null;

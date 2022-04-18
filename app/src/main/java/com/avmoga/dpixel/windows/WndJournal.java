@@ -20,108 +20,168 @@ package com.avmoga.dpixel.windows;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Journal;
 import com.avmoga.dpixel.Messages.Messages;
-import com.avmoga.dpixel.ShatteredPixelDungeon;
+import com.avmoga.dpixel.items.keys.GoldenKey;
+import com.avmoga.dpixel.items.keys.IronKey;
+import com.avmoga.dpixel.items.keys.SkeletonKey;
+import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.ui.Icons;
+import com.avmoga.dpixel.ui.RedButton;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.ScrollPane;
 import com.avmoga.dpixel.ui.Window;
 import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.ColorBlock;
 import com.watabou.noosa.Image;
-import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.ui.Component;
 
 import java.util.Collections;
 
 public class WndJournal extends Window {
 
-	private static final int WIDTH = 112;
-	private static final int HEIGHT_P = 160;
-	private static final int HEIGHT_L = 144;
+	private static final int WIDTH      = 112;
+	private static final int HEIGHT     = 160;
 
-	private static final int ITEM_HEIGHT = 18;
+	private static final int ITEM_HEIGHT	= 17;
 
-	private static final String TXT_TITLE = Messages.get(WndJournal.class, "journal");
-
-	private RenderedText txtTitle;
+	private RedButton btnTitle;
+	private RedButton btnCatalogues;
 	private ScrollPane list;
 
 	public WndJournal() {
 
 		super();
-		resize(WIDTH, ShatteredPixelDungeon.landscape() ? HEIGHT_L : HEIGHT_P);
+		resize( WIDTH, HEIGHT );
 
-		txtTitle = PixelScene.renderText(TXT_TITLE, 9);
-		txtTitle.hardlight(Window.TITLE_COLOR);
-		txtTitle.x = PixelScene.align(PixelScene.uiCamera,
-				(WIDTH - txtTitle.width()) / 2);
-		add(txtTitle);
+		//does nothing, we're already in the journal
+		btnTitle = new RedButton( Messages.get(this, "title"), 9 );
+		btnTitle.textColor( Window.TITLE_COLOR );
+		btnTitle.setRect(0, 0, WIDTH/2f - 1, btnTitle.reqHeight());
+		PixelScene.align(btnTitle);
+		add( btnTitle );
+
+		btnCatalogues = new RedButton( Messages.get(WndCatalogus.class, "title"), 9 ){
+			@Override
+			protected void onClick() {
+				hide();
+				GameScene.show(new WndCatalogus());
+			}
+		};
+		btnCatalogues.setRect(WIDTH/2f + 1, 0, WIDTH/2f - 1, btnCatalogues.reqHeight());
+		PixelScene.align( btnCatalogues );
+		add( btnCatalogues );
 
 		Component content = new Component();
 
-		Collections.sort(Journal.records);
+		Collections.sort( Journal.records );
 
 		float pos = 0;
+
+		//Keys
+		for (int i = Dungeon.hero.belongings.ironKeys.length-1; i > 0; i--){
+			if (Dungeon.hero.belongings.specialKeys[i] > 0){
+				String text;
+				if (i % 5 == 0)
+					text = Messages.capitalize(Messages.get(SkeletonKey.class, "name"));
+				else
+					text = Messages.capitalize(Messages.get(GoldenKey.class, "name"));
+
+				if (Dungeon.hero.belongings.specialKeys[i] > 1){
+					text += " x" + Dungeon.hero.belongings.specialKeys[i];
+				}
+				ListItem item = new ListItem( Messages.titleCase(text), i );
+				item.setRect( 0, pos, WIDTH, ITEM_HEIGHT );
+				content.add( item );
+
+				pos += item.height();
+			}
+			if (Dungeon.hero.belongings.ironKeys[i] > 0){
+				String text = Messages.titleCase(Messages.get(IronKey.class, "name"));
+
+				if (Dungeon.hero.belongings.ironKeys[i] > 1){
+					text += " x" + Dungeon.hero.belongings.ironKeys[i];
+				}
+
+				ListItem item = new ListItem( text, i );
+				item.setRect( 0, pos, WIDTH, ITEM_HEIGHT );
+				content.add( item );
+
+				pos += item.height();
+			}
+
+		}
+
+		//Journal entries
 		for (Journal.Record rec : Journal.records) {
-			ListItem item = new ListItem(rec.feature, rec.depth);
-			item.setRect(0, pos, WIDTH, ITEM_HEIGHT);
-			content.add(item);
+			ListItem item = new ListItem( rec.feature.desc(), rec.depth );
+			item.setRect( 0, pos, WIDTH, ITEM_HEIGHT );
+			content.add( item );
 
 			pos += item.height();
 		}
 
-		content.setSize(WIDTH, pos);
+		content.setSize( WIDTH, pos );
 
-		list = new ScrollPane(content);
-		add(list);
+		list = new ScrollPane( content );
+		add( list );
 
-		list.setRect(0, txtTitle.height(), WIDTH, height - txtTitle.height());
+		list.setRect( 0, btnTitle.height() + 1, WIDTH, height - btnTitle.height() - 1 );
 	}
 
 	private static class ListItem extends Component {
 
-		private RenderedText feature;
+		private RenderedTextMultiline feature;
 		private BitmapText depth;
-
+		private ColorBlock line;
 		private Image icon;
 
-		public ListItem(Journal.Feature f, int d) {
+		public ListItem( String text, int d ) {
 			super();
 
-			feature.text(f.desc);
+			feature.text( text );
 
-			depth.text(Integer.toString(d));
+			depth.text( Integer.toString( d ) );
 			depth.measure();
 
 			if (d == Dungeon.depth) {
-				feature.hardlight(TITLE_COLOR);
-				depth.hardlight(TITLE_COLOR);
+				feature.hardlight( TITLE_COLOR );
+				depth.hardlight( TITLE_COLOR );
 			}
 		}
 
 		@Override
 		protected void createChildren() {
-			feature = PixelScene.renderText(9);
-			add(feature);
+			feature = PixelScene.renderMultiline( 7 );
+			add( feature );
 
-			depth = new BitmapText(PixelScene.font1x);
-			add(depth);
+			depth = new BitmapText( PixelScene.pixelFont);
+			add( depth );
 
-			icon = Icons.get(Icons.DEPTH);
-			add(icon);
+			line = new ColorBlock( 1, 1, 0xFF222222);
+			add(line);
+
+			icon = Icons.get( Icons.DEPTH );
+			add( icon );
 		}
 
 		@Override
 		protected void layout() {
 
-			icon.x = width - icon.width;
+			depth.x = (8 - depth.width())/2f;
+			depth.y = y + 1.5f + (height() - 1 - depth.height()) / 2f;
+			PixelScene.align(depth);
 
-			depth.x = icon.x - 1 - depth.width();
-			depth.y = PixelScene.align(y + (height - depth.height()) / 2);
+			icon.x = 8;
+			icon.y = y + 1 + (height() - 1 - icon.height()) / 2f;
+			PixelScene.align(icon);
 
-			icon.y = depth.y - 1;
+			line.size(width, 1);
+			line.x = 0;
+			line.y = y;
 
-			feature.y = PixelScene.align(depth.y + depth.baseLine()
-					- feature.baseLine());
+			feature.maxWidth((int)(width - icon.width() - 8 - 1));
+			feature.setPos(icon.x + icon.width() + 1, y + 1 + (height() - 1 - feature.height()) / 2f);
+			PixelScene.align(feature);
 		}
 	}
 }
