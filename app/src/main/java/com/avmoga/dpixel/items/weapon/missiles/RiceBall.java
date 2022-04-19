@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.weapon.missiles;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Drowsy;
@@ -46,7 +47,7 @@ public class RiceBall extends MissileWeapon {
 	public static final float DURATION = 10f;
 
 	{
-		name = "rice dumpling";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.RICEBALL;
 		rapperValue = 0;
 
@@ -69,8 +70,7 @@ public class RiceBall extends MissileWeapon {
 
 	@Override
 	public String desc() {
-		return "A satisfying dumpling lovingly crafted from magic rice. "
-		       +"Anything that eats would gladly take a dumpling. ";
+		return Messages.get(this, "desc");
 	}
 	
 	@Override

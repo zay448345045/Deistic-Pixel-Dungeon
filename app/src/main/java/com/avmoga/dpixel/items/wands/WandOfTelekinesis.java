@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.wands;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.mobs.Mob;
@@ -27,8 +28,8 @@ import com.avmoga.dpixel.effects.MagicMissile;
 import com.avmoga.dpixel.effects.Pushing;
 import com.avmoga.dpixel.items.Dewdrop;
 import com.avmoga.dpixel.items.Heap;
-import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.Heap.Type;
+import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.potions.PotionOfStrength;
 import com.avmoga.dpixel.items.scrolls.ScrollOfUpgrade;
 import com.avmoga.dpixel.levels.Level;
@@ -42,10 +43,10 @@ import com.watabou.utils.Callback;
 
 public class WandOfTelekinesis extends Wand {
 
-	private static final String TXT_YOU_NOW_HAVE = "You have magically transported %s into your backpack";
+	private static final String TXT_YOU_NOW_HAVE = Messages.get(WandOfTelekinesis.class, "have");
 
 	{
-		name = "Wand of Telekinesis";
+		name = Messages.get(this, "name");
 		hitChars = false;
 	}
 
@@ -174,7 +175,6 @@ public class WandOfTelekinesis extends Wand {
 
 	@Override
 	public String desc() {
-		return "Waves of magic force from this wand will affect all cells on their way triggering traps, trampling high vegetation, "
-				+ "opening closed doors and closing open ones. They also push back monsters.";
+		return Messages.get(this, "desc");
 	}
 }

@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.food;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Bleeding;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Cripple;
@@ -30,10 +31,10 @@ import com.watabou.utils.Random;
 public class PotionOfConstitution extends Food {
 
 	{
-		name = "Honey";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.POTION_HONEY;
 		bones = true;
-		message = "You feel your life extending.";
+		message = Messages.get(this, "eat");
 		hornValue = 0;
 	}
 
@@ -53,11 +54,11 @@ public class PotionOfConstitution extends Food {
 				hero.sprite.emitter().start(Speck.factory(Speck.HEALING), 0.4f, 4);
 			
 		}
-	}	
-	
+	}
+
 	@Override
 	public String info() {
-		return "Life giving nectar.";
+		return Messages.get(this, "desc");
 	}
 
 

@@ -17,11 +17,10 @@
  */
 package com.avmoga.dpixel.items.weapon.melee;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.quest.DarkGold;
@@ -34,14 +33,16 @@ import com.avmoga.dpixel.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class ShortSword extends MeleeWeapon {
 
-	public static final String AC_REFORGE = "REFORGE";
+	public static final String AC_REFORGE = Messages.get(ShortSword.class, "ac_reforge");
 
-	private static final String TXT_SELECT_WEAPON = "Select a weapon to upgrade";
+	private static final String TXT_SELECT_WEAPON = Messages.get(ShortSword.class, "title");
 
-	private static final String TXT_REFORGED = "you reforged the short sword to upgrade your %s";
-	private static final String TXT_NOT_BOOMERANG = "you can't upgrade a boomerang this way";
+	private static final String TXT_REFORGED = Messages.get(ShortSword.class, "reforged");
+	private static final String TXT_NOT_BOOMERANG = Messages.get(ShortSword.class, "notboomerang");
 
 	private static final float TIME_TO_REFORGE = 2f;
 
@@ -50,7 +51,7 @@ public class ShortSword extends MeleeWeapon {
 	private float upgradeChance = 0.5f;
 
 	{
-		name = "short sword";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SHORT_SWORD;
 
 		bones = false;
@@ -98,7 +99,7 @@ public class ShortSword extends MeleeWeapon {
 
 	@Override
 	public String desc() {
-		return "It is indeed quite short, just a few inches longer, than a dagger.";
+		return Messages.get(this, "desc");
 	}
 
 	private final WndBag.Listener itemSelector = new WndBag.Listener() {
@@ -124,7 +125,7 @@ public class ShortSword extends MeleeWeapon {
 				            item.upgrade();
 				            upgradeChance = Math.max(0.5f, upgradeChance-0.1f);
 						 } else {
-							 GLog.w("%s is not strong enough to recieve anymore upgrades!", item.name());
+							GLog.w(Messages.get(ShortSword.class, "notenough"),item.name());
 							 i=level;
 						 }
 				  }

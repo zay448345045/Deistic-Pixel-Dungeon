@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.weapon.melee;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class Sword extends MeleeWeapon {
 
 	{
-		name = "sword";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SWORD;
 	}
 
@@ -32,6 +33,6 @@ public class Sword extends MeleeWeapon {
 
 	@Override
 	public String desc() {
-		return "The razor-sharp length of steel blade shines reassuringly.";
+		return Messages.get(this, "desc");
 	}
 }

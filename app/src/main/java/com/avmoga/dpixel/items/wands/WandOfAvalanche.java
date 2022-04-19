@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.wands;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -43,7 +44,7 @@ import com.watabou.utils.Random;
 public class WandOfAvalanche extends Wand {
 
 	{
-		name = "Wand of Avalanche";
+		name = Messages.get(this, "name");
 		hitChars = false;
 	}
 
@@ -88,7 +89,7 @@ public class WandOfAvalanche extends Wand {
 
 		if (!curUser.isAlive()) {
 			Dungeon.fail(Utils.format(ResultDescriptions.ITEM, name));
-			GLog.n("You killed yourself with your own Wand of Avalanche...");
+			GLog.n(Messages.get(this, "kill"));
 		}
 	}
 
@@ -100,7 +101,6 @@ public class WandOfAvalanche extends Wand {
 
 	@Override
 	public String desc() {
-		return "When a discharge of this wand hits a wall (or any other solid obstacle) it causes "
-				+ "an avalanche of stones, damaging and stunning all creatures in the affected area.";
+		return Messages.get(this, "desc", 2, 7 + level() / 3);
 	}
 }

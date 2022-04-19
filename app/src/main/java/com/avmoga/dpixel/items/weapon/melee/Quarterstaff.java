@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.weapon.melee;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class Quarterstaff extends MeleeWeapon {
 
 	{
-		name = "quarterstaff";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.QUARTERSTAFF;
 	}
 
@@ -32,6 +33,6 @@ public class Quarterstaff extends MeleeWeapon {
 
 	@Override
 	public String desc() {
-		return "A staff of hardwood, its ends are shod with iron.";
+		return Messages.get(this, "desc");
 	}
 }

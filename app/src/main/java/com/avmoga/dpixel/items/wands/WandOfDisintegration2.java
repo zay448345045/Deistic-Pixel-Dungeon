@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.items.wands;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.DungeonTilemap;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -35,10 +34,12 @@ import com.avmoga.dpixel.scenes.GameScene;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class WandOfDisintegration2 extends Wand {
 
 	{
-		name = "Wand of Disintegration";
+		name = Messages.get(this, "name");
 		hitChars = false;
 	}
 
@@ -113,7 +114,6 @@ public class WandOfDisintegration2 extends Wand {
 
 	@Override
 	public String desc() {
-		return "This wand emits a beam of destructive energy, which pierces all creatures in its way. "
-				+ "The more targets it hits, the more damage it inflicts to each of them.";
+		return Messages.get(this, "desc");
 	}
 }

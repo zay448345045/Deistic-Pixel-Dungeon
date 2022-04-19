@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.weapon.melee;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class BattleAxe extends MeleeWeapon {
 
 	{
-		name = "battle axe";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.BATTLE_AXE;
 	}
 
@@ -32,6 +33,6 @@ public class BattleAxe extends MeleeWeapon {
 
 	@Override
 	public String desc() {
-		return "The enormous steel head of this battle axe puts considerable heft behind each stroke.";
+		return Messages.get(this, "desc");
 	}
 }

@@ -1,7 +1,5 @@
 package com.avmoga.dpixel.items.artifacts;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.Actor;
@@ -21,20 +19,28 @@ import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class CommRelay extends Artifact {
 	{
-		name = "Communications relay";
+		name = "通信中继器";
 		image = ItemSpriteSheet.ARTIFACT_RADIO;
 		level = 0;
 		levelCap = 5;
 		
 		defaultAction = AC_MERC;
 	}
-	
-	private static final String AC_SUPP = "SUPPORT PACKAGE";
-	private static final String AC_MERC = "HIRE MERCENARY";
-	private static final String TXT_MERC = "A mercenary teleports adjacent to you!";
-	private static final String TXT_BOSS = "Strong magic aura of this place prevents the guilds from teleporting you supplies!";
+
+
+	//private static final String AC_SUPP = "SUPPORT PACKAGE";
+	//private static final String AC_MERC = "HIRE MERCENARY";
+	//private static final String TXT_MERC = "A mercenary teleports adjacent to you!";
+	//private static final String TXT_BOSS = "Strong magic aura of this place prevents the guilds from teleporting
+	// you supplies!";
+	private static final String AC_SUPP = "支持包";
+	private static final String AC_MERC = "呼唤雇佣兵";
+	private static final String TXT_MERC = "雇佣兵传送到你附近！";
+	private static final String TXT_BOSS = "这里强大的魔力流阻止了地牢国际委员公会预传送给你的雇佣兵！";
 	@Override
 	public ArrayList<String> actions(Hero hero) {
 		ArrayList<String> actions = super.actions(hero);
@@ -66,11 +72,11 @@ public class CommRelay extends Artifact {
 		if (action.equals(AC_MERC)) {
 			if(!cursed){
 				if (!isEquipped(hero))
-					GLog.i("You need to equip this to do that.");
+					GLog.i("你需要先装备神器才能使用！");
 				else if(!useable())
-					GLog.i("What are you trying to do?");
+					GLog.i("你想做什么？");
 				else if (!(Dungeon.gold >= 500))//TODO adjust the gold cost based on current level.
-					GLog.i("You are too poor to do that.");
+					GLog.i("你穷困潦倒，不能使用神器的该技能！");
 				else {
 					ArrayList<Integer> respawnPoints = new ArrayList<Integer>();
 
@@ -93,7 +99,8 @@ public class CommRelay extends Artifact {
 					}
 				}
 			} else {
-				GLog.i("The item will not obey you!");
+				GLog.i("我们不会服从你!");
+				//GLog.i("The item will not obey you!");
 			}
 		} else if (action.equals(AC_SUPP)) {
 			if(Dungeon.bossLevel()){
@@ -106,7 +113,7 @@ public class CommRelay extends Artifact {
 	
 	@Override
 	public String desc() {
-		String desc = "You are surprised to find a working communications relay in the dungeon! There is an " 
+		String desc = "You are surprised to find a working communications relay in the dungeon! There is an "
 				+ "instruction pamphlet included along with it, ";
 		if(Dungeon.hero.heroRace() == HeroRace.HUMAN){
 			desc += "and with a little bit of cross-referencing, you are able to identify its use. "

@@ -1,8 +1,7 @@
 package com.avmoga.dpixel.items.artifacts;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -12,6 +11,8 @@ import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.utils.Utils;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
 
 /**
  * Created by Evan on 24/08/2014.
@@ -64,13 +65,13 @@ public class Artifact extends KindofMisc {
 
 		if (hero.belongings.misc1 != null && hero.belongings.misc2 != null) {
 
-			GLog.w("you can only wear 2 misc items at a time");
+			GLog.w(Messages.get(Artifact.class, "2a"));
 			return false;
 
 		} else if ((hero.belongings.misc1 != null && hero.belongings.misc1.getClass() == this.getClass())
 				|| (hero.belongings.misc2 != null && hero.belongings.misc2.getClass() == this.getClass())) {
 
-			GLog.w("you cannot wear two of the same artifact");
+			GLog.w("你不能同时穿戴两个相同的神器");
 			return false;
 
 		} else {
@@ -89,7 +90,7 @@ public class Artifact extends KindofMisc {
 			identify();
 			if (cursed) {
 				equipCursed(hero);
-				GLog.n("the " + this.name + " painfully binds itself to you");
+				GLog.n("这件神器 " + this.name + " 令人痛苦地缠住了你的灵魂。");
 			}
 
 			hero.spendAndNext(TIME_TO_EQUIP);
@@ -158,8 +159,7 @@ public class Artifact extends KindofMisc {
 		if (cursed && cursedKnown && !isEquipped(Dungeon.hero)) {
 
 			return desc()
-					+ "\n\nYou can feel a malevolent magic lurking within the "
-					+ name() + ".";
+					+ Messages.get(this, "curse_known");
 
 		} else {
 

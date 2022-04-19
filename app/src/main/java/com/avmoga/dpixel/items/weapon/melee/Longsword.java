@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.weapon.melee;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class Longsword extends MeleeWeapon {
 
 	{
-		name = "longsword";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.LONG_SWORD;
 	}
 
@@ -32,6 +33,6 @@ public class Longsword extends MeleeWeapon {
 
 	@Override
 	public String desc() {
-		return "This towering blade inflicts heavy damage by investing its heft into every cut.";
+		return Messages.get(this, "desc");
 	}
 }

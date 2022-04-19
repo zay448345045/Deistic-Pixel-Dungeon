@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.weapon.melee;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class Glaive extends MeleeWeapon {
 
 	{
-		name = "glaive";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.GLAIVE;
 	}
 
@@ -32,6 +33,6 @@ public class Glaive extends MeleeWeapon {
 
 	@Override
 	public String desc() {
-		return "A polearm consisting of a sword blade on the end of a pole.";
+		return Messages.get(this, "desc");
 	}
 }

@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.weapon.missiles;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Cripple;
@@ -27,7 +28,7 @@ import com.watabou.utils.Random;
 public class Javelin extends MissileWeapon {
 
 	{
-		name = "javelin";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.JAVELIN;
 		rapperValue = 5;
 
@@ -54,8 +55,7 @@ public class Javelin extends MissileWeapon {
 
 	@Override
 	public String desc() {
-		return "This length of metal is weighted to keep the spike "
-				+ "at its tip foremost as it sails through the air.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

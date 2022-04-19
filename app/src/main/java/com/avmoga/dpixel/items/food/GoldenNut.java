@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.food;
 
 import com.avmoga.dpixel.Badges;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Hunger;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.sprites.CharSprite;
@@ -28,10 +29,10 @@ import com.watabou.utils.Random;
 public class GoldenNut extends Nut {
 
 	{
-		name = "golden dungeon nut";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SEED_GOLDENDUNGEONNUT;
 		energy = Hunger.STARVING;
-		message = "Melts in your mouth. Tastes like Nutella.";
+		message = Messages.get(this, "eat");
 		hornValue = 2;
 	}
 
@@ -43,33 +44,30 @@ public class GoldenNut extends Nut {
 		if (action.equals(AC_EAT)) {
 
 			switch (Random.Int(2)) {
-			case 0:
-				GLog.w("You have recieved the dungeon's blessing.");
-				
-				hero.HT+=20;
-				hero.STR+=2;
-				hero.sprite.showStatus(CharSprite.POSITIVE, "+2 str, +20 ht");
-				GLog.p("Newfound strength surges through your body.");
+				case 0:
+					GLog.p(Messages.get(this, "effect1"));
 
-				Badges.validateStrengthAttained();
-				break;
-			case 1:
-				GLog.w("You have recieved the dungeon's highest blessing.");
-				
-				hero.HT+=50;
-				hero.STR+=5;
-				hero.sprite.showStatus(CharSprite.POSITIVE, "+5 str, +50 ht");
-				GLog.p("Newfound strength surges through your body.");
+					hero.HT += 20;
+					hero.STR += 2;
+					hero.sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "effect2"));
+					GLog.p(Messages.get(this, "effect3"));
+					break;
+				case 1:
+					GLog.p(Messages.get(this, "effect4"));
 
-				Badges.validateStrengthAttained();
-				break;
+					hero.HT += 50;
+					hero.STR += 5;
+					hero.sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "effect5"));
+					GLog.p(Messages.get(this, "effect3"));
+					Badges.validateStrengthAttained();
+					break;
 			}
 		}
-	}	
-	
+	}
+
 	@Override
 	public String info() {
-		return "Unique dungeon nut gilded with enchantment.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

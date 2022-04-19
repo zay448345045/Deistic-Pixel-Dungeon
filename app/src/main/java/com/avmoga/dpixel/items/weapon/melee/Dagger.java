@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.weapon.melee;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class Dagger extends MeleeWeapon {
 
 	{
-		name = "dagger";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.DAGGER;
 	}
 
@@ -32,6 +33,6 @@ public class Dagger extends MeleeWeapon {
 
 	@Override
 	public String desc() {
-		return "A simple iron dagger with a well worn wooden handle.";
+		return Messages.get(this, "desc");
 	}
 }

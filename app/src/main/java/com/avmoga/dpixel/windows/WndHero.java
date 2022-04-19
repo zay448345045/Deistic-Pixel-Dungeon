@@ -201,30 +201,23 @@ public class WndHero extends WndTabbed {
 			title.setRect(0, 0, WIDTH, 0);
 			add(title);
 
-			RedButton btnCatalogus = new RedButton(TXT_CATALOGUS) {
+			RedButton btnCatalogus = new RedButton(TXT_JOURNAL) {
 				@Override
 				protected void onClick() {
 					hide();
-					GameScene.show(new WndCatalogus());
+					GameScene.show(new WndJournal());
 				};
-				//@Override
-				//protected boolean onLongClick() {
-				//	Hero heroToBuff = Dungeon.hero;
-				//	if (heroToBuff.pos==Dungeon.level.entrance && heroToBuff.belongings.weapon == null ){
-				//	heroToBuff.heroClass.playtest(heroToBuff);
-				//	}
-				//	return true;
-				//};
 			};
 			btnCatalogus.setRect(0, title.height(),
 					btnCatalogus.reqWidth() + 2, btnCatalogus.reqHeight() + 2);
 			add(btnCatalogus);
 
-			RedButton btnJournal = new RedButton(TXT_JOURNAL) {
+			RedButton btnJournal = new RedButton(TXT_CATALOGUS) {
 				@Override
 				protected void onClick() {
 					hide();
-					GameScene.show(new WndJournal());
+					GameScene.show(new WndCatalogus());
+
 				}
 			};
 			btnJournal.setRect(btnCatalogus.right() + 1, btnCatalogus.top(),

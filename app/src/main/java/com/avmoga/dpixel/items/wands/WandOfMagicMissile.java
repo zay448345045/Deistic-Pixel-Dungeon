@@ -17,11 +17,10 @@
  */
 package com.avmoga.dpixel.items.wands;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -39,13 +38,15 @@ import com.avmoga.dpixel.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class WandOfMagicMissile extends Wand {
 
-	public static final String AC_DISENCHANT = "DISENCHANT";
+	public static final String AC_DISENCHANT = Messages.get(WandOfMagicMissile.class, "ac_dis");
 
-	private static final String TXT_SELECT_WAND = "Select a wand to upgrade";
+	private static final String TXT_SELECT_WAND = Messages.get(WandOfMagicMissile.class, "title");
 
-	private static final String TXT_DISENCHANTED = "you disenchanted the Wand of Magic Missile and used its essence to upgrade your %s";
+	private static final String TXT_DISENCHANTED = Messages.get(WandOfMagicMissile.class, "dised");
 
 	private static final float TIME_TO_DISENCHANT = 2f;
 
@@ -54,7 +55,7 @@ public class WandOfMagicMissile extends Wand {
 	private float upgradeChance = 0.5f;
 
 	{
-		name = "Wand of Magic Missile";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.WAND_MAGIC_MISSILE;
 
 		bones = false;
@@ -84,7 +85,7 @@ public class WandOfMagicMissile extends Wand {
 
 			if (ch == curUser && !ch.isAlive()) {
 				Dungeon.fail(Utils.format(ResultDescriptions.ITEM, name));
-				GLog.n("You killed yourself with your own Wand of Magic Missile...");
+				GLog.n("你用自己的魔弹法杖杀死了自己……");
 			}
 		}
 	}
@@ -129,7 +130,7 @@ public class WandOfMagicMissile extends Wand {
 
 	@Override
 	public String desc() {
-		return "This wand launches missiles of pure magical energy, dealing moderate damage to a target creature.";
+		return Messages.get(this, "desc", 3 + level(), 6 + level() * 2);
 	}
 
 	private final WndBag.Listener itemSelector = new WndBag.Listener() {
@@ -166,7 +167,7 @@ public class WandOfMagicMissile extends Wand {
 					            item.upgrade();
 					            upgradeChance = Math.max(0.5f, upgradeChance-0.1f);
 							 } else {
-								 GLog.w("%s is not strong enough to recieve anymore upgrades!", item.name());
+								GLog.w(Messages.get(WandOfMagicMissile.class, "notenough", item.name()));
 								 i=level;
 							 }
 					  }

@@ -17,8 +17,6 @@
  */
 package com.avmoga.dpixel.items.rings;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
@@ -34,11 +32,22 @@ import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class Ring extends KindofMisc {
 
 	private static final int TICKS_TO_KNOW = 200;
 
 	private static final float TIME_TO_EQUIP = 1f;
+
+	public static HashSet<Class<? extends Ring>> getKnown() {
+		return handler.known();
+	}
+
+	public static HashSet<Class<? extends Ring>> getUnknown() {
+		return handler.unknown();
+	}
 
 	private static final String TXT_IDENTIFY = Messages.get(Ring.class, "identify");
 

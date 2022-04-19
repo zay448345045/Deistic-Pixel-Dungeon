@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.weapon.missiles;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Paralysis;
@@ -29,7 +30,7 @@ public class CurareDart extends MissileWeapon {
 	public static final float DURATION = 3f;
 
 	{
-		name = "curare dart";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.CURARE_DART;
 		rapperValue = 4;
 
@@ -56,8 +57,7 @@ public class CurareDart extends MissileWeapon {
 
 	@Override
 	public String desc() {
-		return "These little evil darts don't do much damage but they can paralyze "
-				+ "the target leaving it helpless and motionless for some time.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

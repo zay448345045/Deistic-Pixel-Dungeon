@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.wands;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
@@ -33,6 +34,7 @@ import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.ItemStatusHandler;
 import com.avmoga.dpixel.items.KindOfWeapon;
 import com.avmoga.dpixel.items.bags.Bag;
+import com.avmoga.dpixel.items.rings.Ring;
 import com.avmoga.dpixel.items.rings.RingOfMagic.Magic;
 import com.avmoga.dpixel.mechanics.Ballistica;
 import com.avmoga.dpixel.scenes.CellSelector;
@@ -50,7 +52,13 @@ public abstract class Wand extends KindOfWeapon {
 	private static final int USAGES_TO_KNOW = 40;
 
 	public static final String AC_ZAP = "ZAP";
+	public static HashSet<Class<? extends Wand>> getKnown() {
+		return handler.known();
+	}
 
+	public static HashSet<Class<? extends Wand>> getUnknown() {
+		return handler.unknown();
+	}
 	private static final String TXT_SILENCED = "You are silenced!";
 	private static final String TXT_WOOD = "This thin %s wand is warm to the touch. Who knows what it will do when used?";
 	private static final String TXT_DAMAGE = "When this wand is used as a melee weapon, its average damage is %d points per hit.";

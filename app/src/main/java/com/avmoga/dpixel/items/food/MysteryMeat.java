@@ -17,13 +17,14 @@
  */
 package com.avmoga.dpixel.items.food;
 
-import com.avmoga.dpixel.Dungeon;
-import com.avmoga.dpixel.actors.buffs.Blindness;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Buff;
+import com.avmoga.dpixel.actors.buffs.Burning;
 import com.avmoga.dpixel.actors.buffs.Hunger;
+import com.avmoga.dpixel.actors.buffs.Paralysis;
 import com.avmoga.dpixel.actors.buffs.Poison;
+import com.avmoga.dpixel.actors.buffs.Roots;
 import com.avmoga.dpixel.actors.buffs.Slow;
-import com.avmoga.dpixel.actors.buffs.Vertigo;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
@@ -32,10 +33,10 @@ import com.watabou.utils.Random;
 public class MysteryMeat extends Food {
 
 	{
-		name = "mystery meat";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.MYSTERYMEAT;
 		energy = Hunger.STARVING - Hunger.HUNGRY;
-		message = "That food couldn't have been good for you.";
+		message = Messages.get(this, "eat_msg");
 		hornValue = 1;
 	}
 
@@ -47,31 +48,30 @@ public class MysteryMeat extends Food {
 		if (action.equals(AC_EAT)) {
 
 			switch (Random.Int(5)) {
-			case 0:
-				GLog.w("You start feeling nauseous.");
-				Buff.prolong(hero, Vertigo.class, Vertigo.duration(hero));
-				break;
-			case 1:
-				GLog.w("Everything goes dark!");
-				Buff.prolong(hero, Blindness.class, Random.Int(10, 12));
-				Dungeon.observe();
-				break;
-			case 2:
-				GLog.w("You are not feeling well.");
-				Buff.affect(hero, Poison.class).set(
-						Poison.durationFactor(hero) * hero.HT / 10);
-				break;
-			case 3:
-				GLog.w("You can hardly move!");
-				Buff.prolong(hero, Slow.class, Slow.duration(hero));
-				break;
+				case 0:
+					GLog.w(Messages.get(this, "hot"));
+					Buff.affect(hero, Burning.class).reignite(hero);
+					break;
+				case 1:
+					GLog.w(Messages.get(this, "legs"));
+					Buff.prolong(hero, Roots.class, Paralysis.duration(hero));
+					break;
+				case 2:
+					GLog.w(Messages.get(this, "not_well"));
+					Buff.affect(hero, Poison.class).set(
+							Poison.durationFactor(hero) * hero.HT / 5);
+					break;
+				case 3:
+					GLog.w(Messages.get(this, "stuffed"));
+					Buff.prolong(hero, Slow.class, Slow.duration(hero));
+					break;
 			}
 		}
 	}
 
 	@Override
 	public String info() {
-		return "Eat at your own risk!";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

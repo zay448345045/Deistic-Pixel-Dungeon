@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.wands;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.mobs.npcs.NPC;
@@ -31,7 +32,7 @@ import com.watabou.utils.Callback;
 public class WandOfTeleportation extends Wand {
 
 	{
-		name = "Wand of Teleportation";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -64,14 +65,13 @@ public class WandOfTeleportation extends Wand {
 				ch.pos = pos;
 				ch.sprite.place(ch.pos);
 				ch.sprite.visible = Dungeon.visible[pos];
-				GLog.i(curUser.name + " teleported " + ch.name
-						+ " to somewhere");
+				GLog.i(Messages.get(this, "tele", curUser.name, ch.name));
 
 			}
 
 		} else {
 
-			GLog.i("nothing happened");
+			GLog.i(Messages.get(WandOfPoison.class, "nothing"));
 
 		}
 	}
@@ -85,7 +85,6 @@ public class WandOfTeleportation extends Wand {
 
 	@Override
 	public String desc() {
-		return "A blast from this wand will teleport a creature against "
-				+ "its will to a random place on the current level.";
+		return Messages.get(this, "desc");
 	}
 }

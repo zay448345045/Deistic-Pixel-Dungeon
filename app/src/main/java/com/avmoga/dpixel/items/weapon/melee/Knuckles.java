@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.weapon.melee;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class Knuckles extends MeleeWeapon {
 
 	{
-		name = "knuckleduster";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.KNUCKLEDUSTER;
 	}
 
@@ -32,6 +33,6 @@ public class Knuckles extends MeleeWeapon {
 
 	@Override
 	public String desc() {
-		return "A piece of iron shaped to fit around the knuckles.";
+		return Messages.get(this, "desc");
 	}
 }

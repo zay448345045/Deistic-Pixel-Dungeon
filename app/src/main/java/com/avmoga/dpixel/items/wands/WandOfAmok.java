@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.wands;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Amok;
@@ -33,7 +34,7 @@ import com.watabou.utils.Callback;
 public class WandOfAmok extends Wand {
 
 	{
-		name = "Wand of Amok";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -48,8 +49,7 @@ public class WandOfAmok extends Wand {
 			}
 
 		} else {
-
-			GLog.i("nothing happened");
+			GLog.i(Messages.get(this, "effect"));
 
 		}
 	}
@@ -63,7 +63,6 @@ public class WandOfAmok extends Wand {
 
 	@Override
 	public String desc() {
-		return "The purple light from this wand will make the target run amok "
-				+ "attacking random creatures in its vicinity.";
+		return Messages.get(this, "desc");
 	}
 }

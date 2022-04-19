@@ -17,26 +17,27 @@
  */
 package com.avmoga.dpixel.items.weapon.melee;
 
-import java.util.ArrayList;
-
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+
 public class Chainsaw extends MeleeWeapon {
 
 	{
-		name = "chainsaw hand";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.CHAINSAW;
 		reinforced = true;
 		cursed = true;
 	}
 	
 	public Boolean turnedOn = false;
-	public static final String AC_ON = "TURN ON";
-	public static final String AC_OFF = "TURN OFF";
+	public static final String AC_ON = Messages.get(Chainsaw.class, "ac_on");
+	public static final String AC_OFF = Messages.get(Chainsaw.class, "ac_off");
 	
 	@Override
 	public ArrayList<String> actions(Hero hero) {
@@ -48,13 +49,13 @@ public class Chainsaw extends MeleeWeapon {
 	@Override
 	public void execute(final Hero hero, String action) {
 		if (action.equals(AC_ON)) {
-			turnedOn=true;
-			GLog.i("The chainsaw roars to life!"); 
+			turnedOn = true;
+			GLog.i(Messages.get(this, "on"));
 			hero.next();
 
 		} else if (action.equals(AC_OFF)) {
-			turnedOn=false;		
-			GLog.i("The chainsaw sputters out.");
+			turnedOn = false;
+			GLog.i(Messages.get(this, "off"));
 			hero.next();
 		} else {
 			super.execute(hero, action);
@@ -70,13 +71,10 @@ public class Chainsaw extends MeleeWeapon {
 		//cursed=false;
 		return this;
 	}
-	
+
 	@Override
 	public String desc() {
-		return "Happy Halloween! "
-			   +"This dwarven device attaches to your arm and cannot be removed. "
-			  +"Its Bloodlust enchantment is fueled by dew from your vial. "
-			   ;
+		return Messages.get(this, "desc");
 	}
 	
 	private static final String TURNEDON = "turnedOn";

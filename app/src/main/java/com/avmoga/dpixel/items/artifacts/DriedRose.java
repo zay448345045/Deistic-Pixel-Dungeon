@@ -1,10 +1,8 @@
 package com.avmoga.dpixel.items.artifacts;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
@@ -28,13 +26,16 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 /**
  * Created by debenhame on 21/11/2014.
  */
 public class DriedRose extends Artifact {
 
 	{
-		name = "Dried Rose";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARTIFACT_ROSE1;
 
 		level = 0;
@@ -52,7 +53,7 @@ public class DriedRose extends Artifact {
 
 	public int droppedPetals = 0;
 
-	public static final String AC_SUMMON = "SUMMON";
+	public static final String AC_SUMMON = Messages.get(DriedRose.class, "ac_summon");
 
 	public DriedRose() {
 		super();
@@ -72,13 +73,13 @@ public class DriedRose extends Artifact {
 		if (action.equals(AC_SUMMON)) {
 
 			if (spawned)
-				GLog.n("sad ghost: \"I'm already here\"");
+				GLog.n(Messages.get(this, "spawned"));
 			else if (!isEquipped(hero))
-				GLog.i("You need to equip your rose to do that.");
+				GLog.i(Messages.get(this, "equip"));
 			else if (charge != chargeCap)
-				GLog.i("Your rose isn't fully charged yet.");
+				GLog.i(Messages.get(this, "no_charge"));
 			else if (cursed)
-				GLog.i("You cannot use a cursed rose.");
+				GLog.i(Messages.get(this, "cursed"));
 			else {
 				ArrayList<Integer> spawnPoints = new ArrayList<Integer>();
 				for (int i = 0; i < Level.NEIGHBOURS8.length; i++) {
@@ -104,7 +105,7 @@ public class DriedRose extends Artifact {
 					hero.sprite.operate(hero.pos);
 
 					if (!firstSummon) {
-						ghost.yell(GhostHero.VOICE_HELLO + Dungeon.hero.givenName());
+						ghost.yell(Messages.get(DriedRose.class, "hello", Dungeon.hero.givenName()));
 						Sample.INSTANCE.play(Assets.SND_GHOST);
 						firstSummon = true;
 					} else
@@ -115,7 +116,7 @@ public class DriedRose extends Artifact {
 					updateQuickslot();
 
 				} else
-					GLog.i("There is no free space near you.");
+					GLog.i(Messages.get(this, "no_space"));
 			}
 
 		} else {
@@ -125,24 +126,14 @@ public class DriedRose extends Artifact {
 
 	@Override
 	public String desc() {
-		String desc = "Is this the rose that the ghost mentioned before disappearing? It seems to hold some spiritual power,"
-				+ " perhaps it can be used to channel the energy of that lost warrior.";
+		String desc = Messages.get(this, "desc");
 
 		if (isEquipped(Dungeon.hero)) {
 			if (!cursed) {
-				desc += "\n\nThe rose rests in your hand, it feels strangely warm.";
-
-				if (level < 5)
-					desc += "\n\nThe rose has lost most of its petals. It feels extremely frail, like it "
-							+ "could snap any moment.";
-				else if (level < 10)
-					desc += "\n\nYou have reattached many petals and the rose has started to somehow come back to life."
-							+ " It almost looks like it's ready to bloom.";
-				else
-					desc += "\n\nThe rose has blossomed again through some kind of magic, its connection to your spirit"
-							+ " friend is stronger than ever.";
+				desc += Messages.get(this, "warm");
+				desc += Messages.get(this, "desc_hint");
 			} else
-				desc += "\n\nThe cursed rose is bound to you hand, it feels eerily cold.";
+				desc += Messages.get(this, "desc_cursed");
 		}
 
 		return desc;
@@ -203,7 +194,7 @@ public class DriedRose extends Artifact {
 					partialCharge--;
 					if (charge == chargeCap) {
 						partialCharge = 0f;
-						GLog.p("Your rose is fully charged!");
+						GLog.p(Messages.get(DriedRose.class, "charged"));
 					}
 				}
 			} else if (cursed && Random.Int(100) == 0) {
@@ -236,7 +227,7 @@ public class DriedRose extends Artifact {
 	public static class Petal extends Item {
 
 		{
-			name = "dried petal";
+			name = Messages.get(this, "name");
 			stackable = true;
 			image = ItemSpriteSheet.PETAL;
 		}
@@ -246,21 +237,22 @@ public class DriedRose extends Artifact {
 			DriedRose rose = hero.belongings.getItem(DriedRose.class);
 
 			if (rose == null) {
-				GLog.w("You have no rose to add this petal to.");
+				GLog.w(Messages.get(this, "no_rose"));
 				return false;
 			}
 			if (rose.level >= rose.levelCap) {
-				GLog.i("There is no room left for this petal, so you discard it.");
+				GLog.i(Messages.get(this, "no_room"));
+				hero.spendAndNext(TIME_TO_PICK_UP);
 				return true;
 			} else {
 
 				rose.upgrade();
 				if (rose.level == rose.levelCap) {
-					GLog.p("The rose is completed!");
+					GLog.p(Messages.get(this, "maxlevel"));
 					Sample.INSTANCE.play(Assets.SND_GHOST);
-					GLog.n("sad ghost: \"Thank you...\"");
+					GLog.n(Messages.get(DriedRose.class, "ghost"));
 				} else
-					GLog.i("You add the petal to the rose.");
+					GLog.i(Messages.get(this, "levelup"));
 
 				Sample.INSTANCE.play(Assets.SND_DEWDROP);
 				hero.spendAndNext(TIME_TO_PICK_UP);
@@ -271,7 +263,7 @@ public class DriedRose extends Artifact {
 
 		@Override
 		public String info() {
-			return "A frail dried up petal, which has somehow survived this far into the dungeon.";
+			return Messages.get(this, "desc");
 		}
 
 	}
@@ -279,7 +271,7 @@ public class DriedRose extends Artifact {
 	public static class GhostHero extends NPC {
 
 		{
-			name = "sad ghost";
+			name = Messages.get(this, "name");
 			spriteClass = GhostSprite.class;
 
 			flying = true;
@@ -334,7 +326,7 @@ public class DriedRose extends Artifact {
 
 		@Override
 		public String defenseVerb() {
-			return "evaded";
+			return Messages.get(this, "def_verb");
 		}
 
 		@Override
@@ -433,8 +425,7 @@ public class DriedRose extends Artifact {
 
 		@Override
 		public String description() {
-			return "A frail looking ethereal figure with a humanoid shape. Its power seems tied to the rose I have."
-					+ "\n\nThis ghost may not be much, but it seems to be my only true friend down here.";
+			return Messages.get(this, "desc");
 		}
 
 		private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();
@@ -455,100 +446,44 @@ public class DriedRose extends Artifact {
 
 		public static final String VOICE_HELLO = "Hello again ";
 
-		private static final String VOICE_INTRODUCE = "My spirit is bound to this rose, it was very precious to me, a "
-				+ "gift from my love whom I left on the surface.\n\nI cannot return to him, but thanks to you I have a "
-				+ "second chance to complete my journey. When I am able I will respond to your call and fight with you.\n\n"
-				+ "hopefully you may succeed where I failed...";
+		private static final String VOICE_INTRODUCE = Messages.get(DriedRose.class, "1");
 
-		// 1st index - depth type, 2nd index - specific line.
 		public static final String[][] VOICE_AMBIENT = {
-				{
-						"These sewers were once safe, some even lived here in the winter...",
-						"I wonder what happened to the guard patrols, did they give up?...",
-						"I had family on the surface, I hope they are safe..." },
-				{
-						"I've heard stories about this place, nothing good...",
-						"This place was always more of a dungeon than a prison...",
-						"I can't imagine what went on when this place was abandoned..." },
-				{
-						"No human or dwarf has been here for a very long time...",
-						"Something must have gone very wrong, for the dwarves to abandon a gold mine...",
-						"I feel great evil lurking below..." },
-				{ "The dwarves were industrious, but greedy...",
-						"I hope the surface never ends up like this place...",
-						"So the dwarvern metropolis really has fallen..." },
-				{
-						"What is this place?...",
-						"So the stories are true, we have to fight a demon god...",
-						"I feel a great evil in this place..." },
-				{ "... I don't like this place... We should leave as soon as possible..." } };
+				{Messages.get(DriedRose.class, "2")},
+				{Messages.get(DriedRose.class, "3")},
+				{Messages.get(DriedRose.class, "4")},
+				{Messages.get(DriedRose.class, "5")},
+				{Messages.get(DriedRose.class, "6")},
+				{Messages.get(DriedRose.class, "7")}};
 
 		// 1st index - depth type, 2nd index - boss or not, 3rd index - specific
 		// line.
 		public static final String[][][] VOICE_ENEMIES = {
-				{
-						{
-								"Let's make the sewers safe again...",
-								"If the guards couldn't defeat them, perhaps we can...",
-								"These crabs are extremely annoying..." },
-						{
-								"Beware Goo!...",
-								"Many of my friends died to this thing, time for vengeance...",
-								"Such an abomination cannot be allowed to live..." } },
-				{
-						{
-								"What dark magic happened here?...",
-								"To think the captives of this place are now its guardians...",
-								"They were criminals before, now they are monsters..." },
-						{
-								"If only he would see reason, he doesn't seem insane...",
-								"He assumes we are hostile, if only he would stop to talk...",
-								"The one prisoner left sane is a deadly assassin. Of course..." } },
-				{
-						{
-								"The creatures here are twisted, just like the sewers... ",
-								"more gnolls, I hate gnolls...",
-								"Even the bats are bloodthirsty here..." },
-						{
-								"Only dwarves would build a mining machine that kills looters...",
-								"That thing is huge...",
-								"How has it survived here for so long?..." } },
-				{
-						{
-								"Dwarves aren't supposed to look that pale...",
-								"I don't know what's worse, the dwarves, or their creations...",
-								"They all obey their master without question, even now..." },
-						{
-								"When people say power corrupts, this is what they mean...",
-								"He's more a Lich than a King now...",
-								"Looks like he's more demon than dwarf now..." } },
-				{
-						{ "What the heck is that thing?...",
-								"This place is terrifying...",
-								"What were the dwarves thinking, toying with power like this?..." },
-						{ "Oh.... this doesn't look good...",
-								"So that's what a god looks like?...",
-								"This is going to hurt..." } },
-				{
-						{ "I don't like this place... we should leave as soon as we can..." },
-						{ "Hello source viewer, I'm writing this here as this line should never trigger. Have a nice day!" } } };
+				{{Messages.get(DriedRose.class, "8")}, {Messages.get(DriedRose.class, "9")}},
+				{{Messages.get(DriedRose.class, "10")}, {Messages.get(DriedRose.class, "11")}},
+				{{Messages.get(DriedRose.class, "12")}, {Messages.get(DriedRose.class, "13")}},
+				{{Messages.get(DriedRose.class, "14")}, {Messages.get(DriedRose.class, "15")}},
+				{{Messages.get(DriedRose.class, "16")}, {Messages.get(DriedRose.class, "17")}},
+				{{Messages.get(DriedRose.class, "18")},
+						{"Hello source viewer, I'm writing this here as this line should never trigger. Have a nice day!"}}};
 
 		// 1st index - Yog or not, 2nd index - specific line.
 		public static final String[][] VOICE_BOSSBEATEN = {
-				{ "Yes!", "Victory!" },
-				{ "It's over... we won...",
-						"I can't believe it... We just killed a god..." } };
+				{Messages.get(DriedRose.class, "19")},
+				{Messages.get(DriedRose.class, "20")}};
+
 
 		// 1st index - boss or not, 2nd index - specific line.
 		public static final String[][] VOICE_DEFEATED = {
-				{ "Good luck...", "I will return...", "Tired... for now..." },
-				{ "No... I can't....", "I'm sorry.. good luck..",
-						"Finish it off... without me..." } };
+				{Messages.get(DriedRose.class, "21"), Messages.get(DriedRose.class, "22"),
+						Messages.get(DriedRose.class, "23")},
+				{Messages.get(DriedRose.class, "24"), Messages.get(DriedRose.class, "25"),
+						Messages.get(DriedRose.class, "26")}};
 
-		public static final String[] VOICE_HEROKILLED = { "nooo...", "no...",
-				"I couldn't help them..." };
+		public static final String[] VOICE_HEROKILLED = {Messages.get(DriedRose.class, "27"),
+				Messages.get(DriedRose.class, "28"), Messages.get(DriedRose.class, "29")};
 
-		public static final String[] VOICE_BLESSEDANKH = { "Incredible!...",
-				"Wish I had one of those...", "How did you survive that?..." };
+		public static final String[] VOICE_BLESSEDANKH = {Messages.get(DriedRose.class, "30"),
+				Messages.get(DriedRose.class, "31"), Messages.get(DriedRose.class, "32")};
 	}
 }

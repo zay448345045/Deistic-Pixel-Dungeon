@@ -17,10 +17,8 @@
  */
 package com.avmoga.dpixel.items.wands;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -37,10 +35,13 @@ import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class WandOfLightning extends Wand {
 
 	{
-		name = "Wand of Lightning";
+		name = Messages.get(this, "name");
 	}
 
 	private ArrayList<Char> affected = new ArrayList<Char>();
@@ -53,7 +54,7 @@ public class WandOfLightning extends Wand {
 		// Everything is processed in fx() method
 		if (!curUser.isAlive()) {
 			Dungeon.fail(Utils.format(ResultDescriptions.ITEM, name));
-			GLog.n("You killed yourself with your own Wand of Lightning...");
+			GLog.n(Messages.get(this, "kill"));
 		}
 	}
 
@@ -114,7 +115,6 @@ public class WandOfLightning extends Wand {
 
 	@Override
 	public String desc() {
-		return "This wand conjures forth deadly arcs of electricity, which deal damage "
-				+ "to several creatures standing close to each other.";
+		return Messages.get(this, "desc", 5 + level(), Math.round(10 + (level() * level() / 4f)));
 	}
 }

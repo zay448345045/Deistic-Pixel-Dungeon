@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.wands;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.mobs.npcs.NPC;
@@ -38,7 +39,7 @@ import com.watabou.utils.Random;
 public class WandOfFlock extends Wand {
 
 	{
-		name = "Wand of Flock";
+		name = Messages.get(this, "name");
 	}
 
 	@Override

@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.wands;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.Regrowth;
 import com.avmoga.dpixel.effects.MagicMissile;
@@ -33,6 +34,7 @@ import com.watabou.utils.Callback;
 public class WandOfRegrowth extends Wand {
 
 	{
+		name = Messages.get(this, "name");
 		name = "Wand of Regrowth";
 	}
 
@@ -59,7 +61,7 @@ public class WandOfRegrowth extends Wand {
 
 		} else {
 
-			GLog.i("nothing happened");
+			GLog.i(Messages.get(WandOfPoison.class, "nothing"));
 
 		}
 	}
@@ -73,6 +75,6 @@ public class WandOfRegrowth extends Wand {
 
 	@Override
 	public String desc() {
-		return "\"When life ceases new life always begins to grow... The eternal cycle always remains!\"";
+		return Messages.get(this, "desc");
 	}
 }

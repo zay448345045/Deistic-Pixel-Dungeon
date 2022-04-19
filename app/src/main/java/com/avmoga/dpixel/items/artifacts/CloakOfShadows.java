@@ -1,9 +1,8 @@
 package com.avmoga.dpixel.items.artifacts;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.items.Item;
@@ -14,13 +13,15 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+
 /**
  * Created by debenhame on 25/08/2014.
  */
 public class CloakOfShadows extends Artifact {
 
 	{
-		name = "Cloak of Shadows";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARTIFACT_CLOAK;
 
 		level = 0;
@@ -40,7 +41,7 @@ public class CloakOfShadows extends Artifact {
 
 	private boolean stealthed = false;
 
-	public static final String AC_STEALTH = "STEALTH";
+	public static final String AC_STEALTH = Messages.get(CloakOfShadows.class, "ac_stealth");
 
 	@Override
 	public ArrayList<String> actions(Hero hero) {
@@ -56,14 +57,13 @@ public class CloakOfShadows extends Artifact {
 
 			if (!stealthed) {
 				if (!isEquipped(hero))
-					GLog.i("You need to equip your cloak to do that.");
+					GLog.i(Messages.get(this, "equip"));
 				else if (cooldown > 0)
-					GLog.i("Your cloak needs " + cooldown
-							+ " more rounds to re-energize.");
+					GLog.i(Messages.get(this, "cooldown", cooldown));
 				else if (Dungeon.depth == 29)
-					GLog.i("An ancient magic in this place prevents you from using your cloak.");
+					GLog.i(Messages.get(this, "29"));
 				else if (charge <= 1)
-					GLog.i("Your cloak hasn't recharged enough to be usable yet.");
+					GLog.i(Messages.get(this, "no_charge"));
 				else {
 					stealthed = true;
 					hero.spend(1f);
@@ -78,14 +78,14 @@ public class CloakOfShadows extends Artifact {
 						hero.sprite.alpha(0.4f);
 					}
 					hero.sprite.operate(hero.pos);
-					GLog.i("Your cloak blends you into the shadows.");
+					GLog.i(Messages.get(this, "enable"));
 				}
 			} else {
 				stealthed = false;
 				activeBuff.detach();
 				activeBuff = null;
 				hero.sprite.operate(hero.pos);
-				GLog.i("You return from underneath your cloak.");
+				GLog.i(Messages.get(this, "disable"));
 			}
 
 		} else
@@ -128,20 +128,16 @@ public class CloakOfShadows extends Artifact {
 
 	@Override
 	public String desc() {
-		String desc = "This light silken cloak shimmers in and out of your vision as it sways in the air. When worn, "
-				+ "it can be used to hide your presence for a short time.\n\n";
+		String desc = Messages.get(this, "desc1");
 
 		if (level < 5)
-			desc += "The cloak's magic has faded and it is not very powerful, perhaps it will regain strength through use.";
+			desc += Messages.get(this, "desc2");
 		else if (level < 10)
-			desc += "The cloak's power has begun to return.";
+			desc += Messages.get(this, "desc3");
 		else if (level < 15)
-			desc += "The cloak has almost returned to full strength.";
+			desc += Messages.get(this, "desc4");
 		else
-			desc += "The cloak is at full potential and will work for extended durations.";
-
-		if (isEquipped(Dungeon.hero))
-			desc += "\n\nThe cloak rests around your shoulders.";
+			desc += Messages.get(this, "desc5");
 
 		return desc;
 	}
@@ -214,7 +210,7 @@ public class CloakOfShadows extends Artifact {
 			charge--;
 			if (charge <= 0) {
 				detach();
-				GLog.w("Your cloak has run out of energy.");
+				GLog.w(Messages.get(this, "no_charge"));
 				((Hero) target).interrupt();
 			}
 
@@ -223,7 +219,7 @@ public class CloakOfShadows extends Artifact {
 			if (exp >= (level + 1) * 50 && level < levelCap) {
 				upgrade();
 				exp -= level * 50;
-				GLog.p("Your cloak grows stronger!");
+				GLog.p(Messages.get(this, "levelup"));
 			}
 
 			updateQuickslot();
@@ -235,7 +231,12 @@ public class CloakOfShadows extends Artifact {
 
 		@Override
 		public String toString() {
-			return "Cloaked";
+			return Messages.get(this, "name");
+		}
+
+		@Override
+		public String desc() {
+			return Messages.get(this, "desc");
 		}
 
 		@Override

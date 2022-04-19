@@ -56,11 +56,11 @@ public class WndCatalogus extends WndTabbed {
 
 		resize( WIDTH, HEIGHT );
 
-		btnJournal = new RedButton( Messages.get(WndJournal.class, "title"), 9 ){
+		btnJournal = new RedButton( "图鉴P1", 9 ){
 			@Override
 			protected void onClick() {
 				hide();
-				GameScene.show(new WndJournal());
+				GameScene.show(new WndCatalogus());
 			}
 		};
 		btnJournal.setRect(0, 0, WIDTH/2f - 1, btnJournal.reqHeight());
@@ -68,7 +68,13 @@ public class WndCatalogus extends WndTabbed {
 		add( btnJournal );
 
 		//does nothing, we're already in the catalog
-		btnTitle = new RedButton( Messages.get(this, "title"), 9 );
+		btnTitle = new RedButton( "图鉴P2", 9 ){
+			@Override
+			protected void onClick() {
+				hide();
+				GameScene.show(new WndCatalogus2());
+			}
+		};
 		btnTitle.textColor( Window.TITLE_COLOR );
 		btnTitle.setRect(WIDTH/2f+1, 0, WIDTH/2f - 1, btnTitle.reqHeight());
 		PixelScene.align(btnTitle);
@@ -145,7 +151,7 @@ public class WndCatalogus extends WndTabbed {
 		list.setSize( list.width(), list.height() );
 	}
 
-	private static class ListItem extends Component {
+	public static class ListItem extends Component {
 
 		private Item item;
 		private boolean identified;

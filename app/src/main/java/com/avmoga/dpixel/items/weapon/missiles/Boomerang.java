@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.weapon.missiles;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.items.Item;
@@ -27,7 +28,7 @@ import com.avmoga.dpixel.sprites.MissileSprite;
 public class Boomerang extends MissileWeapon {
 
 	{
-		name = "boomerang";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.BOOMERANG;
 
 		STR = 10;
@@ -107,18 +108,18 @@ public class Boomerang extends MissileWeapon {
 
 	@Override
 	public String desc() {
-		String info = "Thrown to the enemy this flat curved wooden missile will return to the hands of its thrower.";
+		String info = Messages.get(this, "desc");
 		switch (imbue) {
-		case LIGHT:
-			info += "\n\nIt was balanced to be lighter. ";
-			break;
-		case HEAVY:
-			info += "\n\nIt was balanced to be heavier. ";
-			break;
-		case NONE:
+			case LIGHT:
+				info += Messages.get(this, "lighter");
+				break;
+			case HEAVY:
+				info += Messages.get(this, "heavier");
+				break;
+			case NONE:
 		}
-		if(reinforced){
-			info += "\n\nIt is reinforced. ";
+		if (reinforced) {
+			info += Messages.get(this, "reinforced");
 		}
 		return info;
 	}

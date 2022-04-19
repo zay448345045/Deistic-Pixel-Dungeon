@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.weapon.melee;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class Spear extends MeleeWeapon {
 
 	{
-		name = "spear";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SPEAR;
 	}
 
@@ -32,6 +33,6 @@ public class Spear extends MeleeWeapon {
 
 	@Override
 	public String desc() {
-		return "A slender wooden rod tipped with sharpened iron.";
+		return Messages.get(this, "desc");
 	}
 }

@@ -1,7 +1,5 @@
 package com.avmoga.dpixel.items.artifacts;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -23,12 +21,14 @@ import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Bundle;
-import com.watabou.utils.Random;
 import com.watabou.utils.Callback;
+import com.watabou.utils.Random;
+
+import java.util.ArrayList;
 
 public class AresChains extends Artifact {
 	{
-		name = "Chains of Ares";
+		name = "战神之链";
 		image = ItemSpriteSheet.ARTIFACT_SHIELD;
 		
 		level = 0;

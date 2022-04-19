@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.food;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Hunger;
 import com.avmoga.dpixel.actors.buffs.Roots;
@@ -31,17 +32,16 @@ import com.watabou.utils.Random;
 public class GoldenJelly extends Food {
 
 	{
-		name = "golden jelly mushroom";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.MUSHROOM_GOLDENJELLY;
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
-		message = "Munch munch";
+		message = Messages.get(BlueMilk.class, "eat");
 		hornValue = 1;
 		bones = false;
 	}
 
-	private static final String TXT_PREVENTING = "Something tells you that wouldn't be a good idea here!";
-	private static final String TXT_EFFECT = "The floor of the dungeon glitters with sticky spores! "
-			                                 +"Where am I going? What are shoes? ";
+	private static final String TXT_PREVENTING = Messages.get(BlueMilk.class, "prevent");
+	private static final String TXT_EFFECT = Messages.get(GoldenJelly.class, "effect");
 
 	@Override
 	public void execute(Hero hero, String action) {
@@ -77,12 +77,11 @@ public class GoldenJelly extends Food {
 			}
 		}
 	   super.execute(hero, action);
-	}	
-	
+	}
+
 	@Override
 	public String info() {
-		return "A gelatinous fungi covered in a sticky ooze. "
-				+"Looks like it might cause some havoc if eaten. ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

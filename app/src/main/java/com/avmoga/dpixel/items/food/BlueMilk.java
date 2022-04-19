@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.food;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.BerryRegeneration;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Haste;
@@ -32,16 +33,16 @@ import com.watabou.utils.Random;
 public class BlueMilk extends Food {
 
 	{
-		name = "blue milk mushroom";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.MUSHROOM_BLUEMILK;
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
-		message = "Munch munch";
+		message = Messages.get(this, "eat");
 		hornValue = 1;
 		bones = false;
 	}
 
-	private static final String TXT_PREVENTING = "Something tells you that wouldn't be a good idea here! ";
-	private static final String TXT_EFFECT = "You are slipping through the ether! ";
+	private static final String TXT_PREVENTING = Messages.get(BlueMilk.class, "prevent");
+	private static final String TXT_EFFECT = Messages.get(BlueMilk.class, "effect");
 
 	@Override
 	public void execute(Hero hero, String action) {
@@ -81,12 +82,11 @@ public class BlueMilk extends Food {
 		}
 	   
 	   super.execute(hero, action);
-	}	
-	
+	}
+
 	@Override
 	public String info() {
-		return "This mushroom oozes a milky blue substance. "
-				+"You feel your senses slipping. ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

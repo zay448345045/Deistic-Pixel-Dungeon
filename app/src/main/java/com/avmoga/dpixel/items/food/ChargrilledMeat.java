@@ -17,13 +17,14 @@
  */
 package com.avmoga.dpixel.items.food;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Hunger;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class ChargrilledMeat extends Food {
 
 	{
-		name = "chargrilled meat";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.STEAK;
 		energy = Hunger.STARVING/2;
 		hornValue = 1;
@@ -32,7 +33,7 @@ public class ChargrilledMeat extends Food {
 
 	@Override
 	public String info() {
-		return "It looks like a decent steak.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

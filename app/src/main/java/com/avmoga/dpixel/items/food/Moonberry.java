@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.food;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Barkskin;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Hunger;
@@ -29,10 +30,10 @@ import com.watabou.utils.Random;
 public class Moonberry extends Food {
 
 	{
-		name = "dungeon moon berry";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SEED_MOONBERRY;
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
-		message = "Juicy!";
+		message = Messages.get(Blackberry.class, "eat");
 		hornValue = 1;
 		bones = false;
 	}
@@ -44,25 +45,23 @@ public class Moonberry extends Food {
 
 		if (action.equals(AC_EAT)) {
 
-				switch (Random.Int(2)) {
+			switch (Random.Int(2)) {
 				case 0:
-					GLog.w("The moon berry fills your body with fearsome strength.");
+					GLog.p(Messages.get(FullMoonberry.class, "effect"));
 					Buff.affect(hero, Strength.class);
 					break;
 				case 1:
-					GLog.w("The moon berry fills your body with fearsome strength.");
+					GLog.p(Messages.get(FullMoonberry.class, "effect"));
 					Buff.affect(hero, Strength.class);
-					Buff.affect(hero, Barkskin.class).level(hero.HT*2);
+					Buff.affect(hero, Barkskin.class).level(hero.HT);
 					break;
-				}
 			}
-	}	
-	
+		}
+	}
+
 	@Override
 	public String info() {
-		return "A hearty blue-green berry found in the depths of the dungeon. "
-				+"This berry has a tough endocarp and radiates powerful magic. "
-			    +"Just a whiff of it and you feel a magical fury build within you. ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

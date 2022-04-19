@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.weapon.missiles;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.mobs.Assassin;
 import com.avmoga.dpixel.actors.mobs.Bat;
@@ -31,14 +32,14 @@ import com.avmoga.dpixel.actors.mobs.SpectralRat;
 import com.avmoga.dpixel.actors.mobs.Thief;
 import com.avmoga.dpixel.actors.mobs.npcs.Ghost.GnollArcher;
 import com.avmoga.dpixel.items.Item;
-import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.sprites.ItemSprite.Glowing;
+import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;
 
 public class ForestDart extends MissileWeapon {
 
 	{
-		name = "forest dart";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.DART;
 		rapperValue = 4;
 
@@ -85,8 +86,7 @@ public class ForestDart extends MissileWeapon {
 
 	@Override
 	public String desc() {
-		return "These legendary hunting darts are specifically designed  "
-				+ "to put down beasts that linger in the shadows.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

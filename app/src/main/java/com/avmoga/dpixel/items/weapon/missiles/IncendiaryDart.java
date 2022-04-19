@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.weapon.missiles;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.Blob;
@@ -32,7 +33,7 @@ import com.watabou.utils.Random;
 public class IncendiaryDart extends MissileWeapon {
 
 	{
-		name = "incendiary dart";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.INCENDIARY_DART;
 		rapperValue = 1;
 
@@ -68,8 +69,7 @@ public class IncendiaryDart extends MissileWeapon {
 
 	@Override
 	public String desc() {
-		return "The spike on each of these darts is designed to pin it to its target "
-				+ "while the unstable compounds strapped to its length burst into brilliant flames.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

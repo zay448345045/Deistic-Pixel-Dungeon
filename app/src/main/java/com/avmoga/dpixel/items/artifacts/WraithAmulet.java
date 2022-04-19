@@ -1,8 +1,5 @@
 package com.avmoga.dpixel.items.artifacts;
 //TODO Rewrite me! Replace both effects with something more useful.
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -12,20 +9,23 @@ import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.hero.HeroRace;
 import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.effects.particles.ShadowParticle;
-import com.avmoga.dpixel.sprites.ItemSpriteSheet;
-import com.avmoga.dpixel.ui.QuickSlotButton;
-import com.avmoga.dpixel.utils.GLog;
-import com.watabou.utils.Random;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.wands.WandOfBlink;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.scenes.CellSelector;
 import com.avmoga.dpixel.scenes.GameScene;
+import com.avmoga.dpixel.sprites.ItemSpriteSheet;
+import com.avmoga.dpixel.ui.QuickSlotButton;
+import com.avmoga.dpixel.utils.GLog;
+import com.watabou.utils.Random;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class WraithAmulet extends Artifact {
 	
 	{
-		name = "Wraithmetal Amulet";
+		name = "幽灵金属护身符";
 		image = ItemSpriteSheet.ARTIFACT_WAMULET;
 		
 		charge = ((level + 2 / 2) +3 );

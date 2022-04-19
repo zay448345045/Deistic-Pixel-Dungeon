@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.weapon.melee;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class RoyalSpork extends MeleeWeapon {
 
 	{
-		name = "royal spork";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ROYALSPORK;
 	}
 
@@ -32,8 +33,6 @@ public class RoyalSpork extends MeleeWeapon {
 
 	@Override
 	public String desc() {
-		return "Is it a spoon? Is it a fork? It is neither and it is both. "
-				+"This one is gold and covered in jewels. Totally special. "
-				+"Mobs better respect!";
+		return Messages.get(this, "desc");
 	}
 }

@@ -17,22 +17,23 @@
  */
 package com.avmoga.dpixel.items.food;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Hunger;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class OverpricedRation extends Food {
 
 	{
-		name = "overpriced food ration";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.OVERPRICED;
 		energy = Hunger.STARVING - Hunger.HUNGRY;
-		message = "That food tasted ok.";
+		message = Messages.get(this, "eat_msg");
 		hornValue = 1;
 	}
 
 	@Override
 	public String info() {
-		return "It looks exactly like a standard ration of food but smaller.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

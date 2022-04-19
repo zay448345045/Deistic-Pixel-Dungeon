@@ -2,14 +2,7 @@ package com.avmoga.dpixel.ui.changelist;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Messages.Messages;
-import com.avmoga.dpixel.items.Ankh;
-import com.avmoga.dpixel.items.food.Blandfruit;
 import com.avmoga.dpixel.scenes.ChangesScene;
-import com.avmoga.dpixel.sprites.ItemSprite;
-import com.avmoga.dpixel.sprites.ItemSpriteSheet;
-import com.avmoga.dpixel.sprites.MolotovHuntsmanSprite;
-import com.avmoga.dpixel.sprites.RatSprite;
-import com.avmoga.dpixel.sprites.TorchHustmanSprites;
 import com.avmoga.dpixel.ui.Icons;
 import com.avmoga.dpixel.ui.Window;
 import com.watabou.noosa.Image;
@@ -23,6 +16,28 @@ public class v0_1_X_Changes{
     }
 
     public static void add_v0_1_0_Changes( ArrayList<ChangeInfo> changeInfos ){
+
+        ChangeInfo changes4 = new ChangeInfo("CN-0.45自然之神的像素地牢", true,
+                "");
+        changes4.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes4);
+
+        changes4 = new ChangeInfo( Messages.get( ChangesScene.class, "new"), false, null);
+        changes4.hardlight( 0x00ff00 );
+        changeInfos.add(changes4);
+
+        changes4.addButton( new ChangeButton(Icons.get(Icons.PREFS), Messages.get(ChangesScene.class, "misc"),
+                "-1.更多的翻译被追加了\n" +
+                        "-2.图鉴得到了极大扩展"));
+
+        changes4 = new ChangeInfo( Messages.get( ChangesScene.class, "bugfixes"), false, null);
+        changes4.hardlight( 0xffff00 );
+        changeInfos.add(changes4);
+
+        changes4.addButton( new ChangeButton(new Image(Assets.SPINNER, 144, 0, 16, 16),
+                Messages.get(ChangesScene.class, "bugfixes"),
+                "-1.修复了天狗层的Bug\n" +
+                        "-2.其他性能优化"));
 
         ChangeInfo changes3 = new ChangeInfo("CN-0.42自然之神的像素地牢", true,
                 "");

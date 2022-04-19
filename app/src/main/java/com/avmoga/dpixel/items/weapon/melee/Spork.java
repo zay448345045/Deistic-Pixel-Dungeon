@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.weapon.melee;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class Spork extends MeleeWeapon {
 
 	{
-		name = "spork";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SPORK;
 		reinforced=true;
 	}
@@ -33,7 +34,6 @@ public class Spork extends MeleeWeapon {
 
 	@Override
 	public String desc() {
-		return "Is it a spoon? Is it a fork? It is neither and it is both. "
-				+"Mobs better respect!";
+		return Messages.get(this, "desc");
 	}
 }

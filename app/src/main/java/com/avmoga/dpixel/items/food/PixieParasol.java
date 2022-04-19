@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.food;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.BerryRegeneration;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Drowsy;
@@ -34,7 +35,7 @@ import com.watabou.utils.Random;
 public class PixieParasol extends Food {
 
 	{
-		name = "pixie parasol mushroom";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.MUSHROOM_PIXIEPARASOL;
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
 		message = "Munch munch";
@@ -42,55 +43,57 @@ public class PixieParasol extends Food {
 		bones = false;
 	}
 
-	private static final String TXT_PREVENTING = "Something tells you that wouldn't be a good idea here! ";
-	private static final String TXT_EFFECT = "You are floating in your dream! ";
+	private static final String TXT_PREVENTING = Messages.get(BlueMilk.class, "prevent");
+	private static final String TXT_EFFECT = Messages.get(PixieParasol.class, "effect");
 
 	@Override
 	public void execute(Hero hero, String action) {
-		
-		if (action.equals(AC_EAT)) {
-			
-			if (Dungeon.bossLevel()){
-				GLog.w(TXT_PREVENTING);
-				return;
-			}
 
-		}
-		
-	   if (action.equals(AC_EAT)) {
-		   
-		   
-		   GLog.w(TXT_EFFECT);
-			
-		   switch (Random.Int(10)) {
-			case 1:
-				for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
-					Buff.affect(mob, Drowsy.class);
-					Buff.prolong(mob, Paralysis.class, Random.IntRange(10, 16));
-					mob.sprite.centerEmitter().start(Speck.factory(Speck.NOTE),	0.3f, 5);
-				}
-				Buff.affect(hero, BerryRegeneration.class).level(hero.HT);
-				break;
-			case 0: case 2: case 3: case 4: case 5: 
-			case 6: case 7: case 8: case 9: case 10:
-				for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
-					Buff.affect(mob, Drowsy.class);
-					Buff.prolong(mob, Paralysis.class, Random.IntRange(10, 16));
-					mob.sprite.centerEmitter().start(Speck.factory(Speck.NOTE),	0.3f, 5);
-				}
-				Buff.affect(hero, Vertigo.class, 5f);
-				Buff.affect(hero, BerryRegeneration.class).level(hero.HT);
-				break;
+		if (action.equals(AC_EAT)) {
+
+
+			GLog.w(TXT_EFFECT);
+
+			switch (Random.Int(10)) {
+				case 1:
+					for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
+						if (mob.hostile) {
+							Buff.affect(mob, Drowsy.class);
+							Buff.prolong(mob, Paralysis.class, Random.IntRange(10, 16));
+							mob.sprite.centerEmitter().start(Speck.factory(Speck.NOTE), 0.3f, 5);
+						}
+					}
+					Buff.affect(hero, BerryRegeneration.class).level(hero.HT);
+					break;
+				case 0:
+				case 2:
+				case 3:
+				case 4:
+				case 5:
+				case 6:
+				case 7:
+				case 8:
+				case 9:
+				case 10:
+					for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
+						if (mob.hostile) {
+							Buff.affect(mob, Drowsy.class);
+							Buff.prolong(mob, Paralysis.class, Random.IntRange(10, 16));
+							mob.sprite.centerEmitter().start(Speck.factory(Speck.NOTE), 0.3f, 5);
+						}
+					}
+					Buff.affect(hero, Vertigo.class, 5f);
+					Buff.affect(hero, BerryRegeneration.class).level(hero.HT);
+					break;
 			}
 		}
 	   
 	   super.execute(hero, action);
-	}	
-	
+	}
+
 	@Override
 	public String info() {
-		return "These mushrooms seem to spin in front of your eyes. "
-				+"You hear fleeting laughter. ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

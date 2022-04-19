@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.weapon.missiles;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.Blob;
@@ -30,7 +31,7 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 public class IncendiaryShuriken extends MissileWeapon {
 
 	{
-		name = "incendiary shuriken";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SHURIKEN;
 		rapperValue = 4;
 
@@ -66,11 +67,10 @@ public class IncendiaryShuriken extends MissileWeapon {
 		Buff.affect(defender, Burning.class).reignite(defender);
 		super.proc(attacker, defender, damage);
 	}
-	
+
 	@Override
 	public String desc() {
-		return "Star-shaped pieces of metal with razor-sharp blades do significant damage "
-				+ "when they hit a target. They can be thrown at very high rate.";
+		return Messages.get(this, "desc");
 	}
 
 	

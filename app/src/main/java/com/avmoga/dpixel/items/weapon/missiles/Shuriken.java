@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.weapon.missiles;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;
@@ -24,7 +25,7 @@ import com.watabou.utils.Random;
 public class Shuriken extends MissileWeapon {
 
 	{
-		name = "shuriken";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SHURIKEN;
 		rapperValue = 2;
 
@@ -47,8 +48,7 @@ public class Shuriken extends MissileWeapon {
 
 	@Override
 	public String desc() {
-		return "Star-shaped pieces of metal with razor-sharp blades do significant damage "
-				+ "when they hit a target. They can be thrown at very high rate.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

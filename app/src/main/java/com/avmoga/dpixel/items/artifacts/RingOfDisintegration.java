@@ -1,10 +1,9 @@
 package com.avmoga.dpixel.items.artifacts;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.DungeonTilemap;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -28,13 +27,15 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 /**
  * Created by dachhack on 10/15/2015.
  */
 public class RingOfDisintegration extends Artifact {
 
 	{
-		name = "Ring of Disintegration";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.RING_DISINTEGRATION;
 
 		level = 0;
@@ -49,13 +50,13 @@ public class RingOfDisintegration extends Artifact {
 		defaultAction = AC_BLAST;
 	}
 
-	protected String inventoryTitle = "Select a scroll";
+	protected String inventoryTitle = Messages.get(RingOfDisintegration.class, "invtitle");
 	protected WndBag.Mode mode = WndBag.Mode.SCROLL;
 	
 	public static int consumedpts = 0;
-	
-	public static final String AC_BLAST = "BLAST";
-	public static final String AC_ADD = "ADD";
+
+	public static final String AC_BLAST = Messages.get(RingOfDisintegration.class, "ac_blast");
+	public static final String AC_ADD = Messages.get(RingOfDisintegration.class, "ac_add");
 
 
 	@Override
@@ -72,17 +73,17 @@ public class RingOfDisintegration extends Artifact {
 	public void execute(Hero hero, String action) {
 		super.execute(hero, action);
 		if (action.equals(AC_BLAST)) {
-   
+
 			if (!isEquipped(hero))
-				GLog.i("You need to equip your ring to do that.");
+				GLog.i(Messages.get(this, "equip"));
 			else if (charge != chargeCap)
-				GLog.i("Your ring isn't full charged yet.");
+				GLog.i(Messages.get(this, "no_charge"));
 			else {
 				
 				blast(hero.pos);
 				charge = 0;
 				updateQuickslot();
-				GLog.p("Blast!");
+				GLog.p("爆破！");
 				
 			}
 			
@@ -207,13 +208,13 @@ public class RingOfDisintegration extends Artifact {
 
 	@Override
 	public String desc() {
-		String desc = "The ring of disintegration vibrates with power. ";
+		String desc = Messages.get(this, "desc1");
 		if (isEquipped(Dungeon.hero)) {
 			desc += "\n\n";
 			if (charge < 100)
-				desc += "Its power is restrained for now. ";
+				desc += Messages.get(this, "desc2");
 			else
-				desc += "It is glowing with power at the brink of being unleashed! ";
+				desc += Messages.get(this, "desc3");
 		}
 
 		return desc;
@@ -283,21 +284,21 @@ public class RingOfDisintegration extends Artifact {
 				hero.sprite.emitter().burst(ElmoParticle.FACTORY, 12);
 
 				item.detach(hero.belongings.backpack);
-				GLog.h("Your ring consumes the power from the scroll! It is at %s points!", consumedpts);
+				GLog.i(Messages.get(RingOfDisintegration.class, "points", consumedpts));
 				
 				int levelChk = ((level()*level()/2)+1)*10;
 								
 				if (consumedpts > levelChk && level()<10) {
 					upgrade();
-					GLog.p("Your ring certainly looks better!");
+					GLog.p(Messages.get(RingOfDisintegration.class, "better"));
 					}
-				
-			
-			} else if (item instanceof Scroll && !item.isIdentified()){
-				GLog.w("You're not sure what type of scroll this is yet.");
-		   } else if (item != null){
-			GLog.w("You are unable to add this scroll to the book.");
-		}
+
+
+			} else if (item instanceof Scroll && !item.isIdentified()) {
+				GLog.w(Messages.get(RingOfDisintegration.class, "notsure"));
+			} else if (item != null) {
+				GLog.w(Messages.get(RingOfDisintegration.class, "unable"));
+			}
 	 }
 	};
 	

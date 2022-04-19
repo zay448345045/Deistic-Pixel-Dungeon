@@ -24,7 +24,7 @@ import com.watabou.utils.Random;
 public class Wave extends MissileWeapon {
 
 	{
-		name = "wave";
+		name = "湮灭波刃";
 		image = ItemSpriteSheet.WAVE;
 		rapperValue = 0;
 

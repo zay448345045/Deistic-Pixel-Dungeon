@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.food;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Bleeding;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Cripple;
@@ -31,16 +32,16 @@ import com.watabou.utils.Random;
 public class Earthstar extends Food {
 
 	{
-		name = "earthstar mushroom";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.MUSHROOM_EARTHSTAR;
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
-		message = "Munch munch";
+		message = Messages.get(BlueMilk.class, "eat");
 		hornValue = 1;
 		bones = false;
 	}
-	
-	private static final String TXT_PREVENTING = "Something tells you that wouldn't be a good idea here! ";
-	private static final String TXT_EFFECT = "Power from an alien world lashes out at you! ";
+
+	private static final String TXT_PREVENTING = Messages.get(BlueMilk.class, "prevent");
+	private static final String TXT_EFFECT = Messages.get(Earthstar.class, "effect");
 
 	@Override
 	public void execute(Hero hero, String action) {
@@ -87,12 +88,11 @@ public class Earthstar extends Food {
 		}
 	   
 	   super.execute(hero, action);
-	}	
-	
+	}
+
 	@Override
 	public String info() {
-		return "A tiny bit of an unknown world grows in this mushroom. "
-				+"It doesn't feel like a place you'd like to visit... ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.wands;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.effects.MagicMissile;
@@ -31,7 +32,7 @@ import com.watabou.utils.Callback;
 public class WandOfBlink extends Wand {
 
 	{
-		name = "Wand of Blink";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -76,7 +77,6 @@ public class WandOfBlink extends Wand {
 
 	@Override
 	public String desc() {
-		return "This wand will allow you to teleport in the chosen direction. "
-				+ "Creatures and inanimate obstructions will block the teleportation.";
+		return Messages.get(this, "desc");
 	}
 }

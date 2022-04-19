@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.weapon.missiles;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Bleeding;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -27,7 +28,7 @@ import com.watabou.utils.Random;
 public class Tamahawk extends MissileWeapon {
 
 	{
-		name = "tomahawk";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.TOMAHAWK;
 		rapperValue = 6;
 
@@ -54,8 +55,7 @@ public class Tamahawk extends MissileWeapon {
 
 	@Override
 	public String desc() {
-		return "This throwing axe is not that heavy, but it still "
-				+ "requires significant strength to be used effectively.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

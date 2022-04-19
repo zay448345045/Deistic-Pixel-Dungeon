@@ -38,6 +38,9 @@ import com.avmoga.dpixel.items.Generator;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.potions.Potion;
 import com.avmoga.dpixel.items.rings.Ring;
+import com.avmoga.dpixel.items.rings.RingFour;
+import com.avmoga.dpixel.items.rings.RingThree;
+import com.avmoga.dpixel.items.rings.RingTwo;
 import com.avmoga.dpixel.items.scrolls.Scroll;
 import com.avmoga.dpixel.items.wands.Wand;
 import com.avmoga.dpixel.levels.BattleLevel;
@@ -208,7 +211,9 @@ public class Dungeon {
 		Potion.initColors();
 		Wand.initWoods();
 		Ring.initGems();
-
+		RingTwo.initGems();
+		RingThree.initGems();
+		RingFour.initGems();
 		Statistics.reset();
 		Journal.reset();
 
@@ -943,6 +948,9 @@ public static Level newThiefBossLevel(){
 			Potion.save(bundle);
 			Wand.save(bundle);
 			Ring.save(bundle);
+			RingTwo.save(bundle);
+			RingThree.save(bundle);
+			RingFour.save(bundle);
 
 			Actor.storeNextID(bundle);
 
@@ -1028,6 +1036,9 @@ public static Level newThiefBossLevel(){
 		Potion.restore(bundle);
 		Wand.restore(bundle);
 		Ring.restore(bundle);
+		RingTwo.restore(bundle);
+		RingThree.restore(bundle);
+		RingFour.restore(bundle);
 
 		quickslot.restorePlaceholders(bundle);
 

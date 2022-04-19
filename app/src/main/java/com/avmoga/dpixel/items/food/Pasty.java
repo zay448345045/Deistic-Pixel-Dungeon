@@ -17,13 +17,14 @@
  */
 package com.avmoga.dpixel.items.food;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Hunger;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class Pasty extends Food {
 
 	{
-		name = "pasty";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.PASTY;
 		energy = Hunger.STARVING;
 		hornValue = 5;
@@ -33,7 +34,7 @@ public class Pasty extends Food {
 
 	@Override
 	public String info() {
-		return "This is authentic Cornish pasty with traditional filling of beef and potato.";
+		return Messages.get(this, "pasty_desc");
 	}
 
 	@Override

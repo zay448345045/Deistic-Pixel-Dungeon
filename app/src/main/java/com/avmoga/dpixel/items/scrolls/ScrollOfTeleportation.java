@@ -74,7 +74,7 @@ public class ScrollOfTeleportation extends Scroll {
 				break;
 			}
 		} while (pos == -1);
-		Dungeon.level.drop(item, pos);
+		//Dungeon.level.drop(item, pos);
 		item.detach(hero.belongings.backpack);
 		GLog.w(TXT_DET);
 	}

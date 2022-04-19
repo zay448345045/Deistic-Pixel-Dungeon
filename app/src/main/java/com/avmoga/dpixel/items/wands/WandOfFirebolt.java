@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.wands;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -46,7 +47,7 @@ import com.watabou.utils.Random;
 public class WandOfFirebolt extends Wand {
 
 	{
-		name = "Wand of Firebolt";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -71,7 +72,7 @@ public class WandOfFirebolt extends Wand {
 			ch.damage(damage, this);
 			
 			if (damage>255){
-				GLog.n("Your wand of Firebolt is burning your hands!");
+				GLog.n("你的火弩箭魔杖正在燃烧你的双手！");
 			}
 			
 			float backfireChance = Math.max(((damage-255)/10000),0);
@@ -86,7 +87,7 @@ public class WandOfFirebolt extends Wand {
 
 			if (ch == curUser && !ch.isAlive()) {
 				Dungeon.fail(Utils.format(ResultDescriptions.ITEM, name));
-				GLog.n("You killed yourself with your own Wand of Firebolt...");
+				GLog.n(Messages.get(this, "kill"));
 			}
 		}
 	}

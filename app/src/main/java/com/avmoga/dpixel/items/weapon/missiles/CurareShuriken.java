@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.weapon.missiles;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Paralysis;
@@ -29,7 +30,7 @@ public class CurareShuriken extends MissileWeapon {
 	public static final float DURATION = 3f;
 
 	{
-		name = "curare shuriken";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SHURIKEN;
 		rapperValue = 4;
 		STR = 13;
@@ -57,8 +58,7 @@ public class CurareShuriken extends MissileWeapon {
 
 	@Override
 	public String desc() {
-		return "Star-shaped pieces of metal with razor-sharp blades do significant damage "
-				+ "when they hit a target. They can be thrown at very high rate.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.items.weapon.missiles;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -33,13 +32,15 @@ import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.windows.WndOptions;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class MissileWeapon extends Weapon {
 
 	public int rapperValue;
-	private static final String TXT_MISSILES = "Missile weapon";
-	private static final String TXT_YES = "Yes, I know what I'm doing";
-	private static final String TXT_NO = "No, I changed my mind";
-	private static final String TXT_R_U_SURE = "Do you really want to equip it as a melee weapon?";
+	private static final String TXT_MISSILES = Messages.get(MissileWeapon.class, "missiles");
+	private static final String TXT_YES = Messages.get(MissileWeapon.class, "yes");
+	private static final String TXT_NO = Messages.get(MissileWeapon.class, "no");
+	private static final String TXT_R_U_SURE = Messages.get(MissileWeapon.class, "sure");
 
 	{
 		stackable = true;
@@ -148,27 +149,29 @@ public class MissileWeapon extends Weapon {
 	@Override
 	public String info() {
 
+		String name = name();
 		StringBuilder info = new StringBuilder(desc());
 
-		info.append("\n\nAverage damage of this weapon equals to "
-				+ (MIN + (MAX - MIN) / 2) + " points per hit. ");
+		info.append(Messages.get(this, "avgdmg", MIN, MAX));
 
 		if (Dungeon.hero.belongings.backpack.items.contains(this)) {
 			if (STR > Dungeon.hero.STR()) {
-				info.append("\n\nBecause of your inadequate strength the accuracy and speed "
-						+ "of your attack with this " + name + " is decreased.");
+				info.append(Messages.get(this, "decreased", name));
 			}
 			if (STR < Dungeon.hero.STR()
 					&& Dungeon.hero.heroClass == HeroClass.HUNTRESS) {
-				info.append("\n\nBecause of your excess strength the damage "
-						+ "of your attack with this " + name + " is increased.");
+				info.append(Messages.get(this, "increased", name));
 			}
 		}
 
-		info.append("\n\nAs this weapon is designed to be used at a distance, it is much less accurate if used at melee range.");
+		info.append(Messages.get(this, "distance"));
 
 		if (isEquipped(Dungeon.hero)) {
-			info.append("\n\nYou hold the " + name + " at the ready.");
+			info.append(Messages.get(this, "ready", name));
+		}
+
+		if (enchantment != null) {
+			info.append(" " + Messages.get(enchantment, "desc"));
 		}
 
 		return info.toString();

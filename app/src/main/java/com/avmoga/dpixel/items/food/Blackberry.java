@@ -58,7 +58,7 @@ public class Blackberry extends Food {
 					GLog.i("你能判定现在本层内就只有你一个人。");
 				}
 				Buff.affect(hero, BerryRegeneration.class).level(hero.HT+hero.HT);
-				GLog.w("The berry releases energy your body!");
+				GLog.w(Messages.get(this, "eat3"));
 				break;
 			case 0: case 2: case 3: case 4: case 5: 
 			case 6: case 7: case 8: case 9: case 10:

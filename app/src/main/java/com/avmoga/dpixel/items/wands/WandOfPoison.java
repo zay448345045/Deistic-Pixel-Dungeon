@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.wands;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -33,7 +34,7 @@ import com.watabou.utils.Callback;
 public class WandOfPoison extends Wand {
 
 	{
-		name = "Wand of Poison";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -50,7 +51,7 @@ public class WandOfPoison extends Wand {
 
 		} else {
 
-			GLog.i("nothing happened");
+			GLog.i(Messages.get(this, "nothing"));
 
 		}
 	}
@@ -63,9 +64,6 @@ public class WandOfPoison extends Wand {
 
 	@Override
 	public String desc() {
-		return "The vile blast of this twisted bit of wood will imbue its target "
-				+ "with a deadly venom. A creature that is poisoned will suffer periodic "
-				+ "damage until the effect ends. The duration of the effect increases "
-				+ "with the level of the staff.";
+		return Messages.get(this, "desc", 3 + level());
 	}
 }

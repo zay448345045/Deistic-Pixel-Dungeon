@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.weapon.melee;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class WarHammer extends MeleeWeapon {
 
 	{
-		name = "war hammer";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.WAR_HAMMER;
 	}
 
@@ -32,7 +33,6 @@ public class WarHammer extends MeleeWeapon {
 
 	@Override
 	public String desc() {
-		return "Few creatures can withstand the crushing blow of this towering mass of lead and steel, "
-				+ "but only the strongest of adventurers can use it effectively.";
+		return Messages.get(this, "desc");
 	}
 }

@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.wands;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -32,7 +33,7 @@ import com.watabou.utils.Callback;
 public class WandOfSlowness extends Wand {
 
 	{
-		name = "Wand of Slowness";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -44,7 +45,7 @@ public class WandOfSlowness extends Wand {
 
 		} else {
 
-			GLog.i("nothing happened");
+			GLog.i(Messages.get(WandOfPoison.class, "nothing"));
 
 		}
 	}
@@ -58,7 +59,6 @@ public class WandOfSlowness extends Wand {
 
 	@Override
 	public String desc() {
-		return "This wand will cause a creature to move and attack "
-				+ "at half its ordinary speed until the effect ends";
+		return Messages.get(this, "desc");
 	}
 }

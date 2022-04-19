@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.food;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Barkskin;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.FullMoonStrength;
@@ -31,10 +32,10 @@ import com.watabou.utils.Random;
 public class FullMoonberry extends Food {
 
 	{
-		name = "dungeon full moon berry";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SEED_FULLMOONBERRY;
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
-		message = "Juicy!";
+		message = Messages.get(Blackberry.class, "eat");
 		hornValue = 1;
 		bones = false;
 	}
@@ -46,29 +47,27 @@ public class FullMoonberry extends Food {
 
 		if (action.equals(AC_EAT)) {
 
-				switch (Random.Int(2)) {
+			switch (Random.Int(2)) {
 				case 0:
-					GLog.w("The moon berry fills your body with fearsome magical strength.");
+					GLog.p(Messages.get(this, "effect"));
 					Buff.affect(hero, Strength.class);
 					Buff.affect(hero, FullMoonStrength.class);
 					Buff.affect(hero, Light.class, Light.DURATION);
 					break;
 				case 1:
-					GLog.w("The moon berry fills your body with fearsome magical strength.");
+					GLog.p(Messages.get(this, "effect"));
 					Buff.affect(hero, Strength.class);
 					Buff.affect(hero, FullMoonStrength.class);
-					Buff.affect(hero, Barkskin.class).level(hero.HT*2);
+					Buff.affect(hero, Barkskin.class).level(hero.HT * 2);
 					Buff.affect(hero, Light.class, Light.DURATION);
 					break;
-				}
 			}
-	}	
-	
+		}
+	}
+
 	@Override
 	public String info() {
-		return "In the darkest hours of night a full moon berry grows. "
-				+"The wishes of the dungeon are concentrated into its strong magic. "
-			    +"Just a whiff of it and you feel a magical fury build within you. ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override
