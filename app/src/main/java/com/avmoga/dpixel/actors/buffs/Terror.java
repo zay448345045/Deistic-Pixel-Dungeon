@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.ui.BuffIndicator;
 import com.watabou.utils.Bundle;
@@ -48,7 +49,12 @@ public class Terror extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Terror";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
 	}
 
 	public static void recover(Char target) {

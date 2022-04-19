@@ -1,5 +1,6 @@
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
 import com.avmoga.dpixel.scenes.GameScene;
@@ -53,7 +54,12 @@ public class ToxicImbue extends Buff {
 
 	@Override
 	public String toString() {
-		return "Imbued with Toxicity";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns(left));
 	}
 
 	{

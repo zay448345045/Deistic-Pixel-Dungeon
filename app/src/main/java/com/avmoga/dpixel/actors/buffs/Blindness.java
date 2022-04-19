@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.buffs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ui.BuffIndicator;
 
 public class Blindness extends FlavourBuff {
@@ -35,6 +36,11 @@ public class Blindness extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Blinded";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
 	}
 }

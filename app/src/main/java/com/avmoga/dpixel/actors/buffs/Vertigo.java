@@ -20,7 +20,7 @@ import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.items.rings.RingOfElements.Resistance;
 import com.avmoga.dpixel.ui.BuffIndicator;
-
+//1
 public class Vertigo extends FlavourBuff {
 
 	public static final float DURATION = 10f;

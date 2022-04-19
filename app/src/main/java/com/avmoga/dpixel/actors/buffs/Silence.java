@@ -16,7 +16,7 @@ public class Silence extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Silenced";
+		return "沉默";
 	}
 
 	public static float duration(Char ch) {

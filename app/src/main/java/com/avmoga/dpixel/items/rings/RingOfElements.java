@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.rings;
 
 import java.util.HashSet;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
 import com.avmoga.dpixel.actors.buffs.Burning;
 import com.avmoga.dpixel.actors.buffs.Poison;
@@ -31,7 +32,7 @@ import com.watabou.utils.Random;
 public class RingOfElements extends Ring {
 
 	{
-		name = "Ring of Elements";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -41,9 +42,7 @@ public class RingOfElements extends Ring {
 
 	@Override
 	public String desc() {
-		return isKnown() ? "This ring provides resistance to different elements, such as fire, "
-				+ "electricity, gases etc. Also it decreases duration of negative effects."
-				: super.desc();
+		return isKnown() ? Messages.get(this, "desc") : super.desc();
 	}
 
 	private static final HashSet<Class<?>> EMPTY = new HashSet<Class<?>>();

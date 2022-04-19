@@ -19,6 +19,7 @@ package com.avmoga.dpixel.actors.mobs.npcs;
 
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.items.AdamantArmor;
@@ -41,25 +42,18 @@ import com.avmoga.dpixel.windows.WndQuest;
 public class Blacksmith2 extends NPC {
 
 
-	private static final String TXT_LOOKS_BETTER = "your %s pulsates with magical energy. ";
-	private static final String TXT2 = "My brother and I make all the items in this dungeon. "
-			                          +"He melts down two upgraded items to enhance one of them. "
-			                          +"My specialty is reinforcing items with adamantite. "
-			                          +"Come back to me when you have 50 dark gold and some adamantite for me to work with. " ;
-	
-	private static final String TXT3 = "Oh ho! Looks like you have some adamantite there. "
-                                     +"I can reinforce an item with adamantite if you wish. "
-                                     +"Reinforced items can handle higher levels of magical upgrade. "
-                                     +"It'll cost you though!. "
-                                     +"Come back to me when you have 50 dark gold. " ;
-	
-	
+	private static final String TXT_LOOKS_BETTER = "你的 %s 被注入了魔法能量。";
+	private static final String TXT2 = "我和我的哥哥制做了这个地牢里所有的优质物品。他可以通过熔炼两个武器来增强其中的一个，而我的专长是用精金突破一个物品的升级限制。当你有_50_块暗金矿和一些精金时再回到我这来，我会为你锻造它们。" ;
+
+	private static final String TXT3 = "看起来你这儿有一些精金，我可以使用这些精金帮你移除某些物品的等级限制。但是，我需要大量的暗金矿来工作。当你有_50_块暗金矿时再回到我这儿来。" ;
+
+
 
 	{
-		name = "Troll Blacksmith named Bop";
+		name = Messages.get(Blacksmith2.class, "name");
 		spriteClass = BlacksmithSprite.class;
 	}
-	
+
 
 	@Override
 	protected boolean act() {
@@ -69,11 +63,10 @@ public class Blacksmith2 extends NPC {
 
 	@Override
 	public void interact() {
-		Dungeon.names++;
-		this.name = BlacksmithName.getName(Dungeon.names);
+
 		sprite.turnTo(pos, Dungeon.hero.pos);
-		
-		
+
+
 		DarkGold gold = Dungeon.hero.belongings.getItem(DarkGold.class);
 		if (!checkAdamant()) {
 			tell(TXT2);
@@ -84,61 +77,61 @@ public class Blacksmith2 extends NPC {
 		} else {
 			tell(TXT2);
 		}
-		
+
 	}
 
 	public static String verify(Item item1, Item item2) {
-	
+
 		if (item1 == item2) {
-			return "Select 2 different items, not the same item twice!";
+			return "选择两个不同的物品，不是两次一样的！";
 		}
 
 		if (!item1.isIdentified()) {
-			return "I need to know what I'm working with, identify first!";
+			return "我需要知道我在拿什么干活，先鉴定它们！";
 		}
 
 		if (item1.cursed) {
-			return "I don't work with cursed items!";
+			return "我可不碰被诅咒的东西！";
 		}
-		
+
 		if (item1.reinforced) {
-			return "This is already as strong as it gets!";
+			return "这个东西已经被界限突破过了！";
 		}
 
 		if (item1.level < 0) {
-			return "This is junk, the quality is too poor!";
+			return "这简直就是个垃圾，质量太烂了！";
 		}
 
 		if (!item1.isUpgradable()) {
-			return "I can't reforge these items!";
+			return "我不能锻造这些东西！";
 		}
-		
+
 		if(item1 instanceof Armor && item2 instanceof AdamantArmor){
-			return null;			
+			return null;
 		}
-		
+
 		if(item1 instanceof MeleeWeapon && item2 instanceof AdamantWeapon){
 			return null;
 		}
-		
+
 		if(item1 instanceof Boomerang && item2 instanceof AdamantWeapon){
 			return null;
 		}
-		
+
 		if(item1 instanceof Wand && item2 instanceof AdamantWand){
 			return null;
 		}
-		
+
 		if(item1 instanceof Ring && item2 instanceof AdamantRing){
 			return null;
 		}
-		
-		return "This won't work. Pick and item and a matching adamantite item. ";
-		
+
+		return "这没用。选择一个物品和一个与之匹配的精金物品。";
+
 	}
-	
+
 	public static void upgrade(Item item1, Item item2) {
-		
+
 		item1.reinforced=true;
 		item2.detach(Dungeon.hero.belongings.backpack);
 		DarkGold gold = Dungeon.hero.belongings.getItem(DarkGold.class);
@@ -148,33 +141,33 @@ public class Blacksmith2 extends NPC {
 				gold.detachAll(Dungeon.hero.belongings.backpack);
 			}
 		}
-		
+
 		GLog.p(TXT_LOOKS_BETTER, item1.name());
 		Dungeon.hero.spendAndNext(2f);
 		Badges.validateItemLevelAquired(item1);
-		
-	}
-	
-	
-	private void tell(String text) {
-		GameScene.show(new WndQuest(this, text));		
+
 	}
 
-	
+
+	private void tell(String text) {
+		GameScene.show(new WndQuest(this, text));
+	}
+
+
 	public static boolean checkAdamant() {
 		AdamantArmor armor1 = Dungeon.hero.belongings.getItem(AdamantArmor.class);
 		AdamantWeapon weapon1 = Dungeon.hero.belongings.getItem(AdamantWeapon.class);
 		AdamantRing ring1 = Dungeon.hero.belongings.getItem(AdamantRing.class);
 		AdamantWand wand1 = Dungeon.hero.belongings.getItem(AdamantWand.class);
-		
+
 		if(armor1!=null ||  weapon1!=null || ring1!=null || wand1!=null) {
 			return true;
 		}
-		   return false;		
+		   return false;
 	}
-	
-	
-	
+
+
+
 
 	@Override
 	public int defenseSkill(Char enemy) {
@@ -200,5 +193,5 @@ public class Blacksmith2 extends NPC {
 				+ "in both color and texture. The troll blacksmith is tinkering with unproportionally small tools.";
 	}
 
-	
+
 }

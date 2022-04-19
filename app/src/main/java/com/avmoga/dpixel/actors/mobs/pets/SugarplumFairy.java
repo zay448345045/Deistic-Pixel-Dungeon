@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs.pets;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.effects.Speck;
@@ -36,7 +37,7 @@ import com.watabou.utils.Random;
 public class SugarplumFairy extends PET implements Callback{
 	
 	{
-		name = "sugarplum fairy";
+		name = Messages.get(SugarplumFairy.class, "name");
 		spriteClass = SugarplumFairySprite.class;       
 		flying=true;
 		state = HUNTING;
@@ -45,7 +46,7 @@ public class SugarplumFairy extends PET implements Callback{
 		cooldown=1000;
 	}
 	private static final float TIME_TO_ZAP = 2f;
-	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
+	private static final String TXT_LIGHTNING_KILLED = Messages.get(SugarplumFairy.class, "kill");
 
 	@Override
 	protected float attackDelay() {
@@ -82,7 +83,7 @@ public class SugarplumFairy extends PET implements Callback{
 		
 		if (cooldown>0){
 			cooldown=Math.max(cooldown-(level*level),0);
-			if (cooldown==0) {GLog.w("Your fairy begins to sparkle!");}
+			if (cooldown==0) {				GLog.p(Messages.get(SugarplumFairy.class, "ready"));}
 		}
 		
 		if (cooldown==0 && Level.adjacent(pos, Dungeon.hero.pos) && Random.Int(1)==0){
@@ -96,13 +97,13 @@ public class SugarplumFairy extends PET implements Callback{
 			
 			if (Random.Int(20)==0){
 			  Dungeon.hero.earnExp(5);
-			  Dungeon.hero.sprite.showStatus(CharSprite.POSITIVE, "+5 exp");
+				Dungeon.hero.sprite.showStatus(CharSprite.POSITIVE, Messages.get(SugarplumFairy.class, "exp"));
 			  cooldown=1000;
 			}
 						
 			if (Random.Int(100)==0){
 				Dungeon.hero.HT += 1;
-				Dungeon.hero.sprite.showStatus(CharSprite.POSITIVE, "+1 ht");
+				Dungeon.hero.sprite.showStatus(CharSprite.POSITIVE, Messages.get(SugarplumFairy.class, "ht"));
 				  cooldown=1000;
 			 }	
 		}
@@ -138,7 +139,7 @@ public class SugarplumFairy extends PET implements Callback{
 
 			spend(TIME_TO_ZAP);
 			cooldown=1000;
-			yell("Take that!");
+			yell(Messages.get(SugarplumFairy.class, "atk"));
 
 			if (hit(this, enemy, true)) {
 				int dmg = damageRoll()*2;
@@ -193,10 +194,10 @@ public class SugarplumFairy extends PET implements Callback{
 	}
 
 
-@Override
-public String description() {
-	return "A sugarplum fairy! It must be the holiday season. She's probably here to give you gifts.";
-}
+	@Override
+	public String description() {
+		return Messages.get(SugarplumFairy.class, "desc");
+	}
 
 
 }

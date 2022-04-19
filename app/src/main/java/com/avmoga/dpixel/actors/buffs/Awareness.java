@@ -20,7 +20,7 @@ package com.avmoga.dpixel.actors.buffs;
 import com.avmoga.dpixel.Dungeon;
 
 public class Awareness extends FlavourBuff {
-
+//
 	public static final float DURATION = 2f;
 
 	@Override

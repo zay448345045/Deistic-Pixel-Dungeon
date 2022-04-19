@@ -18,7 +18,7 @@
 package com.avmoga.dpixel.actors.buffs;
 
 public class LichenDrop extends FlavourBuff {
-
+//
 	public static final float DURATION = 5f;	
 	
 }

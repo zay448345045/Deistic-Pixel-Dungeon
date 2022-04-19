@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs.pets;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Frost;
@@ -34,7 +35,7 @@ import com.watabou.utils.Random;
 public class BlueDragon extends PET implements Callback{
 	
 	{
-		name = "blue dragon";
+		name = Messages.get(BlueDragon.class, "name");
 		spriteClass = BlueDragonSprite.class;       
 		flying=true;
 		state = HUNTING;
@@ -75,13 +76,17 @@ public class BlueDragon extends PET implements Callback{
 
 	@Override
 	protected boolean act() {
-		
-		if (cooldown>0){
-			cooldown=Math.max(cooldown-(level*level),0);
-			if (cooldown==0) {GLog.w("The air grows chilly around your dragon!");}
+
+		if (cooldown > 0) {
+			cooldown = Math.max(cooldown - (level * level) / 4, 0);
+			if (level < 50 && cooldown == 0) {
+				GLog.p(Messages.get(BlueDragon.class, "ready1"));
+			}
 		}
-		
-		if (Random.Float()<regenChance && HP<HT){HP+=regen;}
+
+		if (Random.Float() < regenChance && HP < HT) {
+			HP += regen;
+		}
 
 		return super.act();
 	}
@@ -122,7 +127,7 @@ public class BlueDragon extends PET implements Callback{
 		spend(TIME_TO_ZAP);
 
 		cooldown=1000;
-		yell("Roaaar!");
+		yell(Messages.get(BlueDragon.class, "atk1"));
 		
 		if (hit(this, enemy, true)) {			
 
@@ -166,10 +171,10 @@ public class BlueDragon extends PET implements Callback{
 	}
 
 
-@Override
-public String description() {
-	return "A feshly hatched blue dragon. Super fierce and super cute!";
-}
+	@Override
+	public String description() {
+		return Messages.get(BlueDragon.class, "desc");
+	}
 
 
 }

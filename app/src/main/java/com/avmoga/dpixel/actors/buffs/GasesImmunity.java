@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.blobs.ConfusionGas;
 import com.avmoga.dpixel.actors.blobs.ParalyticGas;
 import com.avmoga.dpixel.actors.blobs.StenchGas;
@@ -34,7 +35,13 @@ public class GasesImmunity extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Immune to gases";
+		return Messages.get(this, "name");
+	}
+
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
 	}
 
 	{

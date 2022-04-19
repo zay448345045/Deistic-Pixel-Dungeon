@@ -12,7 +12,7 @@ import com.watabou.utils.Bundle;
  * Created by debenhame on 06/02/2015.
  */
 public class PinCushion extends Buff {
-
+//
 	private ArrayList<MissileWeapon> items = new ArrayList<MissileWeapon>();
 
 	public void stick(MissileWeapon item) {

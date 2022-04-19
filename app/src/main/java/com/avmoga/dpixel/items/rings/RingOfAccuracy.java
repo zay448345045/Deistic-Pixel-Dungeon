@@ -17,10 +17,12 @@
  */
 package com.avmoga.dpixel.items.rings;
 
+import com.avmoga.dpixel.Messages.Messages;
+
 public class RingOfAccuracy extends Ring {
 
 	{
-		name = "Ring of Accuracy";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -30,9 +32,7 @@ public class RingOfAccuracy extends Ring {
 
 	@Override
 	public String desc() {
-		return isKnown() ? "This ring increases your focus, reducing your enemy's ability to dodge your attacks. "
-				+ "A degraded ring will instead make you easier to evade."
-				: super.desc();
+		return isKnown() ? Messages.get(this, "desc") : super.desc();
 	}
 
 	public class Accuracy extends RingBuff {

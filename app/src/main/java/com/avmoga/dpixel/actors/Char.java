@@ -19,8 +19,10 @@ package com.avmoga.dpixel.actors;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.DungeonTilemap;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
+import com.avmoga.dpixel.actors.blobs.Freezing;
 import com.avmoga.dpixel.actors.buffs.Amok;
 import com.avmoga.dpixel.actors.buffs.Bleeding;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -56,6 +58,7 @@ import com.avmoga.dpixel.actors.mobs.Yog;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.particles.PoisonParticle;
 import com.avmoga.dpixel.items.artifacts.CloakOfShadows;
+import com.avmoga.dpixel.items.artifacts.RingOfDisintegration;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.levels.Terrain;
 import com.avmoga.dpixel.levels.features.Door;
@@ -163,11 +166,6 @@ public abstract class Char extends Actor {
 
 		if (hit(this, enemy, false)) {
 
-			if (visibleFight) {
-				GLog.i(TXT_HIT, name, enemy.name);
-			}
-
-			//FIXME
 			int dr = this instanceof Hero && ((Hero) this).rangedWeapon != null
 					&& ((Hero) this).subClass == HeroSubClass.SNIPER ? 0
 					: Random.IntRange(0, enemy.dr());
@@ -190,11 +188,6 @@ public abstract class Char extends Actor {
 				return true;
 			}
 
-			if(this instanceof Hero && Dungeon.hero.subRace == HeroSubRace.BLUE){
-				Buff.affect(enemy, Mark.class);
-			}
-
-			// TODO: consider revisiting this and shaking in more cases.
 			float shake = 0f;
 			if (enemy == Dungeon.hero)
 				shake = effectiveDamage / (enemy.HT / 4);
@@ -209,28 +202,20 @@ public abstract class Char extends Actor {
 			if (buff(EarthImbue.class) != null)
 				buff(EarthImbue.class).proc(enemy);
 
+			if (buff(RingOfDisintegration.ringRecharge.class) != null && enemy.isAlive()) {
+				if (buff(RingOfDisintegration.ringRecharge.class).level() > 10) {
+				}
+			}
+
 			enemy.sprite.bloodBurstA(sprite.center(), effectiveDamage);
 			enemy.sprite.flash();
 
 			if (!enemy.isAlive() && visibleFight) {
 				if (enemy == Dungeon.hero) {
-
-					if (this instanceof Yog) {
-						Dungeon.fail(Utils.format(ResultDescriptions.NAMED,
-								name));
-					}
-					if (Bestiary.isUnique(this)) {
-						Dungeon.fail(Utils.format(ResultDescriptions.UNIQUE,
-								name));
-					} else {
-						Dungeon.fail(Utils.format(ResultDescriptions.MOB,
-								Utils.indefinite(name)));
-					}
-
-					GLog.n(TXT_KILL, name);
-
+					Dungeon.fail(Utils.format(ResultDescriptions.MOB, Utils.indefinite(name)));
+					GLog.n(Messages.get(this, "kill"), name);
 				} else {
-					GLog.i(TXT_DEFEAT, name, enemy.name);
+					GLog.i(Messages.get(this, "defeat"), name, enemy.name);
 				}
 			}
 

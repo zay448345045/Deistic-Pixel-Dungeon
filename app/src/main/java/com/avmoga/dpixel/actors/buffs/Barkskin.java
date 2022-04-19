@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ui.BuffIndicator;
 import com.watabou.utils.Bundle;
 
@@ -73,6 +74,11 @@ public class Barkskin extends Buff {
 
 	@Override
 	public String toString() {
-		return "Barkskin";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", barkleft);
 	}
 }

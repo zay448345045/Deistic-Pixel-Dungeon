@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.buffs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 
 public class Shield extends Buff {
@@ -29,7 +30,7 @@ public class Shield extends Buff {
 	//private int hits = Math.max(2, Math.round(Statistics.deepestFloor/5)+3);
 	@Override
 	public String toString() {
-		return "Full Moon Fury";
+		return Messages.get(this, "name");
 	}
 	
 	@Override

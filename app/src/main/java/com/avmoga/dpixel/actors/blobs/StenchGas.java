@@ -1,5 +1,6 @@
 package com.avmoga.dpixel.actors.blobs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -35,6 +36,6 @@ public class StenchGas extends Blob {
 
 	@Override
 	public String tileDesc() {
-		return "A cloud of fetid stench is swirling here.";
+		return Messages.get(this, "desc");
 	}
 }

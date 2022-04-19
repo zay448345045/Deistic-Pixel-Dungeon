@@ -24,6 +24,29 @@ public class v0_1_X_Changes{
 
     public static void add_v0_1_0_Changes( ArrayList<ChangeInfo> changeInfos ){
 
+        ChangeInfo changes3 = new ChangeInfo("CN-0.42自然之神的像素地牢", true,
+                "");
+        changes3.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes3);
+
+        changes3 = new ChangeInfo( Messages.get( ChangesScene.class, "new"), false, null);
+        changes3.hardlight( 0x00ff00 );
+        changeInfos.add(changes3);
+
+        changes3.addButton( new ChangeButton(Icons.get(Icons.PREFS), Messages.get(ChangesScene.class, "misc"),
+                "-1.血量和饥饿值现在都能显示数值了\n" +
+                        "-2.按照群友要求，不再改游戏内容，一切还原初始。但专精之书开局不能直接获得是我最后的倔强\n" +
+                        "-3.更多的翻译被追加了"));
+
+        changes3 = new ChangeInfo( Messages.get( ChangesScene.class, "bugfixes"), false, null);
+        changes3.hardlight( 0xffff00 );
+        changeInfos.add(changes3);
+
+        changes3.addButton( new ChangeButton(new Image(Assets.SPINNER, 144, 0, 16, 16),
+                Messages.get(ChangesScene.class, "bugfixes"),
+                "-1.修复了气泡文本Bug\n" +
+                        "2.新游戏按钮可能导致崩溃得到了修复。也许吧（）"));
+
         ChangeInfo changes2 = new ChangeInfo("CN-0.4自然之神的像素地牢", true,
                 "");
         changes2.hardlight(Window.TITLE_COLOR);
@@ -39,18 +62,12 @@ public class v0_1_X_Changes{
                         "-3.所有英雄开局获得3瓶小型治疗药水和250金币\n" +
                         "-4.更多的贴图被矫正"));
 
-        changes2.addButton( new ChangeButton(new Image(new MolotovHuntsmanSprite()), "血月爆破长老",
-                "他们曾经是普普通通之人，但由于ZOT的影响，他们已经遁入疯狂，他们会使用炸弹把入侵者全部炸得渣都不剩！\n\n生成位置：17-18层\n\n概率：1~2%"));
-
-        changes2.addButton( new ChangeButton(new Image(new TorchHustmanSprites()), "火把猎人",
-                "这些猎人曾经是地表上的一员，由于地牢里面魔力的影响，他们渐渐的失去了理智，他们会将每一个入侵者杀死。\n\n生成位置：矿洞层之内\n\n概率：10~25%"));
-
         changes2 = new ChangeInfo( Messages.get( ChangesScene.class, "bugfixes"), false, null);
         changes2.hardlight( 0xffff00 );
         changeInfos.add(changes2);
 
         changes2.addButton( new ChangeButton(new Image(Assets.SPINNER, 144, 0, 16, 16), Messages.get(ChangesScene.class, "bugfixes"),
-                "-1.修复了告示牌BUG" +
+                "-1.修复了告示牌BUG\n" +
                         "2.越界BUG处理"));
 
         ChangeInfo changes = new ChangeInfo("CN-0.36自然之神的像素地牢", true,

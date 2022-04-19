@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ui.BuffIndicator;
 
 public class Fury extends Buff {
@@ -35,12 +36,12 @@ public class Fury extends Buff {
 	}
 
 	@Override
-	public int icon() {
-		return BuffIndicator.FURY;
+	public String toString() {
+		return Messages.get(this, "name");
 	}
 
 	@Override
-	public String toString() {
-		return "Fury";
+	public String desc() {
+		return Messages.get(this, "desc");
 	}
 }

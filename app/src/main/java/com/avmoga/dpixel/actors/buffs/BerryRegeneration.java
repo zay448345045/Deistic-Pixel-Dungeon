@@ -66,7 +66,7 @@ public class BerryRegeneration extends Buff {
 	@Override
 	public boolean act() {
 		if (target.isAlive()) {
-			   
+			   //
 			if (target.HP < target.HT) {
 				target.HP += Math.min(1+Math.round(regenleft/25),(target.HT-target.HP));
 			}

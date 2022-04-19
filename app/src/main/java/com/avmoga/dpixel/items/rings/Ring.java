@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -39,7 +40,7 @@ public class Ring extends KindofMisc {
 
 	private static final float TIME_TO_EQUIP = 1f;
 
-	private static final String TXT_IDENTIFY = "you are now familiar enough with your %s to identify it. It is %s.";
+	private static final String TXT_IDENTIFY = Messages.get(Ring.class, "identify");
 
 	protected Buff buff;
 
@@ -48,9 +49,18 @@ public class Ring extends KindofMisc {
 			RingOfFuror.class, RingOfHaste.class, RingOfMagic.class,
 			RingOfMight.class, RingOfSharpshooting.class, RingOfTenacity.class,
 			RingOfWealth.class, };
-	private static final String[] gems = { "diamond", "opal", "garnet", "ruby",
-			"amethyst", "topaz", "onyx", "tourmaline", "emerald", "sapphire",
-			"quartz", "agate" };
+	private static final String[] gems = { 			Messages.get(Ring.class, "diamond"),
+			Messages.get(Ring.class, "opal"),
+			Messages.get(Ring.class, "garnet"),
+			Messages.get(Ring.class, "ruby"),
+			Messages.get(Ring.class, "amethyst"),
+			Messages.get(Ring.class, "topaz"),
+			Messages.get(Ring.class, "onyx"),
+			Messages.get(Ring.class, "tourmaline"),
+			Messages.get(Ring.class, "emerald"),
+			Messages.get(Ring.class, "sapphire"),
+			Messages.get(Ring.class, "quartz"),
+			Messages.get(Ring.class, "agate")};
 	private static final Integer[] images = { ItemSpriteSheet.RING_DIAMOND,
 			ItemSpriteSheet.RING_OPAL, ItemSpriteSheet.RING_GARNET,
 			ItemSpriteSheet.RING_RUBY, ItemSpriteSheet.RING_AMETHYST,
@@ -197,15 +207,12 @@ public class Ring extends KindofMisc {
 
 	@Override
 	public String name() {
-		return isKnown() ? name : gem + " ring";
+		return isKnown() ? super.name() : Messages.get(this, "unknown_name", gem);
 	}
 
 	@Override
 	public String desc() {
-		return "This metal band is adorned with a large "
-				+ gem
-				+ " gem "
-				+ "that glitters in the darkness. Who knows what effect it has when worn?";
+		return Messages.get(this, "unknown_desc", gem);
 	}
 
 	@Override
@@ -213,25 +220,18 @@ public class Ring extends KindofMisc {
 		if (isEquipped(Dungeon.hero)) {
 
 			return desc()
-					+ "\n\n"
-					+ "The "
-					+ name()
-					+ " is on your finger"
-					+ (cursed ? ", and because it is cursed, you are powerless to remove it. "
-							: ".")
-					+ (reinforced ? "\n\nIt is reinforced."
-							: "")
-							;
+					+ "\n\n" + Messages.get(this, "on_finger", name())
+					+ (cursed ? Messages.get(this, "cursed_worn") : "")
+					+ (reinforced ? Messages.get(this, "reinforced") : "");
 
 		} else if (cursed && cursedKnown) {
 
 			return desc()
-					+ "\n\nYou can feel a malevolent magic lurking within the "
-					+ name() + ".";
+					+ "\n\n" + Messages.get(this, "curse_known", name());
 
 		} else {
 
-			return desc() + (reinforced ? "\n\nIt is reinforced." : "");
+			return desc() + (reinforced ? Messages.get(this, "reinforced") : "");
 
 		}
 	}
@@ -302,7 +302,7 @@ public class Ring extends KindofMisc {
 
 	public class RingBuff extends Buff {
 
-		private static final String TXT_KNOWN = "This is a %s";
+		private final String TXT_KNOWN = Messages.get(Ring.class, "known");
 
 		public int level;
 

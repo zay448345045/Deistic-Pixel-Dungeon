@@ -21,6 +21,7 @@ import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Journal;
 import com.avmoga.dpixel.Journal.Feature;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Hunger;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.effects.BlobEmitter;
@@ -50,7 +51,7 @@ public class WaterOfHealth extends WellWater {
 
 		Dungeon.hero.interrupt();
 
-		GLog.p(TXT_PROCCED);
+		GLog.p(Messages.get(this, "proc"));
 
 		Journal.remove(Feature.WELL_OF_HEALTH);
 
@@ -75,7 +76,6 @@ public class WaterOfHealth extends WellWater {
 
 	@Override
 	public String tileDesc() {
-		return "Power of health radiates from the water of this well. "
-				+ "Take a sip from it to heal your wounds and satisfy hunger.";
+		return Messages.get(this, "desc");
 	}
 }

@@ -23,6 +23,7 @@ import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.DungeonTilemap;
 import com.avmoga.dpixel.Journal;
 import com.avmoga.dpixel.Journal.Feature;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Awareness;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -70,7 +71,7 @@ public class WaterOfAwareness extends WellWater {
 
 		Dungeon.hero.interrupt();
 
-		GLog.p(TXT_PROCCED);
+		GLog.p(Messages.get(this, "proc"));
 
 		Journal.remove(Feature.WELL_OF_AWARENESS);
 
@@ -102,7 +103,6 @@ public class WaterOfAwareness extends WellWater {
 
 	@Override
 	public String tileDesc() {
-		return "Power of knowledge radiates from the water of this well. "
-				+ "Take a sip from it to reveal all secrets of equipped items.";
+		return Messages.get(this, "desc");
 	}
 }

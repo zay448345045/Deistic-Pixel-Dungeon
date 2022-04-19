@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs.pets;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.Web;
@@ -31,7 +32,7 @@ import com.watabou.utils.Random;
 public class Spider extends PET {
 	
 	{
-		name = "spider";
+		name = Messages.get(Spider.class, "name");
 		spriteClass = SpiderSprite.class;       
 		flying=false;
 		state = HUNTING;
@@ -68,7 +69,7 @@ public class Spider extends PET {
 		
 		if (cooldown>0){
 			cooldown=Math.max(cooldown-(level*level),0);
-			if (cooldown==0) {GLog.w("Your spider is ready to spin webs!");}
+			if (cooldown==0) {				GLog.p(Messages.get(Spider.class, "ready"));}
 		}
 		
 		if (Random.Float()<regenChance && HP<HT){HP+=regen;}
@@ -91,11 +92,11 @@ public class Spider extends PET {
 
 		return damage;
 	}
-	
-@Override
-public String description() {
-	return "A rather large hairy spider. It's oddly clingy. ";
-}
+
+	@Override
+	public String description() {
+		return Messages.get(Spider.class, "desc");
+	}
 
 
 @Override

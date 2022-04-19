@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.ui.BuffIndicator;
 import com.watabou.utils.Random;
@@ -49,6 +50,11 @@ public class Drowsy extends Buff {
 
 	@Override
 	public String toString() {
-		return "Drowsy";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns(cooldown() + 1));
 	}
 }

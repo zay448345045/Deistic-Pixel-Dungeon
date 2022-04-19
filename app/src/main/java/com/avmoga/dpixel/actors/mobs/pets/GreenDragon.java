@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs.pets;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.effects.particles.SparkParticle;
@@ -35,7 +36,7 @@ import com.watabou.utils.Random;
 public class GreenDragon extends PET implements Callback{
 	
 	{
-		name = "green dragon";
+		name = Messages.get(GreenDragon.class, "name");
 		spriteClass = GreenDragonSprite.class;       
 		flying=true;
 		state = HUNTING;
@@ -44,7 +45,7 @@ public class GreenDragon extends PET implements Callback{
 		cooldown=1000;
 	}
 	private static final float TIME_TO_ZAP = 2f;
-	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
+	private static final String TXT_LIGHTNING_KILLED = Messages.get(GreenDragon.class, "kill");
 
 	@Override
 	protected float attackDelay() {
@@ -84,7 +85,9 @@ public class GreenDragon extends PET implements Callback{
 		
 		if (cooldown>0){
 			cooldown=Math.max(cooldown-(level*level),0);
-			if (cooldown==0) {GLog.w("The air crackles around your green dragon!");}
+			if (cooldown==0) {
+				GLog.p(Messages.get(GreenDragon.class, "ready"));
+			}
 		}
 		
 		if (Random.Float()<regenChance && HP<HT){HP+=regen;}
@@ -121,7 +124,7 @@ public class GreenDragon extends PET implements Callback{
 
 			spend(TIME_TO_ZAP);
 			cooldown=1000;
-			yell("Roaaar!");
+			yell(Messages.get(GreenDragon.class, "atk"));
 
 			if (hit(this, enemy, true)) {
 				int dmg = damageRoll()*2;
@@ -176,10 +179,10 @@ public class GreenDragon extends PET implements Callback{
 	}
 
 
-@Override
-public String description() {
-	return "A feshly hatched green dragon. Super fierce and super cute!";
-}
+	@Override
+	public String description() {
+		return Messages.get(GreenDragon.class, "desc");
+	}
 
 
 }

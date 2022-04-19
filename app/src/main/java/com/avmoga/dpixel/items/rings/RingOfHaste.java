@@ -17,10 +17,12 @@
  */
 package com.avmoga.dpixel.items.rings;
 
+import com.avmoga.dpixel.Messages.Messages;
+
 public class RingOfHaste extends Ring {
 
 	{
-		name = "Ring of Haste";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -30,9 +32,7 @@ public class RingOfHaste extends Ring {
 
 	@Override
 	public String desc() {
-		return isKnown() ? "This ring reduces the stress of movement on the wearer, allowing them to run "
-				+ "at superhuman speeds. A degraded ring will instead weigh the wearer down."
-				: super.desc();
+		return isKnown() ? Messages.get(this, "desc") : super.desc();
 	}
 
 	public class Haste extends RingBuff {

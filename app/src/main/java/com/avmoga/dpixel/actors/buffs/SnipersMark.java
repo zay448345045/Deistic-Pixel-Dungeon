@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ui.BuffIndicator;
 import com.watabou.utils.Bundle;
 
@@ -46,6 +47,11 @@ public class SnipersMark extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Sniper's mark";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc");
 	}
 }

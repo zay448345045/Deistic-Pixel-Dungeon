@@ -19,6 +19,7 @@ package com.avmoga.dpixel.actors.buffs;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.ui.BuffIndicator;
 import com.watabou.noosa.audio.Sample;
@@ -90,7 +91,11 @@ public class Shadows extends Invisibility {
 
 	@Override
 	public String toString() {
-		return "Shadowmelded";
+		return Messages.get(this, "name");
 	}
 
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc");
+	}
 }

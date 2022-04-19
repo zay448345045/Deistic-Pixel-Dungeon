@@ -45,7 +45,7 @@ public class Madness extends Buff {
 
 	@Override
 	public String toString() {
-		String returnString = "Warrior's Madness";
+		String returnString = "战狂";
 		return returnString;
 	}
 }

@@ -18,14 +18,16 @@
 package com.avmoga.dpixel.actors.mobs.pets;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.sprites.VelociroosterSprite;
+import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Random;
 
 public class Velocirooster extends PET {
 	
 	{
-		name = "velocirooster";
+		name = Messages.get(this, "name");
 		spriteClass = VelociroosterSprite.class;       
 		flying=false;
 		state = HUNTING;
@@ -57,8 +59,8 @@ public class Velocirooster extends PET {
 		
 		int dmg=0;
 		if (cooldown==0){
-			dmg=Random.NormalIntRange(HT/2, HT); 
-			yell("Bwak!");
+			dmg=Random.NormalIntRange(HT/2, HT);
+			GLog.p(Messages.get(this, "ready"));
 			cooldown=1000;
 		} else {
 			dmg=Random.NormalIntRange(HT/5, HT/2) ;
@@ -78,15 +80,13 @@ public class Velocirooster extends PET {
 		if (Random.Float()<regenChance && HP<HT){HP+=regen;}
 
 		return super.act();
-	}			
-	
+	}
 
-@Override
-public String description() {
-	return "The Velocirooster is a vicious cousin of the domesticated rooster." +
-            " It races through the dungeon and attacks with razor sharp talons and a vicious beak." +
-            " This one has a collar with a tag. It reads, 'To Sprouted from Unleashed. Please enjoy this Velocirooster.' ";
-}
+
+	@Override
+	public String description() {
+		return Messages.get(this, "desc");
+	}
 
 
 @Override

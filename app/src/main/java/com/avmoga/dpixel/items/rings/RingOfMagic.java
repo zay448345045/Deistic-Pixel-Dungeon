@@ -17,10 +17,12 @@
  */
 package com.avmoga.dpixel.items.rings;
 
+import com.avmoga.dpixel.Messages.Messages;
+
 public class RingOfMagic extends Ring {
 
 	{
-		name = "Ring of Magic";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -30,9 +32,7 @@ public class RingOfMagic extends Ring {
 
 	@Override
 	public String desc() {
-		return isKnown() ? "Your wands will become more powerful in the arcane field "
-				+ "that radiates from this ring. Degraded rings of magic will instead weaken your wands."
-				: super.desc();
+		return isKnown() ? Messages.get(this, "desc") : super.desc();
 	}
 
 	public class Magic extends RingBuff {

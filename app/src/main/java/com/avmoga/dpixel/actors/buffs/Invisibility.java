@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.buffs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.items.artifacts.CloakOfShadows;
 import com.avmoga.dpixel.items.artifacts.TimekeepersHourglass;
@@ -50,10 +51,14 @@ public class Invisibility extends FlavourBuff {
 	}
 
 	@Override
-	public String toString() {
-		return "Invisible";
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
 	}
 
+	@Override
+	public String toString() {
+		return Messages.get(this, "name");
+	}
 	public static void dispel() {
 		Invisibility buff = Dungeon.hero.buff(Invisibility.class);
 		if (buff != null) {

@@ -19,6 +19,7 @@ package com.avmoga.dpixel.actors.buffs;
 
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -48,7 +49,9 @@ public class Poison extends Buff implements Hero.Doom {
 
 	public void set(float duration) {
 		this.left = duration;
-	};
+	}
+
+	;
 
 	@Override
 	public int icon() {
@@ -57,7 +60,12 @@ public class Poison extends Buff implements Hero.Doom {
 
 	@Override
 	public String toString() {
-		return "Poisoned";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns(left));
 	}
 
 	@Override
@@ -90,6 +98,6 @@ public class Poison extends Buff implements Hero.Doom {
 		Badges.validateDeathFromPoison();
 
 		Dungeon.fail(ResultDescriptions.POISON);
-		GLog.n("You died from poison...");
+		GLog.n(Messages.get("你因中毒身亡……"));
 	}
 }

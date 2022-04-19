@@ -17,6 +17,8 @@
  */
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ui.BuffIndicator;
 
 public class Dewcharge extends FlavourBuff {
@@ -30,7 +32,13 @@ public class Dewcharge extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Dew Charge";
+		return Messages.get(this, "name");
 	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", Dungeon.hero.buff(Dewcharge.class).dispTurnsInt());
+	}
+
 	
 }

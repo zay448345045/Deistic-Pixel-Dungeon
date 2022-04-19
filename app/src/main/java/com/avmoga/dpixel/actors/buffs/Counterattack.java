@@ -14,7 +14,7 @@ public class Counterattack extends FlavourBuff {
 
 		@Override
 		public String toString() {
-			return "Counterattacking";
+			return "反击";
 		}
 	}
 }

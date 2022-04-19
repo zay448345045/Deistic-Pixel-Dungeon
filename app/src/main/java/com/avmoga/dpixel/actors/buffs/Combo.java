@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.buffs;
 
 import com.avmoga.dpixel.Badges;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.ui.BuffIndicator;
 import com.avmoga.dpixel.utils.GLog;
@@ -35,7 +36,12 @@ public class Combo extends Buff {
 
 	@Override
 	public String toString() {
-		return "Combo";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc");
 	}
 
 	public int hit(Char enemy, int damage) {

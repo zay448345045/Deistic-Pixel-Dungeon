@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs.pets;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Poison;
@@ -32,7 +33,7 @@ import com.watabou.utils.Random;
 public class VioletDragon extends PET implements Callback{
 	
 	{
-		name = "violet dragon";
+		name = Messages.get(VioletDragon.class, "name");
 		spriteClass = VioletDragonSprite.class;       
 		flying=true;
 		state = HUNTING;
@@ -83,7 +84,7 @@ public class VioletDragon extends PET implements Callback{
 		
 		if (cooldown>0){
 			cooldown=Math.max(cooldown-(level*level),0);
-			if (cooldown==0) {GLog.w("Your violet dragon is dripping poison!");}
+			if (cooldown==0) {				GLog.p(Messages.get(VioletDragon.class, "ready"));}
 		}
 		
 		if (Random.Float()<regenChance && HP<HT){HP+=regen;}
@@ -170,10 +171,10 @@ public class VioletDragon extends PET implements Callback{
 	}
 
 
-@Override
-public String description() {
-	return "A feshly hatched violet dragon. Super fierce and super cute!";
-}
+	@Override
+	public String description() {
+		return Messages.get(VioletDragon.class, "desc");
+	}
 
 
 }

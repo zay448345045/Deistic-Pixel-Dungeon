@@ -1,5 +1,6 @@
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.particles.EarthParticle;
@@ -24,7 +25,12 @@ public class EarthImbue extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Imbued with Earth";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
 	}
 
 	{

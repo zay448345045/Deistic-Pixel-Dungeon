@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ui.BuffIndicator;
 
 public class Cripple extends FlavourBuff {
@@ -30,6 +31,11 @@ public class Cripple extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Crippled";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
 	}
 }

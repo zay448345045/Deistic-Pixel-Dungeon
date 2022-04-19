@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.buffs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.mobs.Thief;
@@ -89,7 +90,12 @@ public class Frost extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Frozen";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
 	}
 
 	public static float duration(Char ch) {

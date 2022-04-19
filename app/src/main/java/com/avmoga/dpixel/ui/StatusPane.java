@@ -66,6 +66,9 @@ public class StatusPane extends Component {
 	private BuffIndicator buffs;
 	private Compass compass;
 
+	private BitmapText hpText;
+	private BitmapText hgText;
+
 	private BitmapText version;
 	private MenuButton btnMenu;
 
@@ -105,12 +108,19 @@ public class StatusPane extends Component {
 		hp = new Image(Assets.HP_BAR);
 		add(hp);
 
+		hpText = new BitmapText(font1x);
+		hpText.hardlight(13291458);
+		add(hpText);
+
 		hg = new Image(Assets.HG_BAR);
 		add(hg);
 
+		hgText = new BitmapText(font1x);
+		hpText.hardlight(13291458);
+		add(hgText);
+
 		exp = new Image(Assets.XP_BAR);
 		add(exp);
-
 
 		level = new BitmapText(font1x);
 		level.hardlight(0xFFEBA4);
@@ -136,8 +146,8 @@ public class StatusPane extends Component {
 		version =new BitmapText("v" + Game.version + "", font1x);
 		version.measure();
 		version.hardlight(0xCCCCCC);
-		version.x = width - -78 - keys.width()-3;
-		version.y = 5;
+		version.x = width - -3 - keys.width()-3;
+		version.y = 35;
 		add(version);
 	}
 
@@ -158,9 +168,20 @@ public class StatusPane extends Component {
 		hp.x = 30;
 		hp.y = 3;
 
+		hpText.scale.set(PixelScene.align(0.5f));
+		hpText.x = hp.x + 1;
+		hpText.y = hp.y + (hp.height - (hpText.baseLine()+hpText.scale.y))/2f;
+		hpText.y -= 0.001f; //prefer to be slightly higher
+		PixelScene.align(hpText);
+
 		hg.x = 30;
 		hg.y = 8;
 
+		hgText.scale.set(PixelScene.align(0.5f));
+		hgText.x = hg.x + 1;
+		hgText.y = hg.y + (hp.height - (hgText.baseLine()+hgText.scale.y))/2f;
+		hgText.y -= 0.001f; //prefer to be slightly higher
+		PixelScene.align(hgText);
 
 		depth.x = width - 24 - depth.width() - 18;
 		depth.y = 6;
@@ -180,13 +201,13 @@ public class StatusPane extends Component {
 		int maxHunger = (int) Hunger.STARVING;
 		float health = (float) Dungeon.hero.HP / Dungeon.hero.HT;
 
+		hpText.text(String.format("%d/%d", Integer.valueOf(Dungeon.hero.HP), Integer.valueOf(Dungeon.hero.HT)));
+
 		Hunger hungerBuff = Dungeon.hero.buff(Hunger.class);
 		if (hungerBuff != null) {
 			int hunger = Math.max(0, maxHunger - hungerBuff.hunger());
 			hg.scale.x = (float) hunger / (float) maxHunger;
-		}
-		else if (Dungeon.hero.isAlive()) {
-			hg.scale.x = 1.0f;
+			hgText.text(hunger + "/" + maxHunger);
 		}
 
 		if (health == 0) {

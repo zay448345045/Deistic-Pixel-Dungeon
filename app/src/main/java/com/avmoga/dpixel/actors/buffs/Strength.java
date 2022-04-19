@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.buffs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ui.BuffIndicator;
 
 public class Strength extends Buff {
@@ -31,7 +32,12 @@ public class Strength extends Buff {
 
 	@Override
 	public String toString() {
-		return "Moon Fury";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", LEVEL);
 	}
 	
 	@Override

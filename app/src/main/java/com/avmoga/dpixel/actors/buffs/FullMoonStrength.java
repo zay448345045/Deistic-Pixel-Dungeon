@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.buffs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.watabou.utils.Bundle;
 
@@ -45,7 +46,12 @@ public class FullMoonStrength extends Buff {
 	//private int hits = Math.max(2, Math.round(Statistics.deepestFloor/5)+3);
 	@Override
 	public String toString() {
-		return "Full Moon Fury";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", hits);
 	}
 	
 	@Override

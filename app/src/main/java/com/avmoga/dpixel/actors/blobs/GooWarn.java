@@ -1,5 +1,6 @@
 package com.avmoga.dpixel.actors.blobs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.effects.BlobEmitter;
 import com.avmoga.dpixel.sprites.GooSprite;
 
@@ -47,6 +48,6 @@ public class GooWarn extends Blob {
 
 	@Override
 	public String tileDesc() {
-		return "Specs of dark energy are swarming here!";
+		return Messages.get(this, "desc");
 	}
 }

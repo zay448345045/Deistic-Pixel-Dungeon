@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.buffs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.ui.BuffIndicator;
@@ -35,7 +36,12 @@ public class Ooze extends Buff {
 
 	@Override
 	public String toString() {
-		return "Caustic ooze";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc");
 	}
 
 	@Override
@@ -47,7 +53,7 @@ public class Ooze extends Buff {
 				target.damage(1, this);
 			if (!target.isAlive() && target == Dungeon.hero) {
 				Dungeon.fail(ResultDescriptions.OOZE);
-				GLog.n(TXT_HERO_KILLED, toString());
+				GLog.n(Messages.get(this, "die"), toString());
 			}
 			spend(TICK);
 		}

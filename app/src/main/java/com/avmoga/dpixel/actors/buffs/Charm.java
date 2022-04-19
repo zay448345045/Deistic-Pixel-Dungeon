@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.items.rings.RingOfElements.Resistance;
 import com.avmoga.dpixel.ui.BuffIndicator;
@@ -46,8 +47,13 @@ public class Charm extends FlavourBuff {
 	}
 
 	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
+	}
+
+	@Override
 	public String toString() {
-		return "Charmed";
+		return Messages.get(this, "name");
 	}
 
 	public static float durationFactor(Char ch) {

@@ -19,6 +19,7 @@ package com.avmoga.dpixel.actors.buffs;
 
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.hero.HeroClass;
@@ -76,7 +77,7 @@ public class Hunger extends Buff implements Hero.Doom {
 				boolean statusUpdated = false;
 				if (newLevel >= STARVING) {
 
-					GLog.n(TXT_STARVING);
+					GLog.n(Messages.get(this, "starve"));
 					hero.damage(1, this);
 					statusUpdated = true;
 
@@ -84,7 +85,7 @@ public class Hunger extends Buff implements Hero.Doom {
 
 				} else if (newLevel >= HUNGRY && level < HUNGRY) {
 
-					GLog.w(TXT_HUNGRY);
+					GLog.w(Messages.get(this, "hunger"));
 					statusUpdated = true;
 
 				}
@@ -114,7 +115,7 @@ public class Hunger extends Buff implements Hero.Doom {
 				.buff(HornOfPlenty.hornRecharge.class);
 		if (buff != null && buff.isCursed()) {
 			energy = Math.round(energy * 0.67f);
-			GLog.n("The cursed horn steals some of the food energy as you eat.");
+			GLog.n(Messages.get(this, "horn"));
 		}
 		level -= energy;
 		if (level < 0) {
@@ -148,10 +149,24 @@ public class Hunger extends Buff implements Hero.Doom {
 	@Override
 	public String toString() {
 		if (level < STARVING) {
-			return "Hungry";
+			return Messages.get(this, "hungerst");
 		} else {
-			return "Starving";
+			return Messages.get(this, "starvest");
 		}
+	}
+
+	@Override
+	public String desc() {
+		String result;
+		if (level < STARVING) {
+			result = Messages.get(this, "desc_intro_hungry");
+		} else {
+			result = Messages.get(this, "desc_intro_starving");
+		}
+
+		result += Messages.get(this, "desc");
+
+		return result;
 	}
 
 	public int hunger() {

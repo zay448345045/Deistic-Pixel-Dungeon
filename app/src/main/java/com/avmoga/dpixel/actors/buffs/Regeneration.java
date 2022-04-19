@@ -37,14 +37,4 @@ public class Regeneration extends Buff {
 
         return true;
     }
-
-    @Override
-    public String toString() {
-        return Messages.get(this, "name");
-    }
-
-    @Override
-    public String desc() {
-        return Messages.get(this, "desc", dispTurns(REGENERATION_DELAY));
-    }
 }

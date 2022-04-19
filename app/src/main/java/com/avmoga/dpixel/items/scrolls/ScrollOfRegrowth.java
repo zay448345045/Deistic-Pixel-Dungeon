@@ -37,10 +37,10 @@ import com.watabou.noosa.audio.Sample;
 
 public class ScrollOfRegrowth extends Scroll {
 
-	private static final String TXT_LAYOUT = "Your senses extend as the vegetation grows around you.";
-	private static final String TXT_RANSACK = "A wail of agony fills your ears as the dungeon begins to burn!";
+	private static final String TXT_LAYOUT = "伴随着你的感知能力延伸，植被在你周围生长。";
+	private static final String TXT_RANSACK = "伴随着痛苦的哀嚎充斥在你耳中，地牢开始燃烧！";
 	{
-		name = "Scroll of Regrowth";
+		name = "再生卷轴";
 		consumedValue = 15;
 	}
 	
@@ -122,8 +122,8 @@ public class ScrollOfRegrowth extends Scroll {
 
 	@Override
 	public String desc() {
-		return "The magic in the scroll feels powerful and inviting."
-				+ "The dungeon cries out for you to read it. ";
+		return "卷轴中的魔力看起来强力而诱人。"
+				+ "地牢都在期待你阅读它。";
 	}
 
 	@Override

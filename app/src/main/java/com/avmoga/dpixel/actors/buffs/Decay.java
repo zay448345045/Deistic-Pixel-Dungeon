@@ -14,8 +14,8 @@ import com.watabou.utils.Random;
 
 public class Decay extends Buff implements Hero.Doom {
 	
-	private final String TXT_CLEANSE = "You feel the Sungrass sap beginning to cleanse your plague.";
-	private final String TXT_PROC = "You are damaged by the decaying!";
+	private final String TXT_CLEANSE = "你感到阳春草的汁液在净化你体内的瘟疫!";
+	private final String TXT_PROC = "你因腐败受到了伤害!";
 	
 	private static final String TIMER = "timer";
 	private static final String POWER = "power";
@@ -25,7 +25,7 @@ public class Decay extends Buff implements Hero.Doom {
 	
 	@Override
 	public String toString() {
-		return "Decaying";
+		return "腐败";
 	}
 	
 	public void set(int value) {

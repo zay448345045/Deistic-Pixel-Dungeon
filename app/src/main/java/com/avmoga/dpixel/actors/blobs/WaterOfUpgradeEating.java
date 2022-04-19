@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.actors.blobs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.effects.BlobEmitter;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.items.Generator;
@@ -96,6 +97,6 @@ public class WaterOfUpgradeEating extends WellWater {
 	
 	@Override
 	public String tileDesc() {
-		return "A highly caustic liquid shimmers in a pool. Toss in an item to harvest its power. ";
+		return Messages.get(this, "desc");
 	}
 }

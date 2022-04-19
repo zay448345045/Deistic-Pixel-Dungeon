@@ -19,6 +19,7 @@ package com.avmoga.dpixel.actors.blobs;
 
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Journal;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Shadows;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -81,6 +82,6 @@ public class Foliage extends Blob {
 
 	@Override
 	public String tileDesc() {
-		return "Shafts of light pierce the gloom of the underground garden.";
+		return Messages.get(this, "desc");
 	}
 }

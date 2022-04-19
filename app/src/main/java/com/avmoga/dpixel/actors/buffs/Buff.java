@@ -27,7 +27,7 @@ import java.util.HashSet;
 public class Buff extends Actor {
 
 	public Char target;
-
+//
 	public HashSet<Class<?>> resistances = new HashSet<Class<?>>();
 
 	public HashSet<Class<?>> immunities = new HashSet<Class<?>>();
@@ -59,7 +59,7 @@ public class Buff extends Actor {
 	}
 	
 	public String desc(){
-		return "";
+		return "该Buff暂无具体描述,请群友得知该buff具体效果后提交描述到群里。";
 	}
 
 	//to handle the common case of showing how many turns are remaining in a buff description.

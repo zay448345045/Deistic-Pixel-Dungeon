@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.ui.BuffIndicator;
 
@@ -39,12 +40,12 @@ public class Roots extends FlavourBuff {
 	}
 
 	@Override
-	public int icon() {
-		return BuffIndicator.ROOTS;
+	public String toString() {
+		return Messages.get(this, "name");
 	}
 
 	@Override
-	public String toString() {
-		return "Rooted";
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
 	}
 }

@@ -23,6 +23,7 @@ import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Journal;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -49,25 +50,21 @@ import com.watabou.utils.Random;
 
 public class Blacksmith extends NPC {
 
-	private static final String TXT_GOLD_1 = "Hey human! Wanna be useful, eh? Take dis pickaxe and mine me some _dark gold ore_, _15 pieces_ should be enough. "
-			+ "What do you mean, how am I gonna pay? You greedy...\n"
-			+ "Ok, ok, I don't have money to pay, but I can do some smithin' for you. Consider yourself lucky, "
-			+ "We're the only blacksmiths around.";
-	private static final String TXT_BLOOD_1 = "Hey human! Wanna be useful, eh? Take dis pickaxe and _kill a bat_ wit' it, I need its blood on the head. "
-			+ "What do you mean, how am I gonna pay? You greedy...\n"
-			+ "Ok, ok, I don't have money to pay, but I can do some smithin' for you. Consider yourself lucky, "
-			+ "We're the only blacksmiths around.";
-	private static final String TXT2 = "Are you kiddin' me? Where is my pickaxe?!";
-	private static final String TXT3 = "Dark gold ore. 15 pieces. Seriously, is it dat hard?";
-	private static final String TXT4 = "I said I need bat blood on the pickaxe. Chop chop!";
-	private static final String TXT_COMPLETED = "Oh, you have returned... Better late dan never.";
-	private static final String TXT_GET_LOST = "Huh? Why'd we make all da weapons in dis dungeon? You see anything better ta do round here?";
+	private static final String TXT_GOLD_1 = "嘿，人类！不想当个没用的废物，对吗？拿着这个镐子，给我挖一些_暗金矿_，_15块_应该够了。什么？我给你什么报酬？你这个贪婪鬼...\n" +
+			"好吧，好吧，我没有钱给你，但是我可以帮你打铁。想想你有多么幸运吧，我们是这附近仅有的铁匠。";
+	private static final String TXT_BLOOD_1 = "嘿，人类！不想当个没用的废物，对吗？拿着那个镐子然后用它_杀只蝙蝠_，我需要镐头上沾着的血。什么？要我如何报答你？真贪心.." +
+			".\n\n好吧，好吧，我没钱付给你，但我可以给你打打铁。想想你运气有多好吧，我可是这附近唯一的铁匠。";
+	private static final String TXT2 = "你在逗我？我的镐子呢？！";
+	private static final String TXT3 = "_暗金矿_。15块。说真的，有那么难？";
+	private static final String TXT4 = "我说了我需要镐子沾上蝙蝠血。赶紧！";
+	private static final String TXT_COMPLETED = "噢，你终于回来了… 算了，总比回不来好。";
+	private static final String TXT_GET_LOST = "我忙着呢。滚开！";
 	private static final String AYYLMAO = "namenumber";
-	private static final String TXT_LOOKS_BETTER = "your %s certainly looks better now";
-	private static final String COLLECTED = "Finally, the SanChikarah. I will forge them for you...";
+	private static final String TXT_LOOKS_BETTER = "你的 %s 现在看起来更好了。";
+	private static final String COLLECTED = "你竟然集齐了三相之力碎片？！我来帮你把碎片合成吧。";
 
 	{
-		name = "Troll Blacksmith named Bip";
+		name = Messages.get(this, "name");
 		spriteClass = BlacksmithSprite.class;
 	}
 	
@@ -80,8 +77,7 @@ public class Blacksmith extends NPC {
 
 	@Override
 	public void interact() {
-		Dungeon.names++;
-		this.name = BlacksmithName.getName(Dungeon.names);
+
 		sprite.turnTo(pos, Dungeon.hero.pos);
 		
 		if (checksan()){
@@ -175,7 +171,7 @@ public class Blacksmith extends NPC {
 	public static String verify(Item item1, Item item2) {
 
 		if (item1 == item2) {
-			return "Select 2 different items, not the same item twice!";
+			return "选择两个不同的物品，不是两次一样的！";
 		}
 
 		//if (item1.getClass() != item2.getClass()) {
@@ -183,23 +179,23 @@ public class Blacksmith extends NPC {
 		//}
 
 		if (!item1.isIdentified() || !item2.isIdentified()) {
-			return "I need to know what I'm working with, identify them first!";
+			return "我需要知道我在拿什么干活，先鉴定它们！";
 		}
 
 		if (item1.cursed || item2.cursed) {
-			return "I don't work with cursed items!";
+			return "我可不碰被诅咒的东西！";
 		}
 
 		if (item1.level < 0 || item2.level < 1) {
-			return "It's a junk, the quality is too poor!";
+			return "这简直就是个垃圾，质量太烂了！";
 		}
-		
+
 		if ((item1.level + item2.level > 15) && !item1.isReinforced()) {
-			return "You item needs to be reinforced to handle the upgrades. Take it to my brother!";
+			return "你的物品需要经过界限突破后才能升级。把它拿给我的弟弟！";
 		}
 
 		if (!item1.isUpgradable() || !item2.isUpgradable()) {
-			return "I can't reforge these items!";
+			return "我不能锻造这些东西！";
 		}
 
 		return null;

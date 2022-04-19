@@ -22,11 +22,15 @@ import com.avmoga.dpixel.Challenges;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
+import com.avmoga.dpixel.actors.buffs.Buff;
+import com.avmoga.dpixel.actors.buffs.Silence;
 import com.avmoga.dpixel.items.Bomb;
+import com.avmoga.dpixel.items.Egg;
 import com.avmoga.dpixel.items.armor.ClothArmor;
 import com.avmoga.dpixel.items.armor.WarriorArmor;
 import com.avmoga.dpixel.items.artifacts.CloakOfShadows;
 import com.avmoga.dpixel.items.bags.KeyRing;
+import com.avmoga.dpixel.items.bags.SeedPouch;
 import com.avmoga.dpixel.items.food.Food;
 import com.avmoga.dpixel.items.potions.PotionOfMending;
 import com.avmoga.dpixel.items.potions.PotionOfMindVision;
@@ -74,28 +78,14 @@ public enum HeroClass {
 			initHuntress(hero);
 			break;
 		}
-
-		if (Badges.isUnlocked(masteryBadge())) {
-			//new TomeOfMastery().collect();
-		}
-
-		hero.updateAwareness();
 	}
 
 	private static void initCommon(Hero hero) {
 		if (!Dungeon.isChallenged(Challenges.NO_ARMOR))
 			(hero.belongings.armor = new ClothArmor()).identify();
-		Dungeon.gold+=250;
-		new PotionOfMending().quantity(3).identify().collect();
-		//new ClothArmor().quantity(1).identify().collect();
-		//new WarriorArmor().quantity(1).identify().collect();
-		//new TomeOfMastery().quantity(1).identify().collect();
-		//new TomeOfSpecialty().quantity(1).identify().collect();
-		//new HuntressArmor().quantity(1).identify().collect();
-		//new MailArmor().quantity(1).identify().collect();
-		//new PlateArmor().quantity(1).identify().collect();
-		//new ScaleArmor().quantity(1).identify().collect();
-		//new LeatherArmor().quantity(1).identify().collect();
+		//难度还原 添加种子袋
+		new SeedPouch().quantity(1).identify().collect();
+
 		if (!Dungeon.isChallenged(Challenges.NO_FOOD))
 			new Food().identify().collect();
 	}

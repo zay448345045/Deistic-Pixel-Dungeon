@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.mobs.Mob;
@@ -35,11 +36,11 @@ public class MagicalSleep extends Buff {
 
 			if (target instanceof Hero)
 				if (target.HP >= target.HT) {
-					GLog.i("You are too healthy, and resist the urge to sleep.");
+					GLog.i(Messages.get(this, "nosleep"));
 					detach();
 					return true;
 				} else {
-					GLog.i("You fall into a deep magical sleep.");
+					GLog.i(Messages.get(this, "sleep"));
 				}
 			else if (target instanceof Mob)
 				((Mob) target).state = ((Mob) target).SLEEPING;
@@ -58,7 +59,7 @@ public class MagicalSleep extends Buff {
 			target.HP = Math.min(target.HP + 1, target.HT);
 			((Hero) target).restoreHealth = true;
 			if (target.HP == target.HT) {
-				GLog.p("You wake up feeling refreshed and healthy.");
+				GLog.p(Messages.get(this, "wakeup"));
 				detach();
 			}
 		}
@@ -81,6 +82,11 @@ public class MagicalSleep extends Buff {
 
 	@Override
 	public String toString() {
-		return "Magical Sleep";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc");
 	}
 }

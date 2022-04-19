@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.actors.buffs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.ui.BuffIndicator;
 
@@ -36,6 +37,11 @@ public class Amok extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Amok";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
 	}
 }

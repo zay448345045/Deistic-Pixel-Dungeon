@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.buffs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.items.rings.RingOfElements.Resistance;
@@ -34,7 +35,12 @@ public class Weakness extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Weakened";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
 	}
 
 	@Override

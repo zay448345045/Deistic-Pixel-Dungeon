@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs.pets;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.Fire;
@@ -26,13 +27,14 @@ import com.avmoga.dpixel.mechanics.Ballistica;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.sprites.CharSprite;
 import com.avmoga.dpixel.sprites.RedDragonSprite;
+import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
 public class RedDragon extends PET implements Callback{
 	
 	{
-		name = "red dragon";
+		name = Messages.get(RedDragon.class, "name");
 		spriteClass = RedDragonSprite.class;       
 		flying=true;
 		state = HUNTING;
@@ -73,17 +75,16 @@ public class RedDragon extends PET implements Callback{
 
 	@Override
 	protected boolean act() {
-		
+
 		if (cooldown>0){
 			cooldown=Math.max(cooldown-(level*level),0);
-			if (cooldown==0) {yell("Flame on!");}
+			if (cooldown==0) {yell(Messages.get(RedDragon.class, "ready"));}
 		}
-		
+
 		if (Random.Float()<regenChance && HP<HT){HP+=regen;}
 
 		return super.act();
 	}
-	
 	
 	@Override
 	protected boolean canAttack(Char enemy) {
@@ -120,7 +121,7 @@ public class RedDragon extends PET implements Callback{
 		spend(TIME_TO_ZAP);
 
 		cooldown=1000;
-		yell("Roaaar!");
+		yell(Messages.get(GreenDragon.class, "atk"));
 		
 		if (hit(this, enemy, true)) {			
 
@@ -163,10 +164,10 @@ public class RedDragon extends PET implements Callback{
 	}
 
 
-@Override
-public String description() {
-	return "A feshly hatched red dragon. Super fierce and super cute!";
-}
+	@Override
+	public String description() {
+		return Messages.get(RedDragon.class, "desc");
+	}
 
 
 }

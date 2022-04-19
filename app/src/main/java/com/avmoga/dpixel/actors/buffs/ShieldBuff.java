@@ -4,7 +4,7 @@ import com.avmoga.dpixel.actors.Char;
 import com.watabou.utils.Bundle;
 
 public class ShieldBuff extends Buff {
-
+//
     private int shielding;
 
     @Override

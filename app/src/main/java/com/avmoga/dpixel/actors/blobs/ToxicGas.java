@@ -19,6 +19,7 @@ package com.avmoga.dpixel.actors.blobs;
 
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -59,15 +60,13 @@ public class ToxicGas extends Blob implements Hero.Doom {
 
 	@Override
 	public String tileDesc() {
-		return "A greenish cloud of toxic gas is swirling here.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override
 	public void onDeath() {
-
 		Badges.validateDeathFromGas();
-
 		Dungeon.fail(ResultDescriptions.GAS);
-		GLog.n("You died from a toxic gas..");
+		GLog.n(Messages.get(this, "die"));
 	}
 }

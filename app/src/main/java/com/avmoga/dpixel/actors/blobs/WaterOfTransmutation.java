@@ -19,6 +19,7 @@ package com.avmoga.dpixel.actors.blobs;
 
 import com.avmoga.dpixel.Journal;
 import com.avmoga.dpixel.Journal.Feature;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.effects.BlobEmitter;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.items.ActiveMrDestructo;
@@ -298,12 +299,12 @@ public class WaterOfTransmutation extends WellWater {
 	private Item rechargeDestructo2(InactiveMrDestructo2 d) {
 		return new ActiveMrDestructo2();
 	}
-	
-	
-	
+
+
+
+
 	@Override
 	public String tileDesc() {
-		return "Power of change radiates from the water of this well. "
-				+ "Throw an item into the well to turn it into something else.";
+		return Messages.get(this, "desc");
 	}
 }
