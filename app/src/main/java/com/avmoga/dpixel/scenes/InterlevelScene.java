@@ -24,6 +24,7 @@ import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.items.Generator;
 import com.avmoga.dpixel.levels.Level;
+import com.avmoga.dpixel.ui.GameLog;
 import com.avmoga.dpixel.windows.WndError;
 import com.avmoga.dpixel.windows.WndStory;
 import com.watabou.noosa.Camera;
@@ -323,6 +324,7 @@ public class InterlevelScene extends PixelScene {
 			if (noStory) {
 				Dungeon.chapters.add(WndStory.ID_SEWERS);
 				noStory = false;
+				GameLog.wipe();
 			}
 		} else {
 			Dungeon.saveLevel();

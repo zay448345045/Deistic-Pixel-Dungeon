@@ -31,7 +31,7 @@ public class MolotovHuntsman extends Mob {
     public float lifespan;
     public MolotovHuntsman() {
         this.spriteClass = MolotovHuntsmanSprite.class;
-        HP = HT = 120*(adj(0)*Random.NormalIntRange(2, 5));
+        HP = HT = 240+(adj(0)*Random.NormalIntRange(2, 5));
         this.defenseSkill = 10;
         name = Messages.get(this, "name");
         this.EXP = 15;
@@ -84,7 +84,7 @@ public class MolotovHuntsman extends Mob {
     }
 
     public int damageRoll() {
-        return Random.NormalIntRange(7, 12)*(adj(0)*Random.NormalIntRange(1, 5));
+        return Random.NormalIntRange(7, 20)+(adj(0)+Random.NormalIntRange(1, 15));
     }
 
     public void die(Object var1) {

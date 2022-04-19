@@ -24,6 +24,7 @@ import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.effects.BadgeBanner;
 import com.avmoga.dpixel.ui.RenderedTextMultiline;
+import com.watabou.input.PointerEvent;
 import com.watabou.input.Touchscreen;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.BitmapText.Font;
@@ -148,6 +149,7 @@ public class PixelScene extends Scene {
 	public void destroy() {
 		super.destroy();
 		Touchscreen.event.removeAll();
+		//PointerEvent.clearListeners();
 	}
 
 	public static BitmapText.Font font;
