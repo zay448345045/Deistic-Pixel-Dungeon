@@ -17,6 +17,29 @@ public class v0_1_X_Changes{
 
     public static void add_v0_1_0_Changes( ArrayList<ChangeInfo> changeInfos ){
 
+        ChangeInfo changes5 = new ChangeInfo("CN-0.46自然之神的像素地牢", true,
+                "");
+        changes5.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes5);
+
+        changes5 = new ChangeInfo( Messages.get( ChangesScene.class, "new"), false, null);
+        changes5.hardlight( 0x00ff00 );
+        changeInfos.add(changes5);
+
+        changes5.addButton( new ChangeButton(Icons.get(Icons.PREFS), Messages.get(ChangesScene.class, "misc"),
+                "-1.更多的翻译被追加了\n" +
+                        "-2.图鉴二次优化\n" +
+                        "-3.其他性能处理"));
+
+        changes5 = new ChangeInfo( Messages.get( ChangesScene.class, "bugfixes"), false, null);
+        changes5.hardlight( 0xffff00 );
+        changeInfos.add(changes5);
+
+        changes5.addButton( new ChangeButton(new Image(Assets.SPINNER, 144, 0, 16, 16),
+                Messages.get(ChangesScene.class, "bugfixes"),
+                "-1.修复了人族贴图Null的Bug\n" +
+                        "-2.修复了部分贴图文字的Bug"));
+
         ChangeInfo changes4 = new ChangeInfo("CN-0.45自然之神的像素地牢", true,
                 "");
         changes4.hardlight(Window.TITLE_COLOR);

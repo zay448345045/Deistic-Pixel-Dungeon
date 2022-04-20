@@ -17,35 +17,37 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.items.weapon.Weapon;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.ui.RedButton;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
 import com.avmoga.dpixel.utils.GLog;
-import com.avmoga.dpixel.utils.Utils;
 import com.avmoga.dpixel.windows.IconTitle;
 import com.avmoga.dpixel.windows.WndBag;
-import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.audio.Sample;
+
+import java.util.ArrayList;
 
 public class Weightstone extends Item {
 
-	private static final String TXT_SELECT_WEAPON = "Select a weapon to balance";
-	private static final String TXT_LIGHT = "you balanced your %s to make it lighter";
-	private static final String TXT_HEAVY = "you balanced your %s to make it heavier";
+
+	private static final String TXT_SELECT_WEAPON = Messages.get(Weightstone.class, "select");
+	private static final String TXT_LIGHT = Messages.get(Weightstone.class, "light");
+	private static final String TXT_HEAVY = Messages.get(Weightstone.class, "heavy");
 
 	private static final float TIME_TO_APPLY = 2;
 
-	private static final String AC_APPLY = "APPLY";
+	private static final String AC_APPLY = Messages.get(Weightstone.class, "ac_apply");
+
 
 	{
-		name = "weightstone";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.WEIGHT;
 
 		stackable = true;
@@ -111,8 +113,7 @@ public class Weightstone extends Item {
 
 	@Override
 	public String info() {
-		return "Using a weightstone, you can balance your melee weapon to make it lighter or heavier, "
-				+ "increasing either speed or damage at the expense of the other.";
+		return Messages.get(this, "desc");
 	}
 
 	private final WndBag.Listener itemSelector = new WndBag.Listener() {
@@ -126,11 +127,11 @@ public class Weightstone extends Item {
 
 	public class WndBalance extends Window {
 
-		private static final String TXT_CHOICE = "How would you like to balance your %s?";
+		private final String TXT_CHOICE = Messages.get(Weightstone.class, "choice");
 
-		private static final String TXT_LIGHT = "Lighter";
-		private static final String TXT_HEAVY = "Heavier";
-		private static final String TXT_CANCEL = "Never mind";
+		private final String TXT_LIGHT = Messages.get(Weightstone.class, "lighter");
+		private final String TXT_HEAVY = Messages.get(Weightstone.class, "heavier");
+		private final String TXT_CANCEL = Messages.get(Weightstone.class, "cancel");
 
 		private static final int WIDTH = 120;
 		private static final int MARGIN = 2;
@@ -144,15 +145,12 @@ public class Weightstone extends Item {
 			titlebar.setRect(0, 0, WIDTH, 0);
 			add(titlebar);
 
-			BitmapTextMultiline tfMesage = PixelScene.createMultiline(
-					Utils.format(TXT_CHOICE, weapon.name()), 8);
-			tfMesage.maxWidth = WIDTH - MARGIN * 2;
-			tfMesage.measure();
-			tfMesage.x = MARGIN;
-			tfMesage.y = titlebar.bottom() + MARGIN;
+			RenderedTextMultiline tfMesage = PixelScene.renderMultiline(Messages.get(Weightstone.class, "choice"), 8);
+			tfMesage.maxWidth(WIDTH - MARGIN * 2);
+			tfMesage.setPos(MARGIN, titlebar.bottom() + MARGIN);
 			add(tfMesage);
 
-			float pos = tfMesage.y + tfMesage.height();
+			float pos = tfMesage.top() + tfMesage.height();
 
 			if (weapon.imbue != Weapon.Imbue.LIGHT) {
 				RedButton btnSpeed = new RedButton(TXT_LIGHT) {
@@ -198,6 +196,6 @@ public class Weightstone extends Item {
 		}
 
 		protected void onSelect(int index) {
-		};
+		}
 	}
 }

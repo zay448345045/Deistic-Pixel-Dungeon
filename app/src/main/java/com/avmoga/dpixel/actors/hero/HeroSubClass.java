@@ -17,55 +17,37 @@
  */
 package com.avmoga.dpixel.actors.hero;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.watabou.utils.Bundle;
 
 public enum HeroSubClass {
 
-	NONE(null, null),
+	NONE(null),
 
-	GLADIATOR(
-			"gladiator",
-			"A successful attack with a melee weapon allows the _Gladiator_ to start a combo, "
-					+ "in which every next successful hit inflicts more damage."), BERSERKER(
-			"berserker",
-			"When severely wounded, the _Berserker_ enters a state of wild fury "
-					+ "significantly increasing his damage output."),
+	GLADIATOR("gladiator"),
+	BERSERKER("berserker"),
 
-	WARLOCK("warlock",
-			"After killing an enemy the _Warlock_ consumes its soul. "
-					+ "It heals his wounds and satisfies his hunger."), BATTLEMAGE(
-			"battlemage",
-			"When fighting with a wand in his hands, the _Battlemage_ inflicts additional damage depending "
-					+ "on the current number of charges. Every successful hit restores 1 charge to this wand."),
+	WARLOCK("warlock"),
+	BATTLEMAGE("battlemage"),
 
-	ASSASSIN(
-			"assassin",
-			"When performing a surprise attack, the _Assassin_ inflicts additional damage to his target."), FREERUNNER(
-			"freerunner",
-			"The _Freerunner_ moves faster when he unencumbered and not starving, "
-					+ "if he is invisible, this speed boost is much stronger."),
+	ASSASSIN("assassin"),
+	FREERUNNER("freerunner"),
 
-	SNIPER("sniper",
-			"_Snipers_ are able to detect weak points in an enemy's armor, "
-					+ "effectively ignoring it when using a missile weapon."), WARDEN(
-			"warden",
-			"Having a strong connection with forces of nature gives _Wardens_ an ability to gather dewdrops and "
-					+ "seeds from plants. Also trampling a high grass grants them a temporary armor buff.");
+	SNIPER("sniper"),
+	WARDEN("warden");
 
 	private String title;
-	private String desc;
-
-	private HeroSubClass(String title, String desc) {
-		this.title = title;
-		this.desc = desc;
-	}
 
 	public String title() {
-		return title;
+		return Messages.get(this, title);
 	}
 
 	public String desc() {
-		return desc;
+		return Messages.get(this, title + "_desc");
+	}
+
+	HeroSubClass(String title) {
+		this.title = title;
 	}
 
 	private static final String SUBCLASS = "subClass";

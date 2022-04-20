@@ -190,7 +190,7 @@ public class StatusPane extends Component {
 
 		danger.setPos(width - danger.width(), 18);
 
-		buffs.setPos(31, 13);
+		buffs.setPos(31, 12);
 
 		btnMenu.setPos(width - btnMenu.width(), 1);
 	}

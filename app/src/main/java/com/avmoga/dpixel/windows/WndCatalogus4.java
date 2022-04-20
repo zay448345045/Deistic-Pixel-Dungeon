@@ -11,7 +11,6 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.ui.RedButton;
 import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.ScrollPane;
-import com.avmoga.dpixel.ui.Window;
 import com.watabou.noosa.ColorBlock;
 import com.watabou.noosa.ui.Component;
 
@@ -58,7 +57,6 @@ public class WndCatalogus4 extends WndTabbed {
                 GameScene.show(new WndCatalogus3());
             }
         };
-        btnTitle.textColor( Window.TITLE_COLOR );
         btnTitle.setRect(WIDTH/3f+1, 0, WIDTH/3f - 1, btnTitle.reqHeight());
         PixelScene.align(btnTitle);
         add( btnTitle );
@@ -105,7 +103,7 @@ public class WndCatalogus4 extends WndTabbed {
 
         layoutTabs();
 
-        select( showPotions ? 0 : 1 );
+        select( showPotions ? 0 : 0 );
     }
 
     private void updateList() {

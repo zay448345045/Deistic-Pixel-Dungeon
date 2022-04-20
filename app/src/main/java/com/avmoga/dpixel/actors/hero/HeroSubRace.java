@@ -89,7 +89,7 @@ public enum HeroSubRace {
 		case BRUTE:
 			return Assets.BRUTEWARRIOR;
 		default:
-			return null;
+			return Assets.HUMANWARRIOR;
 		}
 	}
 	public String mageSprite() {
@@ -107,7 +107,7 @@ public enum HeroSubRace {
 		case BRUTE:
 			return Assets.BRUTEMAGE;
 		default:
-			return null;
+			return Assets.HUMANMAGE;
 		}
 	}
 	public String rogueSprite() {
@@ -125,7 +125,7 @@ public enum HeroSubRace {
 		case BRUTE:
 			return Assets.BRUTEROGUE;
 		default:
-			return null;
+			return Assets.HUMANROGUE;
 		}
 	}
 	public String huntressSprite() {
@@ -143,7 +143,7 @@ public enum HeroSubRace {
 		case BRUTE:
 			return Assets.BRUTEHUNTRESS;
 		default:
-			return null;
+			return Assets.HUMANHUNTRESS;
 		}
 	}
 

@@ -35,7 +35,6 @@ import com.avmoga.dpixel.items.weapon.missiles.Javelin;
 import com.avmoga.dpixel.items.weapon.missiles.RiceBall;
 import com.avmoga.dpixel.items.weapon.missiles.Shuriken;
 import com.avmoga.dpixel.items.weapon.missiles.Tamahawk;
-import com.avmoga.dpixel.items.weapon.missiles.Wave;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Bundle;
@@ -89,7 +88,6 @@ public class RingThree extends KindofMisc {
             RiceBall.class,
             Shuriken.class,
             Tamahawk.class,
-            Wave.class
     };
     private static final String[] gems = {
             Messages.get(Ring.class, "diamond"),
@@ -117,7 +115,6 @@ public class RingThree extends KindofMisc {
             Messages.get(Ring.class, "amethyst"),
             Messages.get(Ring.class, "garnet"),
             Messages.get(Ring.class, "ruby"),
-            Messages.get(Ring.class, "amethyst"),
     };
     private static final Integer[] images = {
             ItemSpriteSheet.RING_DIAMOND,
@@ -132,7 +129,7 @@ public class RingThree extends KindofMisc {
             ItemSpriteSheet.RING_TOPAZ, ItemSpriteSheet.RING_ONYX,
             ItemSpriteSheet.RING_TOURMALINE, ItemSpriteSheet.RING_EMERALD,
             ItemSpriteSheet.RING_SAPPHIRE,ItemSpriteSheet.RING_SAPPHIRE,ItemSpriteSheet.RING_EMERALD,
-            ItemSpriteSheet.RING_SAPPHIRE,ItemSpriteSheet.RING_SAPPHIRE
+            ItemSpriteSheet.RING_SAPPHIRE
     };
 
     private static ItemStatusHandler<RingThree> handler;

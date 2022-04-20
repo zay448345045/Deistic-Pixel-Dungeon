@@ -17,12 +17,10 @@
  */
 package com.avmoga.dpixel.items.wands;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -34,7 +32,6 @@ import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.ItemStatusHandler;
 import com.avmoga.dpixel.items.KindOfWeapon;
 import com.avmoga.dpixel.items.bags.Bag;
-import com.avmoga.dpixel.items.rings.Ring;
 import com.avmoga.dpixel.items.rings.RingOfMagic.Magic;
 import com.avmoga.dpixel.mechanics.Ballistica;
 import com.avmoga.dpixel.scenes.CellSelector;
@@ -47,11 +44,13 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public abstract class Wand extends KindOfWeapon {
 
 	private static final int USAGES_TO_KNOW = 40;
 
-	public static final String AC_ZAP = "ZAP";
 	public static HashSet<Class<? extends Wand>> getKnown() {
 		return handler.known();
 	}
@@ -59,17 +58,19 @@ public abstract class Wand extends KindOfWeapon {
 	public static HashSet<Class<? extends Wand>> getUnknown() {
 		return handler.unknown();
 	}
-	private static final String TXT_SILENCED = "You are silenced!";
-	private static final String TXT_WOOD = "This thin %s wand is warm to the touch. Who knows what it will do when used?";
-	private static final String TXT_DAMAGE = "When this wand is used as a melee weapon, its average damage is %d points per hit.";
-	private static final String TXT_WEAPON = "You can use this wand as a melee weapon.";
+	private static final String TXT_SILENCED = "法杖因沉默诅咒无法释放力量！";
+	public static final String AC_ZAP = Messages.get(Wand.class, "ac_zap");
 
-	private static final String TXT_FIZZLES = "your wand fizzles; it must be out of charges for now";
-	private static final String TXT_SELF_TARGET = "You can't target yourself";
+	private static final String TXT_WOOD = Messages.get(Wand.class, "wood");
+	private static final String TXT_DAMAGE = Messages.get(Wand.class, "damage");
+	private static final String TXT_WEAPON = Messages.get(Wand.class, "weapon");
 
-	private static final String TXT_IDENTIFY = "You are now familiar enough with your %s.";
-	
-	private static final String TXT_REINFORCED = "\n\nIt is reinforced. ";
+	private static final String TXT_FIZZLES = Messages.get(Wand.class, "fizzles");
+	private static final String TXT_SELF_TARGET = Messages.get(Wand.class, "self_target");
+
+	private static final String TXT_IDENTIFY = Messages.get(Wand.class, "identify");
+
+	private static final String TXT_REINFORCED = Messages.get(Wand.class, "re");
 
 	private static final float TIME_TO_ZAP = 1f;
 

@@ -203,20 +203,6 @@ public class WndSettings extends WndTabbed {
 				btnOrientation.setRect(0, btnImmersive.bottom() + GAP, WIDTH_L, BTN_HEIGHT);
 			}
 			add(btnOrientation);
-
-			OptionSlider brightness = new OptionSlider(Messages.get(WndSettings.class, "brightness"), "-2", "2", -2, 2) {
-				@Override
-				protected void onChange() {
-					ShatteredPixelDungeon.brightness(getSelectedValue());
-				}
-			};
-			brightness.setSelectedValue(ShatteredPixelDungeon.brightness());
-			if (!ShatteredPixelDungeon.landscape()) {
-				brightness.setRect(0, btnOrientation.bottom() + GAP, WIDTH, SLIDER_HEIGHT);
-			} else {
-				brightness.setRect(0, btnOrientation.bottom() + GAP, WIDTH_L, SLIDER_HEIGHT);
-			}
-			add(brightness);
 		}
 
 	}

@@ -3,10 +3,6 @@ package com.avmoga.dpixel.windows;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.items.Item;
-import com.avmoga.dpixel.items.artifacts.Artifact;
-import com.avmoga.dpixel.items.potions.Potion;
-import com.avmoga.dpixel.items.rings.Ring;
-import com.avmoga.dpixel.items.scrolls.Scroll;
 import com.avmoga.dpixel.items.wands.Wand;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.scenes.PixelScene;
@@ -15,7 +11,6 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.ui.RedButton;
 import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.ScrollPane;
-import com.avmoga.dpixel.ui.Window;
 import com.watabou.noosa.ColorBlock;
 import com.watabou.noosa.ui.Component;
 
@@ -62,7 +57,7 @@ public class WndCatalogus2 extends WndTabbed {
                 GameScene.show(new WndCatalogus2());
             }
         };
-        btnTitle.textColor( Window.TITLE_COLOR );
+        btnTitle.textColor( 0xffff00 );
         btnTitle.setRect(WIDTH/3f+1, 0, WIDTH/3f - 1, btnTitle.reqHeight());
         PixelScene.align(btnTitle);
         add( btnTitle );
@@ -74,7 +69,6 @@ public class WndCatalogus2 extends WndTabbed {
                 GameScene.show(new WndCatalogus3());
             }
         };
-        SbtnTitle.textColor( 0xffff00 );
         SbtnTitle.setRect(WIDTH/3f+39, 0, WIDTH/3f - 1, SbtnTitle.reqHeight());
         PixelScene.align(SbtnTitle);
         add( SbtnTitle );
@@ -95,13 +89,6 @@ public class WndCatalogus2 extends WndTabbed {
 
         boolean showPotions = WndCatalogus2.showPotions;
         Tab[] tabs = {
-                new LabeledTab( "戒指" ) {
-                    protected void select( boolean value ) {
-                        super.select( value );
-                        WndCatalogus2.showPotions = value;
-                        updateList();
-                    };
-                },
                 new LabeledTab(  "法杖" ) {
                     protected void select( boolean value ) {
                         super.select( value );
@@ -116,7 +103,7 @@ public class WndCatalogus2 extends WndTabbed {
 
         layoutTabs();
 
-        select( showPotions ? 0 : 1 );
+        select( showPotions ? 0 : 0);
     }
 
     private void updateList() {
@@ -128,7 +115,7 @@ public class WndCatalogus2 extends WndTabbed {
         list.scrollTo( 0, 0 );
 
         float pos = 0;
-        for (Class<? extends Item> itemClass : showPotions ? Wand.getKnown() : Ring.getKnown()) {
+        for (Class<? extends Item> itemClass : showPotions ? Wand.getKnown() : Wand.getKnown()) {
             WndCatalogus.ListItem item = new WndCatalogus.ListItem( itemClass );
             item.setRect( 0, pos, width, ITEM_HEIGHT );
             content.add( item );
@@ -137,7 +124,7 @@ public class WndCatalogus2 extends WndTabbed {
             pos += item.height();
         }
 
-        for (Class<? extends Item> itemClass : showPotions ? Ring.getUnknown() : Wand.getUnknown()) {
+        for (Class<? extends Item> itemClass : showPotions ? Wand.getUnknown() : Wand.getUnknown()) {
             WndCatalogus.ListItem item = new WndCatalogus.ListItem( itemClass );
             item.setRect( 0, pos, width, ITEM_HEIGHT );
             content.add( item );

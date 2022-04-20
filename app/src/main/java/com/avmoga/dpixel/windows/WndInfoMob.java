@@ -55,7 +55,7 @@ public class WndInfoMob extends WndTitledMessage {
 		public MobTitle(Mob mob) {
 
 			name =
-					PixelScene.renderText(Messages.titleCase(mob.name)+(" " + (mob.HP) + "/" + mob.HT ), 9);
+					PixelScene.renderText(Messages.titleCase(mob.name),9);
 			name.hardlight(TITLE_COLOR);
 			add(name);
 

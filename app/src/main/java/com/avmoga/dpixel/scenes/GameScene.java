@@ -85,7 +85,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class GameScene extends PixelScene {
-
+	public static float density = 1;
 	private static final String TXT_WELCOME = Messages.get(GameScene.class, "welcome");
 	private static final String TXT_WELCOME_BACK = Messages.get(GameScene.class, "welcome_back");
 

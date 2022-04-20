@@ -50,7 +50,7 @@ public class Wave extends MissileWeapon {
 
 	@Override
 	public Item random() {
-		quantity = Random.Int(5, 15);
+		quantity = Random.Int(50, 180);
 		return this;
 	}
 
