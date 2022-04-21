@@ -17,11 +17,10 @@
  */
 package com.avmoga.dpixel.actors.mobs.npcs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Journal;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -70,6 +69,8 @@ import com.avmoga.dpixel.windows.WndSadGhost;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class Ghost extends NPC {
 
@@ -608,10 +609,10 @@ public class Ghost extends NPC {
 	}
 	
 	public static class GnollArcher extends Gnoll {
-		
-	private static final String TXT_KILLCOUNT = "Gnoll Archer Kill Count: %s";
+
+		private static final String TXT_KILLCOUNT = Messages.get(Ghost.class, "killcount");
 		{
-			name = "gnoll archer";
+			name = Messages.get(Ghost.class, "archername");
 			spriteClass = GnollArcherSprite.class;
 
 			HP = HT = 20;
@@ -689,11 +690,11 @@ public class Ghost extends NPC {
 
 				}
 		}
-		
-		
+
+
 		@Override
 		public String description() {
-			return "This gnoll is camouflaged and hiding in the foliage. He's pretty upset you are here. ";
+			return Messages.get(Ghost.class, "archerdesc");
 		}
 
 			

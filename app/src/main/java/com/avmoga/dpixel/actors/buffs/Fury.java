@@ -22,6 +22,10 @@ import com.avmoga.dpixel.ui.BuffIndicator;
 
 public class Fury extends Buff {
 
+	public int icon() {
+		return BuffIndicator.FURY;
+	}
+
 	public static float LEVEL = 0.4f;
 
 	@Override

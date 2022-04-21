@@ -19,6 +19,7 @@ package com.avmoga.dpixel.actors.mobs;
 
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Bleeding;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -29,7 +30,7 @@ import com.watabou.utils.Random;
 public class Albino extends Rat {
 
 	{
-		name = "albino rat";
+		name = Messages.get(this, "name");
 		spriteClass = AlbinoSprite.class;
 
 		HP = HT = 10+(Dungeon.depth*Random.NormalIntRange(1, 3));
@@ -55,6 +56,6 @@ public class Albino extends Rat {
 
 	@Override
 	public String description() {
-		return "This is a rare breed of marsupial rat, with pure white fur and jagged teeth.";
+		return Messages.get(this, "desc");
 	}
 }

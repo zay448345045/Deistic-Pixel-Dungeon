@@ -17,8 +17,7 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Poison;
@@ -30,6 +29,8 @@ import com.avmoga.dpixel.mechanics.Ballistica;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.sprites.DwarfLichSprite;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class DwarfLich extends Mob {
 	
@@ -106,14 +107,13 @@ public class DwarfLich extends Mob {
 			return d;
      
      }
-	
-	
-	
+
+
+
 
 	@Override
 	public String description() {
-		return "A powerful wizard sacrificed to sustain the undead dwarf king, "
-				+ "the wizard calls on the power of death to damage opponents.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

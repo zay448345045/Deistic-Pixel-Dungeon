@@ -17,11 +17,10 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -52,6 +51,8 @@ import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class DM300 extends Mob implements Callback {
 	
@@ -237,12 +238,10 @@ public class DM300 extends Mob implements Callback {
 	public void call() {
 		next();
 	}
-		
+
 	@Override
 	public String description() {
-		return "This machine was created by the Dwarves several centuries ago. Later, Dwarves started to replace machines with "
-				+ "golems, elementals and even demons. Eventually it led their civilization to the decline. The DM-300 and similar "
-				+ "machines were typically used for construction and mining, and in some cases, for city defense.";
+		return Messages.get(this, "desc");
 	}
 
 	

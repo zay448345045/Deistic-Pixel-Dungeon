@@ -17,13 +17,9 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.effects.CellEmitter;
@@ -38,6 +34,11 @@ import com.avmoga.dpixel.sprites.MimicSprite;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 public class Mimic extends Mob {
 
@@ -122,8 +123,7 @@ public class Mimic extends Mob {
 
 	@Override
 	public String description() {
-		return "Mimics are magical creatures which can take any shape they wish. In dungeons they almost always "
-				+ "choose a shape of a treasure chest, because they know how to beckon an adventurer.";
+		return Messages.get(this, "desc");
 	}
 
 	public static Mimic spawnAt(int pos, List<Item> items) {

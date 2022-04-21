@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs;
 
 import com.avmoga.dpixel.Badges;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.sprites.AcidicSprite;
 import com.watabou.utils.Random;
@@ -25,7 +26,7 @@ import com.watabou.utils.Random;
 public class Acidic extends Scorpio {
 
 	{
-		name = "acidic scorpio";
+		name = Messages.get(this, "name");
 		spriteClass = AcidicSprite.class;
 	}
 

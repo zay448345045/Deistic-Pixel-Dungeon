@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -41,6 +40,8 @@ import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.utils.Utils;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class Eye extends Mob {
 
@@ -183,13 +184,11 @@ public class Eye extends Mob {
 			return null;
 		}
 	}
-	
+
 	@Override
 	public String description() {
-		return "One of this demon's other names is \"orb of hatred\", because when it sees an enemy, "
-				+ "it uses its deathgaze recklessly, often ignoring its allies and wounding them.";
+		return Messages.get(this, "desc");
 	}
-
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();
 	static {
 		RESISTANCES.add(WandOfDisintegration.class);

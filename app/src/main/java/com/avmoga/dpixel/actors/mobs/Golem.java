@@ -17,8 +17,7 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Amok;
 import com.avmoga.dpixel.actors.buffs.Sleep;
@@ -26,6 +25,8 @@ import com.avmoga.dpixel.actors.buffs.Terror;
 import com.avmoga.dpixel.actors.mobs.npcs.Imp;
 import com.avmoga.dpixel.sprites.GolemSprite;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class Golem extends Mob {
 
@@ -74,9 +75,7 @@ public class Golem extends Mob {
 
 	@Override
 	public String description() {
-		return "The Dwarves tried to combine their knowledge of mechanisms with their newfound power of elemental binding. "
-				+ "They used spirits of earth as the \"soul\" for the mechanical bodies of golems, which were believed to be "
-				+ "most controllable of all. Despite this, the tiniest mistake in the ritual could cause an outbreak.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

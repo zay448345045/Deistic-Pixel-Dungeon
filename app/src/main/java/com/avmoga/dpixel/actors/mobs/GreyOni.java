@@ -17,13 +17,14 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Amok;
 import com.avmoga.dpixel.actors.buffs.Terror;
 import com.avmoga.dpixel.sprites.GreyOniSprite;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class GreyOni extends Mob {
 
@@ -65,8 +66,7 @@ public class GreyOni extends Mob {
 
 	@Override
 	public String description() {
-		return "Oni are wicked trolls who dwell in places of great power. "
-				+"The grey variety are vicious but no less hungry... ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

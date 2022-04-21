@@ -11,7 +11,6 @@ import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.ItemStatusHandler;
 import com.avmoga.dpixel.items.KindofMisc;
 import com.avmoga.dpixel.items.weapon.melee.BattleAxe;
-import com.avmoga.dpixel.items.weapon.melee.Chainsaw;
 import com.avmoga.dpixel.items.weapon.melee.Dagger;
 import com.avmoga.dpixel.items.weapon.melee.Glaive;
 import com.avmoga.dpixel.items.weapon.melee.Knuckles;
@@ -64,7 +63,6 @@ public class RingThree extends KindofMisc {
     //Wepaon
     private static final Class<?>[] rings = {
             BattleAxe.class,
-            Chainsaw.class,
             Dagger.class,
             Glaive.class,
             Knuckles.class,
@@ -91,7 +89,6 @@ public class RingThree extends KindofMisc {
     };
     private static final String[] gems = {
             Messages.get(Ring.class, "diamond"),
-            Messages.get(Ring.class, "opal"),
             Messages.get(Ring.class, "garnet"),
             Messages.get(Ring.class, "ruby"),
             Messages.get(Ring.class, "amethyst"),
@@ -118,7 +115,7 @@ public class RingThree extends KindofMisc {
     };
     private static final Integer[] images = {
             ItemSpriteSheet.RING_DIAMOND,
-            ItemSpriteSheet.RING_OPAL, ItemSpriteSheet.RING_GARNET,
+            ItemSpriteSheet.RING_GARNET,
             ItemSpriteSheet.RING_RUBY, ItemSpriteSheet.RING_AMETHYST,
             ItemSpriteSheet.RING_TOPAZ, ItemSpriteSheet.RING_ONYX,
             ItemSpriteSheet.RING_TOURMALINE, ItemSpriteSheet.RING_EMERALD,

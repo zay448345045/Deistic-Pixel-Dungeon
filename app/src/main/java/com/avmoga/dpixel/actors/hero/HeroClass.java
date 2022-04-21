@@ -79,6 +79,7 @@ public enum HeroClass {
 		if (!Dungeon.isChallenged(Challenges.NO_ARMOR))
 			(hero.belongings.armor = new ClothArmor()).identify();
 		//难度还原 添加种子袋
+
 		new SeedPouch().quantity(1).identify().collect();
 
 		if (!Dungeon.isChallenged(Challenges.NO_FOOD))

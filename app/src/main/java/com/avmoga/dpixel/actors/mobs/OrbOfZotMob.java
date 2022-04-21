@@ -17,14 +17,13 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
-import com.avmoga.dpixel.actors.buffs.Silence;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
+import com.avmoga.dpixel.actors.buffs.Silence;
 import com.avmoga.dpixel.actors.buffs.Terror;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.particles.PurpleParticle;
@@ -39,6 +38,8 @@ import com.avmoga.dpixel.sprites.OrbOfZotSprite;
 import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.utils.Utils;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class OrbOfZotMob extends Mob {
 
@@ -211,11 +212,10 @@ public class OrbOfZotMob extends Mob {
 	@Override
 	public void beckon(int cell) {
 	}
-	
+
 	@Override
 	public String description() {
-		return "The orb has sprung to life! "
-				+ "It is blowing away nearby mobs!";
+		return Messages.get(this, "desc");
 	}
 
 	

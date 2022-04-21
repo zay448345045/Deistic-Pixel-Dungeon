@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Terror;
 import com.avmoga.dpixel.items.Gold;
@@ -29,6 +28,8 @@ import com.avmoga.dpixel.sprites.CharSprite;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class Brute extends Mob {
 
@@ -94,8 +95,7 @@ public class Brute extends Mob {
 
 	@Override
 	public String description() {
-		return "Brutes are the largest, strongest and toughest of all gnolls. When severely wounded, "
-				+ "they go berserk, inflicting even more damage to their enemies.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

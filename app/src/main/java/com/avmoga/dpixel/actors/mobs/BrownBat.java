@@ -17,7 +17,9 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
+import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Blindness;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -25,12 +27,13 @@ import com.avmoga.dpixel.items.Generator;
 import com.avmoga.dpixel.items.food.Meat;
 import com.avmoga.dpixel.sprites.BrownBatSprite;
 import com.avmoga.dpixel.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
 public class BrownBat extends Mob {
 
 	{
-		name = "brown bat";
+		name = Messages.get(this, "name");
 		spriteClass = BrownBatSprite.class;
 
 		HP = HT = 4;
@@ -64,7 +67,7 @@ public class BrownBat extends Mob {
 	public int attackProc(Char enemy, int damage) {
 		if (Random.Int(10) == 0) {
 			Buff.prolong(enemy, Blindness.class, Random.Int(3, 10));
-			GLog.n("The brown bat scratches your eyes!");
+			GLog.n("棕色蝙蝠刺伤了你的眼睛!");
 			Dungeon.observe();
 			state = FLEEING;
 		}
@@ -78,7 +81,7 @@ public class BrownBat extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return "躲避";
 	}
 	
 	@Override
@@ -88,17 +91,18 @@ public class BrownBat extends Mob {
 			  for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
 				  if (Random.Int(2) == 0 && enemy!=null){mob.beckon(enemy.pos);}
 			      }
-			  GLog.n("The brown bat's shrieks alert nearby enemies!");
+			  GLog.n("棕色蝙蝠的发出的尖叫把附近的敌人都惊醒了！");
+				Sample.INSTANCE.play(Assets.SND_ALERT);
 			}
 
 		super.die(cause);
 
 	}
 
-	
+
 	@Override
 	public String description() {
-		return "Basically small, flying rats. Careful they don't get tangled in your hair.";
+		return Messages.get(this, "desc");
 	}
 
 	

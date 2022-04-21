@@ -17,6 +17,31 @@ public class v0_1_X_Changes{
 
     public static void add_v0_1_0_Changes( ArrayList<ChangeInfo> changeInfos ){
 
+        ChangeInfo changes6 = new ChangeInfo("CN-0.48自然之神的像素地牢", true,
+                "");
+        changes6.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes6);
+
+        changes6 = new ChangeInfo( Messages.get( ChangesScene.class, "new"), false, null);
+        changes6.hardlight( 0x00ff00 );
+        changeInfos.add(changes6);
+
+        changes6.addButton( new ChangeButton(Icons.get(Icons.PREFS), Messages.get(ChangesScene.class, "misc"),
+                "-1.更多的翻译被追加了\n" +
+                        "-2.BGM音乐系统升级，特别感谢无名地牢作者的音乐和破碎地牢的音乐\n" +
+                        "-3.修复了图鉴电锯和螃蟹王的湮灭波刃存在的Bug\n" +
+                        "-4.挑战现在可以直接选择！\n" +
+                        "-5.为棕色蝙蝠死亡尖叫添加了音效（显得更加真实）"));
+
+        changes6 = new ChangeInfo( Messages.get( ChangesScene.class, "bugfixes"), false, null);
+        changes6.hardlight( 0xffff00 );
+        changeInfos.add(changes6);
+
+        changes6.addButton( new ChangeButton(new Image(Assets.SPINNER, 144, 0, 16, 16),
+                Messages.get(ChangesScene.class, "bugfixes"),
+                "-1.修复了法杖闪退的Bug\n" +
+                        "-2.修复了部分界面贴图渲染崩溃的Bug"));
+
         ChangeInfo changes5 = new ChangeInfo("CN-0.46自然之神的像素地牢", true,
                 "");
         changes5.hardlight(Window.TITLE_COLOR);

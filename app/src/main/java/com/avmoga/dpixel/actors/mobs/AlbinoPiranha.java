@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
@@ -36,6 +35,8 @@ import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.sprites.AlbinoPiranhaSprite;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class AlbinoPiranha extends Mob {
 	
@@ -182,9 +183,7 @@ public class AlbinoPiranha extends Mob {
 
 	@Override
 	public String description() {
-		return "These huge blind cave fish inhabitant pools of underground water. "
-				+"Vibrations in the water alert them to prey. "
-				+ "They look ferocious and hungry.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

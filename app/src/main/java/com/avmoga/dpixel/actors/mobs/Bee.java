@@ -17,18 +17,19 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
+import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
-import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.buffs.Amok;
 import com.avmoga.dpixel.actors.buffs.Poison;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.sprites.BeeSprite;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class Bee extends Mob {
 
@@ -152,8 +153,7 @@ public class Bee extends Mob {
 
 	@Override
 	public String description() {
-		return "Despite their small size, golden bees tend "
-				+ "to protect their home fiercely. This one is very mad, better keep your distance.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

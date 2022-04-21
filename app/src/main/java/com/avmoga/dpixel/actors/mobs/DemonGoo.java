@@ -17,10 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
@@ -43,6 +41,9 @@ import com.avmoga.dpixel.sprites.DemonGooSprite;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class DemonGoo extends Mob {
 	
@@ -178,7 +179,7 @@ private static final String DEMONGOOGENERATION = "demonGooGeneration";
 
 	@Override
 	public String description() {
-		return "Demon Goo is pretty angry you killed its buddy in the sewers. ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

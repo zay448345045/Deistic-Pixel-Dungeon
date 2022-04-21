@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
@@ -39,6 +38,8 @@ import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class CrabKing extends Mob {
 
 	private static final int JUMP_DELAY = 5;
@@ -48,9 +49,9 @@ public class CrabKing extends Mob {
 		spriteClass = CrabKingSprite.class;
 		baseSpeed = 2f;
 
-		HP = HT = 300;
+		HP = HT = 300*adj(2);
 		EXP = 20;
-		defenseSkill = 30;
+		defenseSkill = 60;
 	}
 
 	private int timeToJump = JUMP_DELAY;
@@ -58,7 +59,7 @@ public class CrabKing extends Mob {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(20, 50);
+		return Random.NormalIntRange(50, 200);
 	}
 
 	@Override
@@ -93,7 +94,7 @@ public class CrabKing extends Mob {
 		
 		GameScene.bossSlain();
 		
-		Dungeon.level.drop(new Gold(Random.Int(1900, 4000)), pos).sprite.drop();
+		Dungeon.level.drop(new Gold(Random.Int(100, 2000)), pos).sprite.drop();
 		Dungeon.level.drop(new AdamantArmor(), pos).sprite.drop();
 		Dungeon.crabkingkilled=true;
 	
@@ -159,8 +160,7 @@ public class CrabKing extends Mob {
 
 	@Override
 	public String description() {
-		return "The crab king collects protective magical items to make himself stronger. "
-				+ "He is hiding himself in a powerful suit of armor.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

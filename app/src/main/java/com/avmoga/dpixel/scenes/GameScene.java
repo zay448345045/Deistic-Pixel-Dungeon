@@ -47,6 +47,7 @@ import com.avmoga.dpixel.items.wands.WandOfBlink;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.levels.RegularLevel;
 import com.avmoga.dpixel.levels.features.Chasm;
+import com.avmoga.dpixel.music.BGMPlayer;
 import com.avmoga.dpixel.plants.Plant;
 import com.avmoga.dpixel.sprites.CharSprite;
 import com.avmoga.dpixel.sprites.DiscardedItemSprite;
@@ -75,7 +76,6 @@ import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.SkinnedBlock;
 import com.watabou.noosa.Visual;
-import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.utils.Random;
@@ -130,8 +130,7 @@ public class GameScene extends PixelScene {
 	@Override
 	public void create() {
 
-		Music.INSTANCE.play(Assets.TUNE, true);
-		Music.INSTANCE.volume(1f);
+		BGMPlayer.playBGMWithDepth();
 
 		ShatteredPixelDungeon.lastClass(Dungeon.hero.heroClass.ordinal());
 		ShatteredPixelDungeon.lastRace(Dungeon.hero.heroRace.ordinal());

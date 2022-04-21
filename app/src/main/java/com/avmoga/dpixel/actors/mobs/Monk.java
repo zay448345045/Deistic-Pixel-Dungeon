@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Amok;
 import com.avmoga.dpixel.actors.buffs.Terror;
@@ -32,6 +31,8 @@ import com.avmoga.dpixel.items.weapon.melee.Knuckles;
 import com.avmoga.dpixel.sprites.MonkSprite;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class Monk extends Mob {
 
@@ -107,8 +108,7 @@ public class Monk extends Mob {
 
 	@Override
 	public String description() {
-		return "These monks are fanatics, who devoted themselves to protecting their city's secrets from all aliens. "
-				+ "They don't use any armor or weapons, relying solely on the art of hand-to-hand combat.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

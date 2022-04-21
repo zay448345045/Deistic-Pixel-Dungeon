@@ -32,7 +32,6 @@ import com.avmoga.dpixel.ui.Icons;
 import com.avmoga.dpixel.ui.RedButton;
 import com.avmoga.dpixel.windows.WndChallenges;
 import com.avmoga.dpixel.windows.WndClass;
-import com.avmoga.dpixel.windows.WndMessage;
 import com.avmoga.dpixel.windows.WndOptions;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.BitmapTextMultiline;
@@ -491,7 +490,16 @@ public class StartScene extends PixelScene {
 					};
 				});
 			} else {
-				StartScene.this.add(new WndMessage(TXT_WIN_THE_GAME));
+				StartScene.this.add(new WndChallenges(ShatteredPixelDungeon
+						.challenges(), true) {
+					@Override
+					public void onBackPressed() {
+						super.onBackPressed();
+						image.copy(Icons
+								.get(ShatteredPixelDungeon.challenges() > 0 ? Icons.CHALLENGE_ON
+										: Icons.CHALLENGE_OFF));
+					};
+				});
 			}
 		}
 

@@ -19,6 +19,7 @@ package com.avmoga.dpixel.actors.mobs;
 
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.items.ArmorKit;
@@ -101,13 +102,11 @@ public class DwarfKingTomb extends Mob  {
 		}
 	}
 
-	
+
 	@Override
 	public String description() {
-		return "The tomb of the undead dwarf king "
-				+ "it radiates a sickening power ";
+		return Messages.get(this, "desc");
 	}
-	
 	
 	@SuppressWarnings("unchecked")
 	@Override

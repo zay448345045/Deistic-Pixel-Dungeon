@@ -18,9 +18,9 @@
 package com.avmoga.dpixel.items.weapon.melee;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.weapon.Weapon;
-import com.avmoga.dpixel.utils.Utils;
 import com.watabou.utils.Random;
 
 public class MeleeWeapon extends Weapon {
@@ -82,92 +82,81 @@ public class MeleeWeapon extends Weapon {
 	@Override
 	public String info() {
 
+		String name = name();
 		final String p = "\n\n";
 
 		StringBuilder info = new StringBuilder(desc());
 
-		String quality = levelKnown && level != 0 ? (level > 0 ? "upgraded"
-				: "degraded") : "";
+		String quality = levelKnown && level != 0 ? (level > 0 ? Messages.get(MeleeWeapon.class, "upgraded")
+				: Messages.get(this, "degraded")) : "";
 		info.append(p);
-		info.append("This " + name + " is " + Utils.indefinite(quality));
-		info.append(" tier-" + tier + " melee weapon. ");
+		info.append(Messages.get(MeleeWeapon.class, "this", name, quality, tier));
 
 		if (levelKnown) {
-			info.append("Its average damage is "
-					+ Math.round((MIN + (MAX - MIN) / 2)
-							* (imbue == Imbue.LIGHT ? 0.75f
-									: (imbue == Imbue.HEAVY ? 1.5f : 1)))
-					+ " points per hit. ");
+			info.append(Messages.get(MeleeWeapon.class, "avgdmg",
+					Math.round((MIN) * (imbue == Imbue.LIGHT ? 0.75f : (imbue == Imbue.HEAVY ? 1.5f : 1))), Math.round((MAX) * (imbue == Imbue.LIGHT ? 0.75f : (imbue == Imbue.HEAVY ? 1.5f : 1)))));
+
 		} else {
-			info.append("Its typical average damage is "
-					+ (min() + (max() - min()) / 2) + " points per hit "
-					+ "and usually it requires " + typicalSTR()
-					+ " points of strength. ");
+			info.append(Messages.get(MeleeWeapon.class, "typicaldmg", min(), max(), typicalSTR()));
 			if (typicalSTR() > Dungeon.hero.STR()) {
-				info.append("Probably this weapon is too heavy for you. ");
+				info.append(Messages.get(MeleeWeapon.class, "pheavy"));
 			}
 		}
 
 		if (DLY != 1f) {
-			info.append("This is a rather " + (DLY < 1f ? "fast" : "slow"));
+			info.append(Messages.get(MeleeWeapon.class, "rather") + (DLY < 1f ? Messages.get(MeleeWeapon.class, "fast") : Messages.get(MeleeWeapon.class, "slow")));
 			if (ACU != 1f) {
 				if ((ACU > 1f) == (DLY < 1f)) {
-					info.append(" and ");
+					info.append(Messages.get(MeleeWeapon.class, "and"));
 				} else {
-					info.append(" but ");
+					info.append(Messages.get(MeleeWeapon.class, "but"));
 				}
-				info.append(ACU > 1f ? "accurate" : "inaccurate");
+				info.append(ACU > 1f ? Messages.get(MeleeWeapon.class, "ac") : Messages.get(MeleeWeapon.class, "inac"));
 			}
-			info.append(" weapon. ");
+			info.append(Messages.get(MeleeWeapon.class, "weapon"));
 		} else if (ACU != 1f) {
-			info.append("This is a rather "
-					+ (ACU > 1f ? "accurate" : "inaccurate") + " weapon. ");
+			info.append(Messages.get(MeleeWeapon.class, "rather")
+					+ (ACU > 1f ? Messages.get(MeleeWeapon.class, "ac") : Messages.get(MeleeWeapon.class, "inac")) + Messages.get(MeleeWeapon.class, "weapon"));
 		}
 		switch (imbue) {
-		case LIGHT:
-			info.append("It was balanced to be lighter. ");
-			break;
-		case HEAVY:
-			info.append("It was balanced to be heavier. ");
-			break;
-		case NONE:
+			case LIGHT:
+				info.append(Messages.get(MeleeWeapon.class, "lighter"));
+				break;
+			case HEAVY:
+				info.append(Messages.get(MeleeWeapon.class, "heavier"));
+				break;
+			case NONE:
 		}
 
 		if (enchantment != null) {
-			info.append("It is enchanted.");
-		}
-		
-		if (reinforced) {
-			info.append("\n\nIt is reinforced.");
+			info.append(Messages.get(MeleeWeapon.class, "enchanted"));
 		}
 
-		if (levelKnown 
-				//&& Dungeon.hero.belongings.backpack.items.contains(this)
-				) {
+		if (reinforced) {
+			info.append(Messages.get(MeleeWeapon.class, "reinforced"));
+		}
+
+		if (levelKnown
+			//&& Dungeon.hero.belongings.backpack.items.contains(this)
+		) {
 			if (STR > Dungeon.hero.STR()) {
 				info.append(p);
-				info.append("Because of your inadequate strength the accuracy and speed "
-						+ "of your attack with this " + name + " is decreased.");
+				info.append(Messages.get(MeleeWeapon.class, "decreased", name));
 			}
 			if (STR < Dungeon.hero.STR()) {
 				info.append(p);
-				info.append("Because of your excess strength the damage "
-						+ "of your attack with this " + name + " is increased.");
+				info.append(Messages.get(MeleeWeapon.class, "increased", name));
 			}
 		}
 
 		if (isEquipped(Dungeon.hero)) {
 			info.append(p);
-			info.append("You hold the "
-					+ name
-					+ " at the ready"
-					+ (cursed ? ", and because it is cursed, you are powerless to let go."
-							: "."));
+			info.append(Messages.get(MeleeWeapon.class, "atready", name)
+					+ (cursed ? Messages.get(MeleeWeapon.class, "equipcursed") : ""));
 		} else {
 			if (cursedKnown && cursed) {
 				info.append(p);
-				info.append("You can feel a malevolent magic lurking within the "
-						+ name + ".");
+				info.append(Messages.get(MeleeWeapon.class, "knowncursed", name));
 			}
 		}
 

@@ -45,6 +45,7 @@ import com.avmoga.dpixel.items.rings.RingOfAccuracy;
 import com.avmoga.dpixel.items.rings.RingOfWealth;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.levels.Level.Feeling;
+import com.avmoga.dpixel.music.BGMPlayer;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.sprites.CharSprite;
 import com.avmoga.dpixel.utils.GLog;
@@ -639,7 +640,11 @@ public abstract class Mob extends Char {
 	}
 
 	public void notice() {
-		sprite.showAlert();
+		if (Dungeon.bossLevel()) {
+			BGMPlayer.playBoss();
+		}else{
+			sprite.showAlert();
+		}
 	}
 
 	public void yell(String str) {

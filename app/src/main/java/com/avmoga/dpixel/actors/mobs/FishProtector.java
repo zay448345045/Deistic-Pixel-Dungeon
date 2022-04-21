@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
@@ -35,6 +34,8 @@ import com.avmoga.dpixel.utils.Utils;
 import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class FishProtector extends Mob implements Callback {
 
@@ -138,10 +139,10 @@ public class FishProtector extends Mob implements Callback {
 		super.notice();
 		yell("Leave this place!");
 	}
-	
+
 	@Override
 	public String description() {
-		return "This guardian protects the cave from overfishing. ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

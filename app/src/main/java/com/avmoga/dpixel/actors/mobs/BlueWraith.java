@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Decay;
@@ -47,10 +48,10 @@ public class BlueWraith extends Wraith  {
 		lootChance = 1.0f; // by default, see die()
 
 	}
-	
+
 	@Override
 	public String description() {
-		return "A Blue Wraith has been dispatched to avenge the dungeon. ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

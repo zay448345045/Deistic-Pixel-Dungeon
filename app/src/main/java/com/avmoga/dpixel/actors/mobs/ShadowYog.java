@@ -17,8 +17,6 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Actor;
@@ -42,13 +40,15 @@ import com.avmoga.dpixel.sprites.ShadowYogSprite;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class ShadowYog extends Mob  {
 	
 	{
 		name = "Shadow Yog-Dzewa";
 		spriteClass = ShadowYogSprite.class;
 
-		HP = HT = 50*Dungeon.hero.lvl;
+		HP = HT = adj(2)*50*Dungeon.hero.lvl;
 		
 		baseSpeed = 2f;
 		defenseSkill = 32;

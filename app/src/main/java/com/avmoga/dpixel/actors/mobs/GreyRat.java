@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.StenchGas;
@@ -39,13 +38,15 @@ import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.sprites.GreyRatSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class GreyRat extends Mob {
 	
 
 	private static final float SPAWN_DELAY = 2f;
 
 	{
-		name = "grey rat";
+		name = Messages.get(this, "name");
 		spriteClass = GreyRatSprite.class;
 
 		HP = HT = 9+(Dungeon.depth*Random.NormalIntRange(1, 3));
@@ -78,9 +79,7 @@ public class GreyRat extends Mob {
 
 	@Override
 	public String description() {
-		return "Heartier cousins to Marsupial rats, Grey Rats have built up tolerances that allow "
-				+ "them to live in the most polluted parts of the sewers. "
-				+ "Probably still good to eat once cooked. ";
+		return Messages.get(this, "desc");
 	}
 	
 	public static void spawnAround(int pos) {

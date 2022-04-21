@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Terror;
@@ -158,8 +159,7 @@ public class GoldThief extends Mob {
 
 	@Override
 	public String description() {
-		String desc = "This thief has gold dust covering his robes and skin. He has a crazy glint in his eye. ";
-		return desc;
+		return Messages.get(this, "desc");
 	}
 
 	private class Fleeing extends Mob.Fleeing {

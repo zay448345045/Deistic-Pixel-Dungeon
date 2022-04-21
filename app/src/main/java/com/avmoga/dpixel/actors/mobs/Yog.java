@@ -17,10 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -58,6 +56,9 @@ import com.avmoga.dpixel.sprites.YogSprite;
 import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.utils.Utils;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Yog extends Mob {
 
@@ -218,8 +219,7 @@ public class Yog extends Mob {
 
 	@Override
 	public String description() {
-		return TXT_DESC;
-
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

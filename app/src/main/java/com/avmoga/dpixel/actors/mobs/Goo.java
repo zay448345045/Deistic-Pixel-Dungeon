@@ -17,23 +17,22 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.GooWarn;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
 import com.avmoga.dpixel.actors.buffs.Buff;
-import com.avmoga.dpixel.items.Egg;
 import com.avmoga.dpixel.actors.buffs.Ooze;
 import com.avmoga.dpixel.actors.buffs.Roots;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.effects.particles.ElmoParticle;
 import com.avmoga.dpixel.items.ActiveMrDestructo;
+import com.avmoga.dpixel.items.Egg;
 import com.avmoga.dpixel.items.Gold;
 import com.avmoga.dpixel.items.artifacts.Rapper;
 import com.avmoga.dpixel.items.keys.SkeletonKey;
@@ -50,6 +49,8 @@ import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class Goo extends Mob {
 	{
@@ -237,11 +238,7 @@ public class Goo extends Mob {
 
 	@Override
 	public String description() {
-		return "Little is known about The Goo. It's quite possible that it is not even a creature, but rather a "
-				+ "conglomerate of vile substances from the sewers that somehow gained basic intelligence. "
-				+ "Regardless, dark magic is certainly what has allowed Goo to exist.\n\n"
-				+ "Its gelatinous nature has let it absorb lots of dark energy, you feel a chill just from being near. "
-				+ "If goo is able to attack with this energy you won't live for long.";
+		return Messages.get(this, "desc");
 	}
 
 	private final String PUMPEDUP = "pumpedup";

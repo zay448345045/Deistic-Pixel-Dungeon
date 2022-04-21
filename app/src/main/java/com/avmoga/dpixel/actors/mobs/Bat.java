@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.items.Item;
@@ -28,6 +27,8 @@ import com.avmoga.dpixel.items.potions.PotionOfMending;
 import com.avmoga.dpixel.items.weapon.enchantments.Leech;
 import com.avmoga.dpixel.sprites.BatSprite;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class Bat extends Mob {
 
@@ -99,8 +100,7 @@ public class Bat extends Mob {
 
 	@Override
 	public String description() {
-		return "These brisk and tenacious inhabitants of cave domes may defeat much larger opponents by "
-				+ "replenishing their health with each successful attack.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

@@ -30,7 +30,6 @@ import com.avmoga.dpixel.ui.ExitButton;
 import com.avmoga.dpixel.ui.Icons;
 import com.avmoga.dpixel.ui.RedButton;
 import com.avmoga.dpixel.windows.WndChallenges;
-import com.avmoga.dpixel.windows.WndMessage;
 import com.avmoga.dpixel.windows.WndRace;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
@@ -432,7 +431,16 @@ public class RaceScene extends PixelScene {
 					};
 				});
 			} else {
-				RaceScene.this.add(new WndMessage(TXT_WIN_THE_GAME));
+				RaceScene.this.add(new WndChallenges(ShatteredPixelDungeon
+						.challenges(), true) {
+					@Override
+					public void onBackPressed() {
+						super.onBackPressed();
+						image.copy(Icons
+								.get(ShatteredPixelDungeon.challenges() > 0 ? Icons.CHALLENGE_ON
+										: Icons.CHALLENGE_OFF));
+					};
+				});
 			}
 		}
 

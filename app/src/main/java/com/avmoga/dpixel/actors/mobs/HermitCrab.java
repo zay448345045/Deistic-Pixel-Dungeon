@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.effects.particles.SparkParticle;
@@ -34,6 +33,8 @@ import com.avmoga.dpixel.utils.Utils;
 import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class HermitCrab extends Mob implements Callback {
 
@@ -153,8 +154,7 @@ public class HermitCrab extends Mob implements Callback {
 
 	@Override
 	public String description() {
-		return "Minions of the crab king, these tough crabs absorb all but the weakest attacks with their shells. "
-				+"The damage they absorb is used to charge the lightning shell. ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

@@ -17,14 +17,15 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Amok;
 import com.avmoga.dpixel.actors.buffs.Terror;
 import com.avmoga.dpixel.sprites.OniSprite;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class Oni extends Mob {
 
@@ -67,8 +68,7 @@ public class Oni extends Mob {
 
 	@Override
 	public String description() {
-		return "Oni are wicked trolls who dwell in places of great power. "
-				+"They are quite lazy unless there is food near by... ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

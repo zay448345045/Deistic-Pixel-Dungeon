@@ -19,6 +19,24 @@ package com.avmoga.dpixel;
 
 public class Assets {
 
+	public static final String BGM_1 = "music/Level1.ogg";
+	public static final String BGM_2 = "music/Level2.ogg";
+	public static final String BGM_3 = "music/Level3.ogg";
+	public static final String BGM_4 = "music/Level4.ogg";
+	public static final String BGM_5 = "music/Level5.ogg";
+
+	public static final String BGM_6 = "music/Level6.ogg";
+	public static final String BGM_7 = "music/Level6.ogg";
+	public static final String BGM_GO = "music/Yuangu.ogg";
+
+	public static final String BGM_BOSSA = "music/Boss1.ogg";
+	public static final String BGM_BOSSB = "music/Boss2.ogg";
+	public static final String BGM_BOSSC = "music/Boss3.ogg";
+
+	public static final String BGM_BOSSD = "music/Boss4.ogg";
+	public static final String BGM_BOSSE = "music/Boss5.ogg";
+
+
 	public static final String ARCS_BG = "arcs1.png";
 	public static final String ARCS_FG = "arcs2.png";
 	public static final String DASHBOARD = "dashboard.png";
@@ -43,56 +61,56 @@ public class Assets {
 	public static final String LOADING_HALLS	= "loading_halls.png";
 	public static final String GODAVATARS = "gods.png";
 
-	public static final String HUMANWARRIOR = "warrior.png";
-	public static final String HUMANMAGE = "mage.png";
-	public static final String HUMANROGUE = "rogue.png";
-	public static final String HUMANHUNTRESS = "ranger.png";
+	public static final String HUMANWARRIOR = "actor/warrior.png";
+	public static final String HUMANMAGE = "actor/mage.png";
+	public static final String HUMANROGUE = "actor/rogue.png";
+	public static final String HUMANHUNTRESS = "actor/ranger.png";
 	public static final String AVATARS = "avatars.png";
 	
-	public static final String GNOLLWARRIOR = "gnollherowarrior.png";
-	public static final String GNOLLMAGE = "gnollheromage.png";
-	public static final String GNOLLROGUE = "gnollherorogue.png";
-	public static final String GNOLLHUNTRESS = "gnollherohuntress.png";
+	public static final String GNOLLWARRIOR = "actor/gnollherowarrior.png";
+	public static final String GNOLLMAGE = "actor/gnollheromage.png";
+	public static final String GNOLLROGUE = "actor/gnollherorogue.png";
+	public static final String GNOLLHUNTRESS = "actor/gnollherohuntress.png";
 	
-	public static final String DWARFWARRIOR = "dwarfherowarrior.png";
-	public static final String DWARFMAGE = "dwarfheromage.png";
-	public static final String DWARFROGUE = "dwarfherorogue.png";
-	public static final String DWARFHUNTRESS = "dwarfherohuntress.png";
+	public static final String DWARFWARRIOR = "actor/dwarfherowarrior.png";
+	public static final String DWARFMAGE = "actor/dwarfheromage.png";
+	public static final String DWARFROGUE = "actor/dwarfherorogue.png";
+	public static final String DWARFHUNTRESS = "actor/dwarfherohuntress.png";
 	
-	public static final String WRAITHWARRIOR = "wraithherowarrior.png";
-	public static final String WRAITHMAGE = "wraithheromage.png";
-	public static final String WRAITHROGUE = "wraithherorogue.png";
-	public static final String WRAITHHUNTRESS = "wraithherohuntress.png";
+	public static final String WRAITHWARRIOR = "actor/wraithherowarrior.png";
+	public static final String WRAITHMAGE = "actor/wraithheromage.png";
+	public static final String WRAITHROGUE = "actor/wraithherorogue.png";
+	public static final String WRAITHHUNTRESS = "actor/wraithherohuntress.png";
 	
-	public static final String WARLOCKWARRIOR = "warlockwarrior.png";
-	public static final String WARLOCKMAGE = "warlockmage.png";
-	public static final String WARLOCKROGUE = "warlockrogue.png";
-	public static final String WARLOCKHUNTRESS = "warlockhuntress.png";
+	public static final String WARLOCKWARRIOR = "actor/warlockwarrior.png";
+	public static final String WARLOCKMAGE = "actor/warlockmage.png";
+	public static final String WARLOCKROGUE = "actor/warlockrogue.png";
+	public static final String WARLOCKHUNTRESS = "actor/warlockhuntress.png";
 	
-	public static final String SHAMANWARRIOR = "shamanwarrior.png";
-	public static final String SHAMANMAGE = "shamanmage.png";
-	public static final String SHAMANROGUE = "shamanrogue.png";
-	public static final String SHAMANHUNTRESS = "shamanhuntress.png";
+	public static final String SHAMANWARRIOR = "actor/shamanwarrior.png";
+	public static final String SHAMANMAGE = "actor/shamanmage.png";
+	public static final String SHAMANROGUE = "actor/shamanrogue.png";
+	public static final String SHAMANHUNTRESS = "actor/shamanhuntress.png";
 	
-	public static final String SERAPHWARRIOR = "seraphwarrior.png";
-	public static final String SERAPHMAGE = "seraphmage.png";
-	public static final String SERAPHROGUE = "seraphrogue.png";
-	public static final String SERAPHHUNTRESS = "seraphhuntress.png";
+	public static final String SERAPHWARRIOR = "actor/seraphwarrior.png";
+	public static final String SERAPHMAGE = "actor/seraphmage.png";
+	public static final String SERAPHROGUE = "actor/seraphrogue.png";
+	public static final String SERAPHHUNTRESS = "actor/seraphhuntress.png";
 	
-	public static final String BRUTEWARRIOR = "brutewarrior.png";
-	public static final String BRUTEMAGE = "brutemage.png";
-	public static final String BRUTEROGUE = "bruterogue.png";
-	public static final String BRUTEHUNTRESS = "brutehuntress.png";
+	public static final String BRUTEWARRIOR = "actor/brutewarrior.png";
+	public static final String BRUTEMAGE = "actor/brutemage.png";
+	public static final String BRUTEROGUE = "actor/bruterogue.png";
+	public static final String BRUTEHUNTRESS = "actor/brutehuntress.png";
 	
-	public static final String MONKWARRIOR = "monkwarrior.png";
-	public static final String MONKMAGE = "monkmage.png";
-	public static final String MONKROGUE = "monkrogue.png";
-	public static final String MONKHUNTRESS = "monkhuntress.png";
+	public static final String MONKWARRIOR = "actor/monkwarrior.png";
+	public static final String MONKMAGE = "actor/monkmage.png";
+	public static final String MONKROGUE = "actor/monkrogue.png";
+	public static final String MONKHUNTRESS = "actor/monkhuntress.png";
 	
-	public static final String SPECTERWARRIOR = "specterwarrior.png";
-	public static final String SPECTERMAGE = "spectermage.png";
-	public static final String SPECTERROGUE = "specterrogue.png";
-	public static final String SPECTERHUNTRESS = "specterhuntress.png";
+	public static final String SPECTERWARRIOR = "actor/specterwarrior.png";
+	public static final String SPECTERMAGE = "actor/spectermage.png";
+	public static final String SPECTERROGUE = "actor/specterrogue.png";
+	public static final String SPECTERHUNTRESS = "actor/specterhuntress.png";
 	
 	
 	public static final String PET = "pet.png";

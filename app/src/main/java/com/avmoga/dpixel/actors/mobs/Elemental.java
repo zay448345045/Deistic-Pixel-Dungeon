@@ -17,14 +17,13 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Burning;
 import com.avmoga.dpixel.actors.buffs.Frost;
-import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.actors.buffs.Silence;
+import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.items.food.ChargrilledMeat;
 import com.avmoga.dpixel.items.potions.PotionOfLiquidFlame;
 import com.avmoga.dpixel.items.wands.WandOfFirebolt;
@@ -32,6 +31,8 @@ import com.avmoga.dpixel.items.weapon.enchantments.Fire;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.sprites.ElementalSprite;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class Elemental extends Mob {
 
@@ -99,8 +100,7 @@ public class Elemental extends Mob {
 
 	@Override
 	public String description() {
-		return "Wandering fire elementals are a byproduct of summoning greater entities. "
-				+ "They are too chaotic in their nature to be controlled by even the most powerful demonologist.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

@@ -17,8 +17,8 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.mobs.Mob;
@@ -31,22 +31,24 @@ import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+
 public class TenguKey extends Item {
 	
-	private static final String TXT_PREVENTING = "Strong magic aura of this place prevents you from using the key!";
-	private static final String TXT_PREVENTING2 = "You need to kill Tengu first!";
+	private static final String TXT_PREVENTING = "这里强大的魔法气息让你无法使用钥匙！";
+	private static final String TXT_PREVENTING2 = "你要先杀了天狗！";
 		
 	
 	public static final float TIME_TO_USE = 1;
 
-	public static final String AC_PORT = "OPEN PORTAL";
+	public static final String AC_PORT = "回到过去";
 
 	private int specialLevel = 36;
 	private int returnDepth = -1;
 	private int returnPos;
 
 	{
-		name = "hideout key";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ANCIENTKEY;
 
 		stackable = false;
@@ -168,6 +170,6 @@ public class TenguKey extends Item {
 
 	@Override
 	public String info() {
-		return "This key radiates an eerie power. Use it to unlock the portal to Tengu's Hideout. ";
+		return Messages.get(this, "desc");
 	}
 }

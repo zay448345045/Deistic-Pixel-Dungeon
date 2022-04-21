@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
@@ -44,6 +43,8 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class King extends Mob {
 
@@ -224,10 +225,7 @@ public class King extends Mob {
 
 	@Override
 	public String description() {
-		return "The last king of dwarves was known for his deep understanding of processes of life and death. "
-				+ "He has persuaded members of his court to participate in a ritual, that should have granted them "
-				+ "eternal youthfulness. In the end he was the only one, who got it - and an army of undead "
-				+ "as a bonus.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

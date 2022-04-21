@@ -17,14 +17,14 @@
  */
 package com.avmoga.dpixel.windows;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Challenges;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.ui.CheckBox;
 import com.avmoga.dpixel.ui.Window;
-import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.RenderedText;
+
+import java.util.ArrayList;
 
 public class WndChallenges extends Window {
 
@@ -44,11 +44,11 @@ public class WndChallenges extends Window {
 
 		this.editable = editable;
 
-		BitmapText title = PixelScene.createText(TITLE, 9);
+		RenderedText title = PixelScene.renderText("选择你的挑战", 9);
 		title.hardlight(TITLE_COLOR);
-		title.measure();
 		title.x = PixelScene.align(camera, (WIDTH - title.width()) / 2);
 		title.y = PixelScene.align(camera, (TTL_HEIGHT - title.height()) / 2);
+		PixelScene.align(title);
 		add(title);
 
 		boxes = new ArrayList<CheckBox>();

@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -46,6 +45,8 @@ import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.utils.Utils;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class BrokenRobot extends Mob {
 
@@ -180,8 +181,7 @@ public class BrokenRobot extends Mob {
 
 	@Override
 	public String description() {
-		return "A wandering robot unfinshed and broken down. "
-				+ "You can feel its malice toward intruders.";
+		return Messages.get(this, "desc");
 	}
 
 	public static void spawnAround(int pos) {

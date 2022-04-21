@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.items.food.MysteryMeat;
 import com.avmoga.dpixel.sprites.CrabSprite;
@@ -62,8 +63,6 @@ public class Crab extends Mob {
 
 	@Override
 	public String description() {
-		return "These huge crabs are at the top of the food chain in the sewers. "
-				+ "They are extremely fast and their thick carapace can withstand "
-				+ "heavy blows.";
+		return Messages.get(this, "desc");
 	}
 }
