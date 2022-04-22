@@ -96,7 +96,7 @@ public class RenderedTextMultiline extends Component {
                     } else {
                         word = new RenderedText(str, size);
                     }
-                    if (highlighting) word.hardlight(0xff00ff);
+                    if (highlighting) word.hardlight(0x00ffff);
                     else if (color != -1) word.hardlight(color);
 
                     if (str.endsWith(UNDERSCORE)) highlighting = !highlighting;

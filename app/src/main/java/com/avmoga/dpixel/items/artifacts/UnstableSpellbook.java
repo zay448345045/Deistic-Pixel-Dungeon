@@ -150,19 +150,20 @@ public class UnstableSpellbook extends Artifact {
 
 		}
 
+
 		if (level < levelCap)
 			if (scrolls.size() > 1)
-				desc += Messages.get(this, "desc_index")
-						+ Messages.get(this, "desc3")
-						+ Messages.get((Object) scrolls.get(0), "name")
-						+ Messages.get(this, "and")
-						+ Messages.get((Object) scrolls.get(1), "name")
-						+ Messages.get(this, "desc4");
-			else if (scrolls.size() == 1)
-				desc += Messages.get(this, "desc5", Messages.get((Object) scrolls.get(0), "name"));
-			else desc += Messages.get(this, "desc6");
+				desc += "这本法典的目录并不完整，"
+						+ "指向的白页有： _"
+						+ scrolls.get(0)+"卷轴_"
+						+ " 和 _"
+						+ scrolls.get(1)+"卷轴_"
+						+ "。也许给这本书增加卷轴能够增强它的能量？";
+			else
+				desc += "这本书的目录还剩一个白页，"
+						+ "白页是：%s。" + scrolls.get(0) + ".";
 		else
-			desc += Messages.get(this, "desc6");
+			desc += "这本书已经满了，似乎你不能向里面加入任何东西。";
 
 		return desc;
 	}

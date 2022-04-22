@@ -22,7 +22,7 @@ public class LanguageButton extends Button {
     protected void createChildren() {
         super.createChildren();
 
-        image = Icons.get(Icons.MASTERY);
+        image = Icons.get(Icons.LANG);
         add(image);
         updateIcon();
     }

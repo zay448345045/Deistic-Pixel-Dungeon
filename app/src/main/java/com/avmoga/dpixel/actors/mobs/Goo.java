@@ -54,7 +54,7 @@ import java.util.HashSet;
 
 public class Goo extends Mob {
 	{
-		name = "Goo";
+		name = Messages.get(this, "name");
 		HP = HT = 200; //200
 		EXP = 10;
 		defenseSkill = 12;
@@ -172,7 +172,7 @@ public class Goo extends Mob {
 
 			if (Dungeon.visible[pos]) {
 				sprite.showStatus(CharSprite.NEGATIVE, "!!!");
-				GLog.n("Goo is pumping itself up!");
+				GLog.n(Messages.get(this, "atk"));
 			}
 
 			spend(attackDelay());
@@ -221,7 +221,7 @@ public class Goo extends Mob {
 			Dungeon.level.drop(new Gold(Random.Int(900, 2000)), pos).sprite.drop();
 		}
 
-		yell("glurp... glurp...");
+		yell(Messages.get(this, "die"));
 	}
   
 	protected boolean spawnedMini = false;
@@ -229,10 +229,10 @@ public class Goo extends Mob {
 	@Override
 	public void notice() {
 		super.notice();
-		yell("GLURP-GLURP!");
-		if (!spawnedMini){
-	    PoisonGoo.spawnAround(pos);
-	    spawnedMini = true;
+		yell(Messages.get(this, "notice"));
+		if (!spawnedMini) {
+			PoisonGoo.spawnAround(pos);
+			spawnedMini = true;
 		}
 	  }
 

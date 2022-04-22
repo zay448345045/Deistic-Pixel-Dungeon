@@ -767,7 +767,7 @@ public class Hero extends Char {
 						// vial doesn't revive
 						// after this... I'm done, I'm just done.
 						if (item instanceof DewVial) {
-							GLog.w("Its revival power seems to have faded.");
+							GLog.w("露珠瓶的原有力量似乎已经消退……");
 							GameScene.show(new WndDewVial(item));
 						}
 					}

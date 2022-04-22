@@ -17,11 +17,10 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -49,13 +48,15 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Tower extends Mob implements Callback {
 
 	{
-		name = "robot printer";
+		name = Messages.get(this, "name");
 		spriteClass = TowerSprite.class;
 
-		HP = HT = 300+(Dungeon.depth*Random.NormalIntRange(2, 5));
+		HP = HT = 500+(Dungeon.depth*Random.NormalIntRange(10, 12));
 		defenseSkill = 0;
 
 		EXP = 25;
@@ -87,10 +88,10 @@ public class Tower extends Mob implements Callback {
 			mob.beckon(Dungeon.hero.pos);
 		}
 
-		GLog.w("Alert!");
+		GLog.w("警报：系统正在受损！！！");
 		CellEmitter.center(pos).start(
 				Speck.factory(Speck.SCREAM), 0.3f, 3);
-		Sample.INSTANCE.play(Assets.SND_CHALLENGE);
+		Sample.INSTANCE.play(Assets.SND_ALERT);
 
 		super.damage(dmg, src);
 	}
@@ -120,7 +121,7 @@ public class Tower extends Mob implements Callback {
 		case 2:
 			if (Dungeon.level.mobs.size()<10){
 		 BrokenRobot.spawnAround(pos);
-		 GLog.n("Proc: Print.Robots; Run;");
+				yell("警报：发现未知人员入侵！！！");
 			}
 		break;
 		}
@@ -135,8 +136,7 @@ public class Tower extends Mob implements Callback {
 
 	@Override
 	public String description() {
-		return "The tower is a source harnessing magical energy "
-				+ "it appears to be out of control ";
+		return Messages.get(this, "desc");
 	}
 	
 	public void explode(int cell) {

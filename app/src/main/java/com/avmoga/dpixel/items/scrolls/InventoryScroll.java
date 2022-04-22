@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.scrolls;
 
 import com.avmoga.dpixel.Assets;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.scenes.GameScene;
@@ -27,13 +28,12 @@ import com.watabou.noosa.audio.Sample;
 
 public abstract class InventoryScroll extends Scroll {
 
-	protected String inventoryTitle = "Select an item";
+	protected String inventoryTitle = Messages.get(InventoryScroll.class, "title");
 	protected WndBag.Mode mode = WndBag.Mode.ALL;
 
-	private static final String TXT_WARNING = "Do you really want to cancel this scroll usage? "
-			+ "It will be consumed anyway.";
-	private static final String TXT_YES = "Yes, I'm positive";
-	private static final String TXT_NO = "No, I changed my mind";
+	private static final String TXT_WARNING = Messages.get(InventoryScroll.class, "warning");
+	private static final String TXT_YES = Messages.get(InventoryScroll.class, "yes");
+	private static final String TXT_NO = Messages.get(InventoryScroll.class, "no");
 
 	@Override
 	protected void doRead() {

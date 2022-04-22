@@ -17,11 +17,10 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.Water;
@@ -33,7 +32,6 @@ import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.hero.HeroClass;
 import com.avmoga.dpixel.actors.hero.HeroRace;
 import com.avmoga.dpixel.effects.Speck;
-import com.avmoga.dpixel.windows.WndBag;
 import com.avmoga.dpixel.effects.particles.ShadowParticle;
 import com.avmoga.dpixel.items.bags.Bag;
 import com.avmoga.dpixel.levels.Level;
@@ -43,9 +41,12 @@ import com.avmoga.dpixel.sprites.CharSprite;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.utils.Utils;
+import com.avmoga.dpixel.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
 
 public class DewVial extends Item {
 
@@ -57,35 +58,34 @@ public class DewVial extends Item {
 	private static final int MAX_VOLUME(){
 		return Dungeon.wings ? EXT_VOLUME : MAX_VOLUME;
 	}
-
-	private static final String AC_SIP = "SIP";
-	private static final String AC_DRINK = "DRINK";
-	private static final String AC_WATER = "WATER";
-	private static final String AC_SPLASH = "SPLASH";
-	private static final String AC_BLESS = "BLESS";
-
+	private static final String AC_SIP = Messages.get(DewVial.class, "ac_sip");
+	private static final String AC_DRINK = Messages.get(DewVial.class, "ac_drink");
+	private static final String AC_WATER = Messages.get(DewVial.class, "ac_water");
+	private static final String AC_SPLASH = Messages.get(DewVial.class, "ac_splash");
+	private static final String AC_BLESS = Messages.get(DewVial.class, "ac_bless");
 
 	private static final float TIME_TO_DRINK = 1f;
 	private static final float TIME_TO_WATER = 3f;
-	protected static final float TIME_TO_BLESS = 1f;
 
-	private static final String TXT_VALUE = "%+dHP";
-	private static final String TXT_STATUS = "%d/%d";
+	private static final String TXT_VALUE = Messages.get(DewVial.class, "value");
+	private static final String TXT_STATUS = "%d";
 
-	//private static final String TXT_AUTO_DRINK = "The dew vial was emptied to heal your wounds.";
-	private static final String TXT_COLLECTED = "You collected a dewdrop into your dew vial.";
-	private static final String TXT_WATERED = "The dungeon regrows around you.";
-	private static final String TXT_REFRESHED = "You splash the dew on your face.";
-	private static final String TXT_BLESSED = "You feel the dew blessing items in your backpack.";
-	private static final String TXT_PROCCED = "Your pack glows with a cleansing light, and a malevolent energy disperses.";
-	private static final String TXT_NOT_PROCCED = "Your pack glows with a cleansing light, but nothing was uncursed.";
-	private static final String TXT_FULL = "Your dew vial is full!";
-	private static final String TXT_EMPTY = "Your dew vial is empty!";
-	private static final String TXT_LOOKS_BETTER = "your %s certainly looks better now";
-	private static final String TXT_SELECT = "Select an item to upgrade";
+	private static final String TXT_COLLECTED = Messages.get(DewVial.class, "collected");
+	private static final String TXT_WATERED = Messages.get(DewVial.class, "watered");
+	private static final String TXT_REFRESHED = Messages.get(DewVial.class, "refreshed");
+	private static final String TXT_BLESSED = Messages.get(DewVial.class, "blessed");
+	private static final String TXT_FULL = Messages.get(DewVial.class, "full");
+	private static final String TXT_EMPTY = Messages.get(DewVial.class, "empty");
+	private static final String TXT_SELECT = Messages.get(DewVial.class, "select");
+
+	private static final String TXT_PROCCED = "你的背包闪烁着净化的光芒，一股恶毒的魔力能量散去。";
+	private static final String TXT_NOT_PROCCED = "你的背包闪烁着净化的光芒，但什么事情都没有发生！";
+
+	private static final String TXT_LOOKS_BETTER = "你的 %s 现在看起来更好了";
+
 
 	{
-		name = "dew vial";
+		name = "露珠瓶";
 		image = ItemSpriteSheet.VIAL;
 
 		defaultAction = AC_DRINK;
@@ -301,11 +301,11 @@ public class DewVial extends Item {
 			Buff.affect(hero, Invisibility.class, Invisibility.DURATION);
 			if(Dungeon.wings){
 				Buff.affect(hero, Levitation.class, Levitation.DURATION);
-			    GLog.i("You float into the air!");
+			    GLog.i("你的身体悬浮在空中。");
 			}
 			GLog.i(TXT_REFRESHED);
-			GLog.i("You see your hands turn invisible!");
-			GLog.i("You are moving much faster!");
+			GLog.i(Messages.get(DewVial.class, "inv"));
+			GLog.i(Messages.get(DewVial.class, "haste"));
 			volume = volume - 10;
 			
 		} else if (action.equals(AC_BLESS) && !Dungeon.dewDraw) {	
@@ -517,16 +517,11 @@ public class DewVial extends Item {
 
 	@Override
 	public String info() {
-		return "You can store excess dew in this tiny vessel for drinking it later. "
-				+ "The more full the vial is, the more each dew drop will heal you. "
-				+ "Ten drops would probably be sufficient to fully heal your wounds. "
-				+ "\n\nVials like this one used to be imbued with revival magic, "
-				+ "but that power has faded. There still seems to be some residual power "
-				+ "left, perhaps collected drops can bless another revival item.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override
 	public String toString() {
-		return super.toString() + " (" + status() + ")";
+		return super.toString() + " (" + status() + (MAX_VOLUME() > 1000 ? "" : Utils.format("/%d", MAX_VOLUME())) + ")";
 	}
 }

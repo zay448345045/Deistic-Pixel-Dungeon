@@ -112,6 +112,17 @@ public class Yog extends Mob {
 	public int damageRoll() {
 		return Random.NormalIntRange(54, 96);
 	}
+
+	@Override
+	public void beckon(int cell) {
+
+		yell("Yog:……");
+
+		if (state != HUNTING) {
+			state = WANDERING;
+		}
+		target = cell;
+	}
 	
 	@Override
 	public void damage(int dmg, Object src) {
@@ -187,10 +198,6 @@ public class Yog extends Mob {
 		}
 
 		return super.defenseProc(enemy, damage);
-	}
-
-	@Override
-	public void beckon(int cell) {
 	}
 
 	@SuppressWarnings("unchecked")

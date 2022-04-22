@@ -17,11 +17,10 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.items.artifacts.CommRelay;
@@ -34,12 +33,14 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class Gold extends Item {
 
-	private static final String TXT_COLLECT = "Collect gold coins to spend them later in a shop.";
-	private static final String TXT_INFO = "A pile of %d gold coins. "
+	private static final String TXT_COLLECT = Messages.get(Gold.class, "collect");
+	private static final String TXT_INFO = Messages.get(Gold.class, "info")
 			+ TXT_COLLECT;
-	private static final String TXT_INFO_1 = "One gold coin. " + TXT_COLLECT;
+	private static final String TXT_INFO_1 = Messages.get(Gold.class, "one") + TXT_COLLECT;
 	private static final String TXT_VALUE = "%+d";
 
 	{

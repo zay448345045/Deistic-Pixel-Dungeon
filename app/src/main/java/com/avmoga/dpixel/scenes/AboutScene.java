@@ -42,7 +42,7 @@ public class AboutScene extends PixelScene {
 
 	private static final String TTL_LOPX = "汉化采用ESPD,SHPD双重汉化\n\n";
 
-	private static final String TTL_WATA = "PD & SPD";
+	private static final String TTL_WATA = "Pixel Dungeon & SPD";
 
 	private static final String TXT_WATA =
 			"Code & Graphics: Watabou\n" +
@@ -90,7 +90,7 @@ public class AboutScene extends PixelScene {
 		shpxtext.setPos((colWidth - shpxtext.width()) / 2, shpxtitle.y + shpxtitle.height() + 12);
 		align(shpxtext);
 
-		Image wata = Icons.BOX.get();
+		Image wata = Icons.SHPX.get();
 		wata.x = wataOffset + (colWidth - wata.width()) / 2;
 		wata.y = ShatteredPixelDungeon.landscape() ?
 				colTop:
@@ -98,10 +98,10 @@ public class AboutScene extends PixelScene {
 		align(wata);
 		add( wata );
 
-		new Flare( 7, 64 ).color( 0x00ff00, true ).show( wata, 0 ).angularSpeed = +20;
+		new Flare( 7, 64 ).color( 0x663399, true ).show( wata, 0 ).angularSpeed = +20;
 
 		RenderedText wataTitle = renderText( TTL_WATA, 8 );
-		wataTitle.hardlight(0xbbbb00);
+		wataTitle.hardlight(0x663399);
 		add( wataTitle );
 
 		wataTitle.x = wataOffset + (colWidth - wataTitle.width()) / 2;

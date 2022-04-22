@@ -17,11 +17,9 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.Blob;
@@ -49,6 +47,9 @@ import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class PoisonGoo extends Mob {
 	
 protected static final float SPAWN_DELAY = 2f;
@@ -61,12 +62,12 @@ private int goosAlive = 0;
 private static final String GOOGENERATION = "gooGeneration";
 
 	{
-		name = "Goo";
-		HP = HT = 50;
+		name = Messages.get(this, "name");	name = Messages.get(this, "name");
+		HP = HT = 120;
 		EXP = 10;
-		defenseSkill = 12;
+		defenseSkill = 20;
 		spriteClass = PoisonGooSprite.class;
-		baseSpeed = 2f;
+		baseSpeed = 2.5f;
 
 		loot = new PotionOfMending();
 		lootChance = 1f;
@@ -227,23 +228,19 @@ private static final String GOOGENERATION = "gooGeneration";
 
 		Dungeon.level.drop(new Gold(Random.Int(100, 200)), pos).sprite.drop();
 		}
-		
-		yell("glurp... glurp...");
+
+		yell(Messages.get(this, "die"));
 	}
 
 	@Override
 	public void notice() {
 		super.notice();
-		yell("GLURP-GLURP!");
+		yell(Messages.get(this, "notice"));
 	}
 
 	@Override
 	public String description() {
-		return "Little is known about The Goo. It's quite possible that it is not even a creature, but rather a "
-				+ "conglomerate of vile substances from the sewers that somehow gained basic intelligence. "
-				+ "Regardless, dark magic is certainly what has allowed Goo to exist.\n\n"
-				+ "Its gelatinous nature has let it absorb lots of dark energy, you feel a chill just from being near. "
-				+ "If goo is able to attack with this energy you won't live for long.";
+		return Messages.get(this, "desc");
 	}
 
 	
@@ -285,11 +282,11 @@ private static final String GOOGENERATION = "gooGeneration";
 	
 	public static void spawnAround(int pos) {
 		for (int n : Level.NEIGHBOURS4) {
-			GLog.n("Goo squeezes!");
+			GLog.n(Messages.get(PoisonGoo.class, "squeeze"));
 			int cell = pos + n;
 			if (Level.passable[cell] && Actor.findChar(cell) == null) {
 				spawnAt(cell);
-				GLog.n("Goo creates mini goo!");
+				GLog.n(Messages.get(PoisonGoo.class, "create"));
 			}
 		}
 	}

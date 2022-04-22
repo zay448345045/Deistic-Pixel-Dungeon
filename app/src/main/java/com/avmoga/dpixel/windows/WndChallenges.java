@@ -18,9 +18,12 @@
 package com.avmoga.dpixel.windows;
 
 import com.avmoga.dpixel.Challenges;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.ui.CheckBox;
+import com.avmoga.dpixel.ui.IconButton;
+import com.avmoga.dpixel.ui.Icons;
 import com.avmoga.dpixel.ui.Window;
 import com.watabou.noosa.RenderedText;
 
@@ -28,49 +31,62 @@ import java.util.ArrayList;
 
 public class WndChallenges extends Window {
 
-	private static final int WIDTH = 108;
-	private static final int TTL_HEIGHT = 12;
-	private static final int BTN_HEIGHT = 18;
-	private static final int GAP = 1;
-
-	private static final String TITLE = "Challenges";
+	private static final int WIDTH		= 120;
+	private static final int TTL_HEIGHT    = 12;
+	private static final int BTN_HEIGHT    = 18;
+	private static final int GAP        = 1;
 
 	private boolean editable;
 	private ArrayList<CheckBox> boxes;
 
-	public WndChallenges(int checked, boolean editable) {
+	public WndChallenges( int checked, boolean editable ) {
 
 		super();
 
 		this.editable = editable;
 
-		RenderedText title = PixelScene.renderText("选择你的挑战", 9);
-		title.hardlight(TITLE_COLOR);
-		title.x = PixelScene.align(camera, (WIDTH - title.width()) / 2);
-		title.y = PixelScene.align(camera, (TTL_HEIGHT - title.height()) / 2);
+		RenderedText title = PixelScene.renderText( Messages.get(this, "title"), 9 );
+		title.hardlight( TITLE_COLOR );
+		title.x = (WIDTH - title.width()) / 2;
+		title.y = (TTL_HEIGHT - title.height()) / 2;
 		PixelScene.align(title);
-		add(title);
+		add( title );
 
-		boxes = new ArrayList<CheckBox>();
+		boxes = new ArrayList<>();
 
 		float pos = TTL_HEIGHT;
-		for (int i = 0; i < Challenges.NAMES.length; i++) {
+		for (int i=0; i < Challenges.NAMES.length; i++) {
 
-			CheckBox cb = new CheckBox(Challenges.NAMES[i]);
-			cb.checked((checked & Challenges.MASKS[i]) != 0);
+			final String challenge = Challenges.NAMES[i];
+
+			CheckBox cb = new CheckBox( Messages.get(Challenges.class, challenge) );
+			cb.checked( (checked & Challenges.MASKS[i]) != 0 );
 			cb.active = editable;
 
 			if (i > 0) {
 				pos += GAP;
 			}
-			cb.setRect(0, pos, WIDTH, BTN_HEIGHT);
-			pos = cb.bottom();
+			cb.setRect( 0, pos, WIDTH-16, BTN_HEIGHT );
 
-			add(cb);
-			boxes.add(cb);
+			add( cb );
+			boxes.add( cb );
+
+			IconButton info = new IconButton(Icons.get(Icons.INFO)){
+				@Override
+				protected void onClick() {
+					super.onClick();
+					ShatteredPixelDungeon.scene().add(
+							new WndMessage(Messages.get(Challenges.class, challenge+"_desc"))
+					);
+				}
+			};
+			info.setRect(cb.right(), pos, 16, BTN_HEIGHT);
+			add(info);
+
+			pos = cb.bottom();
 		}
 
-		resize(WIDTH, (int) pos);
+		resize( WIDTH, (int)pos );
 	}
 
 	@Override
@@ -78,12 +94,12 @@ public class WndChallenges extends Window {
 
 		if (editable) {
 			int value = 0;
-			for (int i = 0; i < boxes.size(); i++) {
-				if (boxes.get(i).checked()) {
+			for (int i=0; i < boxes.size(); i++) {
+				if (boxes.get( i ).checked()) {
 					value |= Challenges.MASKS[i];
 				}
 			}
-			ShatteredPixelDungeon.challenges(value);
+			ShatteredPixelDungeon.challenges( value );
 		}
 
 		super.onBackPressed();

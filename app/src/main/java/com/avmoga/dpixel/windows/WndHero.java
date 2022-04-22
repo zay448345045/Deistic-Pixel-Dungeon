@@ -22,7 +22,6 @@ import static com.avmoga.dpixel.Dungeon.hero;
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
-import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Hunger;
@@ -57,7 +56,6 @@ import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.utils.Utils;
 import com.watabou.gltextures.SmartTexture;
 import com.watabou.gltextures.TextureCache;
-import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.RenderedText;
@@ -181,7 +179,7 @@ public class WndHero extends WndTabbed {
 
 	private class StatsTab extends Group {
 
-		private final String TXT_TITLE = Messages.get(WndHero.class, "title")+hero.className();
+		private final String TXT_TITLE = Messages.get(WndHero.class, "title")+hero.lvl+hero.className()+hero.heroRace.title();
 		private final String TXT_CATALOGUS = Messages.get(WndHero.class, "catalogus");
 		private final String TXT_JOURNAL = Messages.get(WndHero.class, "journal");
 
@@ -195,63 +193,58 @@ public class WndHero extends WndTabbed {
 
 			IconTitle title = new IconTitle();
 			title.icon(HeroSprite.avatar(hero.heroClass, hero.tier()));
-			title.label(Utils.format(TXT_TITLE, hero.lvl, hero.heroRace.title(), hero.className())
+			title.label(Utils.format(TXT_TITLE, hero.lvl, hero.className())
 					.toUpperCase(Locale.ENGLISH), 9);
 			title.color(Window.SHPX_COLOR);
 			title.setRect(0, 0, WIDTH, 0);
 			add(title);
 
-			RedButton btnCatalogus = new RedButton(TXT_JOURNAL) {
+			RedButton btnCatalogus = new RedButton(TXT_CATALOGUS) {
 				@Override
 				protected void onClick() {
 					hide();
-					GameScene.show(new WndJournal());
-				};
+					GameScene.show(new WndCatalogus());
+				}
+
+				@Override
+				protected boolean onLongClick() {
+					Hero heroToBuff = Dungeon.hero;
+					if (Level.water[heroToBuff.pos] && heroToBuff.belongings.armor == null) {
+						//heroToBuff.heroClass.playtest(heroToBuff);
+					}
+					return true;
+				}
 			};
 			btnCatalogus.setRect(0, title.height(),
 					btnCatalogus.reqWidth() + 2, btnCatalogus.reqHeight() + 2);
 			add(btnCatalogus);
 
-			RedButton btnJournal = new RedButton(TXT_CATALOGUS) {
+			RedButton btnJournal = new RedButton(TXT_JOURNAL) {
 				@Override
 				protected void onClick() {
 					hide();
-					GameScene.show(new WndCatalogus());
-
+					GameScene.show(new WndJournal());
 				}
 			};
 			btnJournal.setRect(btnCatalogus.right() + 1, btnCatalogus.top(),
 					btnJournal.reqWidth() + 2, btnJournal.reqHeight() + 2);
 			add(btnJournal);
 
-			pos = btnCatalogus.bottom() + GAP;
+			pos = btnJournal.bottom() + GAP;
 
 			statSlot(TXT_STR, hero.STR());
-			statSlot(TXT_HEALTH, hero.HP + "/" + hero.HT);
+			statSlot(TXT_HEALTH, (hero.HP) + "/" + hero.HT);
 			statSlot(TXT_EXP, hero.exp + "/" + hero.maxExp());
 
+			if (Dungeon.hero.buff(Hunger.class) != null) {
+				statSlot(TXT_HUNGER,
+						(100 - Math.round(((float) Dungeon.hero.buff(Hunger.class).hungerLevel()) / 7f)) + "%");
+			}
+
+
 			pos += GAP;
 
-			statSlot(TXT_GOLD, Statistics.goldCollected);
-			statSlot(TXT_DEPTH, Statistics.deepestFloor);
-			
-			pos += GAP;
-			
-			statSlot(TXT_MOVES, Statistics.moves);
-			
-			if(Dungeon.hero.buff(Hunger.class) != null){
-				statSlot(TXT_HUNGER, Dungeon.hero.buff(Hunger.class).hungerLevel());
-			}
-			
-			pos += GAP;
-			
-			if (Dungeon.dewDraw && !(Dungeon.depth > 25)){
-				statSlot(TXT_MOVES2, Dungeon.level.currentmoves);
-				statSlot(TXT_MOVES3, Dungeon.pars[Dungeon.depth]);
-				statSlot(TXT_MOVES4, Statistics.prevfloormoves);
-			}
-			
-			pos += GAP;
+
 		}
 
 		private void statSlot(String label, String value) {
@@ -299,7 +292,7 @@ public class WndHero extends WndTabbed {
 				icon.y = pos;
 				add(icon);
 
-				BitmapText txt = PixelScene.createText(god.name(), 8);
+				RenderedText txt = PixelScene.renderText(god.name(), 8);
 				txt.x = icon.width + GAP;
 				txt.y = pos + (int) (icon.height - txt.baseLine()) / 2;
 				add(txt);
@@ -374,12 +367,12 @@ public class WndHero extends WndTabbed {
 	
 	private class PetTab extends Group {
 
-		private static final String TXT_TITLE = "Level %d %s";
-		private static final String TXT_FEED = "Feed";
-		private static final String TXT_SELECT = "What do you want to feed your pet?";
+		private final String TXT_TITLE = Messages.get(WndHero.class, "p_title");
+		private final String TXT_FEED = Messages.get(WndHero.class, "p_feed");
+		private final String TXT_SELECT = Messages.get(WndHero.class, "p_select");
 		
 		private CharSprite image;
-		private BitmapText name;
+		private RenderedText name;
 		private HealthBar health;
 		private BuffIndicator buffs;
 
@@ -388,11 +381,10 @@ public class WndHero extends WndTabbed {
 		private float pos;
 		
 				
-		public PetTab(PET heropet) {		
-						
-			name = PixelScene.createText(Utils.capitalize(heropet.name), 9);
+		public PetTab(PET heropet) {
+
+			name = PixelScene.renderText(Utils.capitalize(heropet.name), 9);
 			name.hardlight(TITLE_COLOR);
-			name.measure();
 			//add(name);
 
 			image = heropet.sprite();
@@ -431,17 +423,20 @@ public class WndHero extends WndTabbed {
 			statSlot(TXT_ATTACK, heropet.attackSkill(null));
 			statSlot(TXT_HEALTH, heropet.HP + "/" + heropet.HT);
 			statSlot(TXT_KILLS, heropet.kills);
-			statSlot(TXT_EXP, heropet.level<10 ? heropet.experience + "/" + (heropet.level*heropet.level*heropet.level) : "Max");
-			if (heropet.type==4 || heropet.type==5 || heropet.type==6 || heropet.type==7){
-			  statSlot(TXT_BREATH, heropet.cooldown==0 ? "Ready" : heropet.cooldown + " Turns");
-			} else if (heropet.type==1){
-				statSlot(TXT_SPIN, heropet.cooldown==0 ? "Armed" : heropet.cooldown + " Turns");
-			} else if (heropet.type==3){
-				statSlot(TXT_FEATHERS, heropet.cooldown==0 ? "Ruffled" : heropet.cooldown + " Turns");
-			} else if (heropet.type==8){
-				statSlot(TXT_STING, heropet.cooldown==0 ? "Ready" : heropet.cooldown + " Turns");
-			} else if (heropet.type==10 || heropet.type==11){
-				statSlot(TXT_SPARKLE, heropet.cooldown==0 ? "Sparkling" : heropet.cooldown + " Turns");
+			statSlot(TXT_EXP, heropet.level<10 ?
+					heropet.experience + "/" + (heropet.level*heropet.level*heropet.level) : "顶级");
+			if (heropet.type == 4 || heropet.type == 5 || heropet.type == 6 || heropet.type == 7 || heropet.type == 12) {
+				statSlot(TXT_BREATH, heropet.cooldown == 0 ? Messages.get(WndHero.class, "p_ready") : (Math.round((1000 - heropet.cooldown) / 10) + "%"));
+			} else if (heropet.type == 1) {
+				statSlot(TXT_SPIN, heropet.cooldown == 0 ? Messages.get(WndHero.class, "p_ready") : (Math.round((1000 - heropet.cooldown) / 10) + "%"));
+			} else if (heropet.type == 3) {
+				statSlot(TXT_FEATHERS, heropet.cooldown == 0 ? Messages.get(WndHero.class, "p_ready") : (Math.round((1000 - heropet.cooldown) / 10) + "%"));
+			} else if (heropet.type == 8) {
+				statSlot(TXT_STING, heropet.cooldown == 0 ? Messages.get(WndHero.class, "p_ready") : (Math.round((1000 - heropet.cooldown) / 10) + "%"));
+			} else if (heropet.type == 10 || heropet.type == 11) {
+				statSlot(TXT_SPARKLE, heropet.cooldown == 0 ? Messages.get(WndHero.class, "p_ready") : (Math.round((1000 - heropet.cooldown) / 10) + "%"));
+			} else if (heropet.type == 9) {
+				statSlot(TXT_FANGS, heropet.cooldown == 0 ? Messages.get(WndHero.class, "p_ready") : (Math.round((1000 - heropet.cooldown) / 10) + "%"));
 			}
 			
 			pos += GAP;

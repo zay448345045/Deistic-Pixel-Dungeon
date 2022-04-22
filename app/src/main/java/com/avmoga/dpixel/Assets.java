@@ -18,7 +18,7 @@
 package com.avmoga.dpixel;
 
 public class Assets {
-
+	public static final String BOSSHP = "boss_hp.png";
 	public static final String BGM_1 = "music/Level1.ogg";
 	public static final String BGM_2 = "music/Level2.ogg";
 	public static final String BGM_3 = "music/Level3.ogg";
@@ -258,10 +258,10 @@ public class Assets {
 	public static final String SND_DRINK = 	"snd/snd_drink.mp3";
 	public static final String SND_SHATTER ="snd/snd_shatter.mp3";
 	public static final String SND_ZAP = 	"snd/snd_zap.mp3";
-	public static final StringSND_LIGHTNING="snd/snd_lightning.mp3";
+	public static final String SND_LIGHTNING="snd/snd_lightning.mp3";
 	public static final String SND_LEVELUP ="snd/snd_levelup.mp3";
 	public static final String SND_DEATH = 	"snd/snd_death.mp3";
-	public static final StringSND_CHALLENGE="snd/snd_challenge.mp3";
+	public static final String SND_CHALLENGE="snd/snd_challenge.mp3";
 	public static final String SND_CURSED = "snd/snd_cursed.mp3";
 	public static final String SND_TRAP = 	"snd/snd_trap.mp3";
 	public static final String SND_EVOKE =	"snd/snd_evoke.mp3";
@@ -286,7 +286,7 @@ public class Assets {
 	public static final String SND_BEE = 	"snd/snd_bee.mp3";
 	public static final String SND_DEGRADE ="snd/snd_degrade.mp3";
 	public static final String SND_MIMIC = 	"snd/snd_mimic.mp3";
-	
+
     public static final String HEALTH_CRITICAL="snd/health_warn.mp3";
 	public static final String HEALTH_WARN = "snd/health_critical.mp3";
 }

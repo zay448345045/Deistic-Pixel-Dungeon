@@ -33,7 +33,7 @@ import com.watabou.utils.Random;
 public class DwarfKingTomb extends Mob  {
 
 	{
-		name = "dwarf king tomb";
+		name = Messages.get(this, "name");
 		spriteClass = DwarfKingTombSprite.class;
 
 		HP = HT = 600;
@@ -96,7 +96,7 @@ public class DwarfKingTomb extends Mob  {
 	@Override
 	public void damage(int dmg, Object src) {
 		if(checkKing()){
-			yell("I am immortal!");
+			yell(Messages.get(this, "im"));
 		} else {
 		super.damage(dmg, src);
 		}

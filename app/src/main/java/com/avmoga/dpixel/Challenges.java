@@ -27,9 +27,15 @@ public class Challenges {
 	public static final int DARKNESS = 32;
 	public static final int NO_SCROLLS = 64;
 
-	public static final String[] NAMES = { "缩餐节食", "信念护体",
-			"恐药异症", "荒芜之地", "集群智能",
-			"没入黑暗", "禁忌咒文" };
+	public static final String[] NAMES = {
+			"no_food",
+			"no_armor",
+			"no_healing",
+			"no_herbalism",
+			"swarm_intelligence",
+			"darkness",
+			"no_scrolls"
+	};
 
 	public static final int[] MASKS = { NO_FOOD, NO_ARMOR, NO_HEALING,
 			NO_HERBALISM, SWARM_INTELLIGENCE, DARKNESS, NO_SCROLLS };

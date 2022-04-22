@@ -17,19 +17,18 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
-import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Badges.Badge;
+import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
-import com.avmoga.dpixel.items.Egg;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
 import com.avmoga.dpixel.actors.buffs.Poison;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.Speck;
+import com.avmoga.dpixel.items.Egg;
 import com.avmoga.dpixel.items.Gold;
 import com.avmoga.dpixel.items.TomeOfMastery;
 import com.avmoga.dpixel.items.TomeOfSpecialty;
@@ -45,12 +44,14 @@ import com.avmoga.dpixel.sprites.TenguSprite;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Tengu extends Mob {
 
 	private static final int JUMP_DELAY = 5;
 
 	{
-		name = "Tengu";
+		name = Messages.get(this, "name");
 		spriteClass = TenguSprite.class;
 		baseSpeed = 2f;
 
@@ -129,7 +130,6 @@ public class Tengu extends Mob {
 		Badges.validateBossSlain();
 		Dungeon.tengukilled=true;
 
-		yell("Time to flee");
 		TenguEscape.spawnAt(pos);
 					
 	}
@@ -201,13 +201,12 @@ public class Tengu extends Mob {
 	@Override
 	public void notice() {
 		super.notice();
-		yell("Gotcha, " + Dungeon.hero.givenName() + "!");
+		yell(Messages.get(this, "notice", Dungeon.hero.givenName()));
 	}
 
 	@Override
 	public String description() {
-		return "Tengu are members of the ancient assassins clan, which is also called Tengu. "
-				+ "These assassins are noted for extensive use of shuriken and traps.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

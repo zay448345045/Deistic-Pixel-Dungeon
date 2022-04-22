@@ -19,9 +19,10 @@ package com.avmoga.dpixel.actors.mobs;
 
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.items.Generator;
-import com.avmoga.dpixel.items.scrolls.ScrollOfRegrowth;
+import com.avmoga.dpixel.items.quest.RatSkull;
 import com.avmoga.dpixel.sprites.RatBossSprite;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Random;
@@ -31,7 +32,7 @@ public class RatBoss extends Rat {
 
 
 	{
-		name = "rat boss";
+		name = "古老鼠王";
 		spriteClass = RatBossSprite.class;
 
 		HP = HT = 12+(Dungeon.depth*Random.NormalIntRange(2, 5));
@@ -40,7 +41,7 @@ public class RatBoss extends Rat {
 		loot = Generator.Category.BERRY;
 		lootChance = 0.5f;
 		
-		lootOther = new ScrollOfRegrowth();
+		lootOther = new RatSkull();
 		lootChanceOther = 0.1f;
 	}
 
@@ -64,18 +65,17 @@ public class RatBoss extends Rat {
 	@Override
 	public void notice() {
 		super.notice();
-		yell("Scritch Scratch!");
-		if (!spawnedRats){
-	    Rat.spawnAround(pos);
-	    GLog.n("Rat pack apears!");
-	    spawnedRats = true;
+		yell(Messages.get(this, "notice"));
+		if (!spawnedRats) {
+			Rat.spawnAround(pos);
+			GLog.n(Messages.get(this, "spawn"));
+			spawnedRats = true;
 		}
-	  }
+	}
 
-	
+
 	@Override
 	public String description() {
-		return "Larger and stronger than other Marsupial Rats, the "
-				+ "Rat Boss can summon a pack of rats from the shadows of the dungeon.";
+		return Messages.get(this, "desc");
 	}
 }

@@ -146,8 +146,7 @@ public class WraithAmulet extends Artifact {
 
 	@Override
 	public String desc() {
-		String desc = "You have made a very interesting find: A piece of silver, transparent metal with "
-				+ "a purple gem encrusted within.\n\n";
+		String desc = "你发现了一个十分有趣的物品：一块镶嵌着紫色宝石的银色透明金属护身符\n\n";
 		if(Dungeon.hero.heroRace() == HeroRace.HUMAN){
 			desc += "As you touch it, you notice that your hands have begun to fade and are now "
 					+ "incorporeal. A wraith would probably be able to make better use of "
@@ -160,10 +159,7 @@ public class WraithAmulet extends Artifact {
 					+ "back. This will be very helpful indeed.";
 		}
 		else{
-			desc += "As you touch it, you feel a slight chill running down your back. Whatever this is, "
-					+ "there is a powerful and evil magic that runs through it. It would probably be dangerous "
-					+ "to use it without knowing how, so you decide you should try and transmute it into something "
-					+ "more useful.";
+			desc += "你一摸上它就感到一丝寒意窜上你的后背。不管这是什么，这里面都流淌着一股强大而邪恶的力量。不经了解就使用它可能很危险。所以你决定你该把它转化为一些更有用的东西。";
 		}
 		
 		if(isEquipped(Dungeon.hero) && (Dungeon.hero.heroRace() == HeroRace.WRAITH ||  cursed)){

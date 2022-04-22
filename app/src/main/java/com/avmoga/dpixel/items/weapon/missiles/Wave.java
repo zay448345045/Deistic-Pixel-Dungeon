@@ -28,8 +28,8 @@ public class Wave extends MissileWeapon {
 		image = ItemSpriteSheet.WAVE;
 		rapperValue = 0;
 
-		MIN = 1;
-		MAX = 4;
+		MIN = 25;
+		MAX = 50;
 
 		bones = false;
 	}

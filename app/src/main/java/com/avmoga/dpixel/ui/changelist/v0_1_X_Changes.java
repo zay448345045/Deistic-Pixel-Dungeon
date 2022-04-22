@@ -17,6 +17,29 @@ public class v0_1_X_Changes{
 
     public static void add_v0_1_0_Changes( ArrayList<ChangeInfo> changeInfos ){
 
+        ChangeInfo changes7 = new ChangeInfo("CN-0.50自然之神的像素地牢", true,
+                "");
+        changes7.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes7);
+
+        changes7 = new ChangeInfo( Messages.get( ChangesScene.class, "new"), false, null);
+        changes7.hardlight( 0x00ff00 );
+        changeInfos.add(changes7);
+
+        changes7.addButton( new ChangeButton(Icons.get(Icons.PREFS), Messages.get(ChangesScene.class, "misc"),
+                "-1.更多的翻译被追加了\n" +
+                        "-2.Boss血条可视画出现！！！\n" +
+                        "-3.简化了英雄属性界面"));
+
+        changes7 = new ChangeInfo( Messages.get( ChangesScene.class, "bugfixes"), false, null);
+        changes7.hardlight( 0xffff00 );
+        changeInfos.add(changes7);
+
+        changes7.addButton( new ChangeButton(new Image(Assets.SPINNER, 144, 0, 16, 16),
+                Messages.get(ChangesScene.class, "bugfixes"),
+                "-1.修复了一系列Bug,自然作者你出来啊，指定没有你好果子吃\n" +
+                        "-2.其他性能修复"));
+
         ChangeInfo changes6 = new ChangeInfo("CN-0.48自然之神的像素地牢", true,
                 "");
         changes6.hardlight(Window.TITLE_COLOR);

@@ -23,6 +23,7 @@ import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.scenes.InterlevelScene;
 import com.avmoga.dpixel.scenes.RankingsScene;
+import com.avmoga.dpixel.scenes.StartScene;
 import com.avmoga.dpixel.scenes.TitleScene;
 import com.avmoga.dpixel.ui.GameLog;
 import com.avmoga.dpixel.ui.Icons;
@@ -79,12 +80,7 @@ public class WndGame extends Window {
 			addButton(btnStart = new RedButton(TXT_START) {
 				@Override
 				protected void onClick() {
-					GameLog.wipe();
-					Dungeon.hero = null;
-					ShatteredPixelDungeon.challenges(Dungeon.challenges);
-					InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
-					InterlevelScene.noStory = true;
-					Game.switchScene(InterlevelScene.class);
+					ShatteredPixelDungeon.switchNoFade(StartScene.class);
 				}
 			});
 			btnStart.icon(Icons.get(Dungeon.hero.heroClass));

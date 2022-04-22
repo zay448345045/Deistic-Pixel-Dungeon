@@ -34,8 +34,7 @@ import com.watabou.utils.Callback;
 public class WandOfRegrowth extends Wand {
 
 	{
-		name = Messages.get(this, "name");
-		name = "Wand of Regrowth";
+		name = "丛生法杖";
 	}
 
 	@Override

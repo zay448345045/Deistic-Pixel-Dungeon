@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.levels.traps;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.mobs.npcs.SheepSokoban;
@@ -31,7 +32,7 @@ import com.watabou.noosa.Camera;
 
 public class FleecingTrap {
 
-	private static final String name = "fleecing trap";
+	private static final String name = Messages.get(FleecingTrap.class, "name");
 	
 	//Are we fleecing... the character?
 	//Ew.
@@ -54,7 +55,7 @@ public class FleecingTrap {
 				Armor armor = Dungeon.hero.belongings.armor; 
 				if (armor!=null){
 					 Dungeon.hero.belongings.armor=null;
-					 GLog.n("The fleecing trap destroys your armor!");
+					 GLog.n("转换羊陷阱摧毁了你的护甲！");
 					 dmg=dmg/2;
 				}
 
@@ -64,7 +65,7 @@ public class FleecingTrap {
 
 				if (!ch.isAlive()) {
 					Dungeon.fail(Utils.format(ResultDescriptions.TRAP, name));
-					GLog.n("You were killed by a discharge of a fleecing trap...");
+					GLog.n("你被转换羊陷阱杀死了");
 				} 
 		    }
 		}

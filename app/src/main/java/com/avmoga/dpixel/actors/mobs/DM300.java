@@ -58,7 +58,7 @@ public class DM300 extends Mob implements Callback {
 	
 	private static final float TIME_TO_ZAP = 2f;
 
-	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
+	private static final String TXT_LIGHTNING_KILLED = Messages.get(DM300.class, "kill");
 
 	{
 		name = "DM-300";
@@ -170,11 +170,11 @@ public class DM300 extends Mob implements Callback {
 
 		if (Dungeon.level.map[step] == Terrain.INACTIVE_TRAP && HP < HT) {
 
-			HP += Random.Int(1, HT - HP);
+			HP += Random.Int(5, HT - HP);
 			sprite.emitter().burst(ElmoParticle.FACTORY, 5);
 
 			if (Dungeon.visible[step] && Dungeon.hero.isAlive()) {
-				GLog.n("DM-300 repairs itself!");
+				GLog.n(Messages.get(DM300.class, "heal"));
 			}
 		}
 
@@ -225,13 +225,13 @@ public class DM300 extends Mob implements Callback {
 					Badges.validateBossSlain();
 			 }
 
-		yell("Mission failed. Shutting down.");
+		yell(Messages.get(DM300.class, "die"));
 	}
 
 	@Override
 	public void notice() {
 		super.notice();
-		yell("Unauthorised personnel detected.");
+		yell(Messages.get(DM300.class, "notice"));
 	}
 	
 	@Override

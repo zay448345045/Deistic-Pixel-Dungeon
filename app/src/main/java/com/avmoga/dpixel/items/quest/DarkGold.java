@@ -17,13 +17,14 @@
  */
 package com.avmoga.dpixel.items.quest;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class DarkGold extends Item {
 
 	{
-		name = "dark gold ore";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ORE;
 
 		stackable = true;
@@ -42,8 +43,7 @@ public class DarkGold extends Item {
 
 	@Override
 	public String info() {
-		return "This metal is called dark not because of its color (it doesn't differ from the normal gold), "
-				+ "but because it melts under the daylight, making it useless on the surface.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

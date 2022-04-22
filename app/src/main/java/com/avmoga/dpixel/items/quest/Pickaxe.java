@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.items.quest;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Hunger;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -32,8 +31,8 @@ import com.avmoga.dpixel.items.weapon.Weapon;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.levels.Terrain;
 import com.avmoga.dpixel.scenes.GameScene;
-import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.sprites.ItemSprite.Glowing;
+import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.ui.BuffIndicator;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.audio.Sample;
@@ -41,13 +40,13 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class Pickaxe extends Weapon {
 
-	public static final String AC_MINE = "MINE";
-
+	public static final String AC_MINE = Messages.get(Pickaxe.class, "ac_mine");
 	public static final float TIME_TO_MINE = 2;
-
-	private static final String TXT_NO_VEIN = "There is no dark gold vein near you to mine";
+	private static final String TXT_NO_VEIN = Messages.get(Pickaxe.class, "no_vein");
 
 	private static final Glowing BLOODY = new Glowing(0x550000);
 
@@ -181,6 +180,6 @@ public class Pickaxe extends Weapon {
 
 	@Override
 	public String info() {
-		return "This is a large and sturdy tool for breaking rocks. Probably it can be used as a weapon.";
+		return Messages.get(this, "desc");
 	}
 }

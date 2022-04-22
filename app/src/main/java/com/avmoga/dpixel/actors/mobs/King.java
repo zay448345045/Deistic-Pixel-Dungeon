@@ -48,12 +48,12 @@ import java.util.HashSet;
 
 public class King extends Mob {
 
-	private static final int MAX_ARMY_SIZE = 5;
+	private static final int MAX_ARMY_SIZE = 8;
 	private static final int REGEN = 3;
 
 
 	{
-		name = "King of Dwarves";
+		name = Messages.get(this, "name");
 		spriteClass = KingSprite.class;
 
 		HP = HT = 500;
@@ -96,7 +96,7 @@ public class King extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "parried";
+		return Messages.get(this, "def");
 	}
 
 	@Override
@@ -154,14 +154,13 @@ public class King extends Mob {
 	public void die(Object cause) {
 		            
 		int findTomb=Dungeon.hero.pos;
-		yell("You cannot kill me, " + Dungeon.hero.givenName()
-				+ "... I am... immortal...");
+		yell(Messages.get(this, "die", Dungeon.hero.givenName()));
 		 for (Mob mob : Dungeon.level.mobs) {
 				if (mob instanceof DwarfKingTomb){findTomb=mob.pos;}
 		 }
 		 
 		 summonLiches(findTomb);
-		 GLog.n("Release the Liches!");
+		GLog.n(Messages.get(this, "release"));
 		 super.die(cause);
 							
 	}
@@ -212,7 +211,7 @@ public class King extends Mob {
 			} while (dist < undeadsToSummon);
 		}
 
-		yell("Arise, slaves!");
+		yell(Messages.get(this, "summon"));
 		HP += Random.Int(1, HT - HP);
 		sprite.emitter().burst(ElmoParticle.FACTORY, 5);
 	}
@@ -220,7 +219,7 @@ public class King extends Mob {
 	@Override
 	public void notice() {
 		super.notice();
-		yell("How dare you!");
+		yell(Messages.get(this, "notice"));
 	}
 
 	@Override
@@ -257,7 +256,7 @@ public class King extends Mob {
 		public static int count = 0;
 
 		{
-			name = "undead dwarf";
+			name = Messages.get(King.class, "dname");
 			spriteClass = UndeadSprite.class;
 
 			HP = HT = 50;
@@ -323,13 +322,12 @@ public class King extends Mob {
 
 		@Override
 		public String defenseVerb() {
-			return "blocked";
+			return Messages.get(King.class, "ddef");
 		}
 
 		@Override
 		public String description() {
-			return "These undead dwarves, risen by the will of the King of Dwarves, were members of his court. "
-					+ "They appear as skeletons with a stunning amount of facial hair.";
+			return Messages.get(King.class, "ddesc");
 		}
 
 		private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

@@ -19,11 +19,12 @@ package com.avmoga.dpixel.scenes;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.effects.Flare;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.ui.RedButton;
-import com.watabou.noosa.BitmapTextMultiline;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
@@ -31,8 +32,8 @@ import com.watabou.utils.Random;
 
 public class AmuletScene extends PixelScene {
 
-	private static final String TXT_EXIT = "Let's call it a day";
-	private static final String TXT_STAY = "I'm not done yet";
+	private static final String TXT_EXIT = Messages.get(AmuletScene.class, "exit");
+	private static final String TXT_STAY = Messages.get(AmuletScene.class, "stay");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 18;
@@ -52,11 +53,10 @@ public class AmuletScene extends PixelScene {
 	public void create() {
 		super.create();
 
-		BitmapTextMultiline text = null;
+		RenderedTextMultiline text = null;
 		if (!noText) {
-			text = createMultiline(TXT, 8);
-			text.maxWidth = WIDTH;
-			text.measure();
+			text = renderMultiline(Messages.get(this, "text"), 7);
+			text.maxWidth(WIDTH);
 			add(text);
 		}
 
@@ -86,28 +86,26 @@ public class AmuletScene extends PixelScene {
 
 		float height;
 		if (noText) {
-			height = amulet.height + LARGE_GAP + btnExit.height() + SMALL_GAP
-					+ btnStay.height();
+			height = amulet.height + LARGE_GAP + btnExit.height() + SMALL_GAP + btnStay.height();
 
-			amulet.x = align((Camera.main.width - amulet.width) / 2);
-			amulet.y = align((Camera.main.height - height) / 2);
+			amulet.x = (Camera.main.width - amulet.width) / 2;
+			amulet.y = (Camera.main.height - height) / 2;
+			align(amulet);
 
-			btnExit.setPos((Camera.main.width - btnExit.width()) / 2, amulet.y
-					+ amulet.height + LARGE_GAP);
+			btnExit.setPos((Camera.main.width - btnExit.width()) / 2, amulet.y + amulet.height + LARGE_GAP);
 			btnStay.setPos(btnExit.left(), btnExit.bottom() + SMALL_GAP);
 
 		} else {
-			height = amulet.height + LARGE_GAP + text.height() + LARGE_GAP
-					+ btnExit.height() + SMALL_GAP + btnStay.height();
+			height = amulet.height + LARGE_GAP + text.height() + LARGE_GAP + btnExit.height() + SMALL_GAP + btnStay.height();
 
-			amulet.x = align((Camera.main.width - amulet.width) / 2);
-			amulet.y = align((Camera.main.height - height) / 2);
+			amulet.x = (Camera.main.width - amulet.width) / 2;
+			amulet.y = (Camera.main.height - height) / 2;
+			align(amulet);
 
-			text.x = align((Camera.main.width - text.width()) / 2);
-			text.y = amulet.y + amulet.height + LARGE_GAP;
+			text.setPos((Camera.main.width - text.width()) / 2, amulet.y + amulet.height + LARGE_GAP);
+			align(text);
 
-			btnExit.setPos((Camera.main.width - btnExit.width()) / 2, text.y
-					+ text.height() + LARGE_GAP);
+			btnExit.setPos((Camera.main.width - btnExit.width()) / 2, text.top() + text.height() + LARGE_GAP);
 			btnStay.setPos(btnExit.left(), btnExit.bottom() + SMALL_GAP);
 		}
 
@@ -115,6 +113,7 @@ public class AmuletScene extends PixelScene {
 
 		fadeIn();
 	}
+
 
 	@Override
 	protected void onBackPressed() {

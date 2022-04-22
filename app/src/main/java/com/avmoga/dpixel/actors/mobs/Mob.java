@@ -48,6 +48,7 @@ import com.avmoga.dpixel.levels.Level.Feeling;
 import com.avmoga.dpixel.music.BGMPlayer;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.sprites.CharSprite;
+import com.avmoga.dpixel.ui.BossHealthBar;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
@@ -642,6 +643,7 @@ public abstract class Mob extends Char {
 	public void notice() {
 		if (Dungeon.bossLevel()) {
 			BGMPlayer.playBoss();
+			BossHealthBar.assignBoss(this);
 		}else{
 			sprite.showAlert();
 		}

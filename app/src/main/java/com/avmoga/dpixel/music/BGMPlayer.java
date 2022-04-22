@@ -25,6 +25,8 @@ public class BGMPlayer {
             Music.INSTANCE.play(Assets.BGM_GO, true);
         } else if (d == 30) {
             Music.INSTANCE.play(Assets.BGM_GO, true);
+        } else if (d == 36) {
+            Music.INSTANCE.play(Assets.BGM_GO, true);
         } else if (d > 31 && d <= 35) {
             Music.INSTANCE.play(Assets.BGM_6,true);
         } else if (d > 36 && d <= 42) {

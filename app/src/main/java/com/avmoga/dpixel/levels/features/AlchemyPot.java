@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.levels.features;
 
-import java.util.Iterator;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.items.Item;
@@ -28,13 +27,15 @@ import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.windows.WndBag;
 import com.avmoga.dpixel.windows.WndOptions;
 
+import java.util.Iterator;
+
 public class AlchemyPot {
 
-	private static final String TXT_SELECT_SEED = "Select a seed to throw";
-	private static final String TXT_POT = "Alchemy Pot";
-	private static final String TXT_FRUIT = "Cook a Blandfruit";
-	private static final String TXT_POTION = "Brew a Potion";
-	private static final String TXT_OPTIONS = "Do you want to cook a Blandfruit with a seed, or brew a Potion from seeds?";
+	private static final String TXT_SELECT_SEED = Messages.get(AlchemyPot.class, "select_seed");
+	private static final String TXT_POT = Messages.get(AlchemyPot.class, "pot");
+	private static final String TXT_FRUIT = Messages.get(AlchemyPot.class, "fruit");
+	private static final String TXT_POTION = Messages.get(AlchemyPot.class, "potion");
+	private static final String TXT_OPTIONS = Messages.get(AlchemyPot.class, "options");
 
 	public static Hero hero;
 	public static int pos;

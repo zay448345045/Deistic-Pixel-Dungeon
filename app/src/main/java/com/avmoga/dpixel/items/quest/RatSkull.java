@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.quest;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
@@ -25,7 +26,7 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 public class RatSkull extends Item {
 
 	{
-		name = "giant rat skull";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SKULL;
 
 		unique = true;
@@ -43,11 +44,11 @@ public class RatSkull extends Item {
 
 	@Override
 	public String info() {
-		return "It could be a nice hunting trophy, but it smells too bad to place it on a wall.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override
 	public int price() {
-		return 100;
+		return 140;
 	}
 }

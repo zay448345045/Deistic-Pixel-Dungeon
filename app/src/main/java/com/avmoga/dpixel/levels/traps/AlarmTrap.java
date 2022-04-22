@@ -19,6 +19,7 @@ package com.avmoga.dpixel.levels.traps;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.effects.CellEmitter;
@@ -39,7 +40,7 @@ public class AlarmTrap {
 		}
 
 		if (Dungeon.visible[pos]) {
-			GLog.w("The trap emits a piercing sound that echoes throughout the dungeon!");
+			GLog.w(Messages.get(AlarmTrap.class, "alarm"));
 			CellEmitter.center(pos).start(Speck.factory(Speck.SCREAM), 0.3f, 3);
 		}
 

@@ -50,14 +50,14 @@ import java.util.HashSet;
 
 public class BrokenRobot extends Mob {
 
-	private static final String TXT_DEATHGAZE_KILLED = "%s's deathray killed you...";
-	private static final float SPAWN_DELAY = 2f;
+	private static final String TXT_DEATHGAZE_KILLED = Messages.get(BrokenRobot.class, "kill");
+	private static final float SPAWN_DELAY = 0.5f;
 
 	{
-		name = "broken robot";
+		name = Messages.get(this, "name");
 		spriteClass = BrokenRobotSprite.class;
 
-		HP = HT = 75+(adj(0)*Random.NormalIntRange(4, 7));
+		HP = HT = 100+(adj(2)*Random.NormalIntRange(8, 16));
 		defenseSkill = 20+adj(1);
 		viewDistance = Light.DISTANCE;
 
@@ -83,7 +83,7 @@ public class BrokenRobot extends Mob {
 		if(enemySeen){
 		  switch (Random.Int(50)) {
 		  case 1:
-			GLog.n("Malfunction!");
+			  GLog.n(Messages.get(BrokenRobot.class, "broken"));
 			explode(pos);
 			if (HP<1){destroy();}
 		  break;

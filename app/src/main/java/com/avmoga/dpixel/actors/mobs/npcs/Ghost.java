@@ -686,7 +686,7 @@ public class Ghost extends NPC {
 				}
 			 
 			 if(!Dungeon.tengukilled && Statistics.archersKilled > 70 && Dungeon.depth>26) {
-				 GLog.w("There are no keys to find on this level. Just dew, seeds, and mushrooms.");
+				 GLog.w("这里没有其他东西，只有蘑菇，露水和无尽的豺狼游击队！你应该速速离开，否则，后果自负。");
 
 				}
 		}

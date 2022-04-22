@@ -24,12 +24,11 @@ import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.items.Item;
-import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.windows.WndBag;
 
 public class ScrollOfUpgrade extends InventoryScroll {
 
-	private static final String TXT_LOOKS_BETTER = "your %s certainly looks better now";
+	//private static final String TXT_LOOKS_BETTER = "your %s certainly looks better now";
 
 	{
 		name = Messages.get(this, "name");
@@ -64,7 +63,7 @@ public class ScrollOfUpgrade extends InventoryScroll {
 		item.upgrade();
 
 		upgrade(curUser);
-		GLog.p(TXT_LOOKS_BETTER, item.name());
+		//GLog.p(TXT_LOOKS_BETTER, item.name());
 
 		Badges.validateItemLevelAquired(item);
 	}

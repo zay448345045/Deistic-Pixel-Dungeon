@@ -186,7 +186,7 @@ public abstract class Level implements Bundlable {
 	public int currentmoves=0;
 	public boolean genpetnext = false;
 
-	public int viewDistance = Dungeon.isChallenged(Challenges.DARKNESS) ? 3 : 8;
+	public int viewDistance = Dungeon.isChallenged(Challenges.DARKNESS) ? 1 : 8;
 
 	public static boolean[] fieldOfView = new boolean[getLength()];
 

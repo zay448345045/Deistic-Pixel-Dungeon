@@ -20,6 +20,7 @@ package com.avmoga.dpixel.levels.features;
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Cripple;
@@ -42,10 +43,10 @@ import com.watabou.utils.Random;
 
 public class Chasm {
 
-	private static final String TXT_CHASM = "Chasm";
-	private static final String TXT_YES = "Yes, I know what I'm doing";
-	private static final String TXT_NO = "No, I changed my mind";
-	private static final String TXT_JUMP = "Do you really want to jump into the chasm? You can probably die.";
+	private static final String TXT_CHASM = Messages.get(Chasm.class, "chasm");
+	private static final String TXT_YES = Messages.get(Chasm.class, "yes");
+	private static final String TXT_NO = Messages.get(Chasm.class, "no");
+	private static final String TXT_JUMP = Messages.get(Chasm.class, "jump");
 
 	public static boolean jumpConfirmed = false;
 
@@ -113,7 +114,7 @@ public class Chasm {
 				Badges.validateDeathFromFalling();
 
 				Dungeon.fail(ResultDescriptions.FALL);
-				GLog.n("You fell to death...");
+				GLog.n(Messages.get(Chasm.class, "ondeath"));
 			}
 		});
 	}
