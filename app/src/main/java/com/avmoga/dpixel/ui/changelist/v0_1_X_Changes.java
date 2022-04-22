@@ -28,7 +28,7 @@ public class v0_1_X_Changes{
 
         changes7.addButton( new ChangeButton(Icons.get(Icons.PREFS), Messages.get(ChangesScene.class, "misc"),
                 "-1.更多的翻译被追加了\n" +
-                        "-2.Boss血条可视画出现！！！\n" +
+                        "-2.Boss血条可视化出现！！！\n" +
                         "-3.简化了英雄属性界面"));
 
         changes7 = new ChangeInfo( Messages.get( ChangesScene.class, "bugfixes"), false, null);

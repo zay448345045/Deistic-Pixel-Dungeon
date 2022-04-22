@@ -19,10 +19,8 @@ package com.avmoga.dpixel.actors;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
-import com.avmoga.dpixel.DungeonTilemap;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
-import com.avmoga.dpixel.actors.blobs.Freezing;
 import com.avmoga.dpixel.actors.buffs.Amok;
 import com.avmoga.dpixel.actors.buffs.Bleeding;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -37,7 +35,6 @@ import com.avmoga.dpixel.actors.buffs.Invisibility;
 import com.avmoga.dpixel.actors.buffs.Levitation;
 import com.avmoga.dpixel.actors.buffs.Light;
 import com.avmoga.dpixel.actors.buffs.MagicalSleep;
-import com.avmoga.dpixel.actors.buffs.Mark;
 import com.avmoga.dpixel.actors.buffs.MindVision;
 import com.avmoga.dpixel.actors.buffs.Paralysis;
 import com.avmoga.dpixel.actors.buffs.Poison;
@@ -52,9 +49,6 @@ import com.avmoga.dpixel.actors.buffs.Terror;
 import com.avmoga.dpixel.actors.buffs.Vertigo;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.hero.HeroSubClass;
-import com.avmoga.dpixel.actors.hero.HeroSubRace;
-import com.avmoga.dpixel.actors.mobs.Bestiary;
-import com.avmoga.dpixel.actors.mobs.Yog;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.particles.PoisonParticle;
 import com.avmoga.dpixel.items.artifacts.CloakOfShadows;
@@ -90,7 +84,12 @@ public abstract class Char extends Actor {
 	public CharSprite sprite;
 
 	public String name = "mob";
-
+	public Alignment alignment;
+	public enum Alignment{
+		ENEMY,
+		NEUTRAL,
+		ALLY
+	}
 	public int HT;
 	public int HP;
 

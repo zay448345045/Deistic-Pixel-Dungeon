@@ -19,7 +19,6 @@ package com.avmoga.dpixel.actors.mobs;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
-import com.avmoga.dpixel.Challenges;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
@@ -680,14 +679,6 @@ public abstract class Mob extends Char {
 				state = HUNTING;
 				target = enemy.pos;
 
-				if (Dungeon.isChallenged(Challenges.SWARM_INTELLIGENCE)) {
-					for (Mob mob : Dungeon.level.mobs) {
-						if (mob != Mob.this) {
-							mob.beckon(target);
-						}
-					}
-				}
-
 				spend(TIME_TO_WAKE_UP);
 
 			} else {
@@ -699,6 +690,8 @@ public abstract class Mob extends Char {
 			}
 			return true;
 		}
+
+
 
 		@Override
 		public String status() {

@@ -1,5 +1,6 @@
 package com.avmoga.dpixel.items.artifacts;
 //TODO Rewrite me! Replace both effects with something more useful.
+
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -27,7 +28,7 @@ public class WraithAmulet extends Artifact {
 	{
 		name = "幽灵金属护身符";
 		image = ItemSpriteSheet.ARTIFACT_WAMULET;
-		
+		cooldown = 0;
 		charge = ((level + 2 / 2) +3 );
 		partialCharge = 0;
 		chargeCap = (((level + 2) / 2) + 3);
@@ -37,31 +38,36 @@ public class WraithAmulet extends Artifact {
 		defaultAction = AC_GHOST;
 	}
 	
-	private static final String TXT_SELFSELECT = "You cannot target yourself.";
-	private static final String TXT_NOCHARGE = "This item must be charged to do that.";
-	private static final String TXT_NOEQUIP = "This item must be equipped to do that.";
-	private static final String AC_GHOST = "INSUBSTANTIATE";
-	private static final String AC_ASSASSINATE = "ASSASSINATE";
-	private static final String TXT_FAR = "It is too far away.";
-	private static final String TXT_GHOST = "Your essense becomes scattered...";
-	private static final String TXT_NOTHING_THERE = "There is nothing there to kill.";
+	private static final String TXT_SELFSELECT = "你不能以自己为目标";
+	private static final String TXT_NOCHARGE = "该物品必须充能才能使用。";
+	private static final String TXT_NOEQUIP = "该物品必须装备才能使用。";
+	private static final String AC_GHOST = "虚无化";
+	private static final String AC_ASSASSINATE = "暗杀";
+	private static final String TXT_FAR = "暗杀位置必须和暗杀对象间距一格。";
+	private static final String TXT_GHOST = "你的本源开始消散";
+	private static final String TXT_NOTHING_THERE = "这里没有东西可以杀死。";
 	
 	@Override
 	public Item upgrade(){
-		chargeCap = (((level + 1) / 2) + 3);
+		chargeCap++;
 		return super.upgrade();
 	}
+
+
 	
 	@Override
 	public void execute(Hero hero, String action) {
 		super.execute(hero, action);
 		if(action.equals(AC_GHOST)){
-			if(useableBasic()){
+		if (cooldown > 0) {
+			GLog.i("幽灵护身符正在冷却中……");
+		} else if(useableBasic()) {
 				if(this.isEquipped(Dungeon.hero)){
-					if(this.charge > 0){
+					if(this.charge > 0) {
 						exp += 5;
 						Buff.affect(Dungeon.hero, Invisibility.class, Invisibility.DURATION);
 						GLog.i(TXT_GHOST);
+						cooldown = 12 - (level / 2);
 						charge--;
 					} else {
 						GLog.i(TXT_NOCHARGE);
@@ -70,7 +76,7 @@ public class WraithAmulet extends Artifact {
 					GLog.i(TXT_NOEQUIP);
 				} 
 			} else {
-				GLog.i("What are you trying to do?");
+				GLog.i("你在干什么？");
 			}
 		} else if (action.equals(AC_ASSASSINATE)) {
 			if(this.charge > 0){
@@ -98,9 +104,9 @@ public class WraithAmulet extends Artifact {
 	@Override
 	public ArrayList<String> actions(Hero hero) {
 		ArrayList<String> actions = super.actions(hero);
-		if (isEquipped(hero) && charge > 0 && Dungeon.hero.heroRace == HeroRace.WRAITH)
+		if (isEquipped(hero) && Dungeon.hero.heroRace == HeroRace.WRAITH)
 			actions.add(AC_GHOST);
-		if (isEquipped(hero) && level >= 2 && charge > 3 && Dungeon.hero.heroRace == HeroRace.WRAITH)
+		if (isEquipped(hero) && charge >= 7 && Dungeon.hero.heroRace == HeroRace.WRAITH)
 			actions.add(AC_ASSASSINATE);
 		return actions;
 	}
@@ -124,19 +130,27 @@ public class WraithAmulet extends Artifact {
 						partialCharge = 0;
 					}
 				}
-				if(exp > level * 50){
-					exp = 0;
-					if(level < levelCap){
-						
-					}
-				}
 			} else if(cursed){
 				if(Random.Int(40) == 0){
-					GLog.i("You are overcome by the arcane!");
+					GLog.i("你被奥术征服了！");
 					Buff.affect(curUser, Vertigo.class, Vertigo.duration(curUser));
-					
+
 				}
 			}
+
+			if(exp > level * 50){
+				exp = 0;
+				if(level < levelCap){
+					//I must add Complete WraithAmulet
+					//Ok,Ling will Complete WraithAmulet
+					upgrade();
+					exp += level * 50;
+					GLog.p("你的幽灵金属护身符变得更加强大了");
+				}
+			}
+
+			if (cooldown > 0)
+				cooldown--;
 
 			updateQuickslot();
 			spend(TICK);
@@ -144,19 +158,16 @@ public class WraithAmulet extends Artifact {
 		}
 	}
 
+
 	@Override
 	public String desc() {
 		String desc = "你发现了一个十分有趣的物品：一块镶嵌着紫色宝石的银色透明金属护身符\n\n";
 		if(Dungeon.hero.heroRace() == HeroRace.HUMAN){
-			desc += "As you touch it, you notice that your hands have begun to fade and are now "
-					+ "incorporeal. A wraith would probably be able to make better use of "
-					+ "this, but you should be able to figure it out well enough to use some basic "
-					+ "functionalities. You just hope there aren't any negative effects that come in tow.";
+			desc += "当你触摸它的时候，你发现你的手已经开始变得透明，并且现在已经失去形体。\n" +
+					"也许幽灵才能把它发挥更好的用处，但你也能搞明白出一些它的基础功能。\n" +
+					"你只是希望不会有一些伴随而来的负面效果。";
 		} else if(Dungeon.hero.heroRace() == HeroRace.WRAITH){
-			desc += "You are entirely taken aback; This is an amulet of Torivorian Steel! "
-					+ "You haven't seen anything like this since you left your "
-					+ "homeworld. As your rub your finger along it, a chill runs down your "
-					+ "back. This will be very helpful indeed.";
+			desc += "你大吃一惊，这是暗影钢的护身符。自从你离开家园后就没见过这种东西了。当你用手指摩擦他的时候，一股寒意窜上你的后背。这东西将会非常有用";
 		}
 		else{
 			desc += "你一摸上它就感到一丝寒意窜上你的后背。不管这是什么，这里面都流淌着一股强大而邪恶的力量。不经了解就使用它可能很危险。所以你决定你该把它转化为一些更有用的东西。";
@@ -165,17 +176,15 @@ public class WraithAmulet extends Artifact {
 		if(isEquipped(Dungeon.hero) && (Dungeon.hero.heroRace() == HeroRace.WRAITH ||  cursed)){
 			desc += "\n\n";
 			if(cursed){
-				desc += "The amulet is reaching into your mind, it makes known to you things beyond your "
-						+ "comprehension.";
+				desc += "护符正在进入你的脑海，它让你知道超出你理解力的事情。";
 			} else if(level < 5 || Dungeon.hero.heroRace() == HeroRace.HUMAN){
-				desc += "It seems like you could push your will over the object to become more wraith-like. You could probably "
-						+ "amplify the experience with more... test subjects.";
+				desc += "你似乎可以把自己的意志施加在它上面来让自己变得幽灵化。\n" +
+						"也许，你可以把这种经验对更多实验对象使用。";
 			} else if (level < 10){
-				desc += "It seems that existant matter when you reapparate from Wraith Form is scattered and becomes "
-						+ "nonexistant. With a surprise attack, maybe you could damage with it.";
+				desc += "似乎当你从幽灵形态再显形时，存在的物质会消散并变得不复存在。也许你可以通过奇袭来造成伤害。\n";
 			} else {
-				desc += "You are exerting your mastery over the amulet to great effect. Nothing dare stand "
-						+ "against you now." ;
+				desc += "你竭力去驾驭这件护符，以发挥一些好的效果。\n" +
+						"现在，没什么能反抗你了。" ;
 			}
 		}
 		
@@ -187,7 +196,7 @@ public class WraithAmulet extends Artifact {
 	protected static CellSelector.Listener porter = new CellSelector.Listener() {
 		@Override
 		public String prompt() {
-			return "Choose direction to teleport";
+			return "选择传送的位置";
 		}
 		@Override
 		public void onSelect(Integer target) {
@@ -196,7 +205,7 @@ public class WraithAmulet extends Artifact {
 				if(Actor.findChar(target) != null){
 					victim.add((Mob) Actor.findChar(target));
 				}
-				
+
 				if (target == curUser.pos) {
 					GLog.i(TXT_SELFSELECT);
 					return;
@@ -204,8 +213,8 @@ public class WraithAmulet extends Artifact {
 
 				QuickSlotButton.target(Actor.findChar(target));
 					if(Actor.findChar(target) != null){
-							if(Level.distance(Dungeon.hero.pos, target) == 2){
-								if(!Level.fieldOfView[target]){
+							if(Level.distance(Dungeon.hero.pos, target) == 2) {
+								if (Level.fieldOfView[target]) {
 									final WraithAmulet amulet = (WraithAmulet) Item.curItem;
 									amulet.charge--;
 									amulet.exp += 10;

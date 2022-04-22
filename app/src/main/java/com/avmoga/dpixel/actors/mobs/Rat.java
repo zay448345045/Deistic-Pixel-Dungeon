@@ -21,6 +21,7 @@ import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
+import com.avmoga.dpixel.items.Gold;
 import com.avmoga.dpixel.items.food.Meat;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.scenes.GameScene;
@@ -28,6 +29,19 @@ import com.avmoga.dpixel.sprites.RatSprite;
 import com.watabou.utils.Random;
 
 public class Rat extends Mob {
+
+	@Override
+	public void die(Object cause) {
+
+		GameScene.bossSlain();
+		Dungeon.level.drop(new Gold(Random.Int(5900, 14000)), pos).sprite.drop();
+		super.die(cause);
+
+		Dungeon.banditkingkilled=true;
+
+		yell("Ugh...the madness ends here...");
+
+	}
 	
 
 	private static final float SPAWN_DELAY = 2f;
@@ -38,7 +52,7 @@ public class Rat extends Mob {
 
 		HP = HT = 8+(Dungeon.depth*Random.NormalIntRange(1, 3));
 		defenseSkill = 3+(Math.round((Dungeon.depth)/2));
-		
+
 		loot = new Meat();
 		lootChance = 0.5f;
 
