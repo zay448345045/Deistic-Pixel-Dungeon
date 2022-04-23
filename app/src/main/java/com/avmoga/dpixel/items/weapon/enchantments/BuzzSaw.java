@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.weapon.enchantments;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.items.DewVial;
 import com.avmoga.dpixel.items.weapon.Weapon;
@@ -29,7 +30,7 @@ import com.watabou.utils.Random;
 
 public class BuzzSaw extends Weapon.Enchantment {
 
-	private static final String TXT_BUZZ = "Bloodlust %s";
+	private static final String TXT_BUZZ = Messages.get(BuzzSaw.class, "buzz");
 	
 
 	private static ItemSprite.Glowing RED = new ItemSprite.Glowing(0x660022);
@@ -48,28 +49,30 @@ public class BuzzSaw extends Weapon.Enchantment {
 						
 		  int hits = Random.Int(Math.round(vial.checkVol()/10));
 		  int dmg;
-		
-		  for (int i = 1; i <= hits + 1; i++) {
-			  if (vial.checkVol()>0 && saw.turnedOn){
-				  vial.sip();
-			      dmg = Math.max(1, (attacker.damageRoll()- i)*2);
-			      defender.damage(dmg, this);
-			      GLog.h("Vrrrrrr!");    
-			  }  else if (vial.checkVol()==0 && saw.turnedOn){
-				  //defender.damage(Random.Int(level), this);
-				  GLog.n("Your chainsaw is out of fuel!");
-				  break;
-			  } else if (vial.checkVol()>0 && !saw.turnedOn){
-				  //defender.damage(Random.Int(level), this);
-				  GLog.n("Your chainsaw is not turned on!");
-				  break;
-			  } else {
-				  //defender.damage(Random.Int(level), this);
-				  //GLog.n("Chainsaw is out of fuel!");
-				  break;
-			  }
-			  if(!defender.isAlive()){break;}			  
-		  } 
+
+			for (int i = 1; i <= hits + 1; i++) {
+				if (vial.checkVol() > 0 && saw.turnedOn) {
+					vial.sip();
+					dmg = Math.max(1, (attacker.damageRoll() - i) * 2);
+					defender.damage(dmg, this);
+					GLog.h(Messages.get(this, "effect"));
+				} else if (vial.checkVol() == 0 && saw.turnedOn) {
+					//defender.damage(Random.Int(level), this);
+					GLog.n(Messages.get(this, "fuel"));
+					break;
+				} else if (vial.checkVol() > 0 && !saw.turnedOn) {
+					//defender.damage(Random.Int(level), this);
+					GLog.n(Messages.get(this, "on"));
+					break;
+				} else {
+					//defender.damage(Random.Int(level), this);
+					//GLog.n("Chainsaw is out of fuel!");
+					break;
+				}
+				if (!defender.isAlive()) {
+					break;
+				}
+			}
 
 		} 
 			

@@ -19,6 +19,7 @@ package com.avmoga.dpixel.actors.mobs.npcs;
 
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.sprites.RatKingSprite;
@@ -26,7 +27,7 @@ import com.avmoga.dpixel.sprites.RatKingSprite;
 public class RatKingDen extends NPC {
 
 	{
-		name = "rat king";
+		name = Messages.get(RatKing.class, "name");
 		spriteClass = RatKingSprite.class;
 
 		state = SLEEPING;
@@ -68,19 +69,17 @@ public class RatKingDen extends NPC {
 		sprite.turnTo(pos, Dungeon.hero.pos);
 		if (state == SLEEPING) {
 			notice();
-			yell("I'm not sleeping!");
-			state = WANDERING;		
-			
+			yell(Messages.get(RatKing.class, "yone"));
+			state = WANDERING;
+
 		} else {
-			yell("What is it? I have no time for this nonsense. My kingdom won't rule itself!");
+			yell(Messages.get(RatKing.class, "yell"));
 		}
 	}
 
 	@Override
 	public String description() {
-		return ((RatKingSprite) sprite).festive ? "This rat is a little bigger than a regular marsupial rat. "
-				+ "It's wearing a tiny festive hat instead of its usual crown. Happy Holidays!"
-				: "This rat is a little bigger than a regular marsupial rat "
-						+ "and it's wearing a tiny crown on its head.";
+		return ((RatKingSprite) sprite).festive ? Messages.get(RatKing.class, "descone")
+				: Messages.get(RatKing.class, "desctwo");
 	}
 }

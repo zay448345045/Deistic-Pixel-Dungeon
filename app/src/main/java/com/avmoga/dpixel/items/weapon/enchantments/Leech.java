@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.weapon.enchantments;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.items.weapon.Weapon;
@@ -27,7 +28,7 @@ import com.watabou.utils.Random;
 
 public class Leech extends Weapon.Enchantment {
 
-	private static final String TXT_VAMPIRIC = "Vampiric %s";
+	private static final String TXT_VAMPIRIC = Messages.get(Leech.class, "name");
 
 	private static ItemSprite.Glowing RED = new ItemSprite.Glowing(0x660022);
 

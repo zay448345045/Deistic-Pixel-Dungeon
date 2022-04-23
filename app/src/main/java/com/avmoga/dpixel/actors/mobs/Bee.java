@@ -34,7 +34,7 @@ import java.util.HashSet;
 public class Bee extends Mob {
 
 	{
-		name = "golden bee";
+		name = Messages.get(this, "name");
 		spriteClass = BeeSprite.class;
 
 		viewDistance = 4;

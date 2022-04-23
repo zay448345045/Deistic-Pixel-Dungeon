@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Journal;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
 import com.avmoga.dpixel.actors.buffs.Poison;
@@ -34,36 +33,18 @@ import com.avmoga.dpixel.sprites.StatueSprite;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Statue extends Mob {
 
 	{
-		name = "animated statue";
+		name = Messages.get(this, "name");
 		spriteClass = StatueSprite.class;
 
 		EXP = 5 + Dungeon.depth * 2;
 		state = PASSIVE;
-		seenHero = false;
-	}	@Override
-	public void notice() {
-		super.notice();
-		if(!this.seenHero){
-			this.yell(quotes[Random.Int(quotes.length - 1)]);
-			seenHero = true;
-		}
 	}
-	private boolean seenHero = false;
-	
-	private String[] quotes = {"Oh God, not you again.", "Hero! Come and fight me on equal ground, so that we may settle this dispute once and for all!",
-			"Fianlly! You have no idea how long I've been stuck in this damn blood spot.", "Please, come attack me. I have an itch.",
-			"I... AM ALIIIIIVVVVEEEEEE!", "Sacre bleu!", "Strike me down, and you will become more powerful than you could every imagine... variably.",
-			"OTHERS SAY MY TACTICS ARE TOO BRUTAL AND VIOLENT. I SAY, \"IS THAT EVEN POSSIBLE?\"", "*incoherent mumbling*", 
-			"Do not take your life too seriously. You will never get out of it alive.", "I may be drunk, but in the morning, I will be sober, and you will still be ugly!",
-			"A dungeon without sunshine is like a night.", "I am a fake statue who had a fake wife who ran away because he couldn't fake keep a fake job.", "My animated plant statues died because I forgot to animated water statue them.",
-			"Only the Gods may judge you, Hero. I am just here to arrange your meeting.", "Too much agreement kills a chat, y'know.", "Hero, in my 1000 years locked in this dungeon, I have learned to resist everything... except temptation,",
-			"WHAT YEAR IS IT?", "TEN THOUSAND YEARS will give you such a crick in the neck.", "Prejudice about Heroes is a great time saver. I could form opinions about you for 1000 years without having any actual facts.", 
-			"Hero, you need a haircut. You look like a Firebloom.", "Reality continues to ruin my life.", "My life needs editing.", "All the other Animated Statues in this dungeon are such crybabies.",
-			"I swear, all I have is a blazing dagger. Please don't hurt me.", "Your Grim Warhammer +3 is in another castle.", "99 hero's skulls on the wall... 99 hero's skulls...", "Hello from the inside.",
-			"Finally, I am free! Tell me, have the Cubs won the World Series yet?"};
+
 
 	private Weapon weapon;
 
@@ -159,21 +140,12 @@ public class Statue extends Mob {
 	@Override
 	public boolean reset() {
 		state = PASSIVE;
-		seenHero = false;
 		return true;
 	}
 
 	@Override
 	public String description() {
-		String desc = "You would think that it's just another one of this dungeon's ugly statues, but its red glowing eyes give it away."
-				+ "\n\n";
-		
-		if(this.state == PASSIVE){
-			desc += "You curse silently; his weapon is sheathed. If you want to know what he has, you'll have to attack!";
-		} else {
-			desc +="Now that it is moving, you can tell that the _"+ weapon.name() + "_, it's wielding, looks real.";
-		}
-		return desc;
+		return Messages.get(this, "desc", weapon.name());
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

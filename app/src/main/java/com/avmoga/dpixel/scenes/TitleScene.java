@@ -61,7 +61,7 @@ public class TitleScene extends PixelScene {
 			Game.switchScene(WelcomeScene.class);
 		}
 
-		Music.INSTANCE.play(Assets.THEME, true);
+		Music.INSTANCE.play(Assets.BGM_BOSSC, true);
 		Music.INSTANCE.volume(1f);
 
 		uiCamera.visible = false;

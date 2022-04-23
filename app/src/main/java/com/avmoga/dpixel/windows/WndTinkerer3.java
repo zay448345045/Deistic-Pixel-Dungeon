@@ -17,25 +17,16 @@
  */
 package com.avmoga.dpixel.windows;
 
-import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.mobs.npcs.Tinkerer3;
 import com.avmoga.dpixel.items.Item;
-import com.avmoga.dpixel.items.Mushroom;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.ui.RedButton;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
 import com.avmoga.dpixel.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndTinkerer3 extends Window {
-
-	private static final String TXT_MESSAGE = "Thanks for the Toadstool Mushroom! "
-			                                  +"I can upgrade your dew vial for you. "
-			                                  +"I can make it hold more and give you wings when you splash. ";
-	private static final String TXT_UPGRADE = "Upgrade my Vial!";
-	
-	private static final String TXT_FARAWELL = "Good luck in your quest, %s!";
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
@@ -51,43 +42,29 @@ public class WndTinkerer3 extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene
-				.createMultiline(TXT_MESSAGE, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene
+				.renderMultiline("", 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
-		RedButton btnUpgrade = new RedButton(TXT_UPGRADE) {
+		RedButton btnUpgrade = new RedButton("") {
 			@Override
 			protected void onClick() {
 				selectUpgrade(tinkerer);
 			}
 		};
-		btnUpgrade.setRect(0, message.y + message.height() + GAP, WIDTH,
+		btnUpgrade.setRect(0, message.top() + message.height() + GAP, WIDTH,
 				BTN_HEIGHT);
 		add(btnUpgrade);
 
-		
+
 		resize(WIDTH, (int) btnUpgrade.bottom());
 	}
 
 	private void selectUpgrade(Tinkerer3 tinkerer) {
 		hide();
-		
-		Mushroom mushroom = Dungeon.hero.belongings.getItem(Mushroom.class);
-		mushroom.detach(Dungeon.hero.belongings.backpack);
-		
-			Dungeon.dewWater=true;				
-			Dungeon.dewDraw=true;
-			Dungeon.wings=true;
-	
-		
-		tinkerer.yell(Utils.format(TXT_FARAWELL, Dungeon.hero.givenName()));
 		tinkerer.destroy();
-
 		tinkerer.sprite.die();
-
-		//Wandmaker.Quest.complete();
 	}
 }

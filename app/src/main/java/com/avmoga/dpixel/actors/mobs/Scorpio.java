@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Cripple;
@@ -34,10 +33,12 @@ import com.avmoga.dpixel.mechanics.Ballistica;
 import com.avmoga.dpixel.sprites.ScorpioSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Scorpio extends Mob {
 
 	{
-		name = "scorpio";
+		name = Messages.get(this, "name");
 		spriteClass = ScorpioSprite.class;
 
 		HP = HT = 95+(adj(0)*Random.NormalIntRange(1, 3));
@@ -111,8 +112,7 @@ public class Scorpio extends Mob {
 
 	@Override
 	public String description() {
-		return "These huge arachnid-like demonic creatures avoid close combat by all means, "
-				+ "firing crippling serrated spikes from long distances.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

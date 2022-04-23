@@ -17,20 +17,19 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
 import com.avmoga.dpixel.actors.buffs.Amok;
 import com.avmoga.dpixel.actors.buffs.Buff;
-import com.avmoga.dpixel.actors.buffs.Silence;
 import com.avmoga.dpixel.actors.buffs.Burning;
 import com.avmoga.dpixel.actors.buffs.Charm;
 import com.avmoga.dpixel.actors.buffs.Frost;
 import com.avmoga.dpixel.actors.buffs.Paralysis;
 import com.avmoga.dpixel.actors.buffs.Roots;
+import com.avmoga.dpixel.actors.buffs.Silence;
 import com.avmoga.dpixel.actors.buffs.Sleep;
 import com.avmoga.dpixel.actors.buffs.Terror;
 import com.avmoga.dpixel.actors.buffs.Vertigo;
@@ -45,6 +44,8 @@ import com.avmoga.dpixel.sprites.RedWraithSprite;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class RedWraith extends Mob {
 
@@ -141,10 +142,10 @@ public class RedWraith extends Mob {
 	//	}
 	//}
 
-	
+
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return Messages.get(this, "def");
 	}
 
 	@Override
@@ -155,8 +156,7 @@ public class RedWraith extends Mob {
 
 	@Override
 	public String description() {
-		return "A wraith is a vengeful spirit of a sinner, whose grave or tomb was disturbed. "
-				+ "Being an ethereal entity, it is very hard to hit with a regular weapon.";
+		return Messages.get(this, "desc");
 	}
 
 	public static void spawnAround(int pos) {

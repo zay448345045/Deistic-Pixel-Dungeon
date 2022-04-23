@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.plants;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.Fire;
@@ -29,11 +30,11 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class Firebloom extends Plant {
 
-	private static final String TXT_DESC = "When something touches a Firebloom, it bursts into flames.";
+	private static final String TXT_DESC = Messages.get(Firebloom.class, "desc");
 
 	{
 		image = 0;
-		plantName = "Firebloom";
+		plantName = Messages.get(this, "name");
 	}
 
 	@Override
@@ -54,9 +55,9 @@ public class Firebloom extends Plant {
 
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Firebloom";
+			plantName = Messages.get(Firebloom.class, "name");
 
-			name = "seed of " + plantName;
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.SEED_FIREBLOOM;
 
 			plantClass = Firebloom.class;
@@ -65,7 +66,7 @@ public class Firebloom extends Plant {
 
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Messages.get(Plant.class, "seeddesc", plantName);
 		}
 	}
 }

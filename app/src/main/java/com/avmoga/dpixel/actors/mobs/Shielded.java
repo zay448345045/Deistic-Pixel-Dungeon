@@ -18,12 +18,13 @@
 package com.avmoga.dpixel.actors.mobs;
 
 import com.avmoga.dpixel.Badges;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ShieldedSprite;
 
 public class Shielded extends Brute {
 
 	{
-		name = "shielded brute";
+		name = Messages.get(this, "name");
 		spriteClass = ShieldedSprite.class;
 
 		defenseSkill = 20+adj(0);
@@ -36,7 +37,7 @@ public class Shielded extends Brute {
 
 	@Override
 	public String defenseVerb() {
-		return "blocked";
+		return Messages.get(this, "def");
 	}
 
 	@Override

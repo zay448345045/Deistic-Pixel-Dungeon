@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs.npcs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.sprites.SokobanSheepSprite;
@@ -29,7 +30,7 @@ public class SheepSokoban extends NPC {
 	"Baa..." };
 
 {
-name = "sheep";
+	name = Messages.get(SheepSokoban.class, "name");
 spriteClass = SokobanSheepSprite.class;
 }
 
@@ -44,11 +45,10 @@ protected boolean act() {
 public void damage(int dmg, Object src) {
 }
 
-@Override
-public String description() {
-return "This is a magic sheep. What's so magical about it? You can't kill it. "
-		+ "You could probably push it out of the way though.";
-}
+	@Override
+	public String description() {
+		return Messages.get(SheepSokoban.class, "desc");
+	}
 
 /*  -W-1 -W  -W+1
  *  -1    P  +1

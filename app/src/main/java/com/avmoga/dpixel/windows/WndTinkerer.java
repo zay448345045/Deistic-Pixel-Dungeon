@@ -17,50 +17,17 @@
  */
 package com.avmoga.dpixel.windows;
 
-import com.avmoga.dpixel.Dungeon;
-import com.avmoga.dpixel.Statistics;
-import com.avmoga.dpixel.actors.buffs.Buff;
-import com.avmoga.dpixel.actors.buffs.Dewcharge;
 import com.avmoga.dpixel.actors.mobs.npcs.Tinkerer1;
 import com.avmoga.dpixel.items.Item;
-import com.avmoga.dpixel.items.Mushroom;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.ui.RedButton;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
-import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndTinkerer extends Window {
-
-	private static final String TXT_MESSAGE = "Thanks for the Toadstool Mushroom! "
-			                                  +"I can upgrade your dew vial for you. "
-			                                  +"I can make it either draw out dew from certain vanquished enemies, "
-			                                  +"or I can make it able to regrow the surrounding dungeon by watering with dew. ";
-	
-	private static final String TXT_MESSAGE_WATER = "Water with dew allows you to grow high grass around you once you have 50 drops in your vial. "
-			                                        +"Watering costs 2 drops but you will be able to find more drop, nuts, berries, and seeds by trampling the grass. ";
-	
-	
-	private static final String TXT_MESSAGE_DRAW = "Drawing out dew makes it so that mobs on special levels drop dew to fill your vial. "
-			                                        +"Additionally, your character is buffed with dew charge at the start of each normal level. "
-			                                        +"As long as you are dew charged, enemies drop dew to fill your vial. "
-			                                        +"Each level dew charges you for a set amount of moves. "
-			                                        +"Each level also has a move goal for killing all regular generated enemies. (Not special enemies like statues and piranha) "
-			                                        +"Killing all regular enemies that were generated with the level clears that level. "
-			                                        +"If you clear a level in less moves than the goal, the additional moves are added to your dew charge for the next level. "
-			                                        +"You will need to clear the levels as fast as you can to get dew upgrades. "
-			                                        +"The dew vial will also allow you to choose which item you apply upgrades to when blessing. ";
-	
-	private static final String TXT_WATER = "Water with Dew";
-	private static final String TXT_DRAW = "Draw Out Dew";
-	private static final String TXT_DRAW_INFO = "Tell me more about Draw Out Dew";
-
-	private static final String TXT_FARAWELL = "Good luck in your quest, %s!";
-	private static final String TXT_FARAWELL_DRAW = "Good luck in your quest, %s! I'll give you a head start drawing out dew!";
-
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
@@ -76,46 +43,36 @@ public class WndTinkerer extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene
-				.createMultiline(TXT_MESSAGE, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene
+				.renderMultiline("", 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
-		RedButton btnBattle = new RedButton(TXT_WATER) {
+		RedButton btnBattle = new RedButton("") {
 			@Override
 			protected void onClick() {
 				selectUpgrade(tinkerer, 1);
 			}
 		};
-		btnBattle.setRect(0, message.y + message.height() + GAP, WIDTH,
+		btnBattle.setRect(0, message.top() + message.height() + GAP, WIDTH,
 				BTN_HEIGHT);
 		add(btnBattle);
 
-		/*
-		BitmapTextMultiline message_draw = PixelScene
-				.createMultiline(TXT_MESSAGE_DRAW, 6);
-		message_draw.maxWidth = WIDTH;
-		message_draw.measure();
-		message_draw.y = btnBattle.bottom() + GAP;
-		add(message_draw);
-		*/
-		
-		RedButton btnNonBattle = new RedButton(TXT_DRAW) {
+		RedButton btnNonBattle = new RedButton("") {
 			@Override
 			protected void onClick() {
 				selectUpgrade(tinkerer, 2);
 			}
 		};
-		
+
 		btnNonBattle.setRect(0, btnBattle.bottom() + GAP, WIDTH, BTN_HEIGHT);
 		add(btnNonBattle);
-		
-		RedButton btnNonBattle2 = new RedButton(TXT_DRAW_INFO) {
+
+		RedButton btnNonBattle2 = new RedButton("") {
 			@Override
 			protected void onClick() {
-				GameScene.show(new WndDewDrawInfo(item));				
+				GameScene.show(new WndDewDrawInfo(item));
 			}
 		};
 		btnNonBattle2.setRect(0, btnNonBattle.bottom() + GAP, WIDTH, BTN_HEIGHT);
@@ -125,34 +82,8 @@ public class WndTinkerer extends Window {
 	}
 
 	private void selectUpgrade(Tinkerer1 tinkerer, int type) {
-
 		hide();
-		
-		Mushroom mushroom = Dungeon.hero.belongings.getItem(Mushroom.class);
-		mushroom.detach(Dungeon.hero.belongings.backpack);
-		
-		if (type==1){
-			
-			Dungeon.dewWater=true;
-			
-		} else if (type==2){
-			
-			Dungeon.dewDraw=true;
-		}
-		
-		if (type==1){
-		    tinkerer.yell(Utils.format(TXT_FARAWELL, Dungeon.hero.givenName()));
-		} else if (type==2){
-			tinkerer.yell(Utils.format(TXT_FARAWELL_DRAW, Dungeon.hero.givenName()));
-			Statistics.prevfloormoves=500;
-			Buff.prolong(Dungeon.hero, Dewcharge.class, Dewcharge.DURATION+50);
-	        GLog.p("You feel the dungeon charge with dew!");
-		}
-		
 		tinkerer.destroy();
-
 		tinkerer.sprite.die();
-
-		//Wandmaker.Quest.complete();
 	}
 }

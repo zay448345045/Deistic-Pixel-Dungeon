@@ -36,13 +36,13 @@ import com.watabou.utils.Random;
 
 public class GoldThief extends Mob {
 
-	protected static final String TXT_STOLE = "%s stole %s gold from you!";
-	private static final String TXT_KILLCOUNT = "Gold Thief Kill Count: %s";
+	protected static final String TXT_STOLE = Messages.get(GoldThief.class, "steal");
+	private static final String TXT_KILLCOUNT = Messages.get(GoldThief.class, "count");
 
 	public Item item;
 
 	{
-		name = "crazy gold thief";
+		name = Messages.get(this, "name");
 		spriteClass = GoldThiefSprite.class;
 
 		HP = HT = 30+Statistics.goldThievesKilled;

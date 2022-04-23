@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.weapon.enchantments;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Terror;
@@ -29,7 +30,7 @@ import com.watabou.utils.Random;
 
 public class Horror extends Weapon.Enchantment {
 
-	private static final String TXT_ELDRITCH = "Eldritch %s";
+	private static final String TXT_ELDRITCH = Messages.get(Horror.class, "name");
 
 	private static ItemSprite.Glowing GREY = new ItemSprite.Glowing(0x222222);
 

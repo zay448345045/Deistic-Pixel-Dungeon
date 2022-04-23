@@ -37,7 +37,7 @@ public class DwarfLich extends Mob {
 	private static final float SPAWN_DELAY = 2f;
 
 	{
-		name = "dwarf lich";
+		name = Messages.get(this, "name");
 		spriteClass = DwarfLichSprite.class;
 
 		HP = HT = 100+(adj(0)*Random.NormalIntRange(7, 5));

@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -35,15 +36,15 @@ import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
 public class SpectralRat extends Mob  implements Callback {
-	
+
 	private static final float TIME_TO_ZAP = 1f;
 
-	private static final String TXT_SHADOWBOLT_KILLED = "%s's shadow bolt killed you...";	
+	private static final String TXT_SHADOWBOLT_KILLED = Messages.get(SpectralRat.class, "kill");
 
 	private static final float SPAWN_DELAY = 2f;
 
 	{
-		name = "spectral rat";
+		name = Messages.get(this, "name");
 		spriteClass = SpectralRatSprite.class;
 		baseSpeed = 4f;
 
@@ -136,8 +137,7 @@ public class SpectralRat extends Mob  implements Callback {
 
 	@Override
 	public String description() {
-		return "This shadowy rat is phasing in and out of this plane. "
-				+ "It's eyes burn with an uncanny hatred.";
+		return Messages.get(this, "desc");
 	}
 	
 	public static void spawnAround(int pos) {

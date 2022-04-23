@@ -39,11 +39,11 @@ import java.util.HashSet;
 
 public class MossySkeleton extends Mob {
 
-	private static final String TXT_HERO_KILLED = "You were killed by the explosion of bones...";
-	private static final String TXT_KILLCOUNT = "Mossy Skeleton Kill Count: %s";
+	private static final String TXT_HERO_KILLED = Messages.get(MossySkeleton.class, "kill");
+	private static final String TXT_KILLCOUNT = Messages.get(MossySkeleton.class, "count");
 
 	{
-		name = "moss covered skeleton";
+		name = Messages.get(this, "name");
 		spriteClass = MossySkeletonSprite.class;
 
 		HP = HT = 35+(10*Random.NormalIntRange(7, 10));
@@ -132,7 +132,7 @@ public class MossySkeleton extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "blocked";
+		return Messages.get(this, "def");
 	}
 
 	@Override

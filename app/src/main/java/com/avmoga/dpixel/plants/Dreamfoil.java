@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.plants;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Bleeding;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -35,15 +36,12 @@ import com.avmoga.dpixel.utils.GLog;
 
 public class Dreamfoil extends Plant {
 
-	private static final String TXT_DESC = "The Dreamfoil's prickly flowers contain a chemical which is known for its "
-			+ "properties as a strong neutralizing agent. Most weaker creatures are overwhelmed "
-			+ "and knocked unconscious, which gives the plant its namesake.";
+	private static final String TXT_DESC = Messages.get(Dreamfoil.class, "desc");
 
 	{
 		image = 10;
-		plantName = "Dreamfoil";
+		plantName = Messages.get(this, "name");
 	}
-
 	@Override
 	public void activate(Char ch) {
 		super.activate(ch);
@@ -52,7 +50,7 @@ public class Dreamfoil extends Plant {
 			if (ch instanceof Mob)
 				Buff.affect(ch, MagicalSleep.class);
 			else if (ch instanceof Hero) {
-				GLog.i("You feel refreshed.");
+				GLog.i(Messages.get(this, "refreshed"));
 				Buff.detach(ch, Poison.class);
 				Buff.detach(ch, Cripple.class);
 				Buff.detach(ch, Weakness.class);
@@ -71,9 +69,9 @@ public class Dreamfoil extends Plant {
 
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Dreamfoil";
+			plantName = Messages.get(Dreamfoil.class, "name");
 
-			name = "seed of " + plantName;
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.SEED_DREAMFOIL;
 
 			plantClass = Dreamfoil.class;
@@ -82,7 +80,7 @@ public class Dreamfoil extends Plant {
 
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Messages.get(Plant.class, "seeddesc", plantName);
 		}
 	}
 }

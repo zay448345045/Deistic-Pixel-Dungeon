@@ -54,7 +54,7 @@ private int demonGooGeneration = 0;
 private static final String DEMONGOOGENERATION = "demonGooGeneration";
 
 	{
-		name = "demon goo";
+		name = Messages.get(this, "name");
 		HP = HT = 200+(adj(0)*Random.NormalIntRange(4, 7));
 		EXP = 10;
 		defenseSkill = 10+adj(1);
@@ -129,7 +129,7 @@ private static final String DEMONGOOGENERATION = "demonGooGeneration";
 			}
 
 			if (candidates.size() > 0) {
-				GLog.n("Demon Goo divides!");
+				GLog.n(Messages.get(DemonGoo.class, "divide"));
 				DemonGoo clone = split();
 				clone.HP = (HP - damage) / 2;
 				clone.pos = Random.element(candidates);
@@ -174,7 +174,7 @@ private static final String DEMONGOOGENERATION = "demonGooGeneration";
 	@Override
 	public void notice() {
 		super.notice();
-		yell("GLURP-GLURP-GLUURRRRP!");
+		yell(Messages.get(DemonGoo.class, "notice"));
 	}
 
 	@Override
@@ -186,7 +186,7 @@ private static final String DEMONGOOGENERATION = "demonGooGeneration";
 	public void die(Object cause) {
 
 		super.die(cause);
-       	yell("glurp... glurp...");
+		yell(Messages.get(DemonGoo.class, "die"));
 	}
 	
 	

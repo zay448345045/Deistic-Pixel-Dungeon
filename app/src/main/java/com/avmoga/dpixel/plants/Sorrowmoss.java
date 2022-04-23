@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.plants;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Poison;
@@ -28,11 +29,11 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class Sorrowmoss extends Plant {
 
-	private static final String TXT_DESC = "A Sorrowmoss is a flower (not a moss) with razor-sharp petals, coated with a deadly venom.";
+	private static final String TXT_DESC = Messages.get(Sorrowmoss.class, "desc");
 
 	{
 		image = 2;
-		plantName = "Sorrowmoss";
+		plantName = Messages.get(this, "name");
 	}
 
 	@Override
@@ -56,9 +57,9 @@ public class Sorrowmoss extends Plant {
 
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Sorrowmoss";
+			plantName = Messages.get(Sorrowmoss.class, "name");
 
-			name = "seed of " + plantName;
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.SEED_SORROWMOSS;
 
 			plantClass = Sorrowmoss.class;
@@ -67,7 +68,7 @@ public class Sorrowmoss extends Plant {
 
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Messages.get(Plant.class, "seeddesc", plantName);
 		}
 	}
 }

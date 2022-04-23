@@ -19,6 +19,7 @@ package com.avmoga.dpixel.actors.mobs;
 
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Blindness;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Cripple;
@@ -33,7 +34,7 @@ public class Bandit extends Thief {
 	public Item item;
 
 	{
-		name = "crazy bandit";
+		name = Messages.get(this, "name");
 		spriteClass = BanditSprite.class;
 
 		// 1 in 30 chance to be a crazy bandit, equates to overall 1/90 chance.

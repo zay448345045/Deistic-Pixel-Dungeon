@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.plants;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.effects.CellEmitter;
@@ -31,11 +32,11 @@ import com.watabou.utils.Bundle;
 
 public class Sungrass extends Plant {
 
-	private static final String TXT_DESC = "Sungrass is renowned for its sap's slow but effective healing properties.";
+	private static final String TXT_DESC = Messages.get(Sungrass.class, "desc");
 
 	{
 		image = 4;
-		plantName = "Sungrass";
+		plantName = Messages.get(this, "name");
 	}
 
 	@Override
@@ -58,9 +59,9 @@ public class Sungrass extends Plant {
 
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Sungrass";
+			plantName = Messages.get(Sungrass.class, "name");
 
-			name = "seed of " + plantName;
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.SEED_SUNGRASS;
 
 			plantClass = Sungrass.class;
@@ -71,7 +72,7 @@ public class Sungrass extends Plant {
 
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Messages.get(Plant.class, "seeddesc", plantName);
 		}
 	}
 
@@ -134,7 +135,12 @@ public class Sungrass extends Plant {
 
 		@Override
 		public String toString() {
-			return Utils.format("Herbal Healing (%d)", level);
+			return Utils.format(Messages.get(this, "name", level));
+		}
+
+		@Override
+		public String desc() {
+			return Messages.get(this, "desc", level);
 		}
 
 		private static final String POS = "pos";

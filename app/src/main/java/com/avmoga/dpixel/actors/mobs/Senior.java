@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs;
 
 import com.avmoga.dpixel.Badges;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Paralysis;
@@ -27,7 +28,7 @@ import com.watabou.utils.Random;
 public class Senior extends Monk {
 
 	{
-		name = "senior monk";
+		name = Messages.get(this, "name");
 		spriteClass = SeniorSprite.class;
 	}
 

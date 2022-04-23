@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs.npcs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.particles.ElmoParticle;
@@ -30,10 +31,10 @@ import com.avmoga.dpixel.windows.WndTradeItem;
 
 public class Shopkeeper extends NPC {
 
-	public static final String TXT_THIEF = "Thief, Thief!";
+	public static final String TXT_THIEF =Messages.get(Shopkeeper.class, "thief");
 
 	{
-		name = "shopkeeper";
+		name = Messages.get(Shopkeeper.class, "name");
 		spriteClass = ShopkeeperSprite.class;
 	}
 
@@ -78,14 +79,14 @@ public class Shopkeeper extends NPC {
 
 	@Override
 	public String description() {
-		return "This stout guy looks more appropriate for a trade district in some large city "
-				+ "than for a dungeon. His prices explain why he prefers to do business here.";
+		return Messages.get(Shopkeeper.class, "desc");
 	}
 
 	public static WndBag sell() {
 		return GameScene.selectItem(itemSelector, WndBag.Mode.FOR_SALE,
-				"Select an item to sell");
+				Messages.get(Shopkeeper.class, "sell"));
 	}
+
 
 	private static WndBag.Listener itemSelector = new WndBag.Listener() {
 		@Override

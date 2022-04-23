@@ -40,12 +40,12 @@ public class HermitCrab extends Mob implements Callback {
 
 	private static final float TIME_TO_ZAP = 2f;
 
-	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
-	private static final String TXT_SHELL_ABSORB = "Hermit Crab absorbed the attack in its shell.";
-	private static final String TXT_SHELL_CHARGE = "Lightning Shell charged by %s.";
+	private static final String TXT_LIGHTNING_KILLED = Messages.get(HermitCrab.class, "kill");
+	private static final String TXT_SHELL_ABSORB = Messages.get(HermitCrab.class, "absorb");
+	private static final String TXT_SHELL_CHARGE = Messages.get(HermitCrab.class, "charge");
 
 	{
-		name = "hermit crab";
+		name = Messages.get(this, "name");
 		spriteClass = HermitCrabSprite.class;
 
 		HP = HT = 20;

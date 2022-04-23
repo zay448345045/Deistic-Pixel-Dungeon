@@ -45,7 +45,7 @@ public class CrabKing extends Mob {
 	private static final int JUMP_DELAY = 5;
 
 	{
-		name = "Crab King";
+		name = Messages.get(this, "name");
 		spriteClass = CrabKingSprite.class;
 		baseSpeed = 2f;
 
@@ -59,7 +59,7 @@ public class CrabKing extends Mob {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(50, 200);
+		return Random.NormalIntRange(30, 80);
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class CrabKing extends Mob {
 			sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
 			HP = HP + regen;
 			Dungeon.shellCharge-=regen;
-			GLog.n("Crab King draws power from the lightning shell!");
+			GLog.n(Messages.get(CrabKing.class, "heal"));
 		}
 		return result;
 	}
@@ -100,8 +100,8 @@ public class CrabKing extends Mob {
 	
 		
 		super.die(cause);
-		
-		yell("Ughhhh...");
+
+		yell(Messages.get(CrabKing.class, "die"));
 					
 	}
 
@@ -109,6 +109,8 @@ public class CrabKing extends Mob {
 	protected boolean getCloser(int target) {
 		if (Level.fieldOfView[target]) {
 			jump();
+			super.notice();
+			yell("没用的，你打不到我！！！"+Dungeon.hero.givenName());
 			return true;
 		} else {
 			return super.getCloser(target);
@@ -155,7 +157,7 @@ public class CrabKing extends Mob {
 	@Override
 	public void notice() {
 		super.notice();
-		yell("Ah! I want that " + Dungeon.hero.givenName() + "'s armor!");
+		yell(Messages.get(CrabKing.class, "notice", Dungeon.hero.givenName()));
 	}
 
 	@Override

@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.weapon.enchantments;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.items.weapon.Weapon;
@@ -26,7 +27,7 @@ import com.watabou.utils.Random;
 
 public class Poison extends Weapon.Enchantment {
 
-	private static final String TXT_VENOMOUS = "Venomous %s";
+	private static final String TXT_VENOMOUS = Messages.get(Poison.class, "name");
 
 	private static ItemSprite.Glowing PURPLE = new ItemSprite.Glowing(0x4400AA);
 

@@ -17,15 +17,14 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
-import com.avmoga.dpixel.actors.buffs.Silence;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
 import com.avmoga.dpixel.actors.buffs.Buff;
+import com.avmoga.dpixel.actors.buffs.Silence;
 import com.avmoga.dpixel.actors.buffs.Terror;
 import com.avmoga.dpixel.effects.particles.SparkParticle;
 import com.avmoga.dpixel.items.RedDewdrop;
@@ -42,14 +41,16 @@ import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Shell extends Mob implements Callback {
 	
 	private static final float TIME_TO_ZAP = 2f;
 
-	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
+	private static final String TXT_LIGHTNING_KILLED = Messages.get(Shell.class, "kill");
 
 	{
-		name = "lightning shell";
+		name = Messages.get(this, "name");
 		spriteClass = ShellSprite.class;
 
 		HP = HT = 600;
@@ -94,7 +95,7 @@ public class Shell extends Mob implements Callback {
 	@Override
 	protected boolean act() {
 		if(Random.Int(Dungeon.shellCharge)>20 && Dungeon.hero.isAlive()){
-			zapAll(1);
+			zapAround(1);
 		}
 		return super.act();
 	}
@@ -124,7 +125,7 @@ public class Shell extends Mob implements Callback {
 			if (visible) {
 				((ShellSprite) sprite).zap(enemy.pos);
 			}			
-			zapAll(10);
+			zapAround(10);
 			spend(TIME_TO_ZAP);
 
 			if (hit(this, enemy, true)) {
@@ -157,74 +158,10 @@ public class Shell extends Mob implements Callback {
 			return !visible;
 		}
 	}
-
-
-	public void zapAll(int dmg){
-		
-		yell("ZZZZZAAAAAAPPPPPP!!!!!!");
-		
-		int heroDmg=0;
-		int mobDmg=Random.Int(1, 2+Math.round(dmg/4));
-		
-		for (Mob mob : Dungeon.level.mobs) {
-				
-			
-		  if (Level.distance(pos, mob.pos) > 1 && mob.isAlive()){
-			  boolean visible = Level.fieldOfView[pos]
-					|| Level.fieldOfView[mob.pos];
-			
-			
-			  if (visible) {
-				((ShellSprite) sprite).zap(mob.pos);
-			  }
-			
-			  if (Level.water[mob.pos] && !mob.flying) {
-				  mobDmg *= 1.5f;
-			  }
-			  mob.damage(mobDmg, LightningTrap.LIGHTNING);
-
-			  mob.sprite.centerEmitter().burst(SparkParticle.FACTORY, 3);
-			  mob.sprite.flash();
-			
-			  Camera.main.shake(2, 0.3f);	
-			}
-		}
-		
-		
-		if (Dungeon.hero.isAlive()){
-			
-		Char hero=Dungeon.hero;
-		
-		 if (Level.distance(pos, hero.pos) > 1){
-		
-		boolean visibleHero = Level.fieldOfView[pos]
-				|| Level.fieldOfView[hero.pos];
-		if (visibleHero) {
-			((ShellSprite) sprite).zap(hero.pos);
-		}
-		
-		heroDmg = Random.Int(Math.round(Dungeon.shellCharge/4), Math.round(Dungeon.shellCharge/2));
-		Dungeon.shellCharge-=heroDmg;
-		
-		if (Level.water[hero.pos] && !hero.flying) {
-			heroDmg *= 1.5f;
-		}
-				
-		hero.damage(heroDmg, LightningTrap.LIGHTNING);
-
-		hero.sprite.centerEmitter().burst(SparkParticle.FACTORY, 3);
-		hero.sprite.flash();
-		
-		Camera.main.shake(2, 0.3f);	
-		}
-		}
-		
-
-	}
 	
 public void zapAround(int dmg){
-		
-		yell("ZZZZZAAAAAAPPPPPP!!!!!!");
+
+	yell(Messages.get(this, "zap"));
 		
 		int heroDmg=0;
 		int mobDmg=Random.Int(1, 2+Math.round(dmg/4));
@@ -285,12 +222,11 @@ public void zapAround(int dmg){
 		}		
 
 	}
-	
+
 
 	@Override
 	public String description() {
-		return "The lightning shell crackles with electric power. "
-				+ "It's powerful lightning attack is drawn to all living things in the lair. ";
+		return Messages.get(this, "desc");
 	}
 	
 	@Override

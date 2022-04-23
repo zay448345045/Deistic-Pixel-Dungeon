@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs.npcs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.SokobanSheepSwitchSprite;
 import com.watabou.utils.Random;
 
@@ -27,7 +28,7 @@ public class SheepSokobanSwitch extends NPC {
 	"Baa..." };
 
 {
-name = "sheep";
+	name = Messages.get(SheepSokobanSwitch.class, "name");
 spriteClass = SokobanSheepSwitchSprite.class;
 }
 
@@ -42,11 +43,10 @@ protected boolean act() {
 public void damage(int dmg, Object src) {
 }
 
-@Override
-public String description() {
-return "This is a magic sheep. What's so magical about it? You can't kill it. "
-		+ "It will stand there until it magcially fades away, all the while chewing cud with a blank stare.";
-}
+	@Override
+	public String description() {
+		return Messages.get(SheepSokobanSwitch.class, "desc");
+	}
 
 @Override
 public void interact() {

@@ -43,10 +43,10 @@ import java.util.HashSet;
 
 public class OrbOfZotMob extends Mob {
 
-	private static final String TXT_DEATHGAZE_KILLED = "%s's deathray killed you...";
+	private static final String TXT_DEATHGAZE_KILLED = Messages.get(OrbOfZotMob.class, "kill");
 
 	{
-		name = "orb of zot";
+		name = Messages.get(this, "name");
 		spriteClass = OrbOfZotSprite.class;
 		hostile = false;
 		state = HUNTING;
@@ -72,7 +72,7 @@ public class OrbOfZotMob extends Mob {
 			if (c<Level.getLength() && c>0){
 			Char ch = Actor.findChar(c);
 				if (ch == Dungeon.hero && Dungeon.hero.isAlive() &&  enemy==null) {
-					yell("Scanning...");
+					yell("扫描敌人...");
 				}
 			}
 		}
@@ -178,7 +178,7 @@ public class OrbOfZotMob extends Mob {
 
 			if (hit(this, ch, true)) {
 				ch.damage(Random.NormalIntRange(100, 300), this);
-				yell("ZOT!");
+				yell(Messages.get(this, "atk"));
 				damage(Random.NormalIntRange(10, 20), this);
 				//Dungeon.hero.earnExp(5);
 				//Dungeon.zotDrains++;

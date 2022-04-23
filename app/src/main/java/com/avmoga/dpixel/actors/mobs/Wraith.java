@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
@@ -27,10 +26,10 @@ import com.avmoga.dpixel.actors.buffs.Amok;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Burning;
 import com.avmoga.dpixel.actors.buffs.Charm;
-import com.avmoga.dpixel.actors.buffs.Silence;
 import com.avmoga.dpixel.actors.buffs.Frost;
 import com.avmoga.dpixel.actors.buffs.Paralysis;
 import com.avmoga.dpixel.actors.buffs.Roots;
+import com.avmoga.dpixel.actors.buffs.Silence;
 import com.avmoga.dpixel.actors.buffs.Sleep;
 import com.avmoga.dpixel.actors.buffs.Terror;
 import com.avmoga.dpixel.actors.buffs.Vertigo;
@@ -46,6 +45,8 @@ import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Wraith extends Mob {
 
 	protected static final float SPAWN_DELAY = 2f;
@@ -53,7 +54,7 @@ public class Wraith extends Mob {
 	protected int level;
 
 	{
-		name = "wraith";
+		name = Messages.get(this, "name");
 		spriteClass = WraithSprite.class;
 
 		HP = HT = 1+level;
@@ -119,16 +120,21 @@ public class Wraith extends Mob {
 	//	}
 	//}
 
-	
+
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return Messages.get(this, "def");
 	}
 
 	@Override
 	public boolean reset() {
 		state = WANDERING;
 		return true;
+	}
+
+	@Override
+	public String description() {
+		return Messages.get(this, "desc");
 	}
 
 	@Override
@@ -143,12 +149,6 @@ public class Wraith extends Mob {
 		} else {
 			super.add(buff);
 		}
-	}
-	
-	@Override
-	public String description() {
-		return "A wraith is a vengeful spirit of a sinner, whose grave or tomb was disturbed. "
-				+ "Being an ethereal entity, it is very hard to hit with a regular weapon.";
 	}
 
 	public static void spawnAround(int pos) {

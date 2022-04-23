@@ -75,7 +75,7 @@ import java.util.HashSet;
 public class Ghost extends NPC {
 
 	{
-		name = "sad ghost";
+		name = Messages.get(Ghost.class, "name");
 		spriteClass = GhostSprite.class;
 
 		flying = true;
@@ -83,32 +83,17 @@ public class Ghost extends NPC {
 		state = WANDERING;
 	}
 
-	private static final String TXT_RAT1 = "Hello %s... Once I was like you - strong and confident... "
-			+ "But I was slain by a foul beast... I can't leave this place... Not until I have my revenge... "
-			+ "Slay the _fetid rat_, that has taken my life...\n\n"
-			+ "It stalks this floor... Spreading filth everywhere... "
-			+ "_Beware its cloud of stink and corrosive bite, the acid dissolves in water..._ ";
+	private static final String TXT_RAT1 = Messages.get(Ghost.class, "ratone", Dungeon.hero.givenName());
 
-	private static final String TXT_RAT2 = "Please... Help me... Slay the abomination...\n\n"
-			+ "_Fight it near water... Avoid the stench..._";
+	private static final String TXT_RAT2 = Messages.get(Ghost.class, "rattwo");
 
-	private static final String TXT_GNOLL1 = "Hello %s... Once I was like you - strong and confident... "
-			+ "But I was slain by a devious foe... I can't leave this place... Not until I have my revenge... "
-			+ "Slay the _gnoll trickster_, that has taken my life...\n\n"
-			+ "It is not like the other gnolls... It hides and uses thrown weapons... "
-			+ "_Beware its poisonous and incendiary darts, don't attack from a distance..._";
+	private static final String TXT_GNOLL1 = Messages.get(Ghost.class, "gnollone", Dungeon.hero.givenName());
 
-	private static final String TXT_GNOLL2 = "Please... Help me... Slay the trickster...\n\n"
-			+ "_Don't let it hit you... Get near to it..._";
+	private static final String TXT_GNOLL2 = Messages.get(Ghost.class, "gnolltwo");
 
-	private static final String TXT_CRAB1 = "Hello %s... Once I was like you - strong and confident... "
-			+ "But I was slain by an ancient creature... I can't leave this place... Not until I have my revenge... "
-			+ "Slay the _great crab_, that has taken my life...\n\n"
-			+ "It is unnaturally old... With a massive single claw and a thick shell... "
-			+ "_Beware its claw, you must surprise the crab or it will block with it..._";
+	private static final String TXT_CRAB1 = Messages.get(Ghost.class, "crabone", Dungeon.hero.givenName());
 
-	private static final String TXT_CRAB2 = "Please... Help me... Slay the Crustacean...\n\n"
-			+ "_It will always block... When it sees you coming..._";
+	private static final String TXT_CRAB2 = Messages.get(Ghost.class, "crabtwo");
 
 	public Ghost() {
 		super();
@@ -123,7 +108,7 @@ public class Ghost extends NPC {
 
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return Messages.get(Ghost.class, "defenseverb");
 	}
 
 	@Override
@@ -226,8 +211,7 @@ public class Ghost extends NPC {
 
 	@Override
 	public String description() {
-		return "The ghost is barely visible. It looks like a shapeless "
-				+ "spot of faint light with a sorrowful face.";
+		return Messages.get(Ghost.class, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();
@@ -358,7 +342,7 @@ public class Ghost extends NPC {
 
 		public static void process() {
 			if (spawned && given && !processed && (depth == Dungeon.depth)) {
-				GLog.n("sad ghost: Thank you... come find me...");
+				GLog.n(Messages.get(Ghost.class, "process"));
 				Sample.INSTANCE.play(Assets.SND_GHOST);
 				processed = true;
 				Generator.Category.ARTIFACT.probs[10] = 1; // flags the dried
@@ -378,7 +362,7 @@ public class Ghost extends NPC {
 	public static class FetidRat extends Rat {
 
 		{
-			name = "fetid rat";
+			name = Messages.get(Ghost.class, "ratname");
 			spriteClass = FetidRatSprite.class;
 
 			HP = HT = 20;
@@ -425,11 +409,7 @@ public class Ghost extends NPC {
 
 		@Override
 		public String description() {
-			return "Something is clearly wrong with this rat. Its greasy black fur and rotting skin are very "
-					+ "different from the healthy rats you've seen previously. It's blood red eyes "
-					+ "make it seem especially menacing.\n\n"
-					+ "The rat carries a cloud of horrible stench with it, it's overpoweringly strong up close.\n\n"
-					+ "Dark ooze dribbles from the rat's mouth, it eats through the floor but seems to dissolve in water.";
+			return Messages.get(Ghost.class, "ratdesc");
 		}
 
 		private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();
@@ -445,7 +425,7 @@ public class Ghost extends NPC {
 
 	public static class GnollTrickster extends Gnoll {
 		{
-			name = "gnoll trickster";
+			name = Messages.get(Ghost.class, "gnollname");
 			spriteClass = GnollTricksterSprite.class;
 
 			HP = HT = 40;
@@ -518,11 +498,7 @@ public class Ghost extends NPC {
 
 		@Override
 		public String description() {
-			return "A strange looking creature, even by gnoll standards. It hunches forward with a wicked grin, "
-					+ "almost cradling the satchel hanging over its shoulder. Its eyes are wide with a strange mix of "
-					+ "fear and excitement.\n\n"
-					+ "There is a large collection of poorly made darts in its satchel, they all seem to be "
-					+ "tipped with various harmful substances.";
+			return Messages.get(Ghost.class, "gnolldesc");
 		}
 
 		private static final String COMBO = "combo";
@@ -543,7 +519,7 @@ public class Ghost extends NPC {
 
 	public static class GreatCrab extends Crab {
 		{
-			name = "great crab";
+			name = Messages.get(Ghost.class, "crabname");
 			spriteClass = GreatCrabSprite.class;
 
 			HP = HT = 50;
@@ -580,8 +556,8 @@ public class Ghost extends NPC {
 			if (enemySeen
 					&& (src instanceof Wand
 							|| src instanceof LightningTrap.Electricity || src instanceof Char)) {
-				GLog.n("The crab notices the attack and blocks with its massive claw.");
-				sprite.showStatus(CharSprite.NEUTRAL, "blocked");
+				GLog.n(Messages.get(Ghost.class, "crabblock"));
+				sprite.showStatus(CharSprite.NEUTRAL, Messages.get(Ghost.class, "crabdef"));
 			} else {
 				super.damage(dmg, src);
 			}
@@ -599,12 +575,7 @@ public class Ghost extends NPC {
 
 		@Override
 		public String description() {
-			return "This crab is gigantic, even compared to other sewer crabs. "
-					+ "Its blue shell is covered in cracks and barnacles, showing great age. "
-					+ "It lumbers around slowly, barely keeping balance with its massive claw.\n\n"
-					+ "While the crab only has one claw, its size easily compensates. "
-					+ "The crab holds the claw infront of itself whenever it sees a threat, shielding "
-					+ "itself behind an impenetrable wall of carapace.";
+			return Messages.get(Ghost.class, "crabdesc");
 		}
 	}
 	

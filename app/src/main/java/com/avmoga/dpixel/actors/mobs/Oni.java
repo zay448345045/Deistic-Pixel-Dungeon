@@ -30,7 +30,7 @@ import java.util.HashSet;
 public class Oni extends Mob {
 
 	{
-		name = "oni";
+		name = Messages.get(this, "name");
 		spriteClass = OniSprite.class;
 		state = SLEEPING;
 
@@ -63,7 +63,7 @@ public class Oni extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "blocked";
+		return Messages.get(this, "def");
 	}
 
 	@Override

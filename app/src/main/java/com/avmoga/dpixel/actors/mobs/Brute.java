@@ -36,7 +36,7 @@ public class Brute extends Mob {
 	private static final String TXT_ENRAGED = "%s becomes enraged!";
 
 	{
-		name = "gnoll brute";
+		name = Messages.get(this, "name");
 		spriteClass = BruteSprite.class;
 
 		HP = HT = 50+(adj(0)*Random.NormalIntRange(4, 8));

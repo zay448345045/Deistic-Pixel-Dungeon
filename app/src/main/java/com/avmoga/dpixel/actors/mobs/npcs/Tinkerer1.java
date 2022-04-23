@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs.npcs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.items.DewVial;
@@ -32,17 +33,15 @@ import com.avmoga.dpixel.windows.WndTinkerer;
 public class Tinkerer1 extends NPC {
 
 	{
-		name = "tinkerer";
+		name = Messages.get(Tinkerer1.class, "name");
 		spriteClass = TinkererSprite.class;
 	}
 
-	private static final String TXT_DUNGEON = "Oh wow, have you seen this dungeon! This is an awesome dungeon.  "
-			+ "I'm here checking things out of course, but also scavenging for toadstool mushrooms. "
-			+ "Could you bring me any toadstool mushrooms you find? ";
-	
-	private static final String TXT_DUNGEON2 = "Oh wow, have you seen this dungeon! This is an awesome dungeon.  ";
+	private static final String TXT_DUNGEON = Messages.get(Tinkerer1.class, "dungeon");
 
-	private static final String TXT_MUSH = "Any luck finding toadstool mushrooms, %s?";
+	private static final String TXT_DUNGEON2 = Messages.get(Tinkerer1.class, "dungeon2");
+
+	private static final String TXT_MUSH = Messages.get(Tinkerer1.class, "mush");
 
 	@Override
 	protected boolean act() {
@@ -57,7 +56,7 @@ public class Tinkerer1 extends NPC {
 
 	@Override
 	public String defenseVerb() {
-		return "absorbed";
+		return Messages.get(Tinkerer1.class, "def");
 	}
 
 	@Override
@@ -95,9 +94,7 @@ public class Tinkerer1 extends NPC {
 
 	@Override
 	public String description() {
-		return "J Mertens, Dungeon Explorer extraordinaire. "
-				+ "Delver of dungeons and magical tinkerer. " 
-				+ "He is protected by a magical shield. ";
+		return Messages.get(Tinkerer1.class, "desc");
 	}
 
 }

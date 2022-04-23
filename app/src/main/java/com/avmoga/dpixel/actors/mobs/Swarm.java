@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -36,10 +35,12 @@ import com.avmoga.dpixel.sprites.SwarmSprite;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class Swarm extends Mob {
 
 	{
-		name = "swarm of flies";
+		name = Messages.get(this, "name");
 		spriteClass = SwarmSprite.class;
 
 		HP = HT = 80;
@@ -120,7 +121,7 @@ public class Swarm extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return Messages.get(this, "def");
 	}
 
 	private Swarm split() {
@@ -151,7 +152,6 @@ public class Swarm extends Mob {
 
 	@Override
 	public String description() {
-		return "The deadly swarm of flies buzzes angrily. Every non-magical attack "
-				+ "will split it into two smaller but equally dangerous swarms.";
+		return Messages.get(this, "desc");
 	}
 }

@@ -1,7 +1,5 @@
 package com.avmoga.dpixel.items.artifacts;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -15,10 +13,12 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class MysticBranch extends Artifact {
 	public static final String TXT_YOURSELF = "You can't target yourself.";
 	{
-		name = "Wooden Effigy";
+		name = "木质雕像";
 		image = ItemSpriteSheet.ARTIFACT_ROOT;
 		
 		level = 0;
@@ -27,9 +27,9 @@ public class MysticBranch extends Artifact {
 		exp = 0;
 		charge = 0;
 	}
-	private static final String TXT_MONSTER = "There is a monster there already.";
-	private static final String UPGRADETXT = "Your effigy grows in power!";
-	private static final String AC_PLANT = "SEED";
+	private static final String TXT_MONSTER = "不能在非高草区域的种植";
+	private static final String UPGRADETXT = "一个灵魂已被派去地牢复仇。";
+	private static final String AC_PLANT = "放置高爆花";
 	
 	protected static CellSelector.Listener listener = new CellSelector.Listener() {
 
@@ -81,7 +81,7 @@ public class MysticBranch extends Artifact {
 			if(cursed){
 					if(Random.Int(30)==0){
 						new Wraith().pos = Dungeon.level.randomRespawnCell();
-						GLog.w("A spirit has been dispatched to avenge the dungeon.");
+						GLog.w("那声音在你耳边不停的咯咯怪叫，它在召唤邪恶的灵魂来骚扰你！");
 					}
 			}
 			updateQuickslot();
@@ -93,7 +93,7 @@ public class MysticBranch extends Artifact {
 			return "Affinity";
 		}
 		public void gainEXP(){
-			exp += 1;
+			exp += 10000;
 			if(exp > ((level + 1) * 100)){
 				exp = 0;
 				if(level < levelCap){
@@ -105,37 +105,29 @@ public class MysticBranch extends Artifact {
 
 @Override
 public String desc() {
-	String desc = "This is quite the odd find: A wooden face shaped in an almost clown-like manner. You notice that "
-			+ "there is a pure energy flowing from it.\n\n";
+	String desc = "你有一个古怪的发现：从这个被雕刻成小丑样貌的木质雕像里，你发现有纯净的能量从中流出。\n\n";
 	if(Dungeon.hero.heroRace() == HeroRace.HUMAN){
-		desc += "You hear a voice whisper to you from the effigy, telling you of the whereabouts of as many characters on this "
-				+ "floor as possible. The voice doesn't notice those creatures on the ";
+		desc += "你听见雕像向你轻声诉说，尽可能的告诉你这层地牢的人物的位置";
 	} else if(Dungeon.hero.heroRace() == HeroRace.GNOLL){
-		desc += "You recognize what you have found as a Spirit Head, enabling you to talk to the "
-				+ "natural spirits here. While their domain is somewhat limited, they might be able "
-				+ "to offer you information, and, later, some offensive power. \n\n";
+		desc += "你认出你发现的木质雕像是一个SpiritHead，它能够让你与这里的自然的灵魂交流。虽然它们的活动领域有限，但也许能为你提供一些信息，甚至以后还能给你提供一些攻击能力。\n\n";
 				if(level < 2){
-					 desc += "Maybe you should try to connect to more spirits by travelling through grassy areas. "
-					 		+ "That might increase the power of your effigy.";
+					 desc += "也许你该试试在草地里穿梭来与更多灵魂达成联系，这也许能提升你的雕像的力量。";
 				}
 	}
 	else{
-		desc += "A disembodied voice starts yelling at you from the effigy; you are so startled that you throw it "
-				+ "against the wall! You should probably transmute this into something more useful for you.";
+		desc += "一阵不知道是哪个人的声音从雕像里向你吼叫；你吓了一跳，把雕像摔向墙壁。也许你该把它转化为别的更有用的东西。";
 	}
 	
 	if(isEquipped(Dungeon.hero) && (Dungeon.hero.heroRace == HeroRace.GNOLL || Dungeon.hero.heroRace == HeroRace.HUMAN || cursed)){
 		desc += "\n\n";
 		if(cursed){
-			desc += "The voice cackles in your ear incessantly, it is summoning evil spirits to haunt you!";
+			desc += "那声音在你耳边不停的咯咯怪叫，它在召唤邪恶的灵魂来骚扰你！";
 		} else if(level < 5 || Dungeon.hero.heroRace() == HeroRace.HUMAN){
-			desc += "In your hand, the voice tells you of the locations of the spirits in the area. You recognize that "
-					+ "not all of them are dead.";
+			desc += "你手中的雕像发出声音，告诉你这块区域里灵魂的位置。你发现它们并未全部失死去。";
 		} else if (level < 10 && Dungeon.hero.heroRace() == HeroRace.GNOLL){
-			desc += "It looks like you could contact the spirits to help you out in combat if needed.";
+			desc += "看起来如果有必要的话，你可以联系灵魂们在战斗中帮助你。";
 		} else {
-			desc += "You have mastered the totem quite well, it is very adaptive to your will "
-					+ "and you have learned to exercise control of it very well.";
+			desc += "你完全掌控了这块图腾，它非常适应你的意志，你也练习过怎么好好地使用它。";
 		}
 	}
 	

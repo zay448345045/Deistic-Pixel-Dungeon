@@ -62,7 +62,7 @@ private int goosAlive = 0;
 private static final String GOOGENERATION = "gooGeneration";
 
 	{
-		name = Messages.get(this, "name");	name = Messages.get(this, "name");
+		name = Messages.get(this, "name");
 		HP = HT = 120;
 		EXP = 10;
 		defenseSkill = 20;
@@ -162,7 +162,7 @@ private static final String GOOGENERATION = "gooGeneration";
 			}
 
 			if (candidates.size() > 0) {
-				GLog.n("Mini Goo divides!");
+				GLog.n(Messages.get(this, "divide"));
 				PoisonGoo clone = split();
 				clone.HP = (HP - damage) / 2;
 				clone.pos = Random.element(candidates);

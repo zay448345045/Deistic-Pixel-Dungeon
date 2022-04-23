@@ -17,9 +17,7 @@
  */
 package com.avmoga.dpixel.items.weapon.enchantments;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.effects.Lightning;
@@ -29,9 +27,12 @@ import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.levels.traps.LightningTrap;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class Shock extends Weapon.Enchantment {
 
-	private static final String TXT_SHOCKING = "Shocking %s";
+	private static final String TXT_SHOCKING = Messages.get(Shock.class, "name");
 
 	@Override
 	public boolean proc(Weapon weapon, Char attacker, Char defender, int damage) {

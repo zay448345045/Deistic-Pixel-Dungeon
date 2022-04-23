@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs.npcs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
 import com.avmoga.dpixel.actors.buffs.Burning;
@@ -31,10 +30,12 @@ import com.avmoga.dpixel.sprites.MirrorSprite;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class MirrorImage extends NPC {
 
 	{
-		name = "mirror image";
+		name = Messages.get(MirrorImage.class, "name");
 		spriteClass = MirrorSprite.class;
 
 		state = HUNTING;
@@ -116,8 +117,7 @@ public class MirrorImage extends NPC {
 
 	@Override
 	public String description() {
-		return "This illusion bears a close resemblance to you, "
-				+ "but it's paler and twitches a little.";
+		return Messages.get(MirrorImage.class, "desc");
 	}
 
 	@Override

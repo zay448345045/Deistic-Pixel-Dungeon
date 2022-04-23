@@ -96,7 +96,7 @@ public class BombFruit extends Plant implements Doom{
 	@Override
 	public void onDeath() {
 		GLog.n(TXT_BLEW_UP);
-		
+		Dungeon.fail(ResultDescriptions.BURNING);
 	}
 
 }

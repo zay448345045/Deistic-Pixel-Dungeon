@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.effects.particles.SparkParticle;
@@ -35,14 +34,16 @@ import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class VaultProtector extends Mob implements Callback {
 
 	private static final float TIME_TO_ZAP = 2f;
 
-	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
+	private static final String TXT_LIGHTNING_KILLED = Messages.get(VaultProtector.class, "kill");
 
 	{
-		name = "flying protector";
+		name = Messages.get(this, "name");
 		spriteClass = VaultProtectorSprite.class;
 
 		EXP = 5;
@@ -134,12 +135,12 @@ public class VaultProtector extends Mob implements Callback {
 	@Override
 	public void notice() {
 		super.notice();
-		yell("Leave this place!");
+		yell(Messages.get(this, "leave"));
 	}
-	
+
 	@Override
 	public String description() {
-		return "This guardian protects the vault from looters like you. ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

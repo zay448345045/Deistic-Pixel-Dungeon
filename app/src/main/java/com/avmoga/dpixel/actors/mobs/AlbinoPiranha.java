@@ -39,11 +39,11 @@ import com.watabou.utils.Random;
 import java.util.HashSet;
 
 public class AlbinoPiranha extends Mob {
-	
-	private static final String TXT_KILLCOUNT = "Albino Piranha Kill Count: %s";
+
+	private static final String TXT_KILLCOUNT = Messages.get(AlbinoPiranha.class, "count");
 
 	{
-		name = "albino giant piranha";
+		name = Messages.get(AlbinoPiranha.class, "name");
 		spriteClass = AlbinoPiranhaSprite.class;
 
 		baseSpeed = 2f;
@@ -98,7 +98,7 @@ public class AlbinoPiranha extends Mob {
 			
 			if (enemy.invisible>1){
 				enemy.remove(Invisibility.class);
-				GLog.w("No point being invisible when all the fish are blind!");
+				GLog.w("当所有的鱼都失明了的时候，看不见是没有意义的！");
 			}
 			
 			if (!Level.water[enemy.pos] || enemy.flying){

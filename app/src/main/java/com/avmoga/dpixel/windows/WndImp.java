@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.windows;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.mobs.npcs.Imp;
 import com.avmoga.dpixel.items.Item;
@@ -25,17 +26,15 @@ import com.avmoga.dpixel.items.quest.DwarfToken;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.ui.RedButton;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
 import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndImp extends Window {
 
-	private static final String TXT_MESSAGE = "Oh yes! You are my hero!\n"
-			+ "Regarding your reward, I don't have cash with me right now, but I have something better for you. "
-			+ "This is my family heirloom ring: my granddad took it off a dead paladin's finger.";
-	private static final String TXT_REWARD = "Take the ring";
+	private static final String TXT_MESSAGE = Messages.get(WndImp.class, "msg");
+	private static final String TXT_REWARD = Messages.get(WndImp.class, "ok");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
@@ -51,11 +50,10 @@ public class WndImp extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene
-				.createMultiline(TXT_MESSAGE, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene
+				.renderMultiline(TXT_MESSAGE, 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
 		RedButton btnReward = new RedButton(TXT_REWARD) {
@@ -64,7 +62,7 @@ public class WndImp extends Window {
 				takeReward(imp, tokens, Imp.Quest.reward);
 			}
 		};
-		btnReward.setRect(0, message.y + message.height() + GAP, WIDTH,
+		btnReward.setRect(0, message.top() + message.height() + GAP, WIDTH,
 				BTN_HEIGHT);
 		add(btnReward);
 

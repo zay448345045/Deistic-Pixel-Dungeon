@@ -18,20 +18,19 @@
 package com.avmoga.dpixel.windows;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.items.DewVial;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.ui.RedButton;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
 import com.avmoga.dpixel.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndDescend extends Window {
 
-	private static final String TXT_MESSAGE = "Are you sure you want to descend? "
-                                             +"Any dew on this level will evaporate and your dew charge might be wasted. "
-			                                 +"If you really want to descend click the button below then try the stairs again. ";
-	private static final String TXT_REWARD = "Descend";
+	private static final String TXT_MESSAGE = Messages.get(WndDescend.class, "msg");
+	private static final String TXT_REWARD = Messages.get(WndDescend.class, "ok");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
@@ -49,11 +48,10 @@ public class WndDescend extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene
-				.createMultiline(TXT_MESSAGE, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene
+				.renderMultiline(TXT_MESSAGE, 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
 		RedButton btnReward = new RedButton(TXT_REWARD) {
@@ -63,7 +61,7 @@ public class WndDescend extends Window {
 				hide();
 			}
 		};
-		btnReward.setRect(0, message.y + message.height() + GAP, WIDTH,
+		btnReward.setRect(0, message.top() + message.height() + GAP, WIDTH,
 				BTN_HEIGHT);
 		add(btnReward);
 

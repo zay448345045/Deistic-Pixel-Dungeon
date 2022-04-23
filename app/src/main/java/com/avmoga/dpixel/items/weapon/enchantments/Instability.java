@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items.weapon.enchantments;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.items.weapon.Weapon;
 
 public class Instability extends Weapon.Enchantment {
 
-	private static final String TXT_UNSTABLE = "Unstable %s";
+	private static final String TXT_UNSTABLE = Messages.get(Instability.class, "name");
 
 	@Override
 	public boolean proc(Weapon weapon, Char attacker, Char defender, int damage) {

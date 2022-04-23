@@ -37,7 +37,7 @@ public class Assassin extends Mob {
 	protected static final float SPAWN_DELAY = 2f;
 	
 	{
-		name = "Shinobi";
+		name = Messages.get(this, "name");
 		spriteClass = AssassinSprite.class;
 		baseSpeed = 2f;
 

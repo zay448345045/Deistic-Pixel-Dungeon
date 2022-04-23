@@ -43,10 +43,10 @@ import java.util.HashSet;
 
 public class MrDestructo2dot0 extends Mob {
 
-	private static final String TXT_DEATHGAZE_KILLED = "%s's deathray killed you...";
+	private static final String TXT_DEATHGAZE_KILLED = Messages.get(MrDestructo2dot0.class, "kill");
 
 	{
-		name = "mr destructo 2.0";
+		name = Messages.get(this, "name");
 		spriteClass = MrDestructo2dot0Sprite.class;
 		hostile = false;
 		state = HUNTING;
@@ -71,7 +71,7 @@ public class MrDestructo2dot0 extends Mob {
 			if (c<Level.getLength() && c>0){
 				Char ch = Actor.findChar(c);
 				if (ch == Dungeon.hero && Dungeon.hero.isAlive() &&  enemy==null) {
-					yell("Scanning...");
+					yell("扫描敌人...");
 				}
 			}
 		}
@@ -177,7 +177,7 @@ public class MrDestructo2dot0 extends Mob {
 
 			if (hit(this, ch, true)) {
 				ch.damage(Random.NormalIntRange(Dungeon.depth+20, Dungeon.depth+32), this);
-				yell("MR DESTRUCTO TWO POINT OH!");
+				yell(Messages.get(this, "atk"));
 				damage(Random.NormalIntRange(5, 10), this);
 
 				if (Dungeon.visible[pos]) {
@@ -212,7 +212,7 @@ public class MrDestructo2dot0 extends Mob {
 	@Override
 	public void die(Object cause) {
 
-		yell("Shutting down...");
+		yell(Messages.get(this, "die"));
 		Dungeon.level.drop(new InactiveMrDestructo2(), pos);
 		super.die(cause);
 

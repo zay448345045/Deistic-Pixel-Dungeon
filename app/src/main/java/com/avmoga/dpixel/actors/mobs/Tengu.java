@@ -28,7 +28,6 @@ import com.avmoga.dpixel.actors.blobs.ToxicGas;
 import com.avmoga.dpixel.actors.buffs.Poison;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.Speck;
-import com.avmoga.dpixel.items.Egg;
 import com.avmoga.dpixel.items.Gold;
 import com.avmoga.dpixel.items.TomeOfMastery;
 import com.avmoga.dpixel.items.TomeOfSpecialty;
@@ -97,12 +96,9 @@ public class Tengu extends Mob {
 			badgeToCheck = Badge.MASTERY_HUNTRESS;
 			break;
 		}
-		
-		if (!Badges.isUnlocked(badgeToCheck)) {
-			Dungeon.level.drop(new TomeOfMastery(), pos).sprite.drop();
-		} else {
-					Dungeon.level.drop(new Egg(), pos).sprite.drop();
-		}
+
+		Dungeon.level.drop(new TomeOfMastery(), pos).sprite.drop();
+
 		switch (Dungeon.hero.heroRace) {
 		case DWARF:
 			badgeToCheck = Badge.MASTERY_DWARF;

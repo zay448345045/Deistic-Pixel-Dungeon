@@ -640,7 +640,7 @@ public abstract class Mob extends Char {
 	}
 
 	public void notice() {
-		if (Dungeon.bossLevel()) {
+		if (Dungeon.bossLevel() ||Dungeon.bossLevelFW()) {
 			BGMPlayer.playBoss();
 			BossHealthBar.assignBoss(this);
 		}else{

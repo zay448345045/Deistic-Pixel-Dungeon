@@ -17,13 +17,10 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Burning;
@@ -39,6 +36,7 @@ import com.avmoga.dpixel.effects.particles.ElmoParticle;
 import com.avmoga.dpixel.effects.particles.FlameParticle;
 import com.avmoga.dpixel.effects.particles.ShadowParticle;
 import com.avmoga.dpixel.items.artifacts.AlchemistsToolkit;
+import com.avmoga.dpixel.items.artifacts.Artifact;
 import com.avmoga.dpixel.items.food.Blandfruit;
 import com.avmoga.dpixel.items.food.ChargrilledMeat;
 import com.avmoga.dpixel.items.food.FrozenCarpaccio;
@@ -50,6 +48,7 @@ import com.avmoga.dpixel.items.potions.Potion;
 import com.avmoga.dpixel.items.potions.PotionOfExperience;
 import com.avmoga.dpixel.items.potions.PotionOfHealing;
 import com.avmoga.dpixel.items.scrolls.Scroll;
+import com.avmoga.dpixel.items.wands.Wand;
 import com.avmoga.dpixel.plants.Plant.Seed;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
@@ -59,7 +58,36 @@ import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+
 public class Heap implements Bundlable {
+
+	public String info() {
+		switch (type) {
+			case CHEST:
+			case MIMIC:
+				return Messages.get(this, "chest_desc");
+			case LOCKED_CHEST:
+				return Messages.get(this, "locked_chest_desc");
+			case CRYSTAL_CHEST:
+				if (peek() instanceof Artifact)
+					return Messages.get(this, "crystal_chest_desc", Messages.get(this, "artifact"));
+				else if (peek() instanceof Wand)
+					return Messages.get(this, "crystal_chest_desc", Messages.get(this, "wand"));
+				else
+					return Messages.get(this, "crystal_chest_desc", Messages.get(this, "ring"));
+			case TOMB:
+				return Messages.get(this, "tomb_desc");
+			case SKELETON:
+				return Messages.get(this, "skeleton_desc");
+			case REMAINS:
+				return Messages.get(this, "remains_desc");
+			default:
+				return peek().info();
+		}
+	}
 
 	private static final String TXT_MIMIC = "This is a mimic!";
 	//private static final String TXT_MONSTERBOX = "You've opened a world of hurt!";

@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.plants;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.effects.CellEmitter;
@@ -31,12 +32,11 @@ import com.watabou.utils.Bundle;
 
 public class Earthroot extends Plant {
 
-	private static final String TXT_DESC = "When a creature touches an Earthroot, its roots "
-			+ "create a kind of immobile natural armor around it.";
+	private static final String TXT_DESC = Messages.get(Earthroot.class, "desc");
 
 	{
 		image = 5;
-		plantName = "Earthroot";
+		plantName = Messages.get(this, "name");
 	}
 
 	@Override
@@ -60,9 +60,9 @@ public class Earthroot extends Plant {
 
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Earthroot";
+			plantName = Messages.get(Earthroot.class, "name");
 
-			name = "seed of " + plantName;
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.SEED_EARTHROOT;
 
 			plantClass = Earthroot.class;
@@ -73,7 +73,7 @@ public class Earthroot extends Plant {
 
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Messages.get(Plant.class, "seeddesc", plantName);
 		}
 	}
 
@@ -122,7 +122,7 @@ public class Earthroot extends Plant {
 
 		@Override
 		public String toString() {
-			return Utils.format("Herbal armor (%d)", level);
+			return Utils.format(Messages.get(Earthroot.class, "armorname", level));
 		}
 
 		private static final String POS = "pos";
@@ -184,7 +184,7 @@ public class Earthroot extends Plant {
 
 		@Override
 		public String toString() {
-			return Utils.format("Herbal armor (%d)", level);
+			return Utils.format(Messages.get(Earthroot.class, "armorname", level));
 		}
 
 		private static final String POS = "pos";

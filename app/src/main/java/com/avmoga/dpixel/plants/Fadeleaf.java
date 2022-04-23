@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.plants;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.mobs.Mob;
@@ -29,12 +30,11 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class Fadeleaf extends Plant {
 
-	private static final String TXT_DESC = "Touching a Fadeleaf will teleport any creature "
-			+ "to a random place on the current level.";
+	private static final String TXT_DESC = Messages.get(Fadeleaf.class, "desc");
 
 	{
 		image = 6;
-		plantName = "Fadeleaf";
+		plantName = Messages.get(this, "name");
 	}
 
 	@Override
@@ -79,9 +79,9 @@ public class Fadeleaf extends Plant {
 
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Fadeleaf";
+			plantName = Messages.get(Fadeleaf.class, "name");
 
-			name = "seed of " + plantName;
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.SEED_FADELEAF;
 
 			plantClass = Fadeleaf.class;
@@ -90,7 +90,7 @@ public class Fadeleaf extends Plant {
 
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Messages.get(Plant.class, "seeddesc", plantName);
 		}
 	}
 }

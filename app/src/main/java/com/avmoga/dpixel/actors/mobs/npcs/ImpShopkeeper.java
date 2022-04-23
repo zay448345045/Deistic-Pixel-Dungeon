@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs.npcs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.Speck;
@@ -28,12 +29,12 @@ import com.avmoga.dpixel.utils.Utils;
 
 public class ImpShopkeeper extends Shopkeeper {
 
-	private static final String TXT_GREETINGS = "Hello, %s! I'll give you a deal on the books once you clear the dungeon.";
-	private static final String TXT_GREETINGS2 = "You did it.... Now you will need these books to chase Yog across the hidden places of the dungeon.";
-	public static final String TXT_THIEF = "I thought I could trust you!";
+	private static final String TXT_GREETINGS = "你好，%s！ 一旦你清除了那恼人的古神，我会给你一个关于书籍的交易。";
+	private static final String TXT_GREETINGS2 = "你做到了....现在你需要这些书获得三相碎片，来追逐Yog在地牢中的隐藏位置……";
+	public static final String TXT_THIEF = "我以为我可以信任你！";
 
 	{
-		name = "ambitious imp";
+		name = Messages.get(Imp.class, "name");
 		spriteClass = ImpSprite.class;
 	}
 
@@ -73,7 +74,6 @@ public class ImpShopkeeper extends Shopkeeper {
 
 	@Override
 	public String description() {
-		return "Imps are lesser demons. They are notable for neither their strength nor their magic talent. "
-				+ "But they are quite smart and sociable, and many of imps prefer to live and do business among non-demons.";
+		return Messages.get(Imp.class, "desc");
 	}
 }

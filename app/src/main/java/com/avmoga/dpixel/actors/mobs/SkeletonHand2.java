@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Burning;
@@ -31,10 +30,12 @@ import com.avmoga.dpixel.items.weapon.enchantments.Fire;
 import com.avmoga.dpixel.sprites.SkeletonHand2Sprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class SkeletonHand2 extends Mob {
 
 	{
-		name = "skeleton king";
+		name = Messages.get(this, "name");
 		spriteClass = SkeletonHand2Sprite.class;
 
 		HP = HT = 200;
@@ -87,13 +88,13 @@ public class SkeletonHand2 extends Mob {
 
 		return damage;
 	}
-	
-	
 
-	
+
+
+
 	@Override
 	public String description() {
-		return "This ancient giant hand belongs to the king of skeletons. ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

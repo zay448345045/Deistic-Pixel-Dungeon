@@ -37,7 +37,7 @@ import java.util.HashSet;
 public class Elemental extends Mob {
 
 	{
-		name = "fire elemental";
+		name = Messages.get(this, "name");
 		spriteClass = ElementalSprite.class;
 
 		HP = HT = 65+(adj(0)*Random.NormalIntRange(4, 7));

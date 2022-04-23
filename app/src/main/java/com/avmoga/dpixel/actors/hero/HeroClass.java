@@ -25,8 +25,7 @@ import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.items.Bomb;
 import com.avmoga.dpixel.items.armor.ClothArmor;
 import com.avmoga.dpixel.items.artifacts.CloakOfShadows;
-import com.avmoga.dpixel.items.artifacts.CommRelay;
-import com.avmoga.dpixel.items.artifacts.WraithAmulet;
+import com.avmoga.dpixel.items.artifacts.MysticBranch;
 import com.avmoga.dpixel.items.bags.KeyRing;
 import com.avmoga.dpixel.items.bags.SeedPouch;
 import com.avmoga.dpixel.items.food.Food;
@@ -34,7 +33,6 @@ import com.avmoga.dpixel.items.potions.PotionOfMindVision;
 import com.avmoga.dpixel.items.potions.PotionOfStrength;
 import com.avmoga.dpixel.items.scrolls.ScrollOfIdentify;
 import com.avmoga.dpixel.items.scrolls.ScrollOfMagicMapping;
-import com.avmoga.dpixel.items.scrolls.ScrollOfUpgrade;
 import com.avmoga.dpixel.items.wands.WandOfMagicMissile;
 import com.avmoga.dpixel.items.weapon.melee.Dagger;
 import com.avmoga.dpixel.items.weapon.melee.Knuckles;
@@ -81,20 +79,22 @@ public enum HeroClass {
 	private static void initCommon(Hero hero) {
 		if (!Dungeon.isChallenged(Challenges.NO_ARMOR))
 			(hero.belongings.armor = new ClothArmor()).identify();
+
 		//难度还原 添加种子袋
-
-		new WraithAmulet().quantity(1).identify().collect();
-		new CommRelay().quantity(1).identify().collect();
-		new ScrollOfUpgrade().quantity(100).identify().collect();
-
+		//new ScrollOfMagicMapping().quantity(100).identify().collect();
+		//new Bone().quantity(1).identify().collect();
+		new MysticBranch().quantity(1).identify().collect();
+		//new MasterThievesArmband().quantity(1).identify().collect();
+		//new AncientCoin().quantity(1).identify().collect();
+		//new ConchShell().quantity(1).identify().collect();
+		//new CommRelay().quantity(1).identify().collect();
+		//Dungeon.gold = 600000000;
+		//hero.STR = 27;
+		//hero.lvl = 31;
+		//hero.exp = -123456789;
+		//hero.HP = 	123456789;
+		//hero.HT = 	123456789;
 		new SeedPouch().quantity(1).identify().collect();
-
-		Dungeon.gold = 6000;
-		hero.STR = 27;
-		hero.lvl = 31;
-		hero.exp = -123456789;
-		hero.HP = 	123456789;
-		hero.HT = 	123456789;
 
 		if (!Dungeon.isChallenged(Challenges.NO_FOOD))
 			new Food().identify().collect();

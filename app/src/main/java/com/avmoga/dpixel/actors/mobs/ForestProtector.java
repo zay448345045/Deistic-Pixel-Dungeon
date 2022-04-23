@@ -41,10 +41,10 @@ public class ForestProtector extends Mob implements Callback {
 
 	private static final float TIME_TO_ZAP = 2f;
 
-	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
+	private static final String TXT_LIGHTNING_KILLED = Messages.get(FlyingProtector.class, "kill");
 
 	{
-		name = "flying protector";
+		name = Messages.get(this, "name");
 		spriteClass = ForestProtectorSprite.class;
 		
 
@@ -137,7 +137,7 @@ public class ForestProtector extends Mob implements Callback {
 	@Override
 	public void notice() {
 		super.notice();
-		yell("Leave this place!");
+		yell(Messages.get(this, "leave"));
 	}
 
 	@Override

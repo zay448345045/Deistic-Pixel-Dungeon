@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.plants;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.items.RedDewdrop;
 import com.avmoga.dpixel.items.VioletDewdrop;
@@ -29,12 +30,10 @@ import com.watabou.utils.Random;
 
 public class Dewcatcher extends Plant {
 
-	private static final String TXT_DESC = "Grown from sparkling crystal seeds, Dewcatchers camouflage as grass to avoid attention, " +
-			                                "but their bulges of collected dew give them away. " +
-			                                "Shake them to harvest dew from their leaves. ";
+	private static final String TXT_DESC = Messages.get(Dewcatcher.class, "desc");
 	{
 		image = 12;
-		plantName = "Dewcatcher";
+		plantName = Messages.get(this, "name");
 	}
 
 	@Override
@@ -53,9 +52,9 @@ public class Dewcatcher extends Plant {
 
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Dewcatcher";
+			plantName = Messages.get(Dewcatcher.class, "name");
 
-			name = "seed of " + plantName;
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.SEED_DEWCATCHER;
 
 			plantClass = Dewcatcher.class;

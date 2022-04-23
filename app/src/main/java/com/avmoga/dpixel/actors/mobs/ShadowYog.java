@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -45,7 +46,7 @@ import java.util.HashSet;
 public class ShadowYog extends Mob  {
 	
 	{
-		name = "Shadow Yog-Dzewa";
+		name = Messages.get(this, "name");
 		spriteClass = ShadowYogSprite.class;
 
 		HP = HT = adj(2)*50*Dungeon.hero.lvl;
@@ -59,9 +60,8 @@ public class ShadowYog extends Mob  {
 	}
 	
 	private int yogsAlive = 0;
-	
-	private static final String TXT_DESC =  "Yog has retreated to his den in Shadow form."
-			                               +"The legion of Yog is being fed strength from the mobs in the den, ";
+
+	private static final String TXT_DESC = Messages.get(ShadowYog.class, "desc");
 
 	@Override
 	public int damageRoll() {
@@ -115,7 +115,7 @@ public class ShadowYog extends Mob  {
 					pos = newPos;
 					sprite.place(pos);
 					sprite.visible = Dungeon.visible[pos];
-					GLog.n("Shadow Yog vanishes!");
+					GLog.n(Messages.get(this, "vanish"));
 				}		
 				if (Dungeon.level.mobs.size()<Dungeon.hero.lvl*2){
 				SpectralRat.spawnAroundChance(newPos);
@@ -169,7 +169,7 @@ public class ShadowYog extends Mob  {
 	@Override
 	public void notice() {
 		super.notice();
-		yell("Hope is an illusion...");
+		yell(Messages.get(this, "notice"));
 	}
 
 	@Override

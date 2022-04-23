@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
@@ -34,10 +33,12 @@ import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.sprites.PiranhaSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Piranha extends Mob {
 
 	{
-		name = "giant piranha";
+		name = Messages.get(this, "name");
 		spriteClass = PiranhaSprite.class;
 
 		baseSpeed = 2f;
@@ -148,8 +149,7 @@ public class Piranha extends Mob {
 
 	@Override
 	public String description() {
-		return "These carnivorous fish are not natural inhabitants of underground pools. "
-				+ "They were bred specifically to protect flooded treasure vaults.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

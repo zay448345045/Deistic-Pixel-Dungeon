@@ -25,15 +25,15 @@ import com.avmoga.dpixel.scenes.InterlevelScene;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.ui.RedButton;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
-import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Game;
 
 public class WndResurrect extends Window {
 
-	private static final String TXT_MESSAGE = "You died, but you were given another chance to win this dungeon. Will you take it?";
-	private static final String TXT_YES = "Yes, I will fight!";
-	private static final String TXT_NO = "No, I give up";
+	private static final String TXT_MESSAGE = "你死了，但你同时被给予了第二次挑战这个地牢的机会。你愿意接受吗？";
+	private static final String TXT_YES = "是的，我要继续战斗！";
+	private static final String TXT_NO = "不，我放弃了";
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
@@ -55,11 +55,10 @@ public class WndResurrect extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene
-				.createMultiline(TXT_MESSAGE, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene
+				.renderMultiline(TXT_MESSAGE, 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
 		RedButton btnYes = new RedButton(TXT_YES) {
@@ -73,7 +72,7 @@ public class WndResurrect extends Window {
 				Game.switchScene(InterlevelScene.class);
 			}
 		};
-		btnYes.setRect(0, message.y + message.height() + GAP, WIDTH, BTN_HEIGHT);
+		btnYes.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
 		add(btnYes);
 
 		RedButton btnNo = new RedButton(TXT_NO) {

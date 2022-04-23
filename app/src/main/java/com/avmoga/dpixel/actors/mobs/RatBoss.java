@@ -21,7 +21,6 @@ package com.avmoga.dpixel.actors.mobs;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
-import com.avmoga.dpixel.items.Generator;
 import com.avmoga.dpixel.items.quest.RatSkull;
 import com.avmoga.dpixel.sprites.RatBossSprite;
 import com.avmoga.dpixel.utils.GLog;
@@ -38,11 +37,8 @@ public class RatBoss extends Rat {
 		HP = HT = 12+(Dungeon.depth*Random.NormalIntRange(2, 5));
 		defenseSkill = 5+(Dungeon.depth/4);
 		
-		loot = Generator.Category.BERRY;
-		lootChance = 0.5f;
-		
-		lootOther = new RatSkull();
-		lootChanceOther = 0.1f;
+		loot = new RatSkull();
+		lootChance = 0.7f;
 	}
 
 	private boolean spawnedRats = false;

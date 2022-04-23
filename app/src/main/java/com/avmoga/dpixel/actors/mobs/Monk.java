@@ -36,10 +36,10 @@ import java.util.HashSet;
 
 public class Monk extends Mob {
 
-	public static final String TXT_DISARM = "%s has knocked the %s from your hands!";
+	public static final String TXT_DISARM = Messages.get(Monk.class, "arm");
 
 	{
-		name = "dwarf monk";
+		name = Messages.get(this, "name");
 		spriteClass = MonkSprite.class;
 
 		HP = HT = 100+(adj(0)*Random.NormalIntRange(3, 5));
@@ -77,7 +77,7 @@ public class Monk extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "parried";
+		return Messages.get(this, "def");
 	}
 
 	@Override

@@ -17,9 +17,10 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
+import static com.avmoga.dpixel.Dungeon.hero;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Burning;
@@ -34,13 +35,15 @@ import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.sprites.SkeletonKingSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class SkeletonKing extends Mob {
 
 	{
-		name = "skeleton king";
+		name = "骷髅王";
 		spriteClass = SkeletonKingSprite.class;
 
-		HP = HT = 550;
+		HP = HT = 800 + hero.HT;
 		defenseSkill = 30;
 
 		EXP = 10;
@@ -81,7 +84,7 @@ public class SkeletonKing extends Mob {
 	@Override
 	public int attackProc(Char enemy, int damage) {
 		if (Random.Int(2) == 0) {
-			if(enemy == Dungeon.hero){
+			if(enemy == hero){
 			 Buff.prolong(enemy, Weakness.class, Weakness.duration(enemy));
 			state = FLEEING;
 			}
@@ -100,8 +103,8 @@ public class SkeletonKing extends Mob {
 		Dungeon.skeletonkingkilled=true;
 			
 		super.die(cause);
-		
-		yell("Ughhhh...");
+
+		yell(Messages.get(this, "die"));
 					
 	}
 	
@@ -109,13 +112,13 @@ public class SkeletonKing extends Mob {
 	@Override
 	public void notice() {
 		super.notice();
-		yell("You will die screaming in flames, " + Dungeon.hero.givenName() + "!");
+		yell(Messages.get(this, "notice", Dungeon.hero.givenName()));
 	}
 
-	
+
 	@Override
 	public String description() {
-		return "This ancient giant skull belongs to the king of skeletons. ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

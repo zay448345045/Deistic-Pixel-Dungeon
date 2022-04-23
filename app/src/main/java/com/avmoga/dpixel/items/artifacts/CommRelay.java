@@ -112,7 +112,7 @@ public class CommRelay extends Artifact {
 		} else if (action.equals(AC_SUPP)) {
 			if (!(Dungeon.gold >= 5000)){//TODO adjust the gold cost based on current level.
 				GLog.w("你穷困潦倒，不能使用神器的该技能！");
-			} else if(Dungeon.bossLevel()){
+			} else if(Dungeon.bossLevel() ||Dungeon.bossLevelFW()){
 				GLog.i(TXT_BOSS);
 			} else{
 				GameScene.selectCell(listener);

@@ -1,5 +1,6 @@
 package com.avmoga.dpixel.plants;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Vertigo;
@@ -11,12 +12,11 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
  */
 public class Stormvine extends Plant {
 
-	private static final String TXT_DESC = "Gravity affects the Stormvine plant strangely, allowing its whispy blue tendrils "
-			+ "to 'hang' on the air. Anything caught in the vine is affected by this, and becomes disoriented.";
+	private static final String TXT_DESC = Messages.get(Stormvine.class, "desc");
 
 	{
 		image = 9;
-		plantName = "Stormvine";
+		plantName = Messages.get(Stormvine.class, "name");
 	}
 
 	@Override
@@ -35,9 +35,9 @@ public class Stormvine extends Plant {
 
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Stormvine";
+			plantName = Messages.get(Stormvine.class, "name");
 
-			name = "seed of " + plantName;
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.SEED_STORMVINE;
 
 			plantClass = Stormvine.class;
@@ -46,7 +46,7 @@ public class Stormvine extends Plant {
 
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Messages.get(Plant.class, "seeddesc", plantName);
 		}
 	}
 }

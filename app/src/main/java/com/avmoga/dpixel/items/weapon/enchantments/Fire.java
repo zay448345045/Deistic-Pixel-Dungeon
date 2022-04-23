@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.weapon.enchantments;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Burning;
@@ -28,7 +29,7 @@ import com.watabou.utils.Random;
 
 public class Fire extends Weapon.Enchantment {
 
-	private static final String TXT_BLAZING = "Blazing %s";
+	private static final String TXT_BLAZING = Messages.get(Fire.class, "name");
 
 	private static ItemSprite.Glowing ORANGE = new ItemSprite.Glowing(0xFF4400);
 

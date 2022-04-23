@@ -33,7 +33,7 @@ import java.util.HashSet;
 public class Bat extends Mob {
 
 	{
-		name = "vampire bat";
+		name = Messages.get(this, "name");
 		spriteClass = BatSprite.class;
 
 		HP = HT = 40+(adj(0)*Random.NormalIntRange(2, 5));
@@ -69,7 +69,7 @@ public class Bat extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return Messages.get(this, "def");
 	}
 
 	@Override

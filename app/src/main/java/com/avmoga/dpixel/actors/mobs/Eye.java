@@ -49,7 +49,7 @@ public class Eye extends Mob {
 	protected static final float SPAWN_DELAY = 2f;
 
 	{
-		name = "evil eye";
+		name = Messages.get(this, "name");
 		spriteClass = EyeSprite.class;
 
 		HP = HT = 100+(adj(0)*Random.NormalIntRange(4, 7));

@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.weapon.enchantments;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Hunger;
 import com.avmoga.dpixel.effects.Speck;
@@ -29,7 +30,7 @@ import com.watabou.utils.Random;
 
 public class Nomnom extends Weapon.Enchantment {
 
-	private static final String TXT_NOM = "OMNOM %s";
+	private static final String TXT_NOM = Messages.get(Nomnom.class, "name");
 
 	private static ItemSprite.Glowing RED = new ItemSprite.Glowing(0x660022);
 

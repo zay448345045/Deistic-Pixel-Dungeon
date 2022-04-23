@@ -3,6 +3,7 @@ package com.avmoga.dpixel.ui.changelist;
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.scenes.ChangesScene;
+import com.avmoga.dpixel.sprites.HermitCrabSprite;
 import com.avmoga.dpixel.ui.Icons;
 import com.avmoga.dpixel.ui.Window;
 import com.watabou.noosa.Image;
@@ -16,6 +17,29 @@ public class v0_1_X_Changes{
     }
 
     public static void add_v0_1_0_Changes( ArrayList<ChangeInfo> changeInfos ){
+
+        ChangeInfo changes8 = new ChangeInfo("CN-0.52自然之神的像素地牢", true,
+                "");
+        changes8.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes8);
+
+        changes8= new ChangeInfo( Messages.get( ChangesScene.class, "new"), false, null);
+        changes8.hardlight( 0x00ff00 );
+        changeInfos.add(changes8);
+
+        changes8.addButton(new ChangeButton(new HermitCrabSprite(), ("新内容"),
+                "1.素材终于全部修复--感谢_洛小乐_的帮忙\n" +
+                        "2.让_幽灵护身符_和_通讯中继器_彻底可用了\n" +
+                        "3.更多的翻译追加了！_特别感谢仓鼠_"));
+
+        changes8 = new ChangeInfo( Messages.get( ChangesScene.class, "bugfixes"), false, null);
+        changes8.hardlight( 0xffff00 );
+        changeInfos.add(changes8);
+
+        changes8.addButton( new ChangeButton(new Image(Assets.SPINNER, 144, 0, 16, 16),
+                Messages.get(ChangesScene.class, "bugfixes"),
+                "-1.修复了一系列Bug……\n" +
+                        "-2.其他性能修复"));
 
         ChangeInfo changes7 = new ChangeInfo("CN-0.50自然之神的像素地牢", true,
                 "");

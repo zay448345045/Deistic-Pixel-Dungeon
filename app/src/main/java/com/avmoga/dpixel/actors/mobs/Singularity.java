@@ -1,7 +1,5 @@
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.ResultDescriptions;
@@ -11,30 +9,32 @@ import com.avmoga.dpixel.actors.blobs.ParalyticGas;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Burning;
+import com.avmoga.dpixel.actors.buffs.Silence;
 import com.avmoga.dpixel.actors.buffs.Terror;
-import com.avmoga.dpixel.scenes.GameScene;
-import com.avmoga.dpixel.levels.Level;
+import com.avmoga.dpixel.effects.CellEmitter;
+import com.avmoga.dpixel.effects.particles.EnergyParticle;
+import com.avmoga.dpixel.effects.particles.SparkParticle;
 import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.items.weapon.enchantments.Death;
 import com.avmoga.dpixel.items.weapon.enchantments.Leech;
+import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.levels.Terrain;
 import com.avmoga.dpixel.mechanics.Ballistica;
-import com.avmoga.dpixel.effects.particles.EnergyParticle;
-import com.avmoga.dpixel.effects.particles.SparkParticle;
-import com.avmoga.dpixel.effects.CellEmitter;
+import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.sprites.CharSprite;
 import com.avmoga.dpixel.sprites.SingularitySprite;
 import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.utils.Utils;
 import com.watabou.noosa.audio.Sample;
-import com.watabou.utils.Random;
 import com.watabou.utils.Callback;
-import com.avmoga.dpixel.actors.buffs.Silence;
+import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class Singularity extends Mob implements Callback {
 
 	{
-		name = "arcane singularity";
+		name = "奇点";
 		spriteClass = SingularitySprite.class;
 		
 		hostile = true;
@@ -44,8 +44,8 @@ public class Singularity extends Mob implements Callback {
 	}
 	
 	public static final float SPAWN_DELAY = 0.1f;
-	private final String TXT_SINGULARITY = "%s's lightning bolt killed you...";
-	private final String TXT_UNDONE = "You were killed by %s's stabilizing.";
+	private final String TXT_SINGULARITY = "%s的电弧击杀了你...";
+	private final String TXT_UNDONE = "你被 %s 的奇点追踪器杀死了。";
 	private int killCount;
 	private int hitCell;
 	
@@ -60,8 +60,8 @@ public class Singularity extends Mob implements Callback {
 	
 	@Override
 	public String description(){
-		return "Wild magic has resulted in the creation of a fluxuation "
-			+ "in spacetime! It will keep drawing in energy until it stabilizes!";
+		return "奇妙的魔法导致了时空中的波动！\n" +
+				"它会不断吸收能量，直到稳定下来！";
 	}
 	
 	@Override
@@ -72,7 +72,7 @@ public class Singularity extends Mob implements Callback {
 	public void die(Object cause){
 		for(int space : Level.NEIGHBOURS8){
 			int c = this.pos + space;
-			GLog.i("The singularity destroys itself!");
+			GLog.i("奇点爆炸！");
 			Sample.INSTANCE.play(Assets.SND_BLAST, 2);
 			if (Dungeon.visible[c]){
 				CellEmitter.get(c).burst(EnergyParticle.FACTORY, 2);

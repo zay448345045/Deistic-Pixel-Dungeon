@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.items.journalpages;
 
-import com.avmoga.dpixel.actors.hero.Hero;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
-import com.avmoga.dpixel.utils.GLog;
 
 public class SafeSpotPage extends JournalPage {
 
@@ -27,22 +26,14 @@ public class SafeSpotPage extends JournalPage {
 	public int room=0;
 
 	{
-		name = "journal page";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.JOURNAL_PAGE;
 
 		stackable = false;
 	}
 
 	@Override
-	public boolean doPickUp(Hero hero) {
-         
-		GLog.p("You found a page to Otiluke's Journal! It reads, %s.", TXT_VALUE);
-		return super.doPickUp(hero);
-	
-	}
-
-	@Override
 	public String info() {
-		return "A loose journal page labled SAFE SPOT.";
+		return Messages.get(this, "desc");
 	}
 }

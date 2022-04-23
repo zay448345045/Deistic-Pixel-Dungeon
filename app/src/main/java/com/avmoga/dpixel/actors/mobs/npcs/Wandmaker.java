@@ -17,11 +17,10 @@
  */
 package com.avmoga.dpixel.actors.mobs.npcs;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Journal;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.Blob;
@@ -62,26 +61,22 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class Wandmaker extends NPC {
 
 	{
-		name = "old wandmaker";
+		name = Messages.get(Wandmaker.class, "name");
 		spriteClass = WandmakerSprite.class;
 	}
 
-	private static final String TXT_BERRY1 = "Oh, what a pleasant surprise to meet a decent person in such place! I came here for a rare ingredient - "
-			+ "a _Rotberry seed_. Being a magic user, I'm quite able to defend myself against local monsters, "
-			+ "but I'm getting lost in no time, it's very embarrassing. Probably you could help me? I would be "
-			+ "happy to pay for your service with one of my best wands.";
+	private static final String TXT_BERRY1 = Messages.get(Wandmaker.class, "berry1");
 
-	private static final String TXT_DUST1 = "Oh, what a pleasant surprise to meet a decent person in such place! I came here for a rare ingredient - "
-			+ "_corpse dust_. It can be gathered from skeletal remains and there is an ample number of them in the dungeon. "
-			+ "Being a magic user, I'm quite able to defend myself against local monsters, but I'm getting lost in no time, "
-			+ "it's very embarrassing. Probably you could help me? I would be happy to pay for your service with one of my best wands.";
+	private static final String TXT_DUST1 = Messages.get(Wandmaker.class, "dust1");
 
-	private static final String TXT_BERRY2 = "Any luck with a Rotberry seed, %s? No? Don't worry, I'm not in a hurry.";
+	private static final String TXT_BERRY2 = Messages.get(Wandmaker.class, "berry2", Dungeon.hero.givenName());
 
-	private static final String TXT_DUST2 = "Any luck with corpse dust, %s? Bone piles are the most obvious places to look.";
+	private static final String TXT_DUST2 = Messages.get(Wandmaker.class, "dust2", Dungeon.hero.givenName());
 
 	@Override
 	protected boolean act() {
@@ -96,7 +91,7 @@ public class Wandmaker extends NPC {
 
 	@Override
 	public String defenseVerb() {
-		return "absorbed";
+		return Messages.get(Tinkerer1.class, "def");
 	}
 
 	@Override
@@ -145,8 +140,7 @@ public class Wandmaker extends NPC {
 
 	@Override
 	public String description() {
-		return "This old but hale gentleman wears a slightly confused "
-				+ "expression. He is protected by a magic shield.";
+		return Messages.get(Wandmaker.class, "desc");
 	}
 
 	public static class Quest {
@@ -321,11 +315,11 @@ public class Wandmaker extends NPC {
 
 	public static class Rotberry extends Plant {
 
-		private static final String TXT_DESC = "Berries of this shrub taste like sweet, sweet death.";
+		private static final String TXT_DESC = Messages.get(Wandmaker.class, "berrydesc");
 
 		{
 			image = 7;
-			plantName = "Rotberry";
+			plantName = Messages.get(Wandmaker.class, "berryname");
 		}
 
 		@Override
@@ -348,9 +342,9 @@ public class Wandmaker extends NPC {
 
 		public static class Seed extends Plant.Seed {
 			{
-				plantName = "Rotberry";
+				plantName = Messages.get(Wandmaker.class, "berryname");
 
-				name = "seed of " + plantName;
+				name = Messages.get(Wandmaker.class, "seedname", plantName);
 				image = ItemSpriteSheet.SEED_ROTBERRY;
 
 				plantClass = Rotberry.class;
@@ -366,7 +360,7 @@ public class Wandmaker extends NPC {
 							mob.beckon(Dungeon.hero.pos);
 						}
 
-						GLog.w("The seed emits a roar that echoes throughout the dungeon!");
+						GLog.w(Messages.get(Wandmaker.class, "pickup"));
 						CellEmitter.center(Dungeon.hero.pos).start(
 								Speck.factory(Speck.SCREAM), 0.3f, 3);
 						Sample.INSTANCE.play(Assets.SND_CHALLENGE);

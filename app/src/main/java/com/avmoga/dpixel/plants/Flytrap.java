@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.plants;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.WaterOfUpgradeEating;
@@ -28,12 +29,11 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class Flytrap extends Plant {
 
-	private static final String TXT_DESC = "This plant has a giant mouth and drips caustic ooze. "
-			                               +"Tossing an item into its mouth has a chance to harvest upgrade goo.";
+	private static final String TXT_DESC = Messages.get(Flytrap.class, "desc");
 
 	{
 		image = 15;
-		plantName = "Upgrade eater";
+		plantName = Messages.get(this, "name");
 	}
 
 	@Override
@@ -52,27 +52,26 @@ public class Flytrap extends Plant {
 
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Upgrade eater";
+			plantName = Messages.get(Flytrap.class, "name");
 
-			name = "seed of " + plantName;
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.SEED_FLYTRAP;
 
 			plantClass = Flytrap.class;
-			alchemyClass = PotionOfOverHealing.class;				
+			alchemyClass = PotionOfOverHealing.class;
 		}
 
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Messages.get(Plant.class, "seeddesc", plantName);
 		}
-		
+
 		@Override
 		public Plant couch(int pos) {
-			GameScene.add(Blob.seed(pos, 1, WaterOfUpgradeEating.class));	
-		    return super.couch(pos);		    
+			GameScene.add(Blob.seed(pos, 1, WaterOfUpgradeEating.class));
+			return super.couch(pos);
 		}
 	}
-	
 		
 	public static boolean checkWater(){
 		

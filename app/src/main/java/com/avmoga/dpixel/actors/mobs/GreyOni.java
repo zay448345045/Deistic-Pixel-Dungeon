@@ -29,7 +29,7 @@ import java.util.HashSet;
 public class GreyOni extends Mob {
 
 	{
-		name = "grey oni";
+		name = Messages.get(this, "name");
 		spriteClass = GreyOniSprite.class;
 		state = SLEEPING;
 
@@ -61,7 +61,7 @@ public class GreyOni extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "blocked";
+		return Messages.get(this, "def");
 	}
 
 	@Override

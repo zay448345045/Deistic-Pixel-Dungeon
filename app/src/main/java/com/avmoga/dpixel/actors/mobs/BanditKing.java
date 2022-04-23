@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Blindness;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -36,7 +37,7 @@ public class BanditKing extends Thief {
 	public Item item;
 
 	{
-		name = "shadow bandit";
+		name = Messages.get(BanditKing.class, "name");
 		spriteClass = BanditKingSprite.class;
 		HP = HT = 200; //200
 
@@ -96,13 +97,13 @@ public class BanditKing extends Thief {
 	public void die(Object cause) {
 		super.die(cause);
 		if (Dungeon.depth<25){
-		yell("Fine! Take it back!");
-		GLog.n("Shadow Bandit dissolves away.");
+			yell(Messages.get(BanditKing.class, "die"));
+			GLog.w(Messages.get(BanditKing.class, "dis"));
 		if (!Dungeon.limitedDrops.spork.dropped()) {
 			Dungeon.level.drop(new Spork(), pos).sprite.drop();
 			Dungeon.limitedDrops.spork.drop();
 			Dungeon.sporkAvail = false;
-		yell("Doh! Dropped my spork!");	
+			yell(Messages.get(BanditKing.class, "spork"));
 		}
 	  }
 	}

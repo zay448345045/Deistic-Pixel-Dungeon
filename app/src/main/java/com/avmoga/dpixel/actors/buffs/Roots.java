@@ -23,6 +23,10 @@ import com.avmoga.dpixel.ui.BuffIndicator;
 
 public class Roots extends FlavourBuff {
 
+	public int icon() {
+		return BuffIndicator.ROOTS;
+	}
+
 	@Override
 	public boolean attachTo(Char target) {
 		if (!target.flying && super.attachTo(target)) {

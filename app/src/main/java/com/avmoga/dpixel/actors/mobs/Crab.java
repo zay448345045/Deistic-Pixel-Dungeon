@@ -26,7 +26,7 @@ import com.watabou.utils.Random;
 public class Crab extends Mob {
 
 	{
-		name = "sewer crab";
+		name = Messages.get(this, "name");
 		spriteClass = CrabSprite.class;
 
 		HP = HT = 15+(adj(0)*Random.NormalIntRange(1, 3));
@@ -58,7 +58,7 @@ public class Crab extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "parried";
+		return Messages.get(this, "def");
 	}
 
 	@Override

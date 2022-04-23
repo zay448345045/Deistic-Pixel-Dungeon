@@ -22,6 +22,7 @@ import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Bones;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.GamesInProgress;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Actor;
@@ -35,7 +36,6 @@ import com.avmoga.dpixel.actors.buffs.Charm;
 import com.avmoga.dpixel.actors.buffs.Combo;
 import com.avmoga.dpixel.actors.buffs.Counterattack;
 import com.avmoga.dpixel.actors.buffs.Cripple;
-import com.avmoga.dpixel.actors.buffs.Decay;
 import com.avmoga.dpixel.actors.buffs.Dewcharge;
 import com.avmoga.dpixel.actors.buffs.Drowsy;
 import com.avmoga.dpixel.actors.buffs.Fury;
@@ -1543,44 +1543,39 @@ public class Hero extends Char {
 
 		if (sprite != null) {
 			if (buff instanceof Burning) {
-				GLog.w("You catch fire!");
+				GLog.w(Messages.get(this, "fire"));
 				interrupt();
 			} else if (buff instanceof Paralysis) {
-				GLog.w("You are paralysed!");
+				GLog.w(Messages.get(this, "paralysis"));
 				interrupt();
 			} else if (buff instanceof Poison) {
-				GLog.w("You are poisoned!");
+				GLog.w(Messages.get(this, "poison"));
 				interrupt();
 			} else if (buff instanceof Ooze) {
-				GLog.w("Caustic ooze eats your flesh. Wash it away!");
+				GLog.w(Messages.get(this, "ooze"));
 			} else if (buff instanceof Roots) {
-				GLog.w("You can't move!");
+				GLog.w(Messages.get(this, "roots"));
 			} else if (buff instanceof Weakness) {
-				GLog.w("You feel weakened!");
+				GLog.w(Messages.get(this, "weakness"));
 			} else if (buff instanceof Blindness) {
-				GLog.w("You are blinded!");
+				GLog.w(Messages.get(this, "blindness"));
 			} else if (buff instanceof Fury) {
-				GLog.w("You become furious!");
-				sprite.showStatus(CharSprite.POSITIVE, "furious");
+				GLog.w(Messages.get(this, "fury"));
+				sprite.showStatus(CharSprite.POSITIVE, Messages.get(Fury.class, "name"));
 			} else if (buff instanceof Charm) {
-				GLog.w("You are charmed!");
+				GLog.w(Messages.get(this, "charm"));
 			} else if (buff instanceof Cripple) {
-				GLog.w("You are crippled!");
+				GLog.w(Messages.get(this, "cripple"));
 			} else if (buff instanceof Bleeding) {
-				GLog.w("You are bleeding!");
+				GLog.w(Messages.get(this, "bleeding"));
 			} else if (buff instanceof RingOfMight.Might) {
 				if (((RingOfMight.Might) buff).level > 0) {
 					HT += ((RingOfMight.Might) buff).level * 5;
 				}
-			} else if (buff instanceof Decay) {
-				GLog.w("Your skin begins to fall off the bone!");
-				interrupt();
 			} else if (buff instanceof Vertigo) {
-				GLog.w("Everything is spinning around you!");
+				GLog.w(Messages.get(this, "vertigo"));
 				interrupt();
-			}
-
-			else if (buff instanceof Light) {
+			} else if (buff instanceof Light) {
 				sprite.add(CharSprite.State.ILLUMINATED);
 			}
 		}

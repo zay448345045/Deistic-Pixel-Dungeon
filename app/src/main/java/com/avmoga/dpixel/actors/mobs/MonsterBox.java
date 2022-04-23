@@ -44,7 +44,7 @@ public class MonsterBox extends Mob {
 	private int level;
 
 	{
-		name = "monster box";
+		name = Messages.get(this, "name");
 		spriteClass = MonsterBoxSprite.class;
 	}
 

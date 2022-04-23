@@ -19,6 +19,7 @@ package com.avmoga.dpixel.actors.mobs.npcs;
 
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -30,7 +31,7 @@ import com.avmoga.dpixel.sprites.RatKingSprite;
 public class RatKing extends NPC {
 
 	{
-		name = "rat king";
+		name = Messages.get(RatKing.class, "name");
 		spriteClass = RatKingSprite.class;
 
 		state = SLEEPING;
@@ -64,54 +65,44 @@ public class RatKing extends NPC {
 		return true;
 	}
 
-   
-	
+
 	@Override
 	public void interact() {
-		
+
 		int checkChests = 0;
 		int length = Level.getLength();
 		for (int i = 0; i < length; i++) {
 			Heap chest = Dungeon.level.heaps.get(i);
-			if(chest != null && chest.chestCheck()){checkChests++;}
+			if (chest != null && chest.chestCheck()) {
+				checkChests++;
+			}
 		}
-		
+
 		Spork spork = Dungeon.hero.belongings.getItem(Spork.class);
 		//RoyalSpork royalspork = Dungeon.hero.belongings.getItem(RoyalSpork.class);
-		
+
 		sprite.turnTo(pos, Dungeon.hero.pos);
 		if (state == SLEEPING) {
 			notice();
-			yell("I'm not sleeping!");
-			yell("Please don't take my treasures!");
+			yell(Messages.get(RatKing.class, "yone"));
+			yell(Messages.get(RatKing.class, "ytwo"));
 			state = WANDERING;
-		//} else if (Statistics.deepestFloor>9 && checkChests >= Dungeon.ratChests && spork==null && royalspork==null){ 
-		} else if (Statistics.deepestFloor>10 && checkChests >= Dungeon.ratChests && spork==null){ 
-			yell("Thank you for not stealing my treasures! You can have my spork if you can kill the Shadow Bandit who took it from me.");
+		} else if (Statistics.deepestFloor > 10 && checkChests >= Dungeon.ratChests && spork == null) {
+			yell(Messages.get(RatKing.class, "notsteal"));
 			Dungeon.sporkAvail = true;
-		} else if (checkChests < Dungeon.ratChests){
+		} else if (checkChests < Dungeon.ratChests) {
 			Dungeon.sporkAvail = false;
-			yell("Why would you steal from me?");
-		} else if (spork!=null) {
-			//yell("You found my spork! Here, trade me for this old one.");
-			yell("You found my spork! Have fun sporking!");
-			//if (spork.isEquipped(Dungeon.hero)) {
-			//	spork.doUnequip(Dungeon.hero, false);
-			//}
-			//spork.detach(Dungeon.hero.belongings.backpack);
-			//Dungeon.level.drop(new RoyalSpork().enchantNom(), pos).sprite.drop();
-			//Dungeon.limitedDrops.royalspork.drop();
-			
+			yell(Messages.get(RatKing.class, "steal"));
+		} else if (spork != null) {
+			yell(Messages.get(RatKing.class, "found"));
+
 		} else {
-			yell("What is it? I have no time for this nonsense. My kingdom won't rule itself!");
+			yell(Messages.get(RatKing.class, "yell"));
 		}
 	}
 
 	@Override
 	public String description() {
-		return ((RatKingSprite) sprite).festive ? "This rat is a little bigger than a regular marsupial rat. "
-				+ "It's wearing a tiny festive hat instead of its usual crown. Happy Holidays!"
-				: "This rat is a little bigger than a regular marsupial rat "
-						+ "and it's wearing a tiny crown on its head.";
+		return ((RatKingSprite) sprite).festive ? Messages.get(RatKing.class, "descone") : Messages.get(RatKing.class, "desctwo");
 	}
 }

@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.plants;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.Fire;
 import com.avmoga.dpixel.actors.blobs.Freezing;
@@ -29,12 +30,11 @@ import com.watabou.utils.PathFinder;
 
 public class Icecap extends Plant {
 
-	private static final String TXT_DESC = "Upon being touched, an Icecap lets out a puff of freezing pollen. "
-			+ "The freezing effect is much stronger if the environment is wet.";
+	private static final String TXT_DESC = Messages.get(Icecap.class, "desc");
 
 	{
 		image = 1;
-		plantName = "Icecap";
+		plantName = Messages.get(this, "name");
 	}
 
 	@Override
@@ -60,9 +60,9 @@ public class Icecap extends Plant {
 
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Icecap";
+			plantName = Messages.get(Icecap.class, "name");
 
-			name = "seed of " + plantName;
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.SEED_ICECAP;
 
 			plantClass = Icecap.class;
@@ -71,7 +71,7 @@ public class Icecap extends Plant {
 
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Messages.get(Plant.class, "seeddesc", plantName);
 		}
 	}
 }

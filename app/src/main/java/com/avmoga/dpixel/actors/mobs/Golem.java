@@ -31,7 +31,7 @@ import java.util.HashSet;
 public class Golem extends Mob {
 
 	{
-		name = "golem";
+		name = Messages.get(this, "name");
 		spriteClass = GolemSprite.class;
 
 		HP = HT = 85+(adj(0)*Random.NormalIntRange(4, 7));
@@ -63,7 +63,7 @@ public class Golem extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "blocked";
+		return Messages.get(this, "def");
 	}
 
 	@Override

@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.plants;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.WaterOfTransmutation;
@@ -28,11 +29,11 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class Phaseshift extends Plant {
 
-	private static final String TXT_DESC = "When something enters a phase pitcher, its future is uncertain.";
+	private static final String TXT_DESC = Messages.get(Phaseshift.class, "desc");
 
 	{
 		image = 14;
-		plantName = "Phase pitcher";
+		plantName = Messages.get(this, "name");
 	}
 
 	@Override
@@ -51,27 +52,26 @@ public class Phaseshift extends Plant {
 
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Phase pitcher";
+			plantName = Messages.get(Phaseshift.class, "name");
 
-			name = "seed of " + plantName;
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.SEED_PHASEPITCHER;
 
 			plantClass = Phaseshift.class;
-			alchemyClass = PotionOfMight.class;				
+			alchemyClass = PotionOfMight.class;
 		}
 
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Messages.get(Plant.class, "seeddesc", plantName);
 		}
-		
+
 		@Override
 		public Plant couch(int pos) {
-			GameScene.add(Blob.seed(pos, 1, WaterOfTransmutation.class));	
-		    return super.couch(pos);		    
+			GameScene.add(Blob.seed(pos, 1, WaterOfTransmutation.class));
+			return super.couch(pos);
 		}
 	}
-	
 		
 	public static boolean checkWater(){
 		

@@ -33,7 +33,7 @@ import com.watabou.utils.Random;
 
 public class BlueWraith extends Wraith  {
 	{
-		name = "blue wraith";
+		name = Messages.get(this, "name");
 		spriteClass = BlueWraithSprite.class;
 
 		HP = HT = 195;

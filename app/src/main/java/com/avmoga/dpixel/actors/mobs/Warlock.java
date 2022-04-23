@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -38,14 +37,16 @@ import com.avmoga.dpixel.utils.Utils;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Warlock extends Mob implements Callback {
 
 	private static final float TIME_TO_ZAP = 1f;
 
-	private static final String TXT_SHADOWBOLT_KILLED = "%s's shadow bolt killed you...";
+	private static final String TXT_SHADOWBOLT_KILLED = Messages.get(Warlock.class, "kill");
 
 	{
-		name = "dwarf warlock";
+		name = Messages.get(this, "name");
 		spriteClass = WarlockSprite.class;
 
 		HP = HT = 70+(adj(0)*Random.NormalIntRange(5, 7));
@@ -156,9 +157,7 @@ public class Warlock extends Mob implements Callback {
 
 	@Override
 	public String description() {
-		return "When dwarves' interests have shifted from engineering to arcane arts, "
-				+ "warlocks have come to power in the city. They started with elemental magic, "
-				+ "but soon switched to demonology and necromancy.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

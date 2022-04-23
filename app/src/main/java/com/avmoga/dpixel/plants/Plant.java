@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.plants;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Barkskin;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -41,6 +40,8 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
 //import com.avmoga.dpixel.effects.SpellSprite;
 //import com.avmoga.dpixel.items.food.Food;
 
@@ -126,9 +127,9 @@ public class Plant implements Bundlable {
 
 	public static class Seed extends Item {
 
-		public static final String AC_PLANT = "PLANT";
+		public static final String AC_PLANT = Messages.get(Plant.class, "ac_plant");
 
-		private static final String TXT_INFO = "Throw this seed to the place where you want to grow %s.\n\n%s";
+		private static final String TXT_INFO = Messages.get(Plant.class, "info");
 
 		private static final float TIME_TO_PLANT = 1f;
 
@@ -153,10 +154,10 @@ public class Plant implements Bundlable {
 		@Override
 		protected void onThrow(int cell) {
 			if (this instanceof Phaseshift.Seed && Phaseshift.checkWater()){
-				GLog.n("Phaseshift pitchers only grow when there are no active Wells of Transmutation on a level.");
+				GLog.w(Messages.get(Plant.class, "prevent1"));
 				super.onThrow(cell);
 			}	else if (this instanceof Flytrap.Seed && Flytrap.checkWater()){
-				 GLog.n("Upgrade Eaters only grow when there are no other Upgrade Eaters growing on a level.");
+				GLog.w(Messages.get(Plant.class, "prevent2"));
 				 super.onThrow(cell);
 			}	else if (Dungeon.level.map[cell] == Terrain.ALCHEMY || Level.pit[cell]) {
 				super.onThrow(cell);

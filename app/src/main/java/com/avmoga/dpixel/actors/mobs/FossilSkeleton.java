@@ -36,10 +36,10 @@ import java.util.HashSet;
 
 public class FossilSkeleton extends Mob {
 
-	private static final String TXT_HERO_KILLED = "You were killed by the explosion of bones...";
+	private static final String TXT_HERO_KILLED = Messages.get(FossilSkeleton.class, "kill");
 
 	{
-		name = "fossil skeleton";
+		name = Messages.get(this, "name");
 		spriteClass = FossilSkeletonSprite.class;
 
 		HP = HT = 25+(adj(0)*Random.NormalIntRange(3, 7));
@@ -115,7 +115,7 @@ public class FossilSkeleton extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "blocked";
+		return Messages.get(this, "def");
 	}
 
 	@Override

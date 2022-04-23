@@ -35,7 +35,7 @@ public class Lichen extends Mob {
 	
 
 	{
-		name = "lichen";
+		name = Messages.get(this, "name");
 		spriteClass = MrDestructoSprite.class;
 		hostile = false;
 		state = HUNTING;
@@ -92,7 +92,7 @@ public class Lichen extends Mob {
 			int cell = pos + n;
 			if (Level.passable[cell] && Actor.findChar(cell) == null && Random.Float()<0.25f) {
 				spawnAt(cell);
-				GLog.i("You shed a lichen from you body. ");
+				GLog.i(Messages.get(Lichen.class, "spawn"));
 			}
 		}
 	}

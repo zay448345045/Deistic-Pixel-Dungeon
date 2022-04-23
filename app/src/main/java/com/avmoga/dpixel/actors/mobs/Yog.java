@@ -17,6 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
+import static com.avmoga.dpixel.Dungeon.hero;
+
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
@@ -75,9 +77,7 @@ public class Yog extends Mob {
 	
 	private static final int REGENERATION = 200;
 
-	private static final String TXT_DESC = "Yog-Dzewa is an Old God, a powerful entity from the realms of chaos. A century ago, the ancient dwarves "
-			+ "barely won the war against its army of demons, but were unable to kill the god itself. Instead, they then "
-			+ "imprisoned it in the halls below their city, believing it to be too weak to rise ever again.";
+	private static final String TXT_DESC = Messages.get(Yog.class, "desc");
 
 	private static int fistsCount = 0;
 
@@ -152,7 +152,7 @@ public class Yog extends Mob {
 				pos = newPos;
 				sprite.place(pos);
 				sprite.visible = Dungeon.visible[pos];
-				GLog.n("Yog vanishes!");
+				GLog.n(Messages.get(this, "vanish"));
 			}		
 					
 			if (Dungeon.level.mobs.size()<5){
@@ -215,13 +215,13 @@ public class Yog extends Mob {
 		Dungeon.level.drop(new Gold(Random.Int(6000, 8000)), pos).sprite.drop();
 		super.die(cause);
 
-		yell("Back to the shadow...");
+		yell(Messages.get(this, "die"));
 	}
 
 	@Override
 	public void notice() {
 		super.notice();
-		yell("Hope is an illusion...");
+		yell(Messages.get(this, "notice"));
 	}
 
 	@Override
@@ -253,7 +253,7 @@ public class Yog extends Mob {
 		private static final int REGENERATION = 50;
 
 		{
-			name = "rotting fist";
+			name = Messages.get(Yog.class, "name1");
 			spriteClass = RottingFistSprite.class;
 
 			HP = HT = 2000;
@@ -348,7 +348,7 @@ public class Yog extends Mob {
 	public static class BurningFist extends Mob {
 
 		{
-			name = "burning fist";
+			name = Messages.get(Yog.class, "name2");
 			spriteClass = BurningFistSprite.class;
 
 			HP = HT = 1000;
@@ -404,10 +404,10 @@ public class Yog extends Mob {
 					enemy.sprite.bloodBurstA(sprite.center(), dmg);
 					enemy.sprite.flash();
 
-					if (!enemy.isAlive() && enemy == Dungeon.hero) {
+					if (!enemy.isAlive() && enemy == hero) {
 						Dungeon.fail(Utils.format(ResultDescriptions.UNIQUE,
 								name));
-						GLog.n(TXT_KILL, name);
+						GLog.n(Messages.get(Char.class, "kill"), name);
 					}
 					return true;
 
@@ -473,7 +473,7 @@ public class Yog extends Mob {
 		
 
 		{
-			name = "infecting fist";
+			name = Messages.get(Yog.class, "name4");
 			spriteClass = InfectingFistSprite.class;
 
 			HP = HT = 2000;
@@ -566,7 +566,7 @@ public class Yog extends Mob {
 	public static class PinningFist extends Mob {
 
 		{
-			name = "pinning fist";
+			name = Messages.get(Yog.class, "name5");
 			spriteClass = PinningFistSprite.class;
 
 			HP = HT = 1000;
@@ -635,10 +635,10 @@ public class Yog extends Mob {
 					enemy.sprite.bloodBurstA(sprite.center(), dmg);
 					enemy.sprite.flash();
 
-					if (!enemy.isAlive() && enemy == Dungeon.hero) {
+					if (!enemy.isAlive() && enemy == hero) {
 						Dungeon.fail(Utils.format(ResultDescriptions.UNIQUE,
 								name));
-						GLog.n(TXT_KILL, name);
+						GLog.n(Messages.get(Char.class, "kill"), name);
 					}
 					return true;
 
@@ -690,10 +690,10 @@ public class Yog extends Mob {
 	public static class Larva extends Mob {
 
 		{
-			name = "god's larva";
+			name = Messages.get(Yog.class, "name3");
 			spriteClass = LarvaSprite.class;
 
-			HP = HT = 25;
+			HP = HT = 25 + hero.HT;
 			defenseSkill = 20;
 
 			EXP = 0;

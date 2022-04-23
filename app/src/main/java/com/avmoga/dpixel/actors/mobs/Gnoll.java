@@ -28,7 +28,7 @@ import com.watabou.utils.Random;
 public class Gnoll extends Mob {
 
 	{
-		name = "gnoll scout";
+		name = Messages.get(this, "name");
 		spriteClass = GnollSprite.class;
 
 		HP = HT = 12+(Dungeon.depth*Random.NormalIntRange(1, 3));

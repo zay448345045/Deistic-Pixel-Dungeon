@@ -692,13 +692,21 @@ public static Level newThiefBossLevel(){
 		return  depth == 6 || depth == 11 || depth == 16;
 	}
 
+	public static boolean bossLevelFW() {
+		return bossLevelFW(depth);
+	}
+
+	public static boolean bossLevelFW(int depth) {
+		return depth ==  37 ||depth ==  38 ||depth ==  39  ||depth ==  40;
+	}
+
 	public static boolean bossLevel() {
 		return bossLevel(depth);
 	}
 
 	public static boolean bossLevel(int depth) {
 		return depth == 5 || depth == 10 || depth == 15 || depth == 20
-				|| depth == 25 ||  depth ==  36 ||  depth ==  41;
+				|| depth == 25 ||  depth ==  36 || depth ==  41;
 	}
 	
 	public static boolean growLevel(int depth) {

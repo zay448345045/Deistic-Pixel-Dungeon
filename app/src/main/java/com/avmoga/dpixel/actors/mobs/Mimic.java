@@ -45,7 +45,7 @@ public class Mimic extends Mob {
 	private int level;
 
 	{
-		name = "mimic";
+		name = Messages.get(this, "name");
 		spriteClass = MimicSprite.class;
 	}
 

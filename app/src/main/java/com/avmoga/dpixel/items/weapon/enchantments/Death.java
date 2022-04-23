@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.weapon.enchantments;
 
 import com.avmoga.dpixel.Badges;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.effects.particles.ShadowParticle;
@@ -28,7 +29,7 @@ import com.watabou.utils.Random;
 
 public class Death extends Weapon.Enchantment {
 
-	private static final String TXT_GRIM = "Grim %s";
+	private static final String TXT_GRIM = Messages.get(Death.class, "name");
 
 	private static ItemSprite.Glowing BLACK = new ItemSprite.Glowing(0x000000);
 

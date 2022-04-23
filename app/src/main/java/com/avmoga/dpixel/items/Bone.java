@@ -17,7 +17,6 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -25,28 +24,30 @@ import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.items.artifacts.DriedRose;
 import com.avmoga.dpixel.items.artifacts.TimekeepersHourglass;
 import com.avmoga.dpixel.scenes.InterlevelScene;
-import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.sprites.ItemSprite.Glowing;
+import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+
 public class Bone extends Item {
 	
-	private static final String TXT_PREVENTING = "Strong magic aura of this place prevents you from using the bone!";
-	private static final String TXT_PREVENTING2 = "You need to kill the skeleton king first!";
+	private static final String TXT_PREVENTING = "这里强大的魔法气息让你无法使用上古骨头！";
+	private static final String TXT_PREVENTING2 = "你需要首先击败骷髅王！";
 		
 	
 	public static final float TIME_TO_USE = 1;
 
-	public static final String AC_PORT = "OPEN PORTAL";
+	public static final String AC_PORT = "传送";
 
 	private int specialLevel = 37;
 	private int returnDepth = -1;
 	private int returnPos;
 
 	{
-		name = "inscribed bone";
+		name = "骷髅巨骨";
 		image = ItemSpriteSheet.BONE;
 
 		stackable = false;

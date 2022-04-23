@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.windows;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.mobs.npcs.Tinkerer2;
 import com.avmoga.dpixel.items.ActiveMrDestructo;
@@ -28,35 +29,30 @@ import com.avmoga.dpixel.items.Mushroom;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.ui.RedButton;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
 import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndTinkerer2 extends Window {
 
-	private static final String TXT_MESSAGE1 = "Thanks for the Toadstool Mushroom! "
-			                                  +"In return, I can upgrade your mr destructo for you, "
-			                                  +"or I can recharge your old one and give you another. ";
-	
-	private static final String TXT_MESSAGE2 = "Thanks for the Toadstool Mushroom! "
-                                               +"In return, I can upgrade your mr destructo for you. "
-                                               +"You can also have this other one I've managed to fix up. ";
-	
-	private static final String TXT_MESSAGE3 = "Thanks for the Toadstool Mushroom! "
-                                               +"In return, you can have this Mr Destructo if you like. ";
+	private static final String TXT_MESSAGE1 = Messages.get(WndTinkerer2.class, "msg1");
 
-	private static final String TXT_UPGRADE = "Upgrade my Mr Destructo";
-	private static final String TXT_RECHARGE = "Recharge my Mr Desructo";
-	private static final String TXT_NEW = "I'll take the new Mr Desructo";
+	private static final String TXT_MESSAGE2 = Messages.get(WndTinkerer2.class, "msg2");
 
-	private static final String TXT_FARAWELL = "Good luck in your quest, %s!";
+	private static final String TXT_MESSAGE3 = Messages.get(WndTinkerer2.class, "msg3");
+
+	private static final String TXT_UPGRADE = Messages.get(WndTinkerer2.class, "upgrade");
+	private static final String TXT_RECHARGE = Messages.get(WndTinkerer2.class, "recharge");
+	private static final String TXT_NEW = Messages.get(WndTinkerer2.class, "new");
+
+	private static final String TXT_FARAWELL = Messages.get(WndTinkerer2.class, "farewell");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
 	private static final float GAP = 2;
-	
-	
+
+
 	public WndTinkerer2(final Tinkerer2 tinkerer, final Item item, final Item mrd) {
 
 		super();
@@ -70,10 +66,9 @@ public class WndTinkerer2 extends Window {
 		if (mrd instanceof InactiveMrDestructo) {
 
 
-			BitmapTextMultiline message = PixelScene.createMultiline(TXT_MESSAGE1, 6);
-			message.maxWidth = WIDTH;
-			message.measure();
-			message.y = titlebar.bottom() + GAP;
+			RenderedTextMultiline message = PixelScene.renderMultiline(TXT_MESSAGE1, 6);
+			message.maxWidth(WIDTH);
+			message.setPos(0, titlebar.bottom() + GAP);
 			add(message);
 
 			RedButton btnUpgrade = new RedButton(TXT_UPGRADE) {
@@ -82,7 +77,7 @@ public class WndTinkerer2 extends Window {
 					selectUpgrade(tinkerer);
 				}
 			};
-			btnUpgrade.setRect(0, message.y + message.height() + GAP, WIDTH, BTN_HEIGHT);
+			btnUpgrade.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
 			add(btnUpgrade);
 
 			RedButton btnRecharge = new RedButton(TXT_RECHARGE) {
@@ -95,13 +90,12 @@ public class WndTinkerer2 extends Window {
 			add(btnRecharge);
 
 			resize(WIDTH, (int) btnRecharge.bottom());
-			
+
 
 		} else if (mrd instanceof ActiveMrDestructo) {
-			BitmapTextMultiline message = PixelScene.createMultiline(TXT_MESSAGE2, 6);
-			message.maxWidth = WIDTH;
-			message.measure();
-			message.y = titlebar.bottom() + GAP;
+			RenderedTextMultiline message = PixelScene.renderMultiline(TXT_MESSAGE2, 6);
+			message.maxWidth(WIDTH);
+			message.setPos(0, titlebar.bottom() + GAP);
 			add(message);
 
 			RedButton btnUpgrade = new RedButton(TXT_UPGRADE) {
@@ -110,16 +104,15 @@ public class WndTinkerer2 extends Window {
 					selectUpgradePlus(tinkerer);
 				}
 			};
-			btnUpgrade.setRect(0, message.y + message.height() + GAP, WIDTH, BTN_HEIGHT);
+			btnUpgrade.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
 			add(btnUpgrade);
 
 			resize(WIDTH, (int) btnUpgrade.bottom());
-			
+
 		} else {
-			BitmapTextMultiline message = PixelScene.createMultiline(TXT_MESSAGE3, 6);
-			message.maxWidth = WIDTH;
-			message.measure();
-			message.y = titlebar.bottom() + GAP;
+			RenderedTextMultiline message = PixelScene.renderMultiline(TXT_MESSAGE3, 6);
+			message.maxWidth(WIDTH);
+			message.setPos(0, titlebar.bottom() + GAP);
 			add(message);
 
 			RedButton btnNew = new RedButton(TXT_NEW) {
@@ -128,34 +121,32 @@ public class WndTinkerer2 extends Window {
 					selectNew(tinkerer);
 				}
 			};
-			btnNew.setRect(0, message.y + message.height() + GAP, WIDTH, BTN_HEIGHT);
+			btnNew.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
 			add(btnNew);
-			
+
 			resize(WIDTH, (int) btnNew.bottom());
 		}
 
 	}
-	
-	
-	
+
 
 	private void selectUpgrade(Tinkerer2 tinkerer) {
 
 		hide();
-		
+
 		Mushroom mushroom = Dungeon.hero.belongings.getItem(Mushroom.class);
 		mushroom.detach(Dungeon.hero.belongings.backpack);
-		
+
 		InactiveMrDestructo inmrd = Dungeon.hero.belongings.getItem(InactiveMrDestructo.class);
 		inmrd.detach(Dungeon.hero.belongings.backpack);
-		
-		 ActiveMrDestructo2 mrd2 = new ActiveMrDestructo2();	
-			if (mrd2.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, mrd2.name());
-			} else {
-				Dungeon.level.drop(mrd2, Dungeon.hero.pos).sprite.drop();
-			}
-		
+
+		ActiveMrDestructo2 mrd2 = new ActiveMrDestructo2();
+		if (mrd2.doPickUp(Dungeon.hero)) {
+			GLog.i(Messages.get(Hero.class, "have"), mrd2.name());
+		} else {
+			Dungeon.level.drop(mrd2, Dungeon.hero.pos).sprite.drop();
+		}
+
 		tinkerer.yell(Utils.format(TXT_FARAWELL, Dungeon.hero.givenName()));
 		tinkerer.destroy();
 
@@ -163,21 +154,21 @@ public class WndTinkerer2 extends Window {
 
 		//Wandmaker.Quest.complete();
 	}
-	
+
 	private void selectUpgradePlus(Tinkerer2 tinkerer) {
 
 		hide();
-		
+
 		Mushroom mushroom = Dungeon.hero.belongings.getItem(Mushroom.class);
-		mushroom.detach(Dungeon.hero.belongings.backpack);		
-		
-		 ActiveMrDestructo2 mrd2 = new ActiveMrDestructo2();	
-			if (mrd2.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, mrd2.name());
-			} else {
-				Dungeon.level.drop(mrd2, Dungeon.hero.pos).sprite.drop();
-			}
-		
+		mushroom.detach(Dungeon.hero.belongings.backpack);
+
+		ActiveMrDestructo2 mrd2 = new ActiveMrDestructo2();
+		if (mrd2.doPickUp(Dungeon.hero)) {
+			GLog.i(Messages.get(Hero.class, "have"), mrd2.name());
+		} else {
+			Dungeon.level.drop(mrd2, Dungeon.hero.pos).sprite.drop();
+		}
+
 		tinkerer.yell(Utils.format(TXT_FARAWELL, Dungeon.hero.givenName()));
 		tinkerer.destroy();
 
@@ -185,31 +176,31 @@ public class WndTinkerer2 extends Window {
 
 		//Wandmaker.Quest.complete();
 	}
-	
+
 	private void selectRecharge(Tinkerer2 tinkerer) {
 
 		hide();
-		
+
 		Mushroom mushroom = Dungeon.hero.belongings.getItem(Mushroom.class);
 		mushroom.detach(Dungeon.hero.belongings.backpack);
-		
+
 		InactiveMrDestructo inmrd = Dungeon.hero.belongings.getItem(InactiveMrDestructo.class);
 		inmrd.detach(Dungeon.hero.belongings.backpack);
-		
-		 ActiveMrDestructo mrd = new ActiveMrDestructo();	
-			if (mrd.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, mrd.name());
-			} else {
-				Dungeon.level.drop(mrd, Dungeon.hero.pos).sprite.drop();
-			}
-			
-		ActiveMrDestructo mrds = new ActiveMrDestructo();	
-				if (mrds.doPickUp(Dungeon.hero)) {
-					GLog.i(Hero.TXT_YOU_NOW_HAVE, mrds.name());
-				} else {
-					Dungeon.level.drop(mrds, Dungeon.hero.pos).sprite.drop();
-				}
-		
+
+		ActiveMrDestructo mrd = new ActiveMrDestructo();
+		if (mrd.doPickUp(Dungeon.hero)) {
+			GLog.i(Messages.get(Hero.class, "have"), mrd.name());
+		} else {
+			Dungeon.level.drop(mrd, Dungeon.hero.pos).sprite.drop();
+		}
+
+		ActiveMrDestructo mrds = new ActiveMrDestructo();
+		if (mrds.doPickUp(Dungeon.hero)) {
+			GLog.i(Messages.get(Hero.class, "have"), mrds.name());
+		} else {
+			Dungeon.level.drop(mrds, Dungeon.hero.pos).sprite.drop();
+		}
+
 		tinkerer.yell(Utils.format(TXT_FARAWELL, Dungeon.hero.givenName()));
 		tinkerer.destroy();
 
@@ -217,21 +208,21 @@ public class WndTinkerer2 extends Window {
 
 		//Wandmaker.Quest.complete();
 	}
-	
+
 	private void selectNew(Tinkerer2 tinkerer) {
 
 		hide();
-		
+
 		Mushroom mushroom = Dungeon.hero.belongings.getItem(Mushroom.class);
 		mushroom.detach(Dungeon.hero.belongings.backpack);
-		
-		 ActiveMrDestructo mrd = new ActiveMrDestructo();	
-			if (mrd.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, mrd.name());
-			} else {
-				Dungeon.level.drop(mrd, Dungeon.hero.pos).sprite.drop();
-			}
-			
+
+		ActiveMrDestructo mrd = new ActiveMrDestructo();
+		if (mrd.doPickUp(Dungeon.hero)) {
+			GLog.i(Messages.get(Hero.class, "have"), mrd.name());
+		} else {
+			Dungeon.level.drop(mrd, Dungeon.hero.pos).sprite.drop();
+		}
+
 		tinkerer.yell(Utils.format(TXT_FARAWELL, Dungeon.hero.givenName()));
 		tinkerer.destroy();
 
@@ -239,5 +230,5 @@ public class WndTinkerer2 extends Window {
 
 		//Wandmaker.Quest.complete();
 	}
-	
+
 }

@@ -17,14 +17,14 @@
  */
 package com.avmoga.dpixel.items.weapon.enchantments;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.items.weapon.Weapon;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.sprites.ItemSprite.Glowing;
 
 public class Luck extends Weapon.Enchantment {
-
-	private static final String TXT_LUCKY = "Lucky %s";
+	private static final String TXT_LUCKY = Messages.get(Luck.class, "name");
 
 	private static ItemSprite.Glowing GREEN = new ItemSprite.Glowing(0x00FF00);
 

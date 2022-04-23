@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.actors.mobs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Terror;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -35,15 +36,15 @@ import com.watabou.utils.Random;
 
 public class Thief extends Mob {
 
-	protected static final String TXT_STOLE = "%s stole %s from you!";
-	protected static final String TXT_CARRIES = "\n\n%s is carrying a _%s_. Stolen obviously.";
+	protected static final String TXT_STOLE = Messages.get(Thief.class, "stole");
+	protected static final String TXT_CARRIES = Messages.get(Thief.class, "carries");
 	protected static final String TXT_RATCHECK1 = "Spork is avail";
 	protected static final String TXT_RATCHECK2 = "Spork is not avail";
 
 	public Item item;
 
 	{
-		name = "crazy thief";
+		name = Messages.get(this, "name");
 		spriteClass = ThiefSprite.class;
 
 		HP = HT = 20+(adj(0)*Random.NormalIntRange(3, 5));
@@ -158,9 +159,7 @@ public class Thief extends Mob {
 
 	@Override
 	public String description() {
-		String desc = "Deeper levels of the dungeon have always been a hiding place for all kinds of criminals. "
-				+ "Not all of them could keep a clear mind during their extended periods so far from daylight. Long ago, "
-				+ "these crazy thieves and bandits have forgotten who they are and why they steal.";
+		String desc = Messages.get(this, "desc");
 
 		if (item != null) {
 			desc += String.format(TXT_CARRIES, Utils.capitalize(this.name),

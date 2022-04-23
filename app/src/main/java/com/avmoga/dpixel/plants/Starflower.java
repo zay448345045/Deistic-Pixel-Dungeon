@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.plants;
 
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Strength;
@@ -28,12 +29,11 @@ import com.watabou.utils.Random;
 
 public class Starflower extends Plant {
 
-	private static final String TXT_DESC ="An extremely rare plant, " +
-			"Starflower is said to grant celestial power to whomever touches it.";
+	private static final String TXT_DESC = Messages.get(Starflower.class, "desc");
 
 	{
 		image = 11;
-		plantName = "Starflower";
+		plantName = Messages.get(Starflower.class, "name");
 	}
 	
 	@Override
@@ -52,12 +52,12 @@ public class Starflower extends Plant {
 		return TXT_DESC;
 	}
 
-	public static class Seed extends Plant.Seed{
+	public static class Seed extends Plant.Seed {
 
 		{
-			plantName = "Starflower";
+			plantName = Messages.get(Starflower.class, "name");
 
-			name = "Seed of " + plantName;
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.SEED_STARFLOWER;
 
 			plantClass = Starflower.class;
@@ -66,7 +66,7 @@ public class Starflower extends Plant {
 
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Messages.get(Plant.class, "seeddesc", plantName);
 		}
 	}
 }

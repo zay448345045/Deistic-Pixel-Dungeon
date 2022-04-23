@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Journal;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
 import com.avmoga.dpixel.actors.buffs.Poison;
@@ -35,11 +34,13 @@ import com.avmoga.dpixel.sprites.SentinelSprite;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Sentinel extends Mob {
 	
 
 	{
-		name = "animated statue";
+		name = Messages.get(this, "name");
 		spriteClass = SentinelSprite.class;
 
 		EXP = 18;

@@ -87,11 +87,11 @@ public class ScrollOfMagicMapping extends Scroll {
 			Sample.INSTANCE.play(Assets.SND_SECRET);
 		}
 
-		SpellSprite.show(curUser, SpellSprite.MAP);
-		Sample.INSTANCE.play(Assets.SND_READ);
-		Invisibility.dispel();
+		//SpellSprite.show(curUser, SpellSprite.MAP);
+		//Sample.INSTANCE.play(Assets.SND_READ);
+		//Invisibility.dispel();
 
-		setKnown();
+		//setKnown();
 	}
 
 	@Override

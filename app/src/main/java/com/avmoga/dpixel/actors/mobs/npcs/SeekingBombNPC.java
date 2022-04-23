@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs.npcs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.items.Bomb;
@@ -28,10 +27,12 @@ import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.sprites.SeekingBombSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class SeekingBombNPC extends NPC {
 
 	{
-		name = "seeking bomb";
+		name = Messages.get(SeekingBombNPC.class, "name");
 		spriteClass = SeekingBombSprite.class;
 
 		state = HUNTING;
@@ -52,7 +53,7 @@ public class SeekingBombNPC extends NPC {
 
 		Bomb bomb = new Bomb();
 		bomb.explode(pos);
-		yell("KA-BOOM!!!");
+		yell(Messages.get(SeekingBombNPC.class, "yell"));
 
 		
 		
@@ -81,7 +82,7 @@ public class SeekingBombNPC extends NPC {
 
 	@Override
 	public String description() {
-		return "This bomb is hunting the dungeon for enemies. ";
+		return Messages.get(SeekingBombNPC.class, "desc");
 	}
 
 	

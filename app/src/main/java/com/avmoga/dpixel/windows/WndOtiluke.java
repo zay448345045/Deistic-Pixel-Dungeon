@@ -17,21 +17,16 @@
  */
 package com.avmoga.dpixel.windows;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.ui.RedButton;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
 import com.avmoga.dpixel.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndOtiluke extends Window {
-
-	
-	private static final String TXT_DRAW_INFO = "Tell me more about Draw Out Dew";
-
-	private static final String TXT_FARAWELL = "Good luck in your quest, %s!";
-	private static final String TXT_FARAWELL_DRAW = "Good luck in your quest, %s! I'll give you a head start drawing out dew!";
 
     
 	private static final int PAGES = 10;
@@ -44,7 +39,7 @@ public class WndOtiluke extends Window {
 		super();
 		
 		String[] roomNames = new String[PAGES];
-		roomNames[0] = "Safe Room";
+		roomNames[0] = "安全房";
 	
 		IconTitle titlebar = new IconTitle();
 		titlebar.icon(new ItemSprite(item.image(), null));
@@ -52,10 +47,9 @@ public class WndOtiluke extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene.createMultiline(TXT_FARAWELL, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene.renderMultiline(Messages.get(WndOtiluke.class, "where"), 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, 0);
 		add(message);
 		
 		//add each button
@@ -68,7 +62,7 @@ public class WndOtiluke extends Window {
 				port(0);
 			}
 		};
-		btn1.setRect(0, message.y + message.height() + GAP, WIDTH, BTN_HEIGHT);
+		btn1.setRect(0, message.top() + message.height() + GAP, WIDTH - 1, BTN_HEIGHT);
 		add(btn1);
 		resize(WIDTH, (int) btn1.bottom());
 		

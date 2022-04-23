@@ -1,6 +1,7 @@
 package com.avmoga.dpixel.plants;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.items.food.Blandfruit;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
@@ -10,12 +11,11 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
  */
 public class BlandfruitBush extends Plant {
 
-	private static final String TXT_DESC = "Distant cousin of the Rotberry, the pear-shaped produce of the Blandfruit bush tastes like caked dust. "
-			+ "The fruit is gross and unsubstantial but isn't poisonous. perhaps it could be cooked.";
+	private static final String TXT_DESC = Messages.get(BlandfruitBush.class, "desc");
 
 	{
 		image = 8;
-		plantName = "Blandfruit";
+		plantName = Messages.get(BlandfruitBush.class, "name");
 	}
 
 	@Override
@@ -32,9 +32,9 @@ public class BlandfruitBush extends Plant {
 
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Blandfruit";
+			plantName = Messages.get(BlandfruitBush.class, "name");
 
-			name = "seed of " + plantName;
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.SEED_BLANDFRUIT;
 
 			plantClass = BlandfruitBush.class;

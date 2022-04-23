@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.effects.particles.SparkParticle;
@@ -36,14 +35,16 @@ import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Shaman extends Mob implements Callback {
 
 	private static final float TIME_TO_ZAP = 2f;
 
-	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
+	private static final String TXT_LIGHTNING_KILLED = Messages.get(Shaman.class, "kill");
 
 	{
-		name = "gnoll shaman";
+		name = Messages.get(this, "name");
 		spriteClass = ShamanSprite.class;
 
 		HP = HT = 18+(adj(0)*Random.NormalIntRange(2, 5));
@@ -137,9 +138,7 @@ public class Shaman extends Mob implements Callback {
 
 	@Override
 	public String description() {
-		return "The most intelligent gnolls can master shamanistic magic. Gnoll shamans prefer "
-				+ "battle spells to compensate for lack of might, not hesitating to use them "
-				+ "on those who question their status in a tribe.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

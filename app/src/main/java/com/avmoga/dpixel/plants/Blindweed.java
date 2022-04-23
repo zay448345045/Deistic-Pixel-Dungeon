@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.plants;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Blindness;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -31,12 +32,11 @@ import com.watabou.utils.Random;
 
 public class Blindweed extends Plant {
 
-	private static final String TXT_DESC = "Upon being touched a Blindweed perishes in a bright flash of light. "
-			+ "The flash is strong enough to disorient for several seconds.";
+	private static final String TXT_DESC = Messages.get(Blindweed.class, "desc");
 
 	{
 		image = 3;
-		plantName = "Blindweed";
+		plantName = Messages.get(this, "name");
 	}
 
 	@Override
@@ -65,9 +65,9 @@ public class Blindweed extends Plant {
 
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Blindweed";
+			plantName = Messages.get(Blindweed.class, "name");
 
-			name = "seed of " + plantName;
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.SEED_BLINDWEED;
 
 			plantClass = Blindweed.class;
@@ -76,7 +76,7 @@ public class Blindweed extends Plant {
 
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Messages.get(Plant.class, "seeddesc", plantName);
 		}
 	}
 }

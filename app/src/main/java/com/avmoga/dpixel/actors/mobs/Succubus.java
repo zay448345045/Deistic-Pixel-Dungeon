@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -37,6 +36,8 @@ import com.avmoga.dpixel.sprites.SuccubusSprite;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Succubus extends Mob {
 
 	private static final int BLINK_DELAY = 5;
@@ -44,7 +45,7 @@ public class Succubus extends Mob {
 	private int delay = 0;
 
 	{
-		name = "succubus";
+		name = Messages.get(this, "name");
 		spriteClass = SuccubusSprite.class;
 
 		HP = HT = 80+(adj(0)*Random.NormalIntRange(5, 7));
@@ -124,8 +125,7 @@ public class Succubus extends Mob {
 
 	@Override
 	public String description() {
-		return "The succubi are demons that look like seductive (in a slightly gothic way) girls. Using its magic, the succubus "
-				+ "can charm a hero, who will become unable to attack anything until the charm wears off.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();
