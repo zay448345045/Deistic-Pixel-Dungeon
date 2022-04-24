@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -42,10 +41,12 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class Bomb extends Item {
 
 	{
-		name = "bomb";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.BOMB;
 		defaultAction = AC_LIGHTTHROW;
 		stackable = true;
@@ -57,13 +58,13 @@ public class Bomb extends Item {
 	// way
 	private static boolean lightingFuse = false;
 
-	private static final String AC_LIGHTTHROW = "Light & Throw";
-	
-	public static final String AC_DIZZYBOMB = "Make Dizzy Bomb";
-	public static final String AC_SMARTBOMB = "Make Smart Bomb";
-	public static final String AC_SEEKINGBOMB = "Make Seeking Bomb";
-	public static final String AC_CLUSTERBOMB = "Make Cluster Bomb";
-	public static final String AC_SEEKINGCLUSTERBOMB = "Make Seeking Cluster Bomb";
+	private static final String AC_LIGHTTHROW = Messages.get(Bomb.class, "ac_lightthrow");
+
+	public static final String AC_DIZZYBOMB = Messages.get(Bomb.class, "dizzy");
+	public static final String AC_SMARTBOMB = Messages.get(Bomb.class, "smart");
+	public static final String AC_SEEKINGBOMB = Messages.get(Bomb.class, "seeking");
+	public static final String AC_CLUSTERBOMB = Messages.get(Bomb.class, "cluster");
+	public static final String AC_SEEKINGCLUSTERBOMB = Messages.get(Bomb.class, "sc");
 	
 	public static final float TIME_TO_COOK_BOMB = 4;
 
@@ -208,7 +209,7 @@ public class Bomb extends Item {
 	@Override
 	public boolean doPickUp(Hero hero) {
 		if (fuse != null) {
-			GLog.w("You quickly snuff the bomb's fuse.");
+			GLog.w(Messages.get(this, "snuff_fuse"));
 			fuse = null;
 		}
 		return super.doPickUp(hero);
@@ -310,10 +311,10 @@ public class Bomb extends Item {
 
 	@Override
 	public String info() {
-		return "A fairly hefty black powder bomb. An explosion from this would certainly do damage to anything nearby."
-				+ (fuse != null ? "\n\nThe bomb's fuse is burning away, keep your distance or put it out!"
-						: "\n\nIt looks like the fuse will take a couple rounds to burn down once it is lit.");
+		return (fuse != null ? Messages.get(this, "desc_burning")
+				: Messages.get(this, "desc"));
 	}
+
 
 	private static final String FUSE = "fuse";
 
@@ -362,24 +363,23 @@ public class Bomb extends Item {
 				}
 			}
 
-			// can't find our bomb, this should never happen, throw an
-			// exception.
-			throw new RuntimeException(
-					"Something caused a lit bomb to not be present in a heap on the level!");
+			bomb.fuse = null;
+			Actor.remove(this);
+			return true;
 		}
 	}
 
 	public static class DoubleBomb extends Bomb {
 
 		{
-			name = "two bombs";
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.DBL_BOMB;
 			stackable = false;
 		}
 
 		@Override
 		public String info() {
-			return "A stack of two hefty black powder bombs, looks like you get one free!";
+			return Messages.get(this, "desc");
 		}
 
 		@Override
@@ -388,7 +388,7 @@ public class Bomb extends Item {
 			bomb.quantity(2);
 			if (bomb.doPickUp(hero)) {
 				// isaaaaac....
-				hero.sprite.showStatus(CharSprite.NEUTRAL, "1+1 free!");
+				hero.sprite.showStatus(CharSprite.NEUTRAL, Messages.get(Bomb.class, "free"));
 				return true;
 			}
 			return false;

@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.armor.glyphs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -32,7 +33,7 @@ import com.watabou.utils.Random;
 
 public class Displacement extends Glyph {
 
-	private static final String TXT_DISPLACEMENT = "%s of displacement";
+	private static final String TXT_DISPLACEMENT = Messages.get(Displacement.class, "name");
 
 	private static ItemSprite.Glowing BLUE = new ItemSprite.Glowing(0x66AAFF);
 

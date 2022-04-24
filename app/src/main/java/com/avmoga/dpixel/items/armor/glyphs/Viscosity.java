@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items.armor.glyphs;
 
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -35,7 +36,7 @@ import com.watabou.utils.Random;
 
 public class Viscosity extends Glyph {
 
-	private static final String TXT_VISCOSITY = "%s of viscosity";
+	private static final String TXT_VISCOSITY = Messages.get(Viscosity.class, "name");
 
 	private static ItemSprite.Glowing PURPLE = new ItemSprite.Glowing(0x8844CC);
 
@@ -56,8 +57,7 @@ public class Viscosity extends Glyph {
 				debuff.attachTo(defender);
 			}
 			debuff.prolong(damage);
-
-			defender.sprite.showStatus(CharSprite.WARNING, "deferred %d",
+			defender.sprite.showStatus(CharSprite.WARNING, Messages.get(this, "deferred"),
 					damage);
 
 			return 0;
@@ -117,7 +117,12 @@ public class Viscosity extends Glyph {
 
 		@Override
 		public String toString() {
-			return Utils.format("Defered damage (%d)", damage);
+			return Utils.format(Messages.get(Viscosity.class, "bname"), damage);
+		}
+
+		@Override
+		public String desc() {
+			return Messages.get(Viscosity.class, "bdesc", damage);
 		}
 
 		@Override
@@ -130,7 +135,7 @@ public class Viscosity extends Glyph {
 					Glyph glyph = new Viscosity();
 					Dungeon.fail(Utils.format(ResultDescriptions.GLYPH,
 							glyph.name()));
-					GLog.n("%s killed you...", glyph.name());
+					GLog.n(Messages.get(Viscosity.class, "bkill"), glyph.name());
 
 					Badges.validateDeathFromGlyph();
 				}

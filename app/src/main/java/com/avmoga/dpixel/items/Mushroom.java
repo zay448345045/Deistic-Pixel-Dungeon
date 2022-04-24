@@ -17,15 +17,14 @@
  */
 package com.avmoga.dpixel.items;
 
-import com.avmoga.dpixel.sprites.ItemSpriteSheet;
+import com.avmoga.dpixel.Messages.Messages;
 
 public class Mushroom extends Item {
 
 	//private static final String AC_END = "END THE GAME";
 
 	{
-		name = "toadstool mushroom";
-		image = ItemSpriteSheet.MUSHROOM;
+		name = Messages.get(this, "name");;
 
 		unique = true;
 	}
@@ -73,7 +72,6 @@ public class Mushroom extends Item {
 
 	@Override
 	public String info() {
-		return "A toadstool mushroom! Growing here in this dank dungeon! "
-				+ "Who would have imagined such a thing! ";
+		return Messages.get(this, "desc");
 	}
 }

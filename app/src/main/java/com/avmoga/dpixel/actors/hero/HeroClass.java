@@ -25,7 +25,6 @@ import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.items.Bomb;
 import com.avmoga.dpixel.items.armor.ClothArmor;
 import com.avmoga.dpixel.items.artifacts.CloakOfShadows;
-import com.avmoga.dpixel.items.artifacts.MysticBranch;
 import com.avmoga.dpixel.items.bags.KeyRing;
 import com.avmoga.dpixel.items.bags.SeedPouch;
 import com.avmoga.dpixel.items.food.Food;
@@ -43,7 +42,7 @@ import com.watabou.utils.Bundle;
 
 public enum HeroClass {
 
-	WARRIOR("warrior"), MAGE("mage"), ROGUE("rogue"), HUNTRESS("huntress");
+	WARRIOR("warrior"), MAGE("mage"), ROGUE("rogue"), HUNTRESS("huntress"),D("A");
 
 	private String title;
 
@@ -82,13 +81,16 @@ public enum HeroClass {
 
 		//难度还原 添加种子袋
 		//new ScrollOfMagicMapping().quantity(100).identify().collect();
-		//new Bone().quantity(1).identify().collect();
-		new MysticBranch().quantity(1).identify().collect();
+		//new PotionOfMindVision().quantity(100).identify().collect();
+		//new PotionOfInvisibility().quantity(100).identify().collect();
+		//new WandOfFirebolt().quantity(1).identify().collect();
+		//new MysticBranch().quantity(1).identify().collect();
+		//new AresChains().quantity(1).identify().collect();
 		//new MasterThievesArmband().quantity(1).identify().collect();
 		//new AncientCoin().quantity(1).identify().collect();
-		//new ConchShell().quantity(1).identify().collect();
+		//new AresChains().quantity(1).identify().collect();
 		//new CommRelay().quantity(1).identify().collect();
-		//Dungeon.gold = 600000000;
+		//Dungeon.gold = 6000;
 		//hero.STR = 27;
 		//hero.lvl = 31;
 		//hero.exp = -123456789;

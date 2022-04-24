@@ -8,6 +8,7 @@ public class ArtifactBox extends Bag{
 
 	{
 		name = "artifact collection";
+		name = "神器宝箱";
 		image = ItemSpriteSheet.ARTIFACT_BOX;
 
 		size = 16;

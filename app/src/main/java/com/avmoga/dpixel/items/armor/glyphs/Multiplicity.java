@@ -17,8 +17,7 @@
  */
 package com.avmoga.dpixel.items.armor.glyphs;
 
-import java.util.ArrayList;
-
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -32,9 +31,11 @@ import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.sprites.ItemSprite.Glowing;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class Multiplicity extends Glyph {
 
-	private static final String TXT_MULTIPLICITY = "%s of multiplicity";
+	private static final String TXT_MULTIPLICITY = Messages.get(Multiplicity.class, "name");
 
 	private static ItemSprite.Glowing PINK = new ItemSprite.Glowing(0xCCAA88);
 

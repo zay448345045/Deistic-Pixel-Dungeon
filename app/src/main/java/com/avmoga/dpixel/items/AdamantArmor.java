@@ -22,7 +22,7 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 public class AdamantArmor extends Item {
 
 		{
-		name = "adamantite armor";
+		name = "精金护甲";
 		image = ItemSpriteSheet.ARMOR_ADAMANT;
 
 		unique = true;
@@ -43,7 +43,7 @@ public class AdamantArmor extends Item {
 	
 	@Override
 	public String info() {
-		return "Despite its state of disrepair, you can tell these armor plates contain a powerful magic.";
+		return "尽管年久失修，你仍然能感觉到这件精金护甲内蕴含着强大的魔法。";
 	}
 	
 }

@@ -880,7 +880,7 @@ public class Badges {
 		if (global.contains(badge)) {
 
 			if (!badge.meta) {
-				GLog.h("Badge endorsed: %s", badge.description);
+				GLog.h("获得徽章: %s", badge.description);
 			}
 
 		} else {

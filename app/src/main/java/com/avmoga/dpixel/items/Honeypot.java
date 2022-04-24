@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -35,12 +34,14 @@ import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class Honeypot extends Item {
 
-	public static final String AC_SHATTER = "SHATTER";
+	public static final String AC_SHATTER = Messages.get(Honeypot.class, "ac_shatter");
 
 	{
-		name = "honeypot";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.HONEYPOT;
 		defaultAction = AC_THROW;
 		stackable = true;
@@ -138,9 +139,7 @@ public class Honeypot extends Item {
 
 	@Override
 	public String info() {
-		return "This large honeypot is only really lined with honey, instead it houses a giant bee! "
-				+ "These sorts of massive bees usually stay in their hives, perhaps the pot is some sort of specialized trapper's cage? "
-				+ "The bee seems pretty content inside the pot with its honey, and buzzes at you warily when you look at it.";
+		return Messages.get(this, "desc");
 	}
 
 	// The bee's broken 'home', all this item does is let its bee know where it
@@ -148,7 +147,7 @@ public class Honeypot extends Item {
 	public static class ShatteredPot extends Item {
 
 		{
-			name = "shattered honeypot";
+			name = Messages.get(this, "name");
 			image = ItemSpriteSheet.SHATTPOT;
 			stackable = false;
 		}
@@ -213,14 +212,7 @@ public class Honeypot extends Item {
 
 		@Override
 		public String info() {
-			String info = "The pot has been shattered, only the sticky honey that lines its walls is holding it together, and it is slowly coming apart.";
-
-			if (Actor.findById(myBee) != null)
-				info += "\n\nDespite its broken state, the bee still seems quite fond of the pot, and is understandably quite mad.";
-			else
-				info += "\n\nNow that its bee is gone, you can't think of a use for this wad of broken clay and drying honey.";
-
-			return info;
+			return Messages.get(this, "desc");
 		}
 
 		private static final String MYBEE = "mybee";

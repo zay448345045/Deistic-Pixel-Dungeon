@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Badges;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.scenes.GameScene;
@@ -27,20 +26,22 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.windows.WndBag;
 
+import java.util.ArrayList;
+
 public class UpgradeBlobRed extends Item {
 
-	private static final String TXT_SELECT = "Select an item to upgrade";
-	private static final String TXT_UPGRADED = "your %s certainly looks better";
+	private static final String TXT_SELECT = Messages.get(UpgradeBlobRed.class, "prompt");
+	private static final String TXT_UPGRADED = Messages.get(UpgradeBlobRed.class, "upgraded");
 
 	private static final float TIME_TO_INSCRIBE = 2;
 	
 	private static final int upgrades = 3;
-	
 
-	private static final String AC_INSCRIBE = "UPGRADE";
+
+	private static final String AC_INSCRIBE = Messages.get(UpgradeBlobRed.class, "ac");
 
 	{
-		name = "red upgrade goo";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.UPGRADEGOO_RED;
 
 		stackable = true;
@@ -108,7 +109,7 @@ public class UpgradeBlobRed extends Item {
 
 	@Override
 	public String info() {
-		return "This blob of red goo holds a powerful magic. It can upgrade your gear when applied. ";
+		return Messages.get(this, "desc");
 	}
 
 	private final WndBag.Listener itemSelector = new WndBag.Listener() {

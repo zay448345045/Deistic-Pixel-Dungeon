@@ -46,9 +46,9 @@ public class SpectralRat extends Mob  implements Callback {
 	{
 		name = Messages.get(this, "name");
 		spriteClass = SpectralRatSprite.class;
-		baseSpeed = 4f;
+		baseSpeed = 6f;
 
-		HP = HT = 80+(Dungeon.depth*Random.NormalIntRange(2, 5));
+		HP = HT = 80+(adj(1)*Random.NormalIntRange(2, 5));
 		defenseSkill = 2;
 		
 		loot = new Meat();
@@ -57,10 +57,10 @@ public class SpectralRat extends Mob  implements Callback {
 	}
 
 
-	
+
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(Dungeon.depth/2, Dungeon.depth);
+		return Random.NormalIntRange(10, 20)+(adj(0)+Random.NormalIntRange(1, 15));
 	}
 
 	@Override

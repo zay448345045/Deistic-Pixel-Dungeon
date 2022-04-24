@@ -3,7 +3,13 @@ package com.avmoga.dpixel.ui.changelist;
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.scenes.ChangesScene;
+import com.avmoga.dpixel.scenes.PixelScene;
+import com.avmoga.dpixel.sprites.GhostGnollSprite;
 import com.avmoga.dpixel.sprites.HermitCrabSprite;
+import com.avmoga.dpixel.sprites.ItemSprite;
+import com.avmoga.dpixel.sprites.ItemSpriteSheet;
+import com.avmoga.dpixel.sprites.KingSprite;
+import com.avmoga.dpixel.sprites.ShadowYogSprite;
 import com.avmoga.dpixel.ui.Icons;
 import com.avmoga.dpixel.ui.Window;
 import com.watabou.noosa.Image;
@@ -13,10 +19,86 @@ import java.util.ArrayList;
 public class v0_1_X_Changes{
 
     public static void addAllChanges( ArrayList<ChangeInfo> changeInfos ){
+        add_v0_3_0_Changes(changeInfos);
         add_v0_1_0_Changes(changeInfos);
     }
 
+    public static void add_v0_3_0_Changes( ArrayList<ChangeInfo> changeInfos ){
+        ChangeInfo changes = new ChangeInfo("CN-0.55自然之神的像素地牢", true, "");
+        changes.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes);
+
+        changes= new ChangeInfo( Messages.get( ChangesScene.class, "new"), false, null);
+        changes.hardlight( 0x00ff00 );
+        changeInfos.add(changes);
+
+        changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ARTIFACT_RADIO, null), "人族专属神器-通讯中继器",
+                "_-_ 修复了很多原版的问题\n" +
+                        "_-_ 正式实装在游戏里面\n" +
+                        "_-_ 汉化作者评估：T0神器"));
+
+        changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ARTIFACT_SHIELD, null), "矮人专属神器-战神锁链",
+                "_-_ 修复了很多原版的问题\n" +
+                        "_-_ 正式实装在游戏里面\n" +
+                        "_-_ 汉化作者评估：T3神器"));
+
+        changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ARTIFACT_WAMULET, null), "幽灵专属神器-幽灵金属护身符",
+                "_-_ 修复了很多原版的问题\n" +
+                        "_-_ 正式实装在游戏里面\n" +
+                        "_-_ 汉化作者评估：T0神器"));
+
+        changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ARTIFACT_ROOT, null), "豺狼专属神器-木质雕像",
+                "_-_ 修复了很多原版的问题\n" +
+                        "_-_ 正式实装在游戏里面\n" +
+                        "_-_ 汉化作者评估：T1神器"));
+
+        changes.addButton( new ChangeButton(Icons.get(Icons.PREFS), "杂项改动",
+                "_-_ 高亮模式回归！！！\n" +
+                        "种族全新的选择界面！！！"));
+
+        Image yog = new ShadowYogSprite();
+        yog.scale.set(PixelScene.align(0.75f));
+        changes.addButton(new ChangeButton(yog, ("暗影古神加强"),
+                "为了迎接即将到来的五一劳动节正式版，专属楼层音乐也在紧锣密鼓的制作中……\n\n" +
+                        "暗影古神和发芽原版有所不同，小心应对！"));
+
+        changes = new ChangeInfo( Messages.get( ChangesScene.class, "bugfixes"), false, null);
+        changes.hardlight( 0xffff00 );
+        changeInfos.add(changes);
+
+        changes.addButton(new ChangeButton(new Image(Assets.SPINNER, 144, 0, 16, 16), ("修复bug"),
+                "1.修复了卷轴烧毁崩溃的问题\n" +
+                        "2.其他问题修复\n" +
+                        "3.全部翻译！！！理论上！"));
+    }
+
+
     public static void add_v0_1_0_Changes( ArrayList<ChangeInfo> changeInfos ){
+
+
+        ChangeInfo changes9 = new ChangeInfo("CN-0.53自然之神的像素地牢", true,
+                "");
+        changes9.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes9);
+
+        changes9= new ChangeInfo( Messages.get( ChangesScene.class, "new"), false, null);
+        changes9.hardlight( 0x00ff00 );
+        changeInfos.add(changes9);
+
+        changes9.addButton(new ChangeButton(new GhostGnollSprite(), ("新内容"),
+                "1.更多的翻译追加了，翻译总进度95%\n" +
+                        "2.除矮人的神器以外，其他的神器均匀修复各种问题\n" +
+                        "3.新Buff,爆炸。解决炸弹花的逻辑问题"));
+
+        changes9 = new ChangeInfo( Messages.get( ChangesScene.class, "bugfixes"), false, null);
+        changes9.hardlight( 0xffff00 );
+        changeInfos.add(changes9);
+
+        changes9.addButton(new ChangeButton(new KingSprite(), ("修复bug"),
+                "1.修复矮人王某些时刻重新喊人血量变满的问题\n" +
+                        "2.修复部分楼层崩溃的问题\n" +
+                        "3.修复露珠调查员文案缺失问题和悲伤幽灵文本错误问题" +
+                        "4.校正错误的露珠文本"));
 
         ChangeInfo changes8 = new ChangeInfo("CN-0.52自然之神的像素地牢", true,
                 "");

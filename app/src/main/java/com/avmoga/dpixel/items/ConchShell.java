@@ -17,7 +17,6 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -25,28 +24,30 @@ import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.items.artifacts.DriedRose;
 import com.avmoga.dpixel.items.artifacts.TimekeepersHourglass;
 import com.avmoga.dpixel.scenes.InterlevelScene;
-import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.sprites.ItemSprite.Glowing;
+import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+
 public class ConchShell extends Item {
-	
-	private static final String TXT_PREVENTING = "Strong magic aura of this place prevents you from using the conch!";
-	private static final String TXT_PREVENTING2 = "You need to kill the crab king first!";
+
+	private static final String TXT_PREVENTING = "这里强大的魔法气息让你无法使用上古钥匙！";
+	private static final String TXT_PREVENTING2 = "你需要首先击败螃蟹王！";
 		
 	
 	public static final float TIME_TO_USE = 1;
 
-	public static final String AC_PORT = "OPEN PORTAL";
+	public static final String AC_PORT = "传送";
 
 	private int specialLevel = 38;
 	private int returnDepth = -1;
 	private int returnPos;
 
 	{
-		name = "conch shell";
+		name = "海滩之王";
 		image = ItemSpriteSheet.SHELL;
 
 		stackable = false;
@@ -159,7 +160,7 @@ public class ConchShell extends Item {
 	}
 
 
-	private static final Glowing BLACK = new Glowing(0x00000);
+	private static final Glowing BLACK = new Glowing(0x009999);
 
 	@Override
 	public Glowing glowing() {
@@ -168,6 +169,6 @@ public class ConchShell extends Item {
 
 	@Override
 	public String info() {
-		return "This shell radiates an eerie power. Blow through it to take you to the Crab King. ";
+		return "这个书页会使你传送至螃蟹王的所在地。";
 	}
 }

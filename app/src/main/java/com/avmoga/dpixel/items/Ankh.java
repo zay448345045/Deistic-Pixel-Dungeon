@@ -17,32 +17,31 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.Speck;
-import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.sprites.ItemSprite.Glowing;
+import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+
 public class Ankh extends Item {
 
-	public static final String AC_BLESS = "IMBUE";
+	public static final String AC_BLESS = Messages.get(Ankh.class, "ac_bless");
 
-	public static final String TXT_DESC_NOBLESS = "Upon resurrection all non-equipped items are lost. "
-			+ "Using drops of dew, the ankh can be imbued with extra strength.";
-	public static final String TXT_DESC_BLESSED = "The ankh has been imbued and is now much stronger. "
-			+ "The Ankh will sacrifice itself to save you in a moment of deadly peril.";
+	public static final String TXT_DESC_NOBLESS = Messages.get(Ankh.class, "desc");
+	public static final String TXT_DESC_BLESSED = Messages.get(Ankh.class, "desc_blessed");
 
-	public static final String TXT_BLESS = "You imbue the ankh with clean water.";
-	public static final String TXT_REVIVE = "The ankh explodes with life-giving energy!";
+	public static final String TXT_BLESS = Messages.get(Ankh.class, "bless");
+	public static final String TXT_REVIVE = Messages.get(Ankh.class, "revive");
 
 	{
-		name = "Ankh";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ANKH;
 
 		// You tell the ankh no, don't revive me, and then it comes back to
@@ -100,11 +99,9 @@ public class Ankh extends Item {
 	@Override
 	public String info() {
 		if (blessed)
-			return "This ancient symbol of immortality grants the ability to return to life after death. "
-					+ TXT_DESC_BLESSED;
+			return TXT_DESC_BLESSED;
 		else
-			return "This ancient symbol of immortality grants the ability to return to life after death. "
-					+ TXT_DESC_NOBLESS;
+			return TXT_DESC_NOBLESS;
 	}
 
 	public Boolean isBlessed() {

@@ -17,26 +17,28 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.levels.Terrain;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 
+import java.util.ArrayList;
+
 public class DwarfHammer extends Item {
 
-	private static final String TXT_PREVENTING = "This is not the place to use the hammer.";
-	private static final String TXT_UNSEAL = "You unseal the entrance to the next level.";
+	private static final String TXT_PREVENTING = Messages.get(DwarfHammer.class, "prevent");
+	private static final String TXT_UNSEAL = Messages.get(DwarfHammer.class, "unseal");
 	
 	public static final float TIME_TO_USE = 1;
 
-	public static final String AC_BREAK = "BREAK SEAL";
+
+	public static final String AC_BREAK = Messages.get(DwarfHammer.class, "ac");
 
 		{
-		name = "dwarf demon hammer";
+			name = Messages.get(this, "name");
 		image = ItemSpriteSheet.DWARFHAMMER;
 		unique = true;
 
@@ -118,11 +120,10 @@ public class DwarfHammer extends Item {
 		return true;
 	}
 
-		
+
 	@Override
 	public String info() {
-		return "Too fragile to use as a weapon, this magic hammer was used to seal the demons in this level. "
-			  +"Perhaps there is just enough magic left to unseal the next level... ";
+		return Messages.get(this, "desc");
 	}
 
 }

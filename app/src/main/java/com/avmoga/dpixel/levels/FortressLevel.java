@@ -17,19 +17,17 @@
  */
 package com.avmoga.dpixel.levels;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Challenges;
 import com.avmoga.dpixel.Dungeon;
-import com.avmoga.dpixel.actors.Actor;
-import com.avmoga.dpixel.actors.mobs.npcs.Tinkerer3;
-import com.avmoga.dpixel.items.Mushroom;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.items.Rice;
 import com.avmoga.dpixel.items.SanChikarahLife;
 import com.avmoga.dpixel.levels.Room.Type;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class FortressLevel extends RegularLevel {
 
@@ -174,22 +172,9 @@ public class FortressLevel extends RegularLevel {
 	@Override
 		protected void createItems() {
 		
-		addItemToSpawn(new Mushroom());
-		
-		Tinkerer3 npc = new Tinkerer3();
-		do {
-			npc.pos = randomRespawnCell();
-		} while (npc.pos == -1 || heaps.get(npc.pos) != null);
-		mobs.add(npc);
-		Actor.occupyCell(npc);
-
-		
 			super.createItems();
 
 			spawn(this, roomEntrance);
-			
-	
-			
 		}
 
 		public static void spawn(FortressLevel level, Room room) {
@@ -203,34 +188,29 @@ public class FortressLevel extends RegularLevel {
 	@Override
 	public String tileName(int tile) {
 		switch (tile) {
-		case Terrain.WATER:
-			return "Suspiciously colored water";
-		case Terrain.HIGH_GRASS:
-			return "High blooming flowers";
-		default:
-			return super.tileName(tile);
+			case Terrain.WATER:
+				return Messages.get(CityLevel.class, "water_name");
+			case Terrain.HIGH_GRASS:
+				return Messages.get(CityLevel.class, "high_grass_name");
+			default:
+				return super.tileName(tile);
 		}
 	}
 
 	@Override
 	public String tileDesc(int tile) {
 		switch (tile) {
-		case Terrain.ENTRANCE:
-			return "A ramp leads up to the upper depth.";
-		case Terrain.EXIT:
-			return "A ramp leads down to the lower depth.";
-		case Terrain.WALL_DECO:
-		case Terrain.EMPTY_DECO:
-			return "Several tiles are missing here.";
-		case Terrain.EMPTY_SP:
-			return "Thick carpet covers the floor.";
-		case Terrain.STATUE:
-		case Terrain.STATUE_SP:
-			return "The statue depicts some dwarf standing in a heroic stance.";
-		case Terrain.BOOKSHELF:
-			return "The rows of books on different disciplines fill the bookshelf.";
-		default:
-			return super.tileDesc(tile);
+			case Terrain.ENTRANCE:
+				return Messages.get(CityLevel.class, "entrance_desc");
+			case Terrain.EXIT:
+				return Messages.get(CityLevel.class, "exit_desc");
+			case Terrain.WALL_DECO:
+			case Terrain.EMPTY_DECO:
+				return Messages.get(CityLevel.class, "deco_desc");
+			case Terrain.EMPTY_SP:
+				return Messages.get(CityLevel.class, "sp_desc");
+			default:
+				return super.tileDesc(tile);
 		}
 	}
 

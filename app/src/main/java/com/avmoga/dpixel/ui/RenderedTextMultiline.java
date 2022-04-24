@@ -177,5 +177,11 @@ public class RenderedTextMultiline extends Component {
         }
         this.height = (y - this.y) + height + 0.5f;
     }
+
+    public class LineSplitter {
+        public RenderedText[] split() {
+            return null;
+        }
+    }
 }
 

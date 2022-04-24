@@ -16,7 +16,20 @@ import com.watabou.utils.Bundle;
 
 public enum HeroRace {
 	
-	DWARF("dwarf"), HUMAN("human"), WRAITH("wraith"), GNOLL("gnoll");
+	DWARF("dwarf"), HUMAN("human"), WRAITH("wraith"), GNOLL("gnoll"),D("A");
+
+	public String spritesheet() {
+		switch (this) {
+			case HUMAN: default:
+				return Assets.HUMANWARRIOR;
+			case DWARF:
+				return Assets.HUMANMAGE;
+			case WRAITH:
+				return Assets.HUMANROGUE;
+			case GNOLL:
+				return Assets.HUMANHUNTRESS;
+		}
+	}
 	
 	public String title;
 	public static HeroRace race;

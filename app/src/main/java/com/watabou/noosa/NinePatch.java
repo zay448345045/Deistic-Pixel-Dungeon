@@ -156,6 +156,10 @@ public class NinePatch extends Visual {
 		return width - marginRight;
 	}
 
+	public float innerLeft() {
+		return width - marginLeft;
+	}
+
 	public float innerBottom() {
 		return height - marginBottom;
 	}

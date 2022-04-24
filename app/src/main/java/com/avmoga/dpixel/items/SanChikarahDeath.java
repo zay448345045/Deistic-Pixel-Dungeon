@@ -24,7 +24,7 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 public class SanChikarahDeath extends Item {
 
 	{
-		name = "SanChikarah of Death";
+		name = "三相之力死亡碎片";
 		image = ItemSpriteSheet.SANCHIKARAH;
 
 		stackable = false;
@@ -62,6 +62,6 @@ public class SanChikarahDeath extends Item {
 
 	@Override
 	public String info() {
-		return "A powerful piece of the puzzle. Three pieces will need to be forged together.";
+		return "一个强力碎片。三个碎片需要被拼在一起来发挥作用。";
 	}
 }

@@ -4,7 +4,7 @@ import java.util.Locale;
 
 public enum Languages {
     ENGLISH("english", "", Status.REVIEWED, null, null),
-    CHINESE("中文", "zh", Status.UNREVIEWED, new String[]{"JDSALing"},
+    CHINESE("中文", "zh", Status.REVIEWED, new String[]{"JDSALing"},
             new String[]{"JDSALing", "g2159687-_发芽汉化文本_","Catand-_告示牌翻译_","不败星辰-_杂项翻译_","洛小乐-_角色贴图处理-杂项翻译_","仓鼠-_主要翻译_\n" +
                     "\n_特别鸣谢：\n_" +
                     "-G21" +

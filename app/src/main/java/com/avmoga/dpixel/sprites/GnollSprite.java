@@ -22,6 +22,9 @@ import com.watabou.noosa.TextureFilm;
 
 public class GnollSprite extends MobSprite {
 
+	private static final int FRAME_WIDTH = 12;
+	private static final int FRAME_HEIGHT = 15;
+
 	public GnollSprite() {
 		super();
 

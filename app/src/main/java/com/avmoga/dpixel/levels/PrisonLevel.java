@@ -20,6 +20,7 @@ package com.avmoga.dpixel.levels;
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.DungeonTilemap;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.hero.HeroClass;
 import com.avmoga.dpixel.actors.mobs.MossySkeleton;
@@ -166,22 +167,22 @@ public class PrisonLevel extends RegularLevel {
 	@Override
 	public String tileName(int tile) {
 		switch (tile) {
-		case Terrain.WATER:
-			return "Dark cold water.";
-		default:
-			return super.tileName(tile);
+			case Terrain.WATER:
+				return Messages.get(PrisonLevel.class, "water_name");
+			default:
+				return super.tileName(tile);
 		}
 	}
 
 	@Override
 	public String tileDesc(int tile) {
 		switch (tile) {
-		case Terrain.EMPTY_DECO:
-			return "There are old blood stains on the floor.";
-		case Terrain.BOOKSHELF:
-			return "This is probably a vestige of a prison library. Might it burn?";
-		default:
-			return super.tileDesc(tile);
+			case Terrain.EMPTY_DECO:
+				return Messages.get(PrisonLevel.class, "empty_deco_desc");
+			case Terrain.BOOKSHELF:
+				return Messages.get(PrisonLevel.class, "bookshelf_desc");
+			default:
+				return super.tileDesc(tile);
 		}
 	}
 

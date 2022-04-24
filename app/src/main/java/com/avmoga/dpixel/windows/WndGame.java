@@ -19,14 +19,9 @@ package com.avmoga.dpixel.windows;
 
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
-import com.avmoga.dpixel.ShatteredPixelDungeon;
 import com.avmoga.dpixel.scenes.GameScene;
-import com.avmoga.dpixel.scenes.InterlevelScene;
-import com.avmoga.dpixel.scenes.RankingsScene;
-import com.avmoga.dpixel.scenes.StartScene;
 import com.avmoga.dpixel.scenes.TitleScene;
 import com.avmoga.dpixel.ui.GameLog;
-import com.avmoga.dpixel.ui.Icons;
 import com.avmoga.dpixel.ui.RedButton;
 import com.avmoga.dpixel.ui.Window;
 import com.watabou.noosa.Game;
@@ -74,25 +69,6 @@ public class WndGame extends Window {
 		}
 
 		// Restart
-		if (!Dungeon.hero.isAlive()) {
-
-			RedButton btnStart;
-			addButton(btnStart = new RedButton(TXT_START) {
-				@Override
-				protected void onClick() {
-					ShatteredPixelDungeon.switchNoFade(StartScene.class);
-				}
-			});
-			btnStart.icon(Icons.get(Dungeon.hero.heroClass));
-
-			addButton(new RedButton(TXT_RANKINGS) {
-				@Override
-				protected void onClick() {
-					InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
-					Game.switchScene(RankingsScene.class);
-				}
-			});
-		}
 
 		addButtons(
 		// Main menu

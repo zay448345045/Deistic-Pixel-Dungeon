@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.mobs.npcs.SeekingClusterBombNPC;
@@ -27,10 +26,12 @@ import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class SeekingClusterBombItem extends Item {
 
 	{
-		name = "seeking cluster bomb";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SEEKING_CLUSTER_BOMB;
 		defaultAction = AC_LIGHTTHROW;
 		stackable = true;
@@ -107,7 +108,7 @@ public class SeekingClusterBombItem extends Item {
 
 	@Override
 	public String info() {
-		return "A destructive powerful bomb with internal magic machinery. Releasing it will send it after enemies.";
+		return Messages.get(this, "desc");
 	}
 
 	

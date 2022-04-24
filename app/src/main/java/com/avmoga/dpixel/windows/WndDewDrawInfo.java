@@ -17,7 +17,6 @@
  */
 package com.avmoga.dpixel.windows;
 
-import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.items.DewVial;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.scenes.PixelScene;
@@ -31,15 +30,20 @@ public class WndDewDrawInfo extends Window {
 	
 	//if people don't get it after this, I quit. I just quit.
 
-	private static final String TXT_MESSAGE = Messages.get(WndDewDrawInfo.class, "msg1");
+	private static final String TXT_MESSAGE = "浇灌露水可以让特殊级别的生物滴露水来装满你的小瓶。"
+			+"此外，您的角色在每个正常级别开始时都会获得露珠充能 "
+			+"只要你带上露水瓶，敌人死亡就会掉落露水来装满你的瓶子。 ";
 
-	private static final String TXT_MESSAGE2 = Messages.get(WndDewDrawInfo.class, "msg2");
+	private static final String TXT_MESSAGE2 = "每个级别的露水都会向您充能的一定数量的露珠能量。 \n" +
+			"每个级别还有一个移动目标，用于杀死所有常规生成的敌人。（不是像雕像和食人鱼这样的特殊敌人）\n" +
+			"杀死所有随关卡生成的常规敌人会有额外加成。";
 
-	private static final String TXT_MESSAGE3 = Messages.get(WndDewDrawInfo.class, "msg3");
+	private static final String TXT_MESSAGE3 = "如果您以少于目标的步数清除一个级别，则额外的步数将添加到您的下一个级别的露水充能中。 \n" +
+			"你需要尽快通关才能获得升级。";
 
-	private static final String TXT_MESSAGE4 = Messages.get(WndDewDrawInfo.class, "msg4");
+	private static final String TXT_MESSAGE4 = "露水瓶还允许您选择在祝福时应用升级的项目。";
 
-	private static final String TXT_WATER = Messages.get(WndDewDrawInfo.class, "ok");
+	private static final String TXT_WATER = "好的，我明白了";
 
 
 	private static final int WIDTH = 120;

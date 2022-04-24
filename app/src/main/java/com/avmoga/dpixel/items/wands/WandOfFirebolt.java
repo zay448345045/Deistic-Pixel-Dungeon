@@ -17,6 +17,8 @@
  */
 package com.avmoga.dpixel.items.wands;
 
+import static com.avmoga.dpixel.Dungeon.hero;
+
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
@@ -68,17 +70,20 @@ public class WandOfFirebolt extends Wand {
 		if (ch != null) {
 
 			int damage= Random.Int(1, 8 + level * level);
-	        if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
+	        if (hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(hero, Strength.class);}
 			ch.damage(damage, this);
 			
 			if (damage>255){
-				GLog.n("你的火弩箭魔杖正在燃烧你的双手！");
+				GLog.n("你的火球魔杖正在燃烧你的双手！");
+				explode(curUser.pos, damage);
+				Buff.affect(hero, Burning.class).reignite(ch);
 			}
 			
 			float backfireChance = Math.max(((damage-255)/10000),0);
 			
 			if (Random.Float() < backfireChance){
 				backfire(damage);
+				Buff.affect(hero, Burning.class).reignite(ch);
 			}
 	
 			Buff.affect(ch, Burning.class).reignite(ch);
@@ -95,7 +100,7 @@ public class WandOfFirebolt extends Wand {
 	public void backfire(int damage){
 		wandEmpty();
 		explode(curUser.pos, damage);
-		GLog.n("Your wand of firebolt backfires!");
+		GLog.n("你被法杖反噬了……");
 	}
 	
 	public void explode(int cell, int damage) {
@@ -130,8 +135,8 @@ public class WandOfFirebolt extends Wand {
 				if (ch != null) {
 					// those not at the center of the blast take damage less
 					// consistently.
-					int minDamage = c == cell ? Math.round(damage/10) : 1;
-					int maxDamage = c == cell ? Math.round(damage/4) : Math.round(damage/10);
+					int minDamage = c == cell ? Math.round(damage/10*hero.HT) : 1;
+					int maxDamage = c == cell ? Math.round(damage*10*hero.HT) : Math.round(damage/5);
 
 					int dmg = Random.NormalIntRange(minDamage, maxDamage)
 							- Random.Int(ch.dr());
@@ -139,7 +144,7 @@ public class WandOfFirebolt extends Wand {
 						ch.damage(dmg, this);
 					}
 
-					if (ch == Dungeon.hero && !ch.isAlive())
+					if (ch == hero && !ch.isAlive())
 						// constant is used here in the rare instance a player
 						// is killed by a double bomb.
 						Dungeon.fail(Utils.format(ResultDescriptions.ITEM,"wand of firebolt"));
@@ -160,8 +165,6 @@ public class WandOfFirebolt extends Wand {
 
 	@Override
 	public String desc() {
-		return "This wand unleashes bursts of magical fire. It will ignite "
-				+ "flammable terrain, and will damage and burn a creature it hits."
-				+ "It is very unstable at higher levels. Use with caution.";
+		return Messages.get(this, "desc", 1, 8 + level() * level());
 	}
 }

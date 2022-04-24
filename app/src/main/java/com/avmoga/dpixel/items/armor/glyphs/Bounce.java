@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.armor.glyphs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.mobs.Mob;
@@ -29,8 +30,7 @@ import com.watabou.utils.Random;
 
 public class Bounce extends Glyph {
 
-	private static final String TXT_BOUNCE = "%s of bounce";
-
+	private static final String TXT_BOUNCE = Messages.get(Bounce.class, "name");
 	@Override
 	public int proc(Armor armor, Char attacker, Char defender, int damage) {
 

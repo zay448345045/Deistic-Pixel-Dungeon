@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.mobs.npcs.MirrorImage;
@@ -28,10 +27,12 @@ import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class SeekingBombItem extends Item {
 
 	{
-		name = "seeking bomb";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SEEKING_BOMB;
 		defaultAction = AC_LIGHTTHROW;
 		stackable = true;
@@ -43,7 +44,7 @@ public class SeekingBombItem extends Item {
 	// way
 	private static boolean seek = false;
 
-	private static final String AC_LIGHTTHROW = "Light & Throw";
+	private static final String AC_LIGHTTHROW = Messages.get(SeekingBombItem.class, "ac");
 	
 
 	@Override
@@ -109,7 +110,7 @@ public class SeekingBombItem extends Item {
 
 	@Override
 	public String info() {
-		return "A bomb with internal magic machinery. Releasing it will send it after enemies.";
+		return Messages.get(this, "desc");
 	}
 
 	

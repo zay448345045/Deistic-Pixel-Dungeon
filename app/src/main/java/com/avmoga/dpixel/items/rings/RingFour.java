@@ -20,7 +20,6 @@ import com.avmoga.dpixel.items.artifacts.DriedRose;
 import com.avmoga.dpixel.items.artifacts.HornOfPlenty;
 import com.avmoga.dpixel.items.artifacts.MasterThievesArmband;
 import com.avmoga.dpixel.items.artifacts.MysticBranch;
-import com.avmoga.dpixel.items.artifacts.Rapper;
 import com.avmoga.dpixel.items.artifacts.RingOfDisintegration;
 import com.avmoga.dpixel.items.artifacts.SandalsOfNature;
 import com.avmoga.dpixel.items.artifacts.TalismanOfForesight;
@@ -65,7 +64,6 @@ public class RingFour extends KindofMisc {
             HornOfPlenty.class,
             MasterThievesArmband.class,
             MysticBranch.class,
-            Rapper.class,
             RingOfDisintegration.class,
             SandalsOfNature.class,
             TalismanOfForesight.class,
@@ -80,7 +78,6 @@ public class RingFour extends KindofMisc {
             Messages.get(Ring.class, "ruby"),
             Messages.get(Ring.class, "amethyst"),
             Messages.get(Ring.class, "diamond"),
-            Messages.get(Ring.class, "opal"),
             Messages.get(Ring.class, "garnet"),
             Messages.get(Ring.class, "ruby"),
             Messages.get(Ring.class, "amethyst"),
@@ -101,7 +98,7 @@ public class RingFour extends KindofMisc {
             ItemSpriteSheet.RING_SAPPHIRE, ItemSpriteSheet.RING_QUARTZ,
             ItemSpriteSheet.RING_AGATE, ItemSpriteSheet.RING_DIAMOND,
             ItemSpriteSheet.RING_OPAL, ItemSpriteSheet.RING_GARNET,
-            ItemSpriteSheet.RING_RUBY, ItemSpriteSheet.RING_AMETHYST,
+            ItemSpriteSheet.RING_RUBY,
     };
 
     private static ItemStatusHandler<RingFour> handler;

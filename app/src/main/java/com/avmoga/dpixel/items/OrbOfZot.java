@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -29,12 +28,14 @@ import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class OrbOfZot extends Item {
 
 	//private static final String AC_END = "END THE GAME";
 
 	{
-		name = "Orb Of Zot";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ORBOFZOT;
 		defaultAction = AC_ACTIVATETHROW;
 		unique = true;
@@ -44,7 +45,7 @@ public class OrbOfZot extends Item {
 	
 	private static boolean activate = false;
 
-	private static final String AC_ACTIVATETHROW = "Activate & Throw";
+	private static final String AC_ACTIVATETHROW = Messages.get(OrbOfZot.class, "ac1");
 	
 	
 	@Override
@@ -129,7 +130,6 @@ public class OrbOfZot extends Item {
 
 	@Override
 	public String info() {
-		return "The Orb of Zot is source of unlimited power created by the wizard Zot. "
-				+ "Apparently, Yog was harnessing its power to infest the dungeon. ";
+		return Messages.get(this, "desc");
 	}
 }

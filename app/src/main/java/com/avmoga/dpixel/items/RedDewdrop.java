@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.hero.HeroClass;
 import com.avmoga.dpixel.effects.Speck;
@@ -31,7 +32,7 @@ public class RedDewdrop extends Item {
 	private static final String TXT_VALUE = "%+dHP";
 
 	{
-		name = "red dewdrop";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.REDDEWDROP;
 
 		stackable = true;
@@ -70,6 +71,6 @@ public class RedDewdrop extends Item {
 
 	@Override
 	public String info() {
-		return "A crystal clear dewdrop.";
+		return Messages.get(this, "desc");
 	}
 }

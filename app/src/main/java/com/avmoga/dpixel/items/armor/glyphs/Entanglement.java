@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.armor.glyphs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Roots;
@@ -32,7 +33,7 @@ import com.watabou.utils.Random;
 
 public class Entanglement extends Glyph {
 
-	private static final String TXT_ENTANGLEMENT = "%s of entanglement";
+	private static final String TXT_ENTANGLEMENT = Messages.get(Entanglement.class, "name");
 
 	private static ItemSprite.Glowing GREEN = new ItemSprite.Glowing(0x448822);
 

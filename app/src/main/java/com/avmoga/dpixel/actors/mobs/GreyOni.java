@@ -33,7 +33,7 @@ public class GreyOni extends Mob {
 		spriteClass = GreyOniSprite.class;
 		state = SLEEPING;
 
-		HP = HT = 500;
+		HP = HT = 200;
 		defenseSkill = 35;
 
 		EXP = 22;		
@@ -41,7 +41,7 @@ public class GreyOni extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(55, 115);
+		return Random.NormalIntRange(50, 150);
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class GreyOni extends Mob {
 
 	@Override
 	protected float attackDelay() {
-		return 1.5f;
+		return 2f;
 	}
 
 	@Override

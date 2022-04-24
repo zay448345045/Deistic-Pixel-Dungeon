@@ -40,7 +40,7 @@ public class HuntressArmor extends ClassArmor {
 	private static final String AC_SPECIAL = Messages.get(HuntressArmor.class, "ac_special");
 
 	{
-		name = "huntress cloak";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARMOR_HUNTRESS;
 	}
 

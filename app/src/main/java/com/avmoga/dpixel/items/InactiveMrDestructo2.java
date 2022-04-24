@@ -17,12 +17,13 @@
  */
 package com.avmoga.dpixel.items;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class InactiveMrDestructo2 extends Item {
 
 	{
-		name = "inactive mr destructo 2.0";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.INACTIVEMRD2;
 		stackable = true;
 	}
@@ -37,10 +38,10 @@ public class InactiveMrDestructo2 extends Item {
 		return true;
 	}
 
-	
+
 	@Override
 	public String info() {
-		return "Mr Destructo has gone inactive. Maybe there is a way to recharge him.";
+		return Messages.get(this, "desc");
 	}
 
 	

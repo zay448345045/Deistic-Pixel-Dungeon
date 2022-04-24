@@ -48,8 +48,8 @@ public class ShadowYog extends Mob  {
 	{
 		name = Messages.get(this, "name");
 		spriteClass = ShadowYogSprite.class;
-
-		HP = HT = adj(2)*50*Dungeon.hero.lvl;
+		//END,PLAYS YOU CAN DIED END BOSS?
+		HP = HT = 4*50*Dungeon.hero.lvl;
 		
 		baseSpeed = 2f;
 		defenseSkill = 32;
@@ -157,7 +157,7 @@ public class ShadowYog extends Mob  {
 			Dungeon.level.drop(new OrbOfZot(), pos).sprite.drop();
 			
 			for (Mob mob : (Iterable<Mob>) Dungeon.level.mobs.clone()) {
-				if (mob instanceof Rat || mob instanceof GreyOni || mob instanceof SpectralRat || mob instanceof Eye) {
+				if (mob instanceof Rat || mob instanceof GreyOni || mob instanceof SpectralRat || mob instanceof Eye|| mob instanceof BrokenRobot|| mob instanceof Shaman|| mob instanceof DemonGoo|| mob instanceof Yog) {
 					mob.die(cause);
 				}
 			}

@@ -18,6 +18,7 @@
 package com.avmoga.dpixel.items.armor.glyphs;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.effects.Lightning;
 import com.avmoga.dpixel.items.armor.Armor;
@@ -31,7 +32,7 @@ import com.watabou.utils.Random;
 
 public class Potential extends Glyph {
 
-	private static final String TXT_POTENTIAL = "%s of potential";
+	private static final String TXT_POTENTIAL = Messages.get(Potential.class, "name");
 
 	private static ItemSprite.Glowing BLUE = new ItemSprite.Glowing(0x66CCEE);
 

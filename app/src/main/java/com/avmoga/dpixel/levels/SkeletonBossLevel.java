@@ -20,6 +20,7 @@ package com.avmoga.dpixel.levels;
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Bones;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.mobs.Mob;
@@ -257,29 +258,28 @@ public class SkeletonBossLevel extends Level {
 		return cell / getWidth() < arenaDoor / getWidth();
 	}
 
-	@Override
 	public String tileName(int tile) {
 		switch (tile) {
-		case Terrain.WATER:
-			return "Dark cold water.";
-		case Terrain.HIGH_GRASS:
-			return "Ancient pottery.";
-		default:
-			return super.tileName(tile);
+			case Terrain.WATER:
+				return Messages.get(SewerLevel.class, "water_name");
+			case Terrain.HIGH_GRASS:
+				return Messages.get(SkeletonBossLevel.class, "high_grass_name");
+			default:
+				return super.tileName(tile);
 		}
 	}
 
 	@Override
 	public String tileDesc(int tile) {
 		switch (tile) {
-		case Terrain.EMPTY_DECO:
-			return "Oddly shaped bones are piled up here. Good thing they are not animated. ";
-		case Terrain.HIGH_GRASS:
-			return "Ancient pottery litters the floor.";
-		case Terrain.BOOKSHELF:
-			return "The bookshelf is packed with cheap useless books. Might it burn?";
-		default:
-			return super.tileDesc(tile);
+			case Terrain.EMPTY_DECO:
+				return Messages.get(SkeletonBossLevel.class, "empty_deco_desc");
+			case Terrain.HIGH_GRASS:
+				return Messages.get(SkeletonBossLevel.class, "high_grass_desc");
+			case Terrain.BOOKSHELF:
+				return Messages.get(SewerLevel.class, "bookshelf_desc");
+			default:
+				return super.tileDesc(tile);
 		}
 	}
 

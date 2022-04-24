@@ -19,12 +19,9 @@ package com.avmoga.dpixel.levels;
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.DungeonTilemap;
-import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.hero.HeroClass;
 import com.avmoga.dpixel.actors.mobs.npcs.Blacksmith;
-import com.avmoga.dpixel.actors.mobs.npcs.Tinkerer2;
 import com.avmoga.dpixel.items.Bomb;
-import com.avmoga.dpixel.items.Mushroom;
 import com.avmoga.dpixel.levels.Room.Type;
 import com.avmoga.dpixel.levels.painters.Painter;
 import com.watabou.noosa.Game;
@@ -72,17 +69,6 @@ public class CavesLevel extends RegularLevel {
 
 	@Override
 	protected void createItems() {
-		
-		if (Dungeon.depth == 12){
-			addItemToSpawn(new Mushroom());
-			Tinkerer2 npc = new Tinkerer2();
-			do {
-				npc.pos = randomRespawnCell();
-			} while (npc.pos == -1 || heaps.get(npc.pos) != null);
-			mobs.add(npc);
-			Actor.occupyCell(npc);
-		}
-
 		if (Dungeon.hero.heroClass==HeroClass.ROGUE && Random.Int(3) == 0){addItemToSpawn(new Bomb());}
 		super.createItems();
 	}

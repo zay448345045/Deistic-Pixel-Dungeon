@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.armor.glyphs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Hunger;
 import com.avmoga.dpixel.effects.Speck;
@@ -30,7 +31,7 @@ import com.watabou.utils.Random;
 
 public class Metabolism extends Glyph {
 
-	private static final String TXT_METABOLISM = "%s of metabolism";
+	private static final String TXT_METABOLISM = Messages.get(Metabolism.class, "name");
 
 	private static ItemSprite.Glowing RED = new ItemSprite.Glowing(0xCC0000);
 

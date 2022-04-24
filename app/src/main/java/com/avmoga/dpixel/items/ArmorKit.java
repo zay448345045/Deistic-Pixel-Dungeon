@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.items.armor.Armor;
@@ -31,17 +30,19 @@ import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
 
+import java.util.ArrayList;
+
 public class ArmorKit extends Item {
 
-	private static final String TXT_SELECT_ARMOR = "Select an armor to upgrade";
-	private static final String TXT_UPGRADED = "you applied the armor kit to upgrade your %s";
+	private static final String TXT_SELECT_ARMOR = Messages.get(ArmorKit.class, "prompt");
+	private static final String TXT_UPGRADED = Messages.get(ArmorKit.class, "upgraded");
 
 	private static final float TIME_TO_UPGRADE = 2;
 
-	private static final String AC_APPLY = "APPLY";
+	private static final String AC_APPLY = Messages.get(ArmorKit.class, "ac_apply");
 
 	{
-		name = "armor kit";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.KIT;
 
 		unique = true;
@@ -109,9 +110,7 @@ public class ArmorKit extends Item {
 
 	@Override
 	public String info() {
-		return "Using this kit of small tools and materials anybody can transform any armor into an \"epic armor\", "
-				+ "which will keep all properties of the original armor, but will also provide its wearer a special ability "
-				+ "depending on his class. No skills in tailoring, leatherworking or blacksmithing are required.";
+		return Messages.get(this, "desc");
 	}
 
 	private final WndBag.Listener itemSelector = new WndBag.Listener() {

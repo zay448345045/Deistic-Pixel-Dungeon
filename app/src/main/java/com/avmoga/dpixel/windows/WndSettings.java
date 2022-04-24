@@ -175,6 +175,18 @@ public class WndSettings extends WndTabbed {
 			chkFont.checked(!ShatteredPixelDungeon.classicFont());
 			add(chkFont);
 
+			CheckBox btnBrightness = new CheckBox("高亮模式") {
+				@Override
+				protected void onClick() {
+					super.onClick();
+					ShatteredPixelDungeon.brightness(checked());
+				}
+			};
+			btnBrightness
+					.setRect(0, btnSound.bottom() + GAP, WIDTH, BTN_HEIGHT);
+			btnBrightness.checked(ShatteredPixelDungeon.brightness());
+			add(btnBrightness);
+
 			CheckBox btnImmersive = new CheckBox(TXT_IMMERSIVE) {
 				@Override
 				protected void onClick() {

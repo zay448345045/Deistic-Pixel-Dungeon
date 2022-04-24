@@ -22,7 +22,7 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 public class AdamantWeapon extends Item {
 
 		{
-		name = "adamantite weapon";
+		name = "精金武器";
 		image = ItemSpriteSheet.ADAMANT_WEAPON;
 
 		unique = true;
@@ -43,7 +43,7 @@ public class AdamantWeapon extends Item {
 	
 	@Override
 	public String info() {
-		return "A blade from an ancient weapon made of a dull grey ore.";
+		return "这是一个由暗灰色矿石制作的古代武器。";
 	}
 	
 }

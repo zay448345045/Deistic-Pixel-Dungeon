@@ -123,6 +123,7 @@ public class Assets {
 
 	public static final String RAT = "rat.png";
 	public static final String GNOLL = "gnoll.png";
+	public static final String GNOLLGHOST = "gnollost.png";
 	public static final String GNOLLARCHER = "gnollarcher.png";
 	public static final String CRAB = "crab.png";
 	public static final String GOO = "goo.png";

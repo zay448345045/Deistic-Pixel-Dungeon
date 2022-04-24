@@ -79,10 +79,9 @@ public class Burning extends Buff implements Hero.Doom {
 				Hero hero = (Hero) target;
 				Item item = hero.belongings.randomUnequipped();
 				if (item instanceof Scroll) {
-					item.detonateIn(hero);
+					//item.detonateIn(hero);
 					item = item.detach(hero.belongings.backpack);
 					GLog.w(Messages.get(this, "up"), item.toString());
-
 					Heap.burnFX(hero.pos);
 
 				} else if (item instanceof MysteryMeat) {
@@ -156,6 +155,5 @@ public class Burning extends Buff implements Hero.Doom {
 		Badges.validateDeathFromFire();
 		GLog.n(Messages.get(this, "die"));
 		Dungeon.fail(ResultDescriptions.BURNING);
-		GLog.n(TXT_BURNED_TO_DEATH);
 	}
 }

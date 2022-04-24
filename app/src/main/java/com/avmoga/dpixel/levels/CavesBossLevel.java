@@ -20,6 +20,7 @@ package com.avmoga.dpixel.levels;
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Bones;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.mobs.Bestiary;
@@ -304,30 +305,30 @@ public class CavesBossLevel extends Level {
 	@Override
 	public String tileName(int tile) {
 		switch (tile) {
-		case Terrain.GRASS:
-			return "Fluorescent moss";
-		case Terrain.HIGH_GRASS:
-			return "Fluorescent mushrooms";
-		case Terrain.WATER:
-			return "Freezing cold water.";
-		default:
-			return super.tileName(tile);
+			case Terrain.GRASS:
+				return Messages.get(CavesLevel.class, "grass_name");
+			case Terrain.HIGH_GRASS:
+				return Messages.get(CavesLevel.class, "high_grass_name");
+			case Terrain.WATER:
+				return Messages.get(CavesLevel.class, "water_name");
+			default:
+				return super.tileName(tile);
 		}
 	}
 
 	@Override
 	public String tileDesc(int tile) {
 		switch (tile) {
-		case Terrain.ENTRANCE:
-			return "The ladder leads up to the upper depth.";
-		case Terrain.EXIT:
-			return "The ladder leads down to the lower depth.";
-		case Terrain.HIGH_GRASS:
-			return "Huge mushrooms block the view.";
-		case Terrain.WALL_DECO:
-			return "A vein of some ore is visible on the wall. Gold?";
-		default:
-			return super.tileDesc(tile);
+			case Terrain.ENTRANCE:
+				return Messages.get(CavesLevel.class, "entrance_desc");
+			case Terrain.EXIT:
+				return Messages.get(CavesLevel.class, "exit_desc");
+			case Terrain.HIGH_GRASS:
+				return Messages.get(CavesLevel.class, "high_grass_desc");
+			case Terrain.WALL_DECO:
+				return Messages.get(CavesLevel.class, "wall_deco_desc");
+			default:
+				return super.tileDesc(tile);
 		}
 	}
 

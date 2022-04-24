@@ -232,8 +232,9 @@ public class Bestiary {
 				classes = new Class<?>[] { FlyingProtector.class };
 			    break;
 			case 35:
-				chances = new float[] {1, 1 };
-				classes = new Class<?>[] {GreyOni.class, SpectralRat.class };
+				chances = new float[] {10, 10, 10, 10, 10 };
+				classes = new Class<?>[] {GreyOni.class, SpectralRat.class ,DemonGoo.class,BrokenRobot.class,
+						Shaman.class};
 			    break;
 			case 36:
 				chances = new float[] {1};

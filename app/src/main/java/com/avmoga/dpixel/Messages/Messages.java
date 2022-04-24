@@ -1,6 +1,7 @@
 package com.avmoga.dpixel.Messages;
 
 import com.avmoga.dpixel.ShatteredPixelDungeon;
+import com.avmoga.dpixel.utils.GLog;
 
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -74,15 +75,19 @@ public class Messages {
      * Resource grabbing methods
      */
 
-    public static String get(String key, Object... args) {
+    public static String get(String key, Object...args){
         return get(null, key, args);
     }
 
-    public static String get(Object o, String k, Object... args) {
+    public static String get(Object o, String k, Object...args){
         return get(o.getClass(), k, args);
     }
 
-    public static String get(Class c, String k, Object... args) {
+    public static String get(Class c, String k, Object...args) {
+        return get(c, k, null, args);
+    }
+
+    public static String get(Class c, String k, String baseName, Object... args) {
         String key;
         if (c != null) {
             key = c.getName().replace("com.avmoga.dpixel.", "");
@@ -94,13 +99,18 @@ public class Messages {
             if (args.length > 0) return format(strings.get(key.toLowerCase(Locale.ENGLISH)), args);
             else return strings.get(key.toLowerCase(Locale.ENGLISH));
         } else {
+            if (baseName == null) {
+                baseName = key;
+            }
             //this is so child classes can inherit properties from their parents.
             //in cases where text is commonly grabbed as a utility from classes that aren't mean to be instantiated
             //(e.g. flavourbuff.dispTurns()) using .class directly is probably smarter to prevent unnecessary recursive calls.
-            if (c != null && c.getSuperclass() != null) {
-                return get(c.getSuperclass(), k, args);
+            if (c != null && c.getSuperclass() != null){
+                return get(c.getSuperclass(), k, baseName, args);
             } else {
-                return "!!!NO TEXT FOUND!!!";
+                String name = "文本缺失，发送截图: "+baseName;
+                GLog.p(name);
+                return name;
             }
         }
     }

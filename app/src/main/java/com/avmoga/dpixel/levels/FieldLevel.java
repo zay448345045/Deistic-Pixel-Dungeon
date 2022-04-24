@@ -19,6 +19,7 @@ package com.avmoga.dpixel.levels;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.mobs.Bestiary;
@@ -160,30 +161,31 @@ public class FieldLevel extends Level {
 	//}
 
 
-	
-	
+
+
 	@Override
 	public String tileName(int tile) {
 		switch (tile) {
-		case Terrain.WATER:
-			return "Murky water";
-		default:
-			return super.tileName(tile);
+			case Terrain.BARRICADE:
+				return Messages.get(FieldLevel.class, "barricade_name");
+			default:
+				return super.tileName(tile);
 		}
 	}
 
 	@Override
 	public String tileDesc(int tile) {
 		switch (tile) {
-		case Terrain.EMPTY_DECO:
-			return "The grass is worn away to reveal bedrock.";
-		case Terrain.BOOKSHELF:
-			return "The bookshelf is packed with cheap useless books. Might it burn?";
-		default:
-			return super.tileDesc(tile);
+			case Terrain.EMPTY_DECO:
+				return Messages.get(FieldLevel.class, "emptydeco_desc");
+			case Terrain.BARRICADE:
+				return Messages.get(FieldLevel.class, "barricade_desc");
+			case Terrain.SHRUB:
+				return Messages.get(FieldLevel.class, "shrub_desc");
+			default:
+				return super.tileDesc(tile);
 		}
 	}
-
 
 	@Override
 	public void addVisuals(Scene scene) {

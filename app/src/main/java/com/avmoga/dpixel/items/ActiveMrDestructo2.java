@@ -17,8 +17,6 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -27,10 +25,12 @@ import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class ActiveMrDestructo2 extends Item {
 
 	{
-		name = "mr destructo 2.0";
+		name = "毁灭先生2.0";
 		image = ItemSpriteSheet.ACTIVEMRD2;
 		defaultAction = AC_ACTIVATETHROW;
 		stackable = true;
@@ -39,7 +39,7 @@ public class ActiveMrDestructo2 extends Item {
 	
 	private static boolean activate = false;
 
-	private static final String AC_ACTIVATETHROW = "Activate & Throw";
+	private static final String AC_ACTIVATETHROW = "激活并扔出";
 
 	
 
@@ -101,7 +101,7 @@ public class ActiveMrDestructo2 extends Item {
 	
 	@Override
 	public String info() {
-		return "It reads, MR DESTRUCTO 2.0. An odd contraption. What does it do?";
+		return "它读作毁灭先生2.0。这个装置很奇怪，它是做什么的？";
 	}
 
 	

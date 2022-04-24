@@ -19,6 +19,7 @@ package com.avmoga.dpixel.levels;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.mobs.Bestiary;
@@ -168,39 +169,39 @@ public class FishingLevel extends Level {
 	//}
 
 
-	
-	
+
+
 	@Override
 	public String tileName(int tile) {
 		switch (tile) {
-		case Terrain.WATER:
-			return "Dark cold water.";
-		case Terrain.HIGH_GRASS:
-			return "Seaweed tangles. ";
-		default:
-			return super.tileName(tile);
+			case Terrain.WATER:
+				return Messages.get(PrisonLevel.class, "water_name");
+			case Terrain.HIGH_GRASS:
+				return Messages.get(CrabBossLevel.class, "high_grass_name");
+			default:
+				return super.tileName(tile);
 		}
 	}
 
 	@Override
 	public String tileDesc(int tile) {
 		switch (tile) {
-		case Terrain.ENTRANCE:
-			return "A ramp leads up to the upper depth.";
-		case Terrain.EXIT:
-			return "A ramp leads down to the lower depth.";
-		case Terrain.WALL_DECO:
-		case Terrain.EMPTY_DECO:
-			return "Small crabs and shell fish litter the sandy floor.";
-		case Terrain.EMPTY_SP:
-			return "Thick carpet covers the floor.";
-		case Terrain.STATUE:
-		case Terrain.STATUE_SP:
-			return "A large sea shell is propped up in the sand.";
-		case Terrain.BOOKSHELF:
-			return "Mostly beach reads.";
-		default:
-			return super.tileDesc(tile);
+			case Terrain.ENTRANCE:
+				return "";
+			case Terrain.EXIT:
+				return "";
+			case Terrain.WALL_DECO:
+			case Terrain.EMPTY_DECO:
+				return Messages.get(CrabBossLevel.class, "deco_desc");
+			case Terrain.EMPTY_SP:
+				return "";
+			case Terrain.STATUE:
+			case Terrain.STATUE_SP:
+				return Messages.get(CrabBossLevel.class, "statue_desc");
+			case Terrain.BOOKSHELF:
+				return Messages.get(CrabBossLevel.class, "bookshelf_desc");
+			default:
+				return super.tileDesc(tile);
 		}
 	}
 

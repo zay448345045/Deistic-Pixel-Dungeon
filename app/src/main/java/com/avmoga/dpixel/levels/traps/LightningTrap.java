@@ -18,13 +18,14 @@
 package com.avmoga.dpixel.levels.traps;
 
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.Lightning;
-import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.effects.particles.SparkParticle;
+import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.utils.Utils;
@@ -33,7 +34,7 @@ import com.watabou.utils.Random;
 
 public class LightningTrap {
 
-	private static final String name = "lightning trap";
+	private static final String name = Messages.get(LightningTrap.class, "name");
 
 	// 00x66CCEE
 
@@ -48,7 +49,7 @@ public class LightningTrap {
 
 				if (!ch.isAlive()) {
 					Dungeon.fail(Utils.format(ResultDescriptions.TRAP, name));
-					GLog.n("You were killed by a discharge of a lightning trap...");
+					GLog.n(Messages.get(LightningTrap.class, "ondeath"));
 				} else {
 					((Hero) ch).belongings.charge(false);
 				}

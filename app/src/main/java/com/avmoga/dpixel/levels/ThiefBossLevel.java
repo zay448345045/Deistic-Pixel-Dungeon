@@ -238,40 +238,6 @@ public class ThiefBossLevel extends Level {
 	}
 
 	@Override
-	public String tileName(int tile) {
-		switch (tile) {
-		case Terrain.WATER:
-			return "Suspiciously colored water";
-		case Terrain.HIGH_GRASS:
-			return "Flowers with little gem-shaped leaves";
-		default:
-			return super.tileName(tile);
-		}
-	}
-
-	@Override
-	public String tileDesc(int tile) {
-		switch (tile) {
-		case Terrain.ENTRANCE:
-			return "A ramp leads up to the upper depth.";
-		case Terrain.EXIT:
-			return "A ramp leads down to the lower depth.";
-		case Terrain.WALL_DECO:
-		case Terrain.EMPTY_DECO:
-			return "Rough-hewn gold ore adorns the dungeon.";
-		case Terrain.EMPTY_SP:
-			return "Thick carpet covers the floor.";
-		case Terrain.STATUE:
-		case Terrain.STATUE_SP:
-			return "The statue is made of solid gold.";
-		case Terrain.BOOKSHELF:
-			return "The rows of books on different disciplines fill the bookshelf.";
-		default:
-			return super.tileDesc(tile);
-		}
-	}
-
-	@Override
 	public void addVisuals(Scene scene) {
 		CityLevel.addVisuals(this, scene);
 	}

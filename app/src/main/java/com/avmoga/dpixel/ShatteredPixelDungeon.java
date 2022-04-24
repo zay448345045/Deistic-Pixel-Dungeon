@@ -67,12 +67,9 @@ public class ShatteredPixelDungeon extends Game {
 
 	}
 
-	public static void brightness(int value) {
-		Preferences.INSTANCE.put(Preferences.KEY_BRIGHTNESS, value);
-	}
-
-	public static int brightness() {
-		return Preferences.INSTANCE.getInt(Preferences.KEY_BRIGHTNESS, 2, -2, 2);
+	public static boolean brightness() {
+		return Preferences.INSTANCE.getBoolean(Preferences.KEY_BRIGHTNESS,
+				false);
 	}
 
 	public static void scale(int value) {

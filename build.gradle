@@ -15,6 +15,9 @@ buildscript {
 }
 
 allprojects {
+    ext {
+        gdxVersion = '1.9.10'
+    }
     repositories {
         jcenter()
         google()

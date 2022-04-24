@@ -67,8 +67,11 @@ public class Yog extends Mob {
 	{
 		name = "Yog-Dzewa";
 		spriteClass = YogSprite.class;
-
-		HP = HT = 2000;
+		if (Dungeon.depth == 35) {
+			HP = HT = 20000;
+		} else {
+			HP = HT = 2000;
+		}
 
 		EXP = 50;
 
@@ -162,6 +165,7 @@ public class Yog extends Mob {
 			if (fistsCount==0){
 				spawnFists();
 				sprite.emitter().burst(ShadowParticle.UP, 2);
+				sprite.emitter().burst(ShadowParticle.UP, 2);
 				HP += REGENERATION;
 			}
 		}
@@ -210,9 +214,13 @@ public class Yog extends Mob {
 			}
 		}
 
-		GameScene.bossSlain();
-		Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
-		Dungeon.level.drop(new Gold(Random.Int(6000, 8000)), pos).sprite.drop();
+		if (Dungeon.depth == 35) {
+			Dungeon.level.drop(new Gold(Random.Int(1, 2)), pos).sprite.drop();
+		} else {
+			Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
+			Dungeon.level.drop(new Gold(Random.Int(6000, 8000)), pos).sprite.drop();
+			GameScene.bossSlain();
+		}
 		super.die(cause);
 
 		yell(Messages.get(this, "die"));

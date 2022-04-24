@@ -17,8 +17,6 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -27,27 +25,29 @@ import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.items.artifacts.DriedRose;
 import com.avmoga.dpixel.items.artifacts.TimekeepersHourglass;
 import com.avmoga.dpixel.scenes.InterlevelScene;
-import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.sprites.ItemSprite.Glowing;
+import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+
 public class BookOfDead extends Item {
 
-	private static final String TXT_PREVENTING = "Strong magic aura of this place prevents you from reading the book!";
-	private static final String TXT_PREVENTING2 = "Darkness blurs your eyes as you try to read! You will need to find the exit pedestal with the SanChikarah...";
+	private static final String TXT_PREVENTING = "强大的魔法阻止了你使用该物品！";
+	private static final String TXT_PREVENTING2 = "当你尝试阅读日志时，黑暗蒙住了你的双眼！你需要找到三相之力碎片之再阅读它...";
 	
 	public static final float TIME_TO_USE = 1;
 
-	public static final String AC_PORT = "READ";
+	public static final String AC_PORT = "阅读";
 
 	private int specialLevel = 31;
 	private int returnDepth = -1;
 	private int returnPos;
 
 	{
-		name = "book of the dead";
+		name = "死亡之书";
 		image = ItemSpriteSheet.BOOKOFDEAD;
 
 		unique = true;
@@ -169,7 +169,7 @@ public class BookOfDead extends Item {
 	
 	@Override
 	public String info() {
-		return "This black book seems to dim the light around it. You feel a horrific presence ";
+		return "这个书页正在吸收它周围的光。你感到很恐怖。 ";
 	}
 
 }

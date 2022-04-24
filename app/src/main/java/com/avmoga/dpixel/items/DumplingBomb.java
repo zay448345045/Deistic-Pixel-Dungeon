@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -51,10 +50,12 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class DumplingBomb extends Item {
 
 	{
-		name = "dumpling bomb";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.RICEBOMB;
 		defaultAction = AC_LIGHTTHROW;
 		stackable = true;
@@ -66,7 +67,7 @@ public class DumplingBomb extends Item {
 	// way
 	private static boolean lightingFuse = false;
 
-	private static final String AC_LIGHTTHROW = "Agitate & Throw";
+	private static final String AC_LIGHTTHROW = Messages.get(DumplingBomb.class, "ac");
 
 	@Override
 	public boolean isSimilar(Item item) {
@@ -112,7 +113,7 @@ public class DumplingBomb extends Item {
 	@Override
 	public boolean doPickUp(Hero hero) {
 		if (fuse != null) {
-			GLog.w("You calm down the dumpling bomb.");
+			GLog.w(Messages.get(DumplingBomb.class, "sniff"));
 			fuse = null;
 		}
 		return super.doPickUp(hero);
@@ -163,7 +164,7 @@ public class DumplingBomb extends Item {
 							ch.pos = pos;
 							ch.sprite.place(ch.pos);
 							ch.sprite.visible = Dungeon.visible[pos];
-							GLog.i(curUser.name + " teleported " + ch.name + " to somewhere");
+							GLog.i(Messages.get(DumplingBomb.class, "tele", curUser.name, ch.name));
 
 						}
 

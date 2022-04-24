@@ -17,13 +17,11 @@
  */
 package com.avmoga.dpixel.levels;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Challenges;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.DungeonTilemap;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.mobs.Sentinel;
 import com.avmoga.dpixel.items.SanChikarahTranscend;
 import com.avmoga.dpixel.items.potions.PotionOfLevitation;
@@ -37,6 +35,9 @@ import com.watabou.noosa.particles.PixelParticle;
 import com.watabou.utils.ColorMath;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class ChasmLevel extends RegularLevel {
 
@@ -239,22 +240,29 @@ public class ChasmLevel extends RegularLevel {
 	@Override
 	public String tileName(int tile) {
 		switch (tile) {
-		case Terrain.WATER:
-			return "Murky water";
-		default:
-			return super.tileName(tile);
+			case Terrain.WATER:
+				return Messages.get(CityLevel.class, "water_name");
+			case Terrain.HIGH_GRASS:
+				return Messages.get(CityLevel.class, "high_grass_name");
+			default:
+				return super.tileName(tile);
 		}
 	}
 
 	@Override
 	public String tileDesc(int tile) {
 		switch (tile) {
-		case Terrain.EMPTY_DECO:
-			return "Wet yellowish moss covers the floor.";
-		case Terrain.BOOKSHELF:
-			return "The bookshelf is packed with cheap useless books. Might it burn?";
-		default:
-			return super.tileDesc(tile);
+			case Terrain.ENTRANCE:
+				return Messages.get(CityLevel.class, "entrance_desc");
+			case Terrain.EXIT:
+				return Messages.get(CityLevel.class, "exit_desc");
+			case Terrain.WALL_DECO:
+			case Terrain.EMPTY_DECO:
+				return Messages.get(CityLevel.class, "deco_desc");
+			case Terrain.EMPTY_SP:
+				return Messages.get(CityLevel.class, "sp_desc");
+			default:
+				return super.tileDesc(tile);
 		}
 	}
 

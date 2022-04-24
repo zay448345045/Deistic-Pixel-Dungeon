@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -38,12 +37,14 @@ import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class SteelHoneypot extends Item {
 
-	public static final String AC_SHATTER = "SHATTER";
+	public static final String AC_SHATTER = Messages.get(SteelHoneypot.class, "ac");
 
 	{
-		name = "steel honeypot";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.STL_HONEYPOT;
 		defaultAction = AC_THROW;
 		stackable = true;
@@ -119,7 +120,7 @@ public class SteelHoneypot extends Item {
 
 			Sample.INSTANCE.play(Assets.SND_BEE);
 			Dungeon.hero.haspet=true;
-			GLog.w("The pot contains a strength potion!");
+			GLog.p(Messages.get(SteelHoneypot.class, "str"));
 			
 			return new PotionOfStrength();
 						
@@ -145,9 +146,7 @@ public class SteelHoneypot extends Item {
 
 	@Override
 	public String info() {
-		return "This large honeypot is only really lined with honey, instead it houses a giant steel bee! "
-				+ "These sorts of massive bees usually stay in their hives, perhaps the pot is some sort of specialized trapper's cage? "
-				+ "The bee seems pretty content inside the pot with its honey, and buzzes at you warily when you look at it.";
+		return Messages.get(SteelHoneypot.class, "sdesc");
 	}
 
 	// The bee's broken 'home', all this item does is let its bee know where it
@@ -155,7 +154,7 @@ public class SteelHoneypot extends Item {
 	public static class SteelShatteredPot extends Item {
 
 		{
-			name = "shattered steel honeypot";
+			name = Messages.get(SteelHoneypot.class, "sname");
 			image = ItemSpriteSheet.STL_SHATTPOT;
 			stackable = false;
 		}
@@ -220,14 +219,7 @@ public class SteelHoneypot extends Item {
 
 		@Override
 		public String info() {
-			String info = "The pot has been shattered, only the sticky honey that lines its walls is holding it together, and it is slowly coming apart.";
-
-			if (Actor.findById(myBee) != null)
-				info += "\n\nDespite its broken state, the bee still seems quite fond of the pot, and is understandably quite mad.";
-			else
-				info += "\n\nNow that its bee is gone, you can't think of a use for this wad of broken clay and drying honey.";
-
-			return info;
+			return Messages.get(SteelHoneypot.class, "sdesc");
 		}
 
 		private static final String MYBEE = "mybee";

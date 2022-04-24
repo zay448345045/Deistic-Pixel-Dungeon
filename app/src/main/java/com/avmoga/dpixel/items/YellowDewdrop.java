@@ -19,6 +19,7 @@ package com.avmoga.dpixel.items;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.hero.HeroClass;
 import com.avmoga.dpixel.effects.Speck;
@@ -28,10 +29,10 @@ import com.watabou.noosa.audio.Sample;
 
 public class YellowDewdrop extends Item {
 
-	private static final String TXT_VALUE = "%+dHP";
+	private static final String TXT_VALUE = Messages.get(RedDewdrop.class, "value");
 
 	{
-		name = "yellow dewdrop";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.YELLOWDEWDROP;
 
 		stackable = true;
@@ -70,6 +71,6 @@ public class YellowDewdrop extends Item {
 
 	@Override
 	public String info() {
-		return "A crystal clear dewdrop.";
+		return Messages.get(RedDewdrop.class, "desc");
 	}
 }

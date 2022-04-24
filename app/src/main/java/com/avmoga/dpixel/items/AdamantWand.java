@@ -22,7 +22,7 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 public class AdamantWand extends Item {
 
 		{
-		name = "adamantite wand";
+		name = "精金法杖";
 		image = ItemSpriteSheet.WAND_ADAMANT;
 
 		unique = true;
@@ -43,7 +43,7 @@ public class AdamantWand extends Item {
 	
 	@Override
 	public String info() {
-		return "A rod of dull ore in the shape of a wand.";
+		return "具有法杖形状的暗灰色的棍。";
 	}
 	
 }

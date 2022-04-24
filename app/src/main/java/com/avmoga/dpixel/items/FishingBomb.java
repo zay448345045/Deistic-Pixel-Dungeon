@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -35,24 +34,26 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class FishingBomb extends Item {
 
 	{
-		name = "dumpling bomb";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.RICEBOMB;
 		defaultAction = AC_LIGHTTHROW;
 		stackable = true;
 	}
 
 	public Fuse fuse;
-	
-	public static final String TXT_NO_TELEPORT = "You missed a fish!";
+
+	public static final String TXT_NO_TELEPORT = Messages.get(FishingBomb.class, "no_tele");
 
 	// FIXME using a static variable for this is kinda gross, should be a better
 	// way
 	private static boolean lightingFuse = false;
 
-	private static final String AC_LIGHTTHROW = "Agitate & Throw";
+	private static final String AC_LIGHTTHROW = Messages.get(FishingBomb.class, "ac");
 
 	@Override
 	public boolean isSimilar(Item item) {
@@ -98,7 +99,7 @@ public class FishingBomb extends Item {
 	@Override
 	public boolean doPickUp(Hero hero) {
 		if (fuse != null) {
-			GLog.w("You stop the fishing bomb.");
+			GLog.w(Messages.get(FishingBomb.class, "stop"));
 			fuse = null;
 		}
 		return super.doPickUp(hero);
@@ -145,7 +146,7 @@ public class FishingBomb extends Item {
 							ch.pos = pos;
 							ch.sprite.place(ch.pos);
 							ch.sprite.visible = Dungeon.visible[pos];
-							GLog.i(curUser.name + " teleported " + ch.name + " to dry land");
+							GLog.i(Messages.get(FishingBomb.class, "tele", curUser.name, ch.name));
 
 						}
 
@@ -178,9 +179,7 @@ public class FishingBomb extends Item {
 
 	@Override
 	public String info() {
-		return "A weighty bundle of dumplings smashed together used for catching fish."
-				+ (fuse != null ? "\n\nThe dumpling bomb looks agitated. It could explode at any moment!"
-						: "\n\nShaking the bundle could make it unstable and release it's goodness.");
+		return Messages.get(FishingBomb.class, "desc1") + (fuse != null ? Messages.get(FishingBomb.class, "desc2") : Messages.get(FishingBomb.class, "desc3"));
 	}
 
 	private static final String FUSE = "fuse";

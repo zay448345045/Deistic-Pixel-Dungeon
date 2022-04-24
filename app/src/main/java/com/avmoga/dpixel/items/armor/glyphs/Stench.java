@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.armor.glyphs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.blobs.Blob;
 import com.avmoga.dpixel.actors.blobs.ToxicGas;
@@ -32,7 +33,7 @@ import com.watabou.utils.Random;
 
 public class Stench extends Glyph {
 
-	private static final String TXT_STENCH = "%s of stench";
+	private static final String TXT_STENCH = Messages.get(Stench.class, "name");
 
 	private static ItemSprite.Glowing GREEN = new ItemSprite.Glowing(0x22CC44);
 

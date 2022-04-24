@@ -171,8 +171,8 @@ public abstract class Level implements Bundlable {
 	protected static final int REGROW_TIMER = 10;
 	protected static final int DROP_TIMER = 10;
 	protected static final int PET_TICK = 1;
-		
-	private static final String TXT_HIDDEN_PLATE_CLICKS = "A hidden pressure plate clicks!";
+
+	private static final String TXT_HIDDEN_PLATE_CLICKS = Messages.get(Level.class, "hidden_plate");
 
 	public static boolean resizingNeeded;
 	public static boolean exitsealed=false;

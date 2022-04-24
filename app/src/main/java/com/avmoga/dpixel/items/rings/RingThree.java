@@ -17,7 +17,6 @@ import com.avmoga.dpixel.items.weapon.melee.Knuckles;
 import com.avmoga.dpixel.items.weapon.melee.Longsword;
 import com.avmoga.dpixel.items.weapon.melee.Mace;
 import com.avmoga.dpixel.items.weapon.melee.Quarterstaff;
-import com.avmoga.dpixel.items.weapon.melee.RoyalSpork;
 import com.avmoga.dpixel.items.weapon.melee.ShortSword;
 import com.avmoga.dpixel.items.weapon.melee.Spear;
 import com.avmoga.dpixel.items.weapon.melee.Spork;
@@ -69,7 +68,6 @@ public class RingThree extends KindofMisc {
             Longsword.class,
             Mace.class,
             Quarterstaff.class,
-            RoyalSpork.class,
             ShortSword.class,
             Spear.class,
             Spork.class,
@@ -100,7 +98,6 @@ public class RingThree extends KindofMisc {
             Messages.get(Ring.class, "diamond"),
             Messages.get(Ring.class, "opal"),
             Messages.get(Ring.class, "garnet"),
-            Messages.get(Ring.class, "ruby"),
             Messages.get(Ring.class, "amethyst"),
             Messages.get(Ring.class, "diamond"),
             Messages.get(Ring.class, "opal"),
@@ -126,7 +123,6 @@ public class RingThree extends KindofMisc {
             ItemSpriteSheet.RING_TOPAZ, ItemSpriteSheet.RING_ONYX,
             ItemSpriteSheet.RING_TOURMALINE, ItemSpriteSheet.RING_EMERALD,
             ItemSpriteSheet.RING_SAPPHIRE,ItemSpriteSheet.RING_SAPPHIRE,ItemSpriteSheet.RING_EMERALD,
-            ItemSpriteSheet.RING_SAPPHIRE
     };
 
     private static ItemStatusHandler<RingThree> handler;

@@ -279,7 +279,7 @@ public class Heap implements Bundlable {
 
 		for (Item item : items.toArray(new Item[0])) {
 			if (item instanceof Scroll) {
-				GLog.i(item.name + " detonates!");
+				GLog.i(item.name + " 被烧毁了！");
 				item.detonate(this);
 				items.remove(item);
 				detonated = true;

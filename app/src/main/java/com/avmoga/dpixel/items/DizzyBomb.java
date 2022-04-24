@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -42,10 +41,12 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class DizzyBomb extends Item {
 
 	{
-		name = "dizzy bomb";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.DIZZY_BOMB;
 		defaultAction = AC_LIGHTTHROW;
 		stackable = true;
@@ -57,7 +58,7 @@ public class DizzyBomb extends Item {
 	// way
 	private static boolean lightingFuse = false;
 
-	private static final String AC_LIGHTTHROW = "Light & Throw";
+	private static final String AC_LIGHTTHROW = Messages.get(DizzyBomb.class, "ac");
 	
 	
 	
@@ -107,11 +108,12 @@ public class DizzyBomb extends Item {
 	@Override
 	public boolean doPickUp(Hero hero) {
 		if (fuse != null) {
-			GLog.w("You quickly snuff the bomb's fuse.");
+			GLog.w(Messages.get(DizzyBomb.class, "sniff"));
 			fuse = null;
 		}
 		return super.doPickUp(hero);
 	}
+
 
 	public void explode(int cell) {
 		// We're blowing up, so no need for a fuse anymore.
@@ -198,9 +200,7 @@ public class DizzyBomb extends Item {
 
 	@Override
 	public String info() {
-		return "A black powder bomb infused with confusion gas. An explosion from this damages things nearby and confuses anyone caught in the blast."
-				+ (fuse != null ? "\n\nThe bomb's fuse is burning away, keep your distance or put it out!"
-						: "\n\nIt looks like the fuse will take a couple rounds to burn down once it is lit.");
+		return fuse != null ? Messages.get(this, "desc1") : Messages.get(this, "desc2");
 	}
 
 	private static final String FUSE = "fuse";

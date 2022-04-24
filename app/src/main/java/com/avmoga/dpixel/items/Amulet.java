@@ -17,9 +17,6 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Statistics;
@@ -28,12 +25,15 @@ import com.avmoga.dpixel.scenes.AmuletScene;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.watabou.noosa.Game;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class Amulet extends Item {
 
-	private static final String AC_END = "END THE GAME";
+	private static final String AC_END = "结束游戏";
 
 	{
-		name = "Amulet of Yendor";
+		name = "Yendor护身符";
 		image = ItemSpriteSheet.AMULET;
 
 		unique = true;
@@ -97,7 +97,6 @@ public class Amulet extends Item {
 
 	@Override
 	public String info() {
-		return "The Amulet of Yendor is the most powerful known artifact of unknown origin. It is said that the amulet "
-				+ "is able to fulfil any wish if its owner's will-power is strong enough to \"persuade\" it to do it.";
+		return "Yendor护身符是来自未知领域中最强大的著名神器。据说它能够实现持有者的一切愿望，只要持有者具备足够的力量来\"说服\"它去做。";
 	}
 }

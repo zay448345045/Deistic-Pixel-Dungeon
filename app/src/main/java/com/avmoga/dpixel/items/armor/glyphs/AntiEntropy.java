@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.armor.glyphs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Frost;
@@ -31,7 +32,7 @@ import com.watabou.utils.Random;
 
 public class AntiEntropy extends Glyph {
 
-	private static final String TXT_ANTI_ENTROPY = "%s of anti-entropy";
+	private static final String TXT_ANTI_ENTROPY = Messages.get(AntiEntropy.class, "name");
 
 	private static ItemSprite.Glowing BLUE = new ItemSprite.Glowing(0x0000FF);
 

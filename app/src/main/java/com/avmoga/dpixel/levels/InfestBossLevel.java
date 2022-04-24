@@ -19,12 +19,14 @@ package com.avmoga.dpixel.levels;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.mobs.Bestiary;
 import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.actors.mobs.ShadowYog;
+import com.avmoga.dpixel.actors.mobs.Yog;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.levels.painters.Painter;
@@ -212,7 +214,7 @@ public class InfestBossLevel extends Level {
 			} while (!passable[boss.pos] || !outsideEntraceRoom(boss.pos)
 					|| Dungeon.visible[boss.pos]);
 			GameScene.add(boss);
-			GLog.n("we are legion");
+			GLog.n("我们是古神大军！！！");
 			
 			ShadowYog boss2 = new ShadowYog();
 			boss2.state = boss2.SLEEPING;
@@ -221,7 +223,7 @@ public class InfestBossLevel extends Level {
 			} while (!passable[boss2.pos] || !outsideEntraceRoom(boss2.pos)
 					|| Dungeon.visible[boss2.pos]);
 			GameScene.add(boss2);
-			GLog.n("we are legion");
+			GLog.n("我们是古神大军！！！");
 			
 			ShadowYog boss3 = new ShadowYog();
 			boss3.state = boss3.SLEEPING;
@@ -230,7 +232,7 @@ public class InfestBossLevel extends Level {
 			} while (!passable[boss3.pos] || !outsideEntraceRoom(boss3.pos)
 					|| Dungeon.visible[boss3.pos]);
 			GameScene.add(boss3);
-			GLog.n("we are legion");
+			GLog.n("我们是古神大军！！！");
 			
 			ShadowYog boss4 = new ShadowYog();
 			boss4.state = boss4.SLEEPING;
@@ -239,7 +241,7 @@ public class InfestBossLevel extends Level {
 			} while (!passable[boss4.pos] || !outsideEntraceRoom(boss4.pos)
 					|| Dungeon.visible[boss4.pos]);
 			GameScene.add(boss4);
-			GLog.n("we are legion");
+			GLog.n("我们是古神大军！！！");
 			
 			ShadowYog boss5 = new ShadowYog();
 			boss5.state = boss5.SLEEPING;
@@ -248,7 +250,7 @@ public class InfestBossLevel extends Level {
 			} while (!passable[boss5.pos] || !outsideEntraceRoom(boss5.pos)
 					|| Dungeon.visible[boss5.pos]);
 			GameScene.add(boss5);
-			GLog.n("we are legion");
+			GLog.n("我们是古神大军！！！");
 			
 			ShadowYog boss6 = new ShadowYog();
 			boss6.state = boss6.SLEEPING;
@@ -257,7 +259,7 @@ public class InfestBossLevel extends Level {
 			} while (!passable[boss6.pos] || !outsideEntraceRoom(boss6.pos)
 					|| Dungeon.visible[boss6.pos]);
 			GameScene.add(boss6);
-			GLog.n("we are legion");
+			GLog.n("我们是古神大军！！！");
 			
 			ShadowYog boss7 = new ShadowYog();
 			boss7.state = boss7.SLEEPING;
@@ -266,34 +268,34 @@ public class InfestBossLevel extends Level {
 			} while (!passable[boss7.pos] || !outsideEntraceRoom(boss7.pos)
 					|| Dungeon.visible[boss7.pos]);
 			GameScene.add(boss7);
-			GLog.n("we are legion");
-			
-			ShadowYog boss8 = new ShadowYog();
+			GLog.n("我们是古神大军！！！");
+
+			Yog boss8 = new Yog();
 			boss8.state = boss8.SLEEPING;
 			do {
 				boss8.pos = Random.Int(getLength());
 			} while (!passable[boss8.pos] || !outsideEntraceRoom(boss8.pos)
 					|| Dungeon.visible[boss8.pos]);
 			GameScene.add(boss8);
-			GLog.n("we are legion");
+			GLog.n("暗影的终结之日！");
 			
-			ShadowYog boss9 = new ShadowYog();
+			Yog boss9 = new Yog();
 			boss9.state = boss9.SLEEPING;
 			do {
 				boss9.pos = Random.Int(getLength());
 			} while (!passable[boss9.pos] || !outsideEntraceRoom(boss9.pos)
 					|| Dungeon.visible[boss9.pos]);
 			GameScene.add(boss9);
-			GLog.n("we are legion");
+			GLog.n("暗影的终结之日！");
 			
-			ShadowYog boss10 = new ShadowYog();
+			Yog boss10 = new Yog();
 			boss10.state = boss10.SLEEPING;
 			do {
 				boss10.pos = Random.Int(getLength());
 			} while (!passable[boss10.pos] || !outsideEntraceRoom(boss10.pos)
 					|| Dungeon.visible[boss10.pos]);
 			GameScene.add(boss10);
-			GLog.n("we are legion");
+			GLog.n("暗影的终结之日！");
 
 			//set(arenaDoor, Terrain.WALL);
 			GameScene.updateMap(arenaDoor);
@@ -316,30 +318,30 @@ public class InfestBossLevel extends Level {
 	@Override
 	public String tileName(int tile) {
 		switch (tile) {
-		case Terrain.GRASS:
-			return "Fluorescent moss";
-		case Terrain.HIGH_GRASS:
-			return "Fluorescent mushrooms";
-		case Terrain.WATER:
-			return "Freezing cold water.";
-		default:
-			return super.tileName(tile);
+			case Terrain.GRASS:
+				return Messages.get(CavesLevel.class, "grass_name");
+			case Terrain.HIGH_GRASS:
+				return Messages.get(CavesLevel.class, "high_grass_name");
+			case Terrain.WATER:
+				return Messages.get(CavesLevel.class, "water_name");
+			default:
+				return super.tileName(tile);
 		}
 	}
 
 	@Override
 	public String tileDesc(int tile) {
 		switch (tile) {
-		case Terrain.ENTRANCE:
-			return "The ladder leads up to the upper depth.";
-		case Terrain.EXIT:
-			return "The ladder leads down to the lower depth.";
-		case Terrain.HIGH_GRASS:
-			return "Huge mushrooms block the view.";
-		case Terrain.WALL_DECO:
-			return "A vein of some ore is visible on the wall. Gold?";
-		default:
-			return super.tileDesc(tile);
+			case Terrain.ENTRANCE:
+				return "";
+			case Terrain.EXIT:
+				return "";
+			case Terrain.HIGH_GRASS:
+				return Messages.get(CavesLevel.class, "high_grass_desc");
+			case Terrain.WALL_DECO:
+				return Messages.get(CavesLevel.class, "wall_deco_desc");
+			default:
+				return super.tileDesc(tile);
 		}
 	}
 

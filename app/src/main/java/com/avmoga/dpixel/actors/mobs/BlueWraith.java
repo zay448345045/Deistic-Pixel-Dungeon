@@ -36,7 +36,7 @@ public class BlueWraith extends Wraith  {
 		name = Messages.get(this, "name");
 		spriteClass = BlueWraithSprite.class;
 
-		HP = HT = 195;
+		HP = HT = 400;
 		defenseSkill = 24;
 		baseSpeed = 4f;
 

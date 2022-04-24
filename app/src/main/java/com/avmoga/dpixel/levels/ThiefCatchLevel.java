@@ -17,9 +17,6 @@
  */
 package com.avmoga.dpixel.levels;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.Actor;
@@ -31,6 +28,9 @@ import com.watabou.noosa.Scene;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Graph;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ThiefCatchLevel extends RegularLevel {
 
@@ -277,25 +277,5 @@ public class ThiefCatchLevel extends RegularLevel {
 	public void restoreFromBundle(Bundle bundle) {
 		super.restoreFromBundle(bundle);
 		stairs = bundle.getInt(STAIRS);
-	}
-
-	@Override
-	public String tileName(int tile) {
-		switch (tile) {
-		case Terrain.WATER:
-			return "Murky water";
-		default:
-			return super.tileName(tile);
-		}
-	}
-
-	@Override
-	public String tileDesc(int tile) {
-		switch (tile) {
-		case Terrain.EMPTY_DECO:
-			return "Wet yellowish moss covers the floor.";
-		default:
-			return super.tileDesc(tile);
-		}
 	}
 }

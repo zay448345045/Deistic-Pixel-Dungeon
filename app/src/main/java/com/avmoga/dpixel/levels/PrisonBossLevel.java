@@ -17,11 +17,10 @@
  */
 package com.avmoga.dpixel.levels;
 
-import java.util.List;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Bones;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.mobs.Bestiary;
@@ -38,6 +37,8 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.Graph;
 import com.watabou.utils.Point;
 import com.watabou.utils.Random;
+
+import java.util.List;
 
 public class PrisonBossLevel extends RegularLevel {
 
@@ -357,20 +358,20 @@ public class PrisonBossLevel extends RegularLevel {
 	@Override
 	public String tileName(int tile) {
 		switch (tile) {
-		case Terrain.WATER:
-			return "Dark cold water.";
-		default:
-			return super.tileName(tile);
+			case Terrain.WATER:
+				return Messages.get(PrisonLevel.class, "water_name");
+			default:
+				return super.tileName(tile);
 		}
 	}
 
 	@Override
 	public String tileDesc(int tile) {
 		switch (tile) {
-		case Terrain.EMPTY_DECO:
-			return "There are old blood stains on the floor.";
-		default:
-			return super.tileDesc(tile);
+			case Terrain.EMPTY_DECO:
+				return Messages.get(PrisonLevel.class, "empty_deco_desc");
+			default:
+				return super.tileDesc(tile);
 		}
 	}
 

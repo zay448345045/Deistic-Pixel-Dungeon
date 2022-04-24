@@ -17,9 +17,8 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.effects.particles.PurpleParticle;
 import com.avmoga.dpixel.items.armor.Armor;
@@ -29,17 +28,19 @@ import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
 
+import java.util.ArrayList;
+
 public class Stylus extends Item {
 
-	private static final String TXT_SELECT_ARMOR = "Select an armor to inscribe on";
-	private static final String TXT_INSCRIBED = "you inscribed your %s with the stylus";
+	private static final String TXT_SELECT_ARMOR = Messages.get(Stylus.class, "prompt");
+	private static final String TXT_INSCRIBED = Messages.get(Stylus.class, "inscribed");
 
 	private static final float TIME_TO_INSCRIBE = 2;
 
-	private static final String AC_INSCRIBE = "INSCRIBE";
+	private static final String AC_INSCRIBE = Messages.get(Stylus.class, "ac_inscribe");
 
 	{
-		name = "arcane stylus";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.STYLUS;
 
 		stackable = true;
@@ -102,9 +103,7 @@ public class Stylus extends Item {
 
 	@Override
 	public String info() {
-		return "This arcane stylus is made of some dark, very hard stone. Using it you can inscribe "
-				+ "a magical glyph on your armor, but you have no power over choosing what glyph it will be, "
-				+ "the stylus will decide it for you.";
+		return Messages.get(this, "desc");
 	}
 
 	private final WndBag.Listener itemSelector = new WndBag.Listener() {

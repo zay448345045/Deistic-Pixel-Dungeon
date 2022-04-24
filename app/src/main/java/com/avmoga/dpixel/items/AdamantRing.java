@@ -22,7 +22,7 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 public class AdamantRing extends Item {
 
 		{
-		name = "adamantite ring";
+		name = "精金戒指";
 		image = ItemSpriteSheet.RING_ADAMANT;
 
 		unique = true;
@@ -43,7 +43,7 @@ public class AdamantRing extends Item {
 	
 	@Override
 	public String info() {
-		return "An old ring missing its jewel. It's made of a dull grey ore.";
+		return "一个丢失了宝石的旧戒指。它是由暗灰色的矿石制作的。";
 	}
 	
 }

@@ -17,8 +17,6 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -27,27 +25,29 @@ import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.items.artifacts.DriedRose;
 import com.avmoga.dpixel.items.artifacts.TimekeepersHourglass;
 import com.avmoga.dpixel.scenes.InterlevelScene;
-import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.sprites.ItemSprite.Glowing;
+import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+
 public class BookOfTranscendence extends Item {
 
-	private static final String TXT_PREVENTING = "Strong magic aura of this place prevents you from reading the book!";
-	private static final String TXT_PREVENTING2 = "A Piercing light blinds your eyes as you try to read! You will need to find the exit pedestal with the SanChikarah...";
+	private static final String TXT_PREVENTING = "强大的魔法阻止了你使用该物品！";
+	private static final String TXT_PREVENTING2 = "你尝试阅读日志时，一道刺眼的光射入了你的眼睛！你需要找到带有三相之力碎片的祭台来阅读它...";
 	
 	public static final float TIME_TO_USE = 1;
 
-	public static final String AC_PORT = "READ";
+	public static final String AC_PORT = "阅读";
 
 	private int specialLevel = 33;
 	private int returnDepth = -1;
 	private int returnPos;
 
 	{
-		name = "book of the heavens";
+		name = "天堂之书";
 		image = ItemSpriteSheet.BOOKOFTRANSCENDENCE;
 
 		unique = true;
@@ -170,7 +170,7 @@ public class BookOfTranscendence extends Item {
 	
 	@Override
 	public String info() {
-		return "The light radiating from this book pierces through you. You feel unstable in it's presence ";
+		return "从这个书页射出的光线似乎可以穿透你的身体。你感到它十分不稳定。 ";
 	}
 
 }

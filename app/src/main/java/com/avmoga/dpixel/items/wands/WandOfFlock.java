@@ -22,6 +22,7 @@ import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
+import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.mobs.npcs.NPC;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.MagicMissile;
@@ -101,16 +102,21 @@ public class WandOfFlock extends Wand {
 
 	@Override
 	public String desc() {
-		return "A flick of this wand summons a flock of magic sheep, creating temporary impenetrable obstacle.";
+		return Messages.get(this, "desc");
+	}
+
+	@Override
+	public void proc(Char attacker, Char defender, int damage) {
+		// TODO: add special effect <sheep transmutation>
 	}
 
 	public static class Sheep extends NPC {
 
-		private static final String[] QUOTES = { "Baa!", "Baa?", "Baa.",
-				"Baa..." };
+		private static final String[] QUOTES = {Messages.get(WandOfFlock.class, "1"), Messages.get(WandOfFlock.class, "2"), Messages.get(WandOfFlock.class, "3"),
+				Messages.get(WandOfFlock.class, "4")};
 
 		{
-			name = "sheep";
+			name = Messages.get(WandOfFlock.class, "sname");
 			spriteClass = SheepSprite.class;
 		}
 
@@ -138,9 +144,12 @@ public class WandOfFlock extends Wand {
 		}
 
 		@Override
+		public void add(Buff buff) {
+		}
+
+		@Override
 		public String description() {
-			return "This is a magic sheep. What's so magical about it? You can't kill it. "
-					+ "It will stand there until it magcially fades away, all the while chewing cud with a blank stare.";
+			return Messages.get(WandOfFlock.class, "sdesc");
 		}
 
 		@Override

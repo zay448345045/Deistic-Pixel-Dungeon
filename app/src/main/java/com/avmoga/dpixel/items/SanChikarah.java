@@ -17,8 +17,6 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -26,27 +24,29 @@ import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.items.artifacts.DriedRose;
 import com.avmoga.dpixel.items.artifacts.TimekeepersHourglass;
 import com.avmoga.dpixel.scenes.InterlevelScene;
-import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.sprites.ItemSprite.Glowing;
+import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+
 public class SanChikarah extends Item {
 	
-	private static final String TXT_PREVENTING = "Strong magic aura of this place prevents you from using the SanChikarah!";
-	private static final String TXT_PREVENTING2 = "You must rid the dungeon of Shadow Yogs before you can leave!";
+	private static final String TXT_PREVENTING = "这里强大的魔力流阻止了你的传送";
+	private static final String TXT_PREVENTING2 = "你必须先击败暗影Yog才能离开！";
 	
 	
 	public static final float TIME_TO_USE = 1;
 
-	public static final String AC_PORT = "OPEN PORTAL";
+	public static final String AC_PORT = "传送";
 
 	private int returnDepth = -1;
 	private int returnPos;
 
 	{
-		name = "Forged SanChikarah";
+		name = "暗影诅咒";
 		image = ItemSpriteSheet.SANCHIKARAH;
 
 		stackable = false;
@@ -155,7 +155,6 @@ public class SanChikarah extends Item {
 
 	@Override
 	public String info() {
-		return "The puzzle is complete. The SanChikarah will open a portal to the final boss. "
-				+"You will be immediately transported when the portal is opened. ";
+		return "它能打开通向暗影Yog的传送门。";
 	}
 }

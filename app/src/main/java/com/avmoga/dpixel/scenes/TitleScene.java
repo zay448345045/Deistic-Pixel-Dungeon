@@ -61,7 +61,7 @@ public class TitleScene extends PixelScene {
 			Game.switchScene(WelcomeScene.class);
 		}
 
-		Music.INSTANCE.play(Assets.BGM_BOSSC, true);
+		Music.INSTANCE.play(Assets.THEME, true);
 		Music.INSTANCE.volume(1f);
 
 		uiCamera.visible = false;
@@ -175,7 +175,7 @@ public class TitleScene extends PixelScene {
 		add(btnPrefs);
 
 		Button changes = new ChangesButton();
-		changes.setPos(32, 1);
+		changes.setPos( w-changes.width(), h - source.height()-7 - changes.height());
 		add( changes );
 
 		//Button btnReset = new ResetButton();

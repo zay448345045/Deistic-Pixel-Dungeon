@@ -18,9 +18,9 @@
 package com.avmoga.dpixel.windows;
 
 import com.avmoga.dpixel.scenes.PixelScene;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
-import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.BitmapTextMultiline;
+import com.watabou.noosa.RenderedText;
 
 public class WndList extends Window {
 
@@ -44,20 +44,16 @@ public class WndList extends Window {
 				pos += GAP;
 			}
 
-			BitmapText dot = PixelScene.createText(DOT, 6);
+			RenderedText dot = PixelScene.renderText(DOT, 6);
 			dot.x = MARGIN;
 			dot.y = pos;
 			if (dotWidth == 0) {
-				dot.measure();
 				dotWidth = dot.width();
 			}
 			add(dot);
 
-			BitmapTextMultiline item = PixelScene.createMultiline(items[i], 6);
-			item.x = dot.x + dotWidth;
-			item.y = pos;
+			RenderedTextMultiline item = PixelScene.renderMultiline(items[i], 6);
 			item.maxWidth = (int) (WIDTH - MARGIN * 2 - dotWidth);
-			item.measure();
 			add(item);
 
 			pos += item.height();

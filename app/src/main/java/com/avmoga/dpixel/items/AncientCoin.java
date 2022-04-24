@@ -17,7 +17,6 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -25,28 +24,30 @@ import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.items.artifacts.DriedRose;
 import com.avmoga.dpixel.items.artifacts.TimekeepersHourglass;
 import com.avmoga.dpixel.scenes.InterlevelScene;
-import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.sprites.ItemSprite.Glowing;
+import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+
 public class AncientCoin extends Item {
 	
-	private static final String TXT_PREVENTING = "Strong magic aura of this place prevents you from using the coin!";
-	private static final String TXT_PREVENTING2 = "You need to kill the bandit king first!";
+	private static final String TXT_PREVENTING = "强大的魔力流阻止你使用古老金币！";
+	private static final String TXT_PREVENTING2 = "此书页会使你传送到小偷王的所在地。";
 		
 	
 	public static final float TIME_TO_USE = 1;
 
-	public static final String AC_PORT = "OPEN PORTAL";
+	public static final String AC_PORT = "传送";
 
 	private int specialLevel = 40;
 	private int returnDepth = -1;
 	private int returnPos;
 
 	{
-		name = "ancient coin";
+		name = "古老金币";
 		image = ItemSpriteSheet.COIN;
 
 		stackable = false;
@@ -168,6 +169,6 @@ public class AncientCoin extends Item {
 
 	@Override
 	public String info() {
-		return "This coin radiates an eerie power. Reading the inscription will take you to the Bandit King. ";
+		return "此上古物品会使你传送到小偷王的所在地。";
 	}
 }

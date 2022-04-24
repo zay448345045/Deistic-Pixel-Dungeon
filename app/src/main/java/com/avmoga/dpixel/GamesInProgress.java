@@ -17,10 +17,10 @@
  */
 package com.avmoga.dpixel;
 
-import java.util.HashMap;
-
 import com.avmoga.dpixel.actors.hero.HeroClass;
 import com.watabou.utils.Bundle;
+
+import java.util.HashMap;
 
 public class GamesInProgress {
 

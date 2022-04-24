@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -30,13 +29,13 @@ import com.avmoga.dpixel.actors.mobs.BlueWraith;
 import com.avmoga.dpixel.actors.mobs.DwarfKingTomb;
 import com.avmoga.dpixel.actors.mobs.DwarfLich;
 import com.avmoga.dpixel.actors.mobs.King;
+import com.avmoga.dpixel.actors.mobs.King.Undead;
 import com.avmoga.dpixel.actors.mobs.MossySkeleton;
 import com.avmoga.dpixel.actors.mobs.RedWraith;
 import com.avmoga.dpixel.actors.mobs.Skeleton;
 import com.avmoga.dpixel.actors.mobs.SpectralRat;
 import com.avmoga.dpixel.actors.mobs.Warlock;
 import com.avmoga.dpixel.actors.mobs.Wraith;
-import com.avmoga.dpixel.actors.mobs.King.Undead;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.effects.particles.SmokeParticle;
@@ -48,10 +47,12 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class HolyHandGrenade extends Item {
 
 	{
-		name = "holy hand grenade";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.HOLY_HAND_GRENADE;
 		defaultAction = AC_LIGHTTHROW;
 		stackable = true;
@@ -114,7 +115,7 @@ public class HolyHandGrenade extends Item {
 	@Override
 	public boolean doPickUp(Hero hero) {
 		if (fuse != null) {
-			GLog.w("You stop the Holy Hand Grenade's ticking.");
+			GLog.w(Messages.get(HolyHandGrenade.class, "stop"));
 			fuse = null;
 		}
 		return super.doPickUp(hero);
@@ -195,11 +196,9 @@ public class HolyHandGrenade extends Item {
 
 	@Override
 	public String info() {
-		return "The power of the heavens concentrates in the Holy Hand Grenade. "
-				+"It will rip apart the dead and undead mobs when it explodes. "
-				+"It disdains being on top of other items and will bounce off them when thrown. "
-				+ (fuse != null ? "\n\nIt is glowing with power and could explode at any moment!"
-						: "\n\nPulling the pin would set it off. ");
+		return Messages.get(this, "desc1")
+				+ (fuse != null ? Messages.get(this, "desc2")
+				: Messages.get(this, "desc3"));
 	}
 
 	private static final String FUSE = "fuse";

@@ -17,8 +17,7 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Light;
 import com.avmoga.dpixel.actors.hero.Hero;
@@ -26,14 +25,16 @@ import com.avmoga.dpixel.effects.particles.FlameParticle;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.watabou.noosa.particles.Emitter;
 
+import java.util.ArrayList;
+
 public class Torch extends Item {
 
-	public static final String AC_LIGHT = "LIGHT";
+	public static final String AC_LIGHT = Messages.get(Torch.class, "ac_light");
 
 	public static final float TIME_TO_LIGHT = 1;
 
 	{
-		name = "torch";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.TORCH;
 
 		stackable = true;
@@ -88,6 +89,6 @@ public class Torch extends Item {
 
 	@Override
 	public String info() {
-		return "An adventuring staple, when a dungeon goes dark, a torch can help lead the way.";
+		return Messages.get(this, "desc");
 	}
 }

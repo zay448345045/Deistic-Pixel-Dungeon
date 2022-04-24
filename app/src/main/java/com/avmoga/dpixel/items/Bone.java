@@ -169,6 +169,6 @@ public class Bone extends Item {
 
 	@Override
 	public String info() {
-		return "This bone radiates an eerie power. Reading the inscription will open the portal to the Skeleton King. ";
+		return "此物品会使你传送到骷髅王的所在地。 ";
 	}
 }

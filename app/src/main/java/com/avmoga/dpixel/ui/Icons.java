@@ -19,6 +19,7 @@ package com.avmoga.dpixel.ui;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.actors.hero.HeroClass;
+import com.avmoga.dpixel.actors.hero.HeroRace;
 import com.watabou.noosa.Image;
 
 public enum Icons {
@@ -26,6 +27,21 @@ public enum Icons {
 	SKULL, BUSY, COMPASS, INFO, PREFS, WARNING, TARGET, MASTERY, WATA, SHPX, WARRIOR, MAGE, ROGUE, HUNTRESS, CLOSE, DEPTH, DEPTH_LG, SLEEP, ALERT, 
 	BACKPACK, SEED_POUCH, SCROLL_HOLDER, POTION_BANDOLIER, WAND_HOLSTER, CHECKED, UNCHECKED, EXIT, CHALLENGE_OFF,
 	CHALLENGE_ON, RESUME, ANKH_CHAIN, KEYRING, BOX,LANG;
+
+	public static Image get(HeroRace cl) {
+		switch (cl) {
+			case HUMAN:
+				return get(WARRIOR);
+			case DWARF:
+				return get(MAGE);
+			case WRAITH:
+				return get(ROGUE);
+			case GNOLL:
+				return get(HUNTRESS);
+			default:
+				return null;
+		}
+	}
 
 	public Image get() {
 		return get(this);

@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
@@ -39,10 +38,12 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class SmartBomb extends Item {
 
 	{
-		name = "smart bomb";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SMART_BOMB;
 		defaultAction = AC_LIGHTTHROW;
 		stackable = true;
@@ -104,7 +105,7 @@ public class SmartBomb extends Item {
 	@Override
 	public boolean doPickUp(Hero hero) {
 		if (fuse != null) {
-			GLog.w("You quickly snuff the bomb's fuse.");
+			GLog.w(Messages.get(SmartBomb.class, "sniff"));
 			fuse = null;
 		}
 		return super.doPickUp(hero);
@@ -193,9 +194,7 @@ public class SmartBomb extends Item {
 
 	@Override
 	public String info() {
-		return "A black powder bomb designed to only damage specific enemies. The blast from this bomb is more powerful, but only damages mobs."
-				+ (fuse != null ? "\n\nThe bomb's fuse is burning away, keep your distance or put it out!"
-						: "\n\nIt looks like the fuse will take a couple rounds to burn down once it is lit.");
+		return Messages.get(this, "desc1") + (fuse != null ? Messages.get(this, "desc2") : Messages.get(this, "desc3"));
 	}
 
 	private static final String FUSE = "fuse";

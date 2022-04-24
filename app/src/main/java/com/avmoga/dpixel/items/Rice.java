@@ -17,10 +17,9 @@
  */
 package com.avmoga.dpixel.items;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.mobs.Mob;
@@ -31,16 +30,18 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 
+import java.util.ArrayList;
+
 public class Rice extends Item {
 
-	public static final String AC_COOK = "Make Dumplings";
-	public static final String AC_COOKBOMB = "Make Dumpling Bomb";
+	public static final String AC_COOK = Messages.get(Rice.class, "ac1");
+	public static final String AC_COOKBOMB = Messages.get(Rice.class, "ac2");
 
 	public static final float TIME_TO_COOK = 1;
 	public static final float TIME_TO_COOK_BOMB = 4;
 
 	{
-		name = "grain of magic rice";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SEED_RICE;
 
 		stackable = false;
@@ -76,15 +77,15 @@ public class Rice extends Item {
 				Dungeon.level.drop(riceball, Dungeon.hero.pos).sprite.drop();
 				Statistics.ballsCooked++;
 			}
-			
-				
-			if (Statistics.ballsCooked>200){
+
+
+			if (Statistics.ballsCooked > 200) {
 				detach(Dungeon.hero.belongings.backpack);
-				GLog.n("Your magic rice crumbles to dust!");
-			} else if (Statistics.ballsCooked>175){
-				GLog.n("Your magic rice is cracking...");
-			} else if (Statistics.ballsCooked>150){
-				GLog.n("Your magic rice begins to look dull...");
+				GLog.n(Messages.get(Rice.class, "b1"));
+			} else if (Statistics.ballsCooked > 175) {
+				GLog.n(Messages.get(Rice.class, "b2"));
+			} else if (Statistics.ballsCooked > 150) {
+				GLog.n(Messages.get(Rice.class, "b3"));
 			}
 				
 		} else if (action.equals(AC_COOKBOMB)) {
@@ -102,15 +103,15 @@ public class Rice extends Item {
 				Dungeon.level.drop(bomb, Dungeon.hero.pos).sprite.drop();
 				Statistics.ballsCooked+=bombcost;
 			}
-			
-				
-			if (Statistics.ballsCooked>200){
+
+
+			if (Statistics.ballsCooked > 200) {
 				detach(Dungeon.hero.belongings.backpack);
-				GLog.n("Your magic rice crumbles to dust!");
-			} else if (Statistics.ballsCooked>175){
-				GLog.n("Your magic rice is cracking...");
-			} else if (Statistics.ballsCooked>150){
-				GLog.n("Your magic rice begins to look dull...");
+				GLog.n(Messages.get(Rice.class, "b1"));
+			} else if (Statistics.ballsCooked > 175) {
+				GLog.n(Messages.get(Rice.class, "b2"));
+			} else if (Statistics.ballsCooked > 150) {
+				GLog.n(Messages.get(Rice.class, "b3"));
 			}
 					
 
@@ -129,7 +130,7 @@ public class Rice extends Item {
 					mob.beckon(Dungeon.hero.pos);
 				}
 
-				GLog.w("The denizens awake and they are hungry! Here come the Oni!");
+				GLog.w(Messages.get(Rice.class, "enrage"));
 				CellEmitter.center(Dungeon.hero.pos).start(
 						Speck.factory(Speck.SCREAM), 0.3f, 3);
 				Sample.INSTANCE.play(Assets.SND_CHALLENGE);
@@ -158,6 +159,6 @@ public class Rice extends Item {
 
 	@Override
 	public String info() {
-		return "This magic grain of rice can create many satisfying dumplings.";
+		return Messages.get(this, "desc");
 	}
 }

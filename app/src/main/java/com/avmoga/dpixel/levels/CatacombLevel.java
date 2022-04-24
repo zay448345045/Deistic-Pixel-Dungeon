@@ -20,6 +20,7 @@ package com.avmoga.dpixel.levels;
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.DungeonTilemap;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.items.SanChikarahDeath;
 import com.avmoga.dpixel.levels.Room.Type;
 import com.avmoga.dpixel.scenes.GameScene;
@@ -168,12 +169,17 @@ public class CatacombLevel extends RegularLevel {
 	@Override
 	public String tileDesc(int tile) {
 		switch (tile) {
-		case Terrain.EMPTY_DECO:
-			return "Wet yellowish moss covers the floor.";
-		case Terrain.BOOKSHELF:
-			return "The bookshelf is packed with cheap useless books. Might it burn?";
-		default:
-			return super.tileDesc(tile);
+			case Terrain.ENTRANCE:
+				return Messages.get(CityLevel.class, "entrance_desc");
+			case Terrain.EXIT:
+				return Messages.get(CityLevel.class, "exit_desc");
+			case Terrain.WALL_DECO:
+			case Terrain.EMPTY_DECO:
+				return Messages.get(CityLevel.class, "deco_desc");
+			case Terrain.EMPTY_SP:
+				return Messages.get(CityLevel.class, "sp_desc");
+			default:
+				return super.tileDesc(tile);
 		}
 	}
 

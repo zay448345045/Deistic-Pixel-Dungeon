@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class AresChains extends Artifact {
 	{
-		name = "战神之链";
+		name = "战神锁链";
 		image = ItemSpriteSheet.ARTIFACT_SHIELD;
 		
 		level = 0;
@@ -42,13 +42,13 @@ public class AresChains extends Artifact {
 	}
 	public static int mobsSinceUpgrade = 0;
 	private static final float TIMETOUSE = 1f;
-	private static final String AC_CHAIN = "CHAIN";
-	private static final String AC_PULL = "PULL";
-	private static final String YELL = "I HAVE YOU NOW!";
-	private static final String BUFF = "buff";
-	private static final String TXT_FAIL = "but there was nobody to pull...";
-	private static final String TXT_NO_CHARGE = "But there was no charge...";
-	private static final String TXT_SELF_TARGET = "you can't target yourself.";
+	private static final String AC_CHAIN = "束缚敌人";
+	private static final String AC_PULL = "拽";
+	private static final String YELL = "你在我手里了！";
+	private static final String BUFF = "增益";
+	private static final String TXT_FAIL = "这里没人能让你拽过来...";
+	private static final String TXT_NO_CHARGE = "充能不足...";
+	private static final String TXT_SELF_TARGET = "你不能以自己为目标。";
 	
 	public void castChain(int cell){
 
@@ -97,7 +97,7 @@ public class AresChains extends Artifact {
 
 		@Override
 		public String prompt() {
-			return "Choose direction to chain";
+			return "选择拖拽位置";
 		}
 	};
 	
@@ -108,7 +108,7 @@ public class AresChains extends Artifact {
 			if ((hero.heroRace() == HeroRace.DWARF || hero.heroRace() == HeroRace.HUMAN))
 				actions.add(AC_CHAIN);
 			
-			if (hero.heroRace() == HeroRace.DWARF && level >= 2)
+			if (hero.heroRace() == HeroRace.DWARF && level >= 5)
 					actions.add(AC_PULL);
 		}
 		return actions;
@@ -138,11 +138,13 @@ public class AresChains extends Artifact {
 		super.execute(hero, action);
 		if (action.equals(AC_CHAIN)) {
 			if (!isEquipped(hero))
-				GLog.i("You need to equip this to do that.");
+				GLog.i("你需要先装备战神锁链。");
 			else if(cursed)
-				GLog.i("The chains will not obey your will!");
+				GLog.i("战神锁链拒绝俯冲你的意志！");
 			else if(!useableBasic()){
-				GLog.i("What are you trying to do?");
+				GLog.n("战神锁链：你想要干什么？你是矮人吗?");
+			} else if (charge == 0) {
+				GLog.w("战神锁链充能不够……");
 			}
 			else {
 				GameScene.selectCell(chain);
@@ -150,7 +152,7 @@ public class AresChains extends Artifact {
 		} else if (action.equals(AC_PULL) && useable()) {
 			Dungeon.hero.checkVisibleMobs();
 			
-			if(charge > 0 && (Dungeon.hero.visibleEnemies()) > 0){
+			if(charge >= 0 && (Dungeon.hero.visibleEnemies()) > 0){
 				Dungeon.hero.yell(YELL);
 				for (final Mob mob : Dungeon.level.mobs) {
 					if(Level.fieldOfView[mob.pos]){
@@ -166,7 +168,7 @@ public class AresChains extends Artifact {
 										Dungeon.observe();
 										curUser.spendAndNext(1f);
 										Dungeon.level.mobPress(mob);
-										GLog.i("Pulled a " + mob.name + "!");
+										GLog.i("拽过来一只 " + mob.name + "!");
 										mob.damage(Random.Int(mob.HT / 10, mob.HT / 4), this);
 										if (!mob.immunities().contains(Paralysis.class)){
 											Buff.prolong(mob, Paralysis.class, Paralysis.duration(mob));
@@ -184,7 +186,7 @@ public class AresChains extends Artifact {
 				}
 				Dungeon.observe();
 				Dungeon.hero.spendAndNext(TIME_TO_THROW);
-			} else if(!(charge > 0)){
+			} else if((charge == 0)){
 				GLog.i(TXT_NO_CHARGE);
 			} else if(!(Dungeon.hero.visibleEnemies() > 0)){
 				GLog.i(TXT_FAIL);
@@ -211,24 +213,17 @@ public class AresChains extends Artifact {
 	}
 	@Override
 	public String desc(){
-		String desc = "You've made quite an interesting find: A shield with the emblem of Ares, the God " + 
-	"of War. \n\n";
+		String desc = "你发现了一个有趣的东西——一个有着战神阿瑞斯纹章的盾牌\n\n";
 		if(Dungeon.hero.heroRace() == HeroRace.DWARF){
-			desc += "The shield immediately seems to take a liking to you; it grabs onto your arm and "
-					+ "almost refuses to let go. It looks like you could use it to hinder enemies, and, "
-					+ "with a bit more training, pull numerous enemies to you.";
+			desc += "当你拿到这块盾牌的时候，它似乎立刻就喜欢上了你。它抓住了你的手臂并且不肯放开。看起来你可以用他来妨碍一下敌人，而且随着使用次数的增多，你还可以用这枚盾牌将敌人拽向你。";
 		} else if(Dungeon.hero.heroRace() == HeroRace.HUMAN){
-			desc += "You notice that the chains attached to the shield seem to jump to the legs of nearby "
-					+ "enemies; perhaps you could throw them at an enemy to hinder them. You're sure the "
-					+ "warlike Drawves could make a much better use of it.";
+			desc += "你注意到盾牌上连着的锁链似乎可以缠住附近敌人的腿部；也许你可以把这些锁链扔向敌人来妨碍他们的行动。你确信那些好战的矮人们用这件武器会更顺手。";
 		} else {
-			desc += "The chains are too heavy to be used effectively, however. Since the chain and shield "
-					+ "are intertwined, you decide that it is too heavy to be of any use. You should probably "
-					+ "transmute it for a better item.";
+			desc += "这些锁链对你来说太重了，你很难有效的利用它。因为锁链和盾牌是组合起来的，过于沉重而导致你无法使用。你也许应该把它转化为更好用的物品。";
 		}
 		if(cursed && isEquipped(Dungeon.hero)){
-			desc += "\n\nThe Shield of Ares is bound to your arm, the chains are floating dangerously "
-					+ "close to your legs. You feel a cruel spirit in the shield.";
+			desc += "\n\n在你接触到它的时候，盾牌突然绑在了你的手臂上，锁链则在你腿边漂浮着。\n\n" +
+					"直觉告诉你盾牌中很有可能封印着一个残暴的灵魂。";
 		}
 		return desc;
 	}
@@ -246,7 +241,7 @@ public class AresChains extends Artifact {
 						partialCharge = 0;
 					}
 				}
-				
+
 			} else if (cursed && Random.Int(10) == 0)
 				((Hero) target).spend(TICK);
 
@@ -258,7 +253,7 @@ public class AresChains extends Artifact {
 		}
 		public void gainEXP(float partialEXP){
 			if (cursed) return;
-			
+
 			exp += Math.round(partialEXP);
 			
 			if(Random.Int(exp, 10000) > 9500 && level < levelCap){
