@@ -17,6 +17,7 @@
  */
 package com.avmoga.dpixel.items.armor.glyphs;
 
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.actors.buffs.Charm;
@@ -31,7 +32,7 @@ import com.watabou.utils.Random;
 
 public class Affection extends Glyph {
 
-	private static final String TXT_AFFECTION = "%s of affection";
+	private static final String TXT_AFFECTION = Messages.get(Affection.class, "name");
 
 	private static ItemSprite.Glowing PINK = new ItemSprite.Glowing(0xFF4488);
 

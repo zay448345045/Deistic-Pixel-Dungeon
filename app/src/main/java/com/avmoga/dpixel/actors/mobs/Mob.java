@@ -80,7 +80,7 @@ public abstract class Mob extends Char {
 	protected int maxLvl = 30;
 	protected int dewLvl = 1;
 
-	protected Char enemy;
+	public Char enemy;
 	protected boolean enemySeen;
 	protected boolean alerted = false;
 
@@ -482,11 +482,11 @@ public abstract class Mob extends Char {
 					GameScene.levelCleared();		
 					if(Dungeon.depth>0){Statistics.prevfloormoves=Math.max(Dungeon.pars[Dungeon.depth]-Dungeon.level.currentmoves,0);
 					   if (Statistics.prevfloormoves>1){
-					     GLog.h("Level cleared in %s moves under goal.", Statistics.prevfloormoves);
-					   } else if (Statistics.prevfloormoves==1){
-					     GLog.h("Level cleared in 1 move under goal."); 
-					   } else if (Statistics.prevfloormoves==0){
-						 GLog.h("Level cleared over goal moves.");
+						   GLog.h(Messages.get(this, "draw1"), Statistics.prevfloormoves);
+					   } else if (Statistics.prevfloormoves == 1) {
+						   GLog.h(Messages.get(this, "draw2"));
+					   } else if (Statistics.prevfloormoves == 0) {
+						   GLog.h(Messages.get(this, "draw3"));
 					   }
 					} 
 				}

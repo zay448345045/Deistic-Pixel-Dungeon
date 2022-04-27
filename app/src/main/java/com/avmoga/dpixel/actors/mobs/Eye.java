@@ -45,7 +45,7 @@ import java.util.HashSet;
 
 public class Eye extends Mob {
 
-	private static final String TXT_DEATHGAZE_KILLED = "%s's deathgaze killed you...";
+	private static final String TXT_DEATHGAZE_KILLED = "%s's 死亡凝视杀害了你……";
 	protected static final float SPAWN_DELAY = 2f;
 
 	{

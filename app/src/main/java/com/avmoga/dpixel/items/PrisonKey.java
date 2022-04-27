@@ -173,10 +173,9 @@ private static final Glowing WHITE = new Glowing(0xFFFFCC);
 	public Glowing glowing() {
 		return WHITE;
 	}
-	
+
 	@Override
 	public String info() {
-		return "This ancient key is rusty and fragile, but you still feel some power left. "
-				+"Looks like it might transport you to a new level. ";
+		return Messages.get(this, "desc");
 	}
 }

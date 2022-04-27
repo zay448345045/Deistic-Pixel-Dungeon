@@ -25,6 +25,9 @@ public class Assets {
 	public static final String BGM_4 = "music/Level4.ogg";
 	public static final String BGM_5 = "music/Level5.ogg";
 
+	public static final String NEVERGIVE = "music/NG.ogg";
+
+
 	public static final String BGM_6 = "music/Level6.ogg";
 	public static final String BGM_7 = "music/Level6.ogg";
 	public static final String BGM_GO = "music/Yuangu.ogg";

@@ -329,15 +329,23 @@ public class DewVial extends Item {
 
 			curUser = hero;
 			GameScene.selectItem(itemSelector, WndBag.Mode.UPGRADEDEW,	TXT_SELECT);
-													
-			volume = volume - 90;	
-			
+
 		} else {
 
 			super.execute(hero, action);
 
 		}
 	}
+
+	private final WndBag.Listener itemSelector = new WndBag.Listener() {
+		@Override
+		public void onSelect(Item item) {
+			if (item != null) {
+				upgrade(item);
+				volume = volume - 90;
+			}
+		}
+	};
 
 	public static boolean uncurse(Hero hero, Item... items) {
 		
@@ -390,15 +398,6 @@ public class DewVial extends Item {
 					
 		return procced;
 	}
-			
-  private final WndBag.Listener itemSelector = new WndBag.Listener() {
-		@Override
-		public void onSelect(Item item) {
-			if (item != null) {
-				upgrade(item);
-			}
-		}
-	};
 	
 	private void upgrade(Item item) {
 
@@ -444,7 +443,7 @@ public class DewVial extends Item {
 		return volume >= MAX_VOLUME();
 	}
 
-	public void collectDew(Dewdrop dew) {
+	public void collectDew(Dewdrop dew, int amountToFill) {
 
 		GLog.i(TXT_COLLECTED);
 		volume += dew.quantity;

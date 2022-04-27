@@ -19,7 +19,7 @@ package com.avmoga.dpixel.levels;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Messages.Messages;
-import com.avmoga.dpixel.items.Amulet;
+import com.avmoga.dpixel.items.NeverGiveUpAmulet;
 import com.avmoga.dpixel.levels.painters.Painter;
 import com.watabou.noosa.Scene;
 import com.watabou.utils.Bundle;
@@ -119,7 +119,7 @@ public class LastLevel extends Level {
 
 	@Override
 	protected void createItems() {
-		drop(new Amulet(), pedestal);
+		drop(new NeverGiveUpAmulet(), pedestal);
 	}
 
 	@Override

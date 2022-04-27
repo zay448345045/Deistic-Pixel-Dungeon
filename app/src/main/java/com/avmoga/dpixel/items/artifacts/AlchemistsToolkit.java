@@ -4,9 +4,12 @@ import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
+import com.avmoga.dpixel.items.Egg;
 import com.avmoga.dpixel.items.Generator;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.potions.Potion;
+import com.avmoga.dpixel.items.potions.PotionOfExperience;
+import com.avmoga.dpixel.items.potions.PotionOfOverHealing;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
@@ -34,9 +37,9 @@ public class AlchemistsToolkit extends Artifact {
 	public static final String AC_BREW = Messages.get(AlchemistsToolkit.class, "ac_brew");
 
 	// arrays used in containing potion collections for mix logic.
-	public final ArrayList<String> combination = new ArrayList<String>();
-	public ArrayList<String> curGuess = new ArrayList<String>();
-	public ArrayList<String> bstGuess = new ArrayList<String>();
+	public final ArrayList<Class> combination = new ArrayList<>();
+	public ArrayList<Class> curGuess = new ArrayList<>();
+	public ArrayList<Class> bstGuess = new ArrayList<>();
 
 	public int numWrongPlace = 0;
 	public int numRight = 0;
@@ -51,14 +54,13 @@ public class AlchemistsToolkit extends Artifact {
 
 		Generator.Category cat = Generator.Category.POTION;
 		for (int i = 1; i <= 3; i++) {
-			String potion;
+			Class potion;
 			do {
-				potion = convertName(cat.classes[Random.chances(cat.probs)]
-						.getSimpleName());
+				potion = cat.classes[Random.chances(cat.probs)];
 				// forcing the player to use experience potions would be
 				// completely unfair.
-			} while (combination.contains(potion)
-					|| potion.equals("Experience"));
+			}
+			while (combination.contains(potion) || potion == PotionOfExperience.class || potion == Egg.class || potion == PotionOfOverHealing.class);
 			combination.add(potion);
 		}
 	}
@@ -87,7 +89,7 @@ public class AlchemistsToolkit extends Artifact {
 		int numWrongPlace = 0;
 		int numRight = 0;
 
-		for (String potion : curGuess) {
+		for (Class potion : curGuess) {
 			if (combination.contains(potion)) {
 				if (curGuess.indexOf(potion) == combination.indexOf(potion)) {
 					numRight++;
@@ -115,7 +117,7 @@ public class AlchemistsToolkit extends Artifact {
 			this.numWrongPlace = numWrongPlace;
 
 			if (level == 10) {
-				bstGuess = new ArrayList<String>();
+				bstGuess = new ArrayList<>();
 				GLog.p(Messages.get(this, "10"));
 			} else {
 				GLog.w(Messages.get(this, "finish")
@@ -129,7 +131,7 @@ public class AlchemistsToolkit extends Artifact {
 					+ brewDesc(numWrongPlace, numRight)
 					+ Messages.get(this, "throw"));
 		}
-		curGuess = new ArrayList<String>();
+		curGuess = new ArrayList<>();
 
 	}
 
@@ -167,8 +169,9 @@ public class AlchemistsToolkit extends Artifact {
 			result += Messages.get(this, "desc5");
 		} else if (!bstGuess.isEmpty()) {
 			result += Messages.get(this, "desc6")
-					+ Messages.get((Object) bstGuess.get(0), "name") + ", " + Messages.get((Object) bstGuess.get(1), "name") + ", "
-					+ Messages.get((Object) bstGuess.get(2), "name") + Messages.get(this, "desc7");
+					+ "_"+Messages.get(bstGuess.get(0), "name") + ", " + Messages.get(bstGuess.get(1), "name") +
+					","
+					+ Messages.get(bstGuess.get(2), "name")+"_" + Messages.get(this, "desc7");
 			result += Messages.get(this, "desc8")
 					+ brewDesc(numWrongPlace, numRight) + Messages.get(this, "desc9");
 
@@ -179,7 +182,6 @@ public class AlchemistsToolkit extends Artifact {
 		}
 		return result;
 	}
-
 
 	private static final String COMBINATION = "combination";
 	private static final String CURGUESS = "curguess";
@@ -199,9 +201,9 @@ public class AlchemistsToolkit extends Artifact {
 		bundle.put(SEEDSTOPOTION, seedsToPotion);
 
 		bundle.put(COMBINATION,
-				combination.toArray(new String[combination.size()]));
-		bundle.put(CURGUESS, curGuess.toArray(new String[curGuess.size()]));
-		bundle.put(BSTGUESS, bstGuess.toArray(new String[bstGuess.size()]));
+				combination.toArray(new Class[combination.size()]));
+		bundle.put(CURGUESS, curGuess.toArray(new Class[curGuess.size()]));
+		bundle.put(BSTGUESS, bstGuess.toArray(new Class[bstGuess.size()]));
 	}
 
 	@Override
@@ -213,9 +215,9 @@ public class AlchemistsToolkit extends Artifact {
 		seedsToPotion = bundle.getInt(SEEDSTOPOTION);
 
 		combination.clear();
-		Collections.addAll(combination, bundle.getStringArray(COMBINATION));
-		Collections.addAll(curGuess, bundle.getStringArray(CURGUESS));
-		Collections.addAll(bstGuess, bundle.getStringArray(BSTGUESS));
+		Collections.addAll(combination, bundle.getClassArray(COMBINATION));
+		Collections.addAll(curGuess, bundle.getClassArray(CURGUESS));
+		Collections.addAll(bstGuess, bundle.getClassArray(BSTGUESS));
 	}
 
 	public class alchemy extends ArtifactBuff {
@@ -250,8 +252,7 @@ public class AlchemistsToolkit extends Artifact {
 		@Override
 		public void onSelect(Item item) {
 			if (item != null && item instanceof Potion && item.isIdentified()) {
-				if (!curGuess.contains(convertName(item.getClass()
-						.getSimpleName()))) {
+				if (!curGuess.contains(item.getClass())) {
 
 					Hero hero = Dungeon.hero;
 					hero.sprite.operate(hero.pos);
@@ -261,18 +262,18 @@ public class AlchemistsToolkit extends Artifact {
 
 					item.detach(hero.belongings.backpack);
 
-					curGuess.add(convertName(item.getClass().getSimpleName()));
+					curGuess.add(item.getClass());
 					if (curGuess.size() == 3) {
 						guessBrew();
 					} else {
-						GLog.i("You mix the " + item.name()
-								+ " into your current brew.");
+						GLog.i(Messages.get(AlchemistsToolkit.class, "mix1") + item.name()
+								+ Messages.get(AlchemistsToolkit.class, "mix2"));
 					}
 				} else {
-					GLog.w("Your current brew already contains that potion.");
+					GLog.w(Messages.get(AlchemistsToolkit.class, "mix3"));
 				}
 			} else if (item != null) {
-				GLog.w("You need to select an identified potion.");
+				GLog.w(Messages.get(AlchemistsToolkit.class, "mix4"));
 			}
 		}
 	};

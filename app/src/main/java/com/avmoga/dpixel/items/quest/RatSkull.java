@@ -49,6 +49,6 @@ public class RatSkull extends Item {
 
 	@Override
 	public int price() {
-		return 140;
+		return 300;
 	}
 }

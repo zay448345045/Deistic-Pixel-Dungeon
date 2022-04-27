@@ -9,7 +9,9 @@ import com.avmoga.dpixel.sprites.HermitCrabSprite;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.sprites.KingSprite;
+import com.avmoga.dpixel.sprites.MrDestructo2dot0Sprite;
 import com.avmoga.dpixel.sprites.ShadowYogSprite;
+import com.avmoga.dpixel.sprites.SpiderSprite;
 import com.avmoga.dpixel.ui.Icons;
 import com.avmoga.dpixel.ui.Window;
 import com.watabou.noosa.Image;
@@ -19,11 +21,113 @@ import java.util.ArrayList;
 public class v0_1_X_Changes{
 
     public static void addAllChanges( ArrayList<ChangeInfo> changeInfos ){
+        add_v0_7_0_Changes(changeInfos);
+        add_v0_6_0_Changes(changeInfos);
+        add_v0_5_0_Changes(changeInfos);
+        add_v0_4_0_Changes(changeInfos);
         add_v0_3_0_Changes(changeInfos);
         add_v0_1_0_Changes(changeInfos);
     }
 
-    public static void add_v0_3_0_Changes( ArrayList<ChangeInfo> changeInfos ){
+    public static void add_v0_7_0_Changes( ArrayList<ChangeInfo> changeInfos ) {
+        ChangeInfo changes = new ChangeInfo("CN-RCV3-V6", true, "");
+        changes.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes);
+
+        changes = new ChangeInfo(Messages.get(ChangesScene.class, "changes"), false, null);
+        changes.hardlight(0xffff00);
+        changeInfos.add(changes);
+
+        changes.addButton( new ChangeButton(new MrDestructo2dot0Sprite(), ("新音乐"),
+                "主界面音乐优先实装\n\n" +
+                        "-Music-By-_Prohonor_"));
+
+        changes.addButton( new ChangeButton(Icons.get(Icons.LANG), "翻译校正",
+                "_-_ 校正翻译问题！"));
+
+        changes = new ChangeInfo( Messages.get( ChangesScene.class, "bugfixes"), false, null);
+        changes.hardlight( 0xffff00 );
+        changeInfos.add(changes);
+
+        changes.addButton( new ChangeButton((new Image(Assets.SPINNER, 144, 0, 16, 16)), "Bug修复汇总",
+                "_-_ 1.修复小偷的崩溃问题"));
+    }
+    public static void add_v0_6_0_Changes( ArrayList<ChangeInfo> changeInfos ) {
+        ChangeInfo changes = new ChangeInfo("CN-RCV3-V5", true, "");
+        changes.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes);
+
+        changes = new ChangeInfo(Messages.get(ChangesScene.class, "changes"), false, null);
+        changes.hardlight(0xffff00);
+        changeInfos.add(changes);
+
+        changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.SANCHIKARAH, null), "暗影古神",
+                "_-_ 逃避不能解决任何问题！直面我，英雄们！"));
+
+        changes.addButton( new ChangeButton(Icons.get(Icons.LANG), "翻译校正",
+                "_-_ 校正翻译问题！"));
+
+        changes = new ChangeInfo( Messages.get( ChangesScene.class, "bugfixes"), false, null);
+        changes.hardlight( 0xffff00 );
+        changeInfos.add(changes);
+
+        changes.addButton( new ChangeButton((new Image(Assets.SPINNER, 144, 0, 16, 16)), "Bug修复汇总",
+                "_-_ 1.性能优化"));
+
+    }
+
+    public static void add_v0_5_0_Changes( ArrayList<ChangeInfo> changeInfos ){
+        ChangeInfo changes = new ChangeInfo("CN-RCV2", true, "");
+        changes.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes);
+
+        changes= new ChangeInfo( Messages.get( ChangesScene.class, "changes"), false, null);
+        changes.hardlight( 0xffff00 );
+        changeInfos.add(changes);
+
+        changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.VIAL, null), "露珠瓶",
+                "_-_ 修复祝福不使用扣除露珠的问题\n" +
+                        "_-_ 优化露珠拾取逻辑"));
+
+        changes.addButton( new ChangeButton(new SpiderSprite(), "宠物属性调整",
+                "_-_ 现在追加召唤-移动-恢复-跟随"));
+
+        changes = new ChangeInfo( Messages.get( ChangesScene.class, "bugfixes"), false, null);
+        changes.hardlight( 0xffff00 );
+        changeInfos.add(changes);
+
+        changes.addButton( new ChangeButton((new Image(Assets.SPINNER, 144, 0, 16, 16)), "Bug修复汇总",
+                "_-_ 1.修复露珠瓶部分特殊情况消失的问题\n" +
+                        "_-_ 2.校正部分漏译"));
+    }
+
+    public static void add_v0_4_0_Changes( ArrayList<ChangeInfo> changeInfos ){
+
+        ChangeInfo changes = new ChangeInfo("CN-RCV1", true, "");
+        changes.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes);
+
+        changes= new ChangeInfo( Messages.get( ChangesScene.class, "new"), false, null);
+        changes.hardlight( 0x00ff00 );
+        changeInfos.add(changes);
+
+        changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ARTIFACT_BOX, null), "神器宝盒",
+                "_-_ 添加神器宝盒翻译"));
+
+        changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.MUSHROOM, null), "伞菌蘑菇",
+                "_-_ 添加伞菌蘑菇翻译"));
+
+        changes = new ChangeInfo( Messages.get( ChangesScene.class, "bugfixes"), false, null);
+        changes.hardlight( 0xffff00 );
+        changeInfos.add(changes);
+
+        changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.ARTIFACT_TOOLKIT, null), "Bug修复汇总",
+                "_-_ 1.移除高亮模式\n" +
+                        "_-_ 2.校正部分漏译"));
+
+    }
+
+            public static void add_v0_3_0_Changes( ArrayList<ChangeInfo> changeInfos ){
         ChangeInfo changes = new ChangeInfo("CN-0.55自然之神的像素地牢", true, "");
         changes.hardlight(Window.TITLE_COLOR);
         changeInfos.add(changes);

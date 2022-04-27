@@ -17,8 +17,6 @@
  */
 package com.avmoga.dpixel.actors.mobs.npcs;
 
-import java.util.Collection;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
@@ -47,6 +45,8 @@ import com.avmoga.dpixel.windows.WndQuest;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.Collection;
 
 public class Blacksmith extends NPC {
 
@@ -147,7 +147,7 @@ public class Blacksmith extends NPC {
 					//	pick.doUnequip(Dungeon.hero, false);
 					//}
 					//pick.detach(Dungeon.hero.belongings.backpack);
-					yell("Keep the pickaxe. It's good for breaking stones in your way.");
+					yell("保管好你的镐子。 这对收集暗金矿有帮助！");
 					tell(TXT_COMPLETED);
 
 					Quest.completed = true;
@@ -284,8 +284,7 @@ public class Blacksmith extends NPC {
 
 	@Override
 	public String description() {
-		return "This troll blacksmith looks like all trolls look: he is tall and lean, and his skin resembles stone "
-				+ "in both color and texture. The troll blacksmith is tinkering with unproportionally small tools.";
+		return "这个巨魔铁匠看起来和其他巨魔一样：又高又瘦，皮肤的色泽和纹理都像是石头。这位巨人铁匠正在拿着一把与其体形极其不符的小锤子不停地修修补补。";
 	}
 
 	public static class Quest {

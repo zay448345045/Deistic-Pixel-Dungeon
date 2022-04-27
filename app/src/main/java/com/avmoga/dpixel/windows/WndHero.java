@@ -87,7 +87,7 @@ public class WndHero extends WndTabbed {
 	private static final String TXT_MOVES4 = Messages.get(WndHero.class, "moves4");
 	private static final String TXT_HUNGER = Messages.get(WndHero.class, "hunger");
 
-	private static final String TXT_KILLS = "Kills";
+	private static final String TXT_KILLS = "宠物杀敌数";
 
 	private static final String TXT_GOLD = "总计金币";
 	private static final String TXT_DEPTH = "最大深度";
@@ -364,13 +364,17 @@ public class WndHero extends WndTabbed {
 
 
 	}
-	
+
 	private class PetTab extends Group {
 
 		private final String TXT_TITLE = Messages.get(WndHero.class, "p_title");
 		private final String TXT_FEED = Messages.get(WndHero.class, "p_feed");
+		private final String TXT_CALL = Messages.get(WndHero.class, "p_call");
+		private final String TXT_STAY = Messages.get(WndHero.class, "p_stay");
+		private final String TXT_RELEASE = Messages.get(WndHero.class, "p_release");
 		private final String TXT_SELECT = Messages.get(WndHero.class, "p_select");
-		
+		private final String TXT_SPEED = Messages.get(WndHero.class, "p_speed");
+
 		private CharSprite image;
 		private RenderedText name;
 		private HealthBar health;
@@ -379,9 +383,9 @@ public class WndHero extends WndTabbed {
 		private static final int GAP = 5;
 
 		private float pos;
-		
-				
-		public PetTab(PET heropet) {
+
+
+		public PetTab(final PET heropet) {
 
 			name = PixelScene.renderText(Utils.capitalize(heropet.name), 9);
 			name.hardlight(TITLE_COLOR);
@@ -396,9 +400,8 @@ public class WndHero extends WndTabbed {
 
 			buffs = new BuffIndicator(heropet);
 			add(buffs);
-		
-			
-			
+
+
 			IconTitle title = new IconTitle();
 			title.icon(image);
 			title.label(Utils.format(TXT_TITLE, heropet.level, heropet.name).toUpperCase(Locale.ENGLISH), 9);
@@ -417,14 +420,38 @@ public class WndHero extends WndTabbed {
 					btnFeed.reqWidth() + 2, btnFeed.reqHeight() + 2);
 			add(btnFeed);
 
+			RedButton btnCall = new RedButton(TXT_CALL) {
+				@Override
+				protected void onClick() {
+					hide();
+					heropet.callback = true;
+					heropet.stay = false;
+					heropet.enemy = null;
+				}
+			};
+			btnCall.setRect(btnFeed.right() + 1, btnFeed.top(),
+					btnCall.reqWidth() + 2, btnCall.reqHeight() + 2);
+			add(btnCall);
 
-			pos = btnFeed.bottom() + GAP;
+			RedButton btnStay = new RedButton(heropet.stay ? TXT_RELEASE : TXT_STAY) {
+				@Override
+				protected void onClick() {
+					hide();
+					heropet.stay = !heropet.stay;
+				}
+			};
+			btnStay.setRect(btnCall.right() + 1, btnCall.top(),
+					btnStay.reqWidth() + 2, btnStay.reqHeight() + 2);
+
+			add(btnStay);
+
+
+			pos = btnStay.bottom() + GAP;
 
 			statSlot(TXT_ATTACK, heropet.attackSkill(null));
+			statSlot(TXT_SPEED, Dungeon.petHasteLevel);
 			statSlot(TXT_HEALTH, heropet.HP + "/" + heropet.HT);
-			statSlot(TXT_KILLS, heropet.kills);
-			statSlot(TXT_EXP, heropet.level<10 ?
-					heropet.experience + "/" + (heropet.level*heropet.level*heropet.level) : "顶级");
+			statSlot(TXT_EXP, heropet.level < 100 ? heropet.experience + "/" + (5 + heropet.level * 5) : Messages.get(WndHero.class, "max"));
 			if (heropet.type == 4 || heropet.type == 5 || heropet.type == 6 || heropet.type == 7 || heropet.type == 12) {
 				statSlot(TXT_BREATH, heropet.cooldown == 0 ? Messages.get(WndHero.class, "p_ready") : (Math.round((1000 - heropet.cooldown) / 10) + "%"));
 			} else if (heropet.type == 1) {
@@ -438,10 +465,10 @@ public class WndHero extends WndTabbed {
 			} else if (heropet.type == 9) {
 				statSlot(TXT_FANGS, heropet.cooldown == 0 ? Messages.get(WndHero.class, "p_ready") : (Math.round((1000 - heropet.cooldown) / 10) + "%"));
 			}
-			
+
 			pos += GAP;
 
-			
+
 		}
 
 		private void statSlot(String label, String value) {

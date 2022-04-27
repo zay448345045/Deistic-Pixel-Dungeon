@@ -89,7 +89,7 @@ public class Heap implements Bundlable {
 		}
 	}
 
-	private static final String TXT_MIMIC = "This is a mimic!";
+	private static final String TXT_MIMIC = "这是一个宝箱怪！";
 	//private static final String TXT_MONSTERBOX = "You've opened a world of hurt!";
 
 	private static final int SEEDS_TO_POTION = 3;

@@ -33,7 +33,7 @@ import java.util.HashSet;
 
 public class Brute extends Mob {
 
-	private static final String TXT_ENRAGED = "%s becomes enraged!";
+	private static final String TXT_ENRAGED = "%s 暴怒了！";
 
 	{
 		name = Messages.get(this, "name");

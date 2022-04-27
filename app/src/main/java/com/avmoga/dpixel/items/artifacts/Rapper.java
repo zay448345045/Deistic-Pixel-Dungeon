@@ -1,9 +1,5 @@
 package com.avmoga.dpixel.items.artifacts;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.buffs.Buff;
@@ -12,6 +8,7 @@ import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.effects.particles.ElmoParticle;
 import com.avmoga.dpixel.items.Item;
 import com.avmoga.dpixel.items.weapon.missiles.MissileWeapon;
+import com.avmoga.dpixel.scenes.CellSelector;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
@@ -20,11 +17,13 @@ import com.avmoga.dpixel.windows.WndBag.Mode;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
-import com.avmoga.dpixel.scenes.CellSelector;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Rapper extends Artifact {
 	{
-			name = Dungeon.getMonth() == 11? "W. R. A. P. P. E. R." : "R. A. P. P. E. R.";
+			name = "W. R. A. P. P. E. R.";
 			image = ItemSpriteSheet.ARTIFACT_RAPPER;
 
 			level = 0;
@@ -63,7 +62,7 @@ public class Rapper extends Artifact {
 			if(Dungeon.getMonth() == 11){
 				desc += "W. R. A. P. P. E. R., encircled by a Christmas Wreath. It looks like the acronym stands for Wreathed ";
 			} else {
-				desc += "R. A. P. P. E. R. It looks like the acronym stands for ";
+				desc += "W. R. A. P. P. E. R., encircled by a Christmas Wreath. It looks like the acronym stands for Wreathed ";
 			}
 			desc += R1[Random.Int(R1.length - 1)] + " " + A[Random.Int(A.length - 1)] + " " + P1[Random.Int(P1.length - 1)] + " " + P2[Random.Int(P2.length - 1)] + " " + E[Random.Int(E.length - 1)] + " " + R2[Random.Int(R2.length - 1)] 
 					+ "\n\n Attached to it is a charge pack that it looks like was meant to store stabilized matter. "

@@ -39,7 +39,7 @@ public class WraithAmulet extends Artifact {
 	}
 	
 	private static final String TXT_SELFSELECT = "你不能以自己为目标";
-	private static final String TXT_NOCHARGE = "该物品必须充能才能使用。";
+	private static final String TXT_NOCHARGE = "充能不足，无法使用！";
 	private static final String TXT_NOEQUIP = "该物品必须装备才能使用。";
 	private static final String AC_GHOST = "虚无化";
 	private static final String AC_ASSASSINATE = "暗杀";
@@ -79,8 +79,9 @@ public class WraithAmulet extends Artifact {
 				GLog.i("你在干什么？");
 			}
 		} else if (action.equals(AC_ASSASSINATE)) {
-			if(this.charge > 0){
+			if(this.charge >= 5){
 				GameScene.selectCell(porter);
+				charge-=5;
 			} else {
 				GLog.i(TXT_NOCHARGE);
 			}
@@ -224,6 +225,7 @@ public class WraithAmulet extends Artifact {
 									WandOfBlink.appear(Dungeon.hero, target);
 									Dungeon.level.press(target, Dungeon.hero);
 									Dungeon.observe();
+									GLog.i("你暗杀了一个怪物！");
 								} else {
 									GLog.i(TXT_FAR);
 								}

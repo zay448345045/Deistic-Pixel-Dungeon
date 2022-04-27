@@ -48,7 +48,9 @@ public class Statistics {
 
 	public static boolean qualifiedForNoKilling = false;
 	public static boolean completedWithNoKilling = false;
-	
+
+
+	public static boolean amuletObtainednever = false;
 
 	public static boolean amuletObtained = false;
 	public static boolean orbObtained = false;
@@ -84,6 +86,7 @@ public class Statistics {
 		qualifiedForNoKilling = false;
 
 		amuletObtained = false;
+		amuletObtainednever = false;
 		orbObtained = false;
 
 	}
@@ -169,7 +172,8 @@ public class Statistics {
 		prevfloormoves = bundle.getInt(PREVFLOORMOVES);
 		moves = bundle.getInt(MOVES);
 		amuletObtained = bundle.getBoolean(AMULET);
-		orbObtained = bundle.getBoolean(ORB);	
+		orbObtained = bundle.getBoolean(ORB);
+		amuletObtainednever = bundle.getBoolean(AMULET);
 		
 	}
 

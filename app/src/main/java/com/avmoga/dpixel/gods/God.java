@@ -1,9 +1,9 @@
 package com.avmoga.dpixel.gods;
 
-import com.watabou.utils.Bundlable;
+import com.avmoga.dpixel.actors.mobs.Mob;
 import com.watabou.utils.Bundle;
 //TODO finish me yo
-public abstract class God implements Bundlable{
+public abstract class God extends Mob {
 	
 	public int ranking = 0;
 	public int progress = 0;

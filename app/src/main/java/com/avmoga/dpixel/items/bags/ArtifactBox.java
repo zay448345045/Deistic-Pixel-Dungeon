@@ -7,8 +7,7 @@ import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 public class ArtifactBox extends Bag{
 
 	{
-		name = "artifact collection";
-		name = "神器宝箱";
+		name = "神器宝盒";
 		image = ItemSpriteSheet.ARTIFACT_BOX;
 
 		size = 16;
@@ -24,8 +23,7 @@ public class ArtifactBox extends Bag{
 	}
 	@Override
 	public String info() {
-		return "This collector's box is lined with a pleasant-feeling fabric, and there is a large keyhole for "
-				+ "you to keep the contents secure with. You could probably store a decent number of valuable "
-				+"items in this box.";
+		return "这个收藏箱内衬舒适的面料，并有一个大的钥匙孔供你保管物品。\n\n" +
+				"你可以在这个盒子里储存相当数量的神器物品。";
 	}
 }

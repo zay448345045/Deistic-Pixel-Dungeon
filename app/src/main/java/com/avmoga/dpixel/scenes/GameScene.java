@@ -201,8 +201,6 @@ public class GameScene extends PixelScene {
 				Dungeon.level.mapped);
 		add(fog);
 
-		brightness(ShatteredPixelDungeon.brightness());
-
 		spells = new Group();
 		add(spells);
 
@@ -343,9 +341,6 @@ public class GameScene extends PixelScene {
 		fadeIn();
 	}
 
-	private void brightness(int brightness) {
-	}
-
 	@Override
 	public void destroy() {
 
@@ -405,6 +400,8 @@ public class GameScene extends PixelScene {
 	private boolean tagAttack = false;
 	private boolean tagLoot = false;
 	private boolean tagResume = false;
+
+
 
 	private void layoutTags() {
 

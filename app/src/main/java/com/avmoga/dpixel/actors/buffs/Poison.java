@@ -98,6 +98,6 @@ public class Poison extends Buff implements Hero.Doom {
 		Badges.validateDeathFromPoison();
 
 		Dungeon.fail(ResultDescriptions.POISON);
-		GLog.n(Messages.get("你因中毒身亡……"));
+		GLog.n("你因中毒身亡……");
 	}
 }

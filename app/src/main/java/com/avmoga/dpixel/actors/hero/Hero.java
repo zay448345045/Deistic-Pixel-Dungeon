@@ -166,7 +166,7 @@ public class Hero extends Char {
 	private static final String TXT_SEARCH = "搜索";
 
 	public static final int STARTING_STR = 10;
-
+	public int petCount = 0;
 	private static final float TIME_TO_REST = 1f;
 	private static final float TIME_TO_SEARCH = 2f;
 

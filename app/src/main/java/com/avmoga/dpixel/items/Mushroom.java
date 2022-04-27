@@ -17,14 +17,15 @@
  */
 package com.avmoga.dpixel.items;
 
-import com.avmoga.dpixel.Messages.Messages;
+import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 
 public class Mushroom extends Item {
 
 	//private static final String AC_END = "END THE GAME";
 
 	{
-		name = Messages.get(this, "name");;
+		name = "伞菌蘑菇";
+		image = ItemSpriteSheet.MUSHROOM;
 
 		unique = true;
 	}
@@ -72,6 +73,6 @@ public class Mushroom extends Item {
 
 	@Override
 	public String info() {
-		return Messages.get(this, "desc");
+		return "谁会想到在这潮湿的地牢里会生长着这样的伞菌蘑菇呢？";
 	}
 }

@@ -310,5 +310,5 @@ public class ItemSpriteSheet {
 	public static final int ARTIFACT_RADIO = ROW16 + 8;
 	public static final int ARTIFACT_BOX = ROW16 + 9;
 	public static final int ARTIFACT_RAPPER = ROW16 + 10;
-
+	public static final int PLZP = ROW16 + 11;
 }

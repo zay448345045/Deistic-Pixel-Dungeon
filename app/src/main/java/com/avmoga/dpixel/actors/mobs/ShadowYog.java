@@ -17,6 +17,8 @@
  */
 package com.avmoga.dpixel.actors.mobs;
 
+import static com.avmoga.dpixel.Dungeon.hero;
+
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
@@ -31,7 +33,7 @@ import com.avmoga.dpixel.actors.buffs.Terror;
 import com.avmoga.dpixel.actors.buffs.Vertigo;
 import com.avmoga.dpixel.effects.CellEmitter;
 import com.avmoga.dpixel.effects.Speck;
-import com.avmoga.dpixel.items.OrbOfZot;
+import com.avmoga.dpixel.items.Amulet;
 import com.avmoga.dpixel.items.scrolls.ScrollOfPsionicBlast;
 import com.avmoga.dpixel.items.weapon.enchantments.Death;
 import com.avmoga.dpixel.levels.Level;
@@ -49,14 +51,14 @@ public class ShadowYog extends Mob  {
 		name = Messages.get(this, "name");
 		spriteClass = ShadowYogSprite.class;
 		//END,PLAYS YOU CAN DIED END BOSS?
-		HP = HT = 4*50*Dungeon.hero.lvl;
+		HP = HT = 200* hero.lvl+Dungeon.depth+100;
 		
 		baseSpeed = 2f;
-		defenseSkill = 32;
+		defenseSkill = 32+hero.lvl/5;
 
 		EXP = 100;
 
-		state = PASSIVE;
+		state = HUNTING;
 	}
 	
 	private int yogsAlive = 0;
@@ -65,12 +67,12 @@ public class ShadowYog extends Mob  {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(45, 125);
+		return Random.NormalIntRange(60+hero.lvl/5, 140+hero.lvl/2);
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 50;
+		return 50+hero.lvl;
 	}
 
 	public ShadowYog() {
@@ -117,7 +119,7 @@ public class ShadowYog extends Mob  {
 					sprite.visible = Dungeon.visible[pos];
 					GLog.n(Messages.get(this, "vanish"));
 				}		
-				if (Dungeon.level.mobs.size()<Dungeon.hero.lvl*2){
+				if (Dungeon.level.mobs.size()< hero.lvl*6){
 				SpectralRat.spawnAroundChance(newPos);
 				}
 			}
@@ -154,7 +156,8 @@ public class ShadowYog extends Mob  {
 			GameScene.bossSlain();
 			Dungeon.shadowyogkilled=true;
 			
-			Dungeon.level.drop(new OrbOfZot(), pos).sprite.drop();
+			//Dungeon.level.drop(new OrbOfZot(), pos).sprite.drop();
+			 Dungeon.level.drop(new Amulet(), pos).sprite.drop();
 			
 			for (Mob mob : (Iterable<Mob>) Dungeon.level.mobs.clone()) {
 				if (mob instanceof Rat || mob instanceof GreyOni || mob instanceof SpectralRat || mob instanceof Eye|| mob instanceof BrokenRobot|| mob instanceof Shaman|| mob instanceof DemonGoo|| mob instanceof Yog) {
@@ -162,7 +165,7 @@ public class ShadowYog extends Mob  {
 				}
 			}
 			
-			yell("...");
+			yell("结束了...");
 		 }
 	}
 

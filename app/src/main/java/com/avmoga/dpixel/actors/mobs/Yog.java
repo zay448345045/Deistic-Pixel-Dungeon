@@ -68,14 +68,25 @@ public class Yog extends Mob {
 		name = "Yog-Dzewa";
 		spriteClass = YogSprite.class;
 		if (Dungeon.depth == 35) {
-			HP = HT = 20000;
+			HP = HT = 4000;
 		} else {
 			HP = HT = 2000;
 		}
 
-		EXP = 50;
 
-		state = PASSIVE;
+		if (Dungeon.depth == 35) {
+			EXP = 1;
+		} else {
+			EXP = 50;
+		}
+
+		if (Dungeon.depth == 35) {
+			state =HUNTING;
+		} else {
+			state = PASSIVE;
+		}
+
+
 	}
 	
 	private static final int REGENERATION = 200;

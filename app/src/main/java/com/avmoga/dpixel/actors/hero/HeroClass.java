@@ -79,24 +79,32 @@ public enum HeroClass {
 		if (!Dungeon.isChallenged(Challenges.NO_ARMOR))
 			(hero.belongings.armor = new ClothArmor()).identify();
 
-		//难度还原 添加种子袋
-		//new ScrollOfMagicMapping().quantity(100).identify().collect();
-		//new PotionOfMindVision().quantity(100).identify().collect();
-		//new PotionOfInvisibility().quantity(100).identify().collect();
-		//new WandOfFirebolt().quantity(1).identify().collect();
-		//new MysticBranch().quantity(1).identify().collect();
-		//new AresChains().quantity(1).identify().collect();
-		//new MasterThievesArmband().quantity(1).identify().collect();
-		//new AncientCoin().quantity(1).identify().collect();
-		//new AresChains().quantity(1).identify().collect();
-		//new CommRelay().quantity(1).identify().collect();
-		//Dungeon.gold = 6000;
-		//hero.STR = 27;
-		//hero.lvl = 31;
-		//hero.exp = -123456789;
-		//hero.HP = 	123456789;
-		//hero.HT = 	123456789;
-		new SeedPouch().quantity(1).identify().collect();
+	////难度还原 添加种子袋
+	//new ScrollOfMagicMapping().quantity(100).identify().collect();
+	//new PotionOfMindVision().quantity(100).identify().collect();
+	//new PotionOfInvisibility().quantity(100).identify().collect();
+	//new PotionOfLiquidFlame().quantity(100).identify().collect();
+	//	//	//new WandOfFirebolt().quantity(1).identify().collect();
+	//new Wave().quantity(100).identify().collect();
+	//new CurareDart().quantity(100).identify().collect();
+	//new Dart().quantity(100).identify().collect();
+	//	new CurareShuriken().quantity(100).identify().collect();
+	//	new Javelin().quantity(100).identify().collect();
+	//	new Shuriken().quantity(100).identify().collect();
+	//	new RiceBall().quantity(100).identify().collect();
+	//	new Tamahawk().quantity(100).identify().collect();
+	//new Rapper().quantity(1).identify().collect();
+	//new AncientCoin().quantity(1).identify().collect();
+	//new WraithAmulet().quantity(1).identify().collect();
+	//new NeverGiveUpAmulet().quantity(1).identify().collect();
+	//	new WandOfFirebolt().quantity(1).collect();
+	//Dungeon.gold = 6000;
+	//hero.STR = 27;
+	//hero.lvl = 31;
+	//hero.exp = -123456789;
+	//hero.HP = 	123456789;
+	//hero.HT = 	123456789;
+	new SeedPouch().quantity(1).identify().collect();
 
 		if (!Dungeon.isChallenged(Challenges.NO_FOOD))
 			new Food().identify().collect();
@@ -118,18 +126,18 @@ public enum HeroClass {
 
 	private static void initWarrior(Hero hero) {
 		hero.STR = hero.STR + 1;
-		
+
 
 		(hero.belongings.weapon = new ShortSword()).identify();
 		Dart darts = new Dart(8);
 		darts.identify().collect();
-		    	
+
 		Dungeon.quickslot.setSlot(0, darts);
-		
+
 		KeyRing keyring = new KeyRing(); keyring.collect();
 
 		new PotionOfStrength().setKnown();
-		
+
 		//playtest(hero);
 	}
 
@@ -138,9 +146,9 @@ public enum HeroClass {
 
 		WandOfMagicMissile wand = new WandOfMagicMissile();
 		wand.identify().collect();
-		
+
 		KeyRing keyring = new KeyRing(); keyring.collect();
-		
+
 		Dungeon.quickslot.setSlot(0, wand);
 
 		new ScrollOfIdentify().setKnown();

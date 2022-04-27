@@ -189,8 +189,7 @@ public class Blacksmith2 extends NPC {
 
 	@Override
 	public String description() {
-		return "This troll blacksmith looks like all trolls look: he is tall and lean, and his skin resembles stone "
-				+ "in both color and texture. The troll blacksmith is tinkering with unproportionally small tools.";
+		return "这个巨魔铁匠看起来和其他巨魔一样：又高又瘦，皮肤的色泽和纹理都像是石头。这位巨人铁匠正在拿着一把与其体形极其不符的小锤子不停地修修补补。";
 	}
 
 

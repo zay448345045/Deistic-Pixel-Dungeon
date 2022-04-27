@@ -19,6 +19,7 @@ package com.avmoga.dpixel.windows;
 
 import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Chrome;
+import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.mobs.npcs.Blacksmith2;
 import com.avmoga.dpixel.items.Item;
@@ -26,9 +27,9 @@ import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.ui.ItemSlot;
 import com.avmoga.dpixel.ui.RedButton;
+import com.avmoga.dpixel.ui.RenderedTextMultiline;
 import com.avmoga.dpixel.ui.Window;
 import com.avmoga.dpixel.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.NinePatch;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Component;
@@ -46,15 +47,11 @@ public class WndBlacksmith2 extends Window {
 	private ItemButton btnItem2;
 	private RedButton btnReforge;
 
-	private static final String TXT_PROMPT = "Listen up, here's what I can do. "
-			                                 +"I can reinforce an item with adamantite. "
-			                                 +"Reinforced items can be upgraded to extreme levels. " 
-			                                 +"You have to have the right kind of adamantite and it'll cost you some dark gold. ";
-	
-	private static final String TXT_SELECT1 = "Select an item to reinforce.";
-	private static final String TXT_SELECT2 = "Select your adamantite.";
-	private static final String TXT_REFORGE = "Reforge them";
-	private static final String TXT_WORK = "Great! Let's reinforce it!";
+	private static final String TXT_PROMPT = Messages.get(WndBlacksmith2.class, "prompt");
+
+	private static final String TXT_SELECT1 = Messages.get(WndBlacksmith2.class, "select1");
+	private static final String TXT_SELECT2 = Messages.get(WndBlacksmith2.class, "select2");
+	private static final String TXT_REFORGE = Messages.get(WndBlacksmith2.class, "reforge");
 
 	public WndBlacksmith2(Blacksmith2 troll, Hero hero) {
 
@@ -66,10 +63,9 @@ public class WndBlacksmith2 extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene.createMultiline(TXT_PROMPT, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene.renderMultiline(TXT_PROMPT, 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
 		btnItem1 = new ItemButton() {
@@ -81,7 +77,7 @@ public class WndBlacksmith2 extends Window {
 			}
 		};
 		btnItem1.setRect((WIDTH - BTN_GAP) / 2 - BTN_SIZE,
-				message.y + message.height() + BTN_GAP, BTN_SIZE, BTN_SIZE);
+				message.top() + message.height() + BTN_GAP, BTN_SIZE, BTN_SIZE);
 		add(btnItem1);
 
 		btnItem2 = new ItemButton() {
@@ -117,14 +113,12 @@ public class WndBlacksmith2 extends Window {
 				btnPressed.item(item);
 
 				if (btnItem1.item != null && btnItem2.item != null) {
-					String result = Blacksmith2.verify(btnItem1.item,
-							btnItem2.item);
+					String result = Blacksmith2.verify(btnItem1.item, btnItem2.item);
 					if (result != null) {
 						GameScene.show(new WndMessage(result));
 						btnReforge.enable(false);
 					} else {
 						btnReforge.enable(true);
-						GameScene.show(new WndMessage(TXT_WORK));
 					}
 				}
 			}
@@ -150,7 +144,7 @@ public class WndBlacksmith2 extends Window {
 				protected void onTouchDown() {
 					bg.brightness(1.2f);
 					Sample.INSTANCE.play(Assets.SND_CLICK);
-				};
+				}
 
 				@Override
 				protected void onTouchUp() {
@@ -166,7 +160,7 @@ public class WndBlacksmith2 extends Window {
 		}
 
 		protected void onClick() {
-		};
+		}
 
 		@Override
 		protected void layout() {
@@ -177,7 +171,7 @@ public class WndBlacksmith2 extends Window {
 			bg.size(width, height);
 
 			slot.setRect(x + 2, y + 2, width - 4, height - 4);
-		};
+		}
 
 		public void item(Item item) {
 			slot.item(this.item = item);

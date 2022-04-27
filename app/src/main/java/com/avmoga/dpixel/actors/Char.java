@@ -70,6 +70,8 @@ import java.util.HashSet;
 
 public abstract class Char extends Actor {
 
+
+
 	protected static final String TXT_HIT = "%s攻击了%s";
 	protected static final String TXT_KILL = "%s杀死了你...";
 	protected static final String TXT_DEFEAT = "%s 击败了 %s。";
@@ -78,7 +80,7 @@ public abstract class Char extends Actor {
 	//private static final String TXT_SMB_MISSED = "%s %s %s's attack";
 //
 	//private static final String TXT_OUT_OF_PARALYSIS = "The pain snapped %s out of paralysis";
-
+	public Char enemy;
 	public int pos = 0;
 
 	public CharSprite sprite;

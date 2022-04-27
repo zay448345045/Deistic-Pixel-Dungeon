@@ -45,7 +45,7 @@ public class UnstableSpellbook extends Artifact {
 	public static final String AC_READ = Messages.get(UnstableSpellbook.class, "ac_read");
 	public static final String AC_ADD = Messages.get(UnstableSpellbook.class, "ac_add");
 
-	private final ArrayList<String> scrolls = new ArrayList<String>();
+	private final ArrayList<Class> scrolls = new ArrayList<>();
 
 	protected String inventoryTitle = Messages.get(UnstableSpellbook.class, "prompt");
 	protected WndBag.Mode mode = WndBag.Mode.SCROLL;
@@ -63,7 +63,8 @@ public class UnstableSpellbook extends Artifact {
 		int i = Random.chances(probs);
 
 		while (i != -1) {
-			scrolls.add(convertName(scrollClasses[i].getSimpleName()));
+			scrolls.add(scrollClasses[i]);
+			probs[i] = 0;
 			probs[i] = 0;
 
 			i = Random.chances(probs);
@@ -150,19 +151,19 @@ public class UnstableSpellbook extends Artifact {
 
 		}
 
-
 		if (level < levelCap)
 			if (scrolls.size() > 1)
-				desc += "这本法典的目录并不完整，"
-						+ "指向的白页有： _"
-						+ scrolls.get(0)+"卷轴_"
-						+ " 和 _"
-						+ scrolls.get(1)+"卷轴_"
-						+ "。也许给这本书增加卷轴能够增强它的能量？";
-			else
-				desc += "这本书的目录还剩一个白页，"
-						+ "白页是：%s。" + scrolls.get(0) + ".";
+				desc += Messages.get(this, "desc_index")
+						+ Messages.get(this, "desc3")
+						+ "_"+Messages.get(scrolls.get(0), "name")
+						+ Messages.get(this, "and")
+						+Messages.get(scrolls.get(1), "name")+ "_"
+						+ Messages.get(this, "desc4");
+			else if (scrolls.size() == 1)
+				desc += Messages.get(this, "desc5", Messages.get(scrolls.get(0), "name"));
+			else desc += Messages.get(this, "desc6");
 		else
+			desc += Messages.get(this, "desc6");
 			desc += "这本书已经满了，似乎你不能向里面加入任何东西。";
 
 		return desc;
@@ -180,7 +181,7 @@ public class UnstableSpellbook extends Artifact {
 	public void restoreFromBundle(Bundle bundle) {
 		super.restoreFromBundle(bundle);
 		scrolls.clear();
-		Collections.addAll(scrolls, bundle.getStringArray(SCROLLS));
+		Collections.addAll(scrolls, bundle.getClassArray(SCROLLS));
 	}
 
 	public class bookRecharge extends ArtifactBuff {

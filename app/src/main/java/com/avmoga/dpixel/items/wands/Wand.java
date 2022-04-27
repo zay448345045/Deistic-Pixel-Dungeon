@@ -90,9 +90,9 @@ public abstract class Wand extends KindOfWeapon {
 			WandOfRegrowth.class, WandOfBlink.class, WandOfLightning.class,
 			WandOfAmok.class, WandOfTelekinesis.class, WandOfFlock.class,
 			WandOfDisintegration.class, WandOfAvalanche.class };
-	private static final String[] woods = { "holly", "yew", "ebony", "cherry",
-			"teak", "rowan", "willow", "mahogany", "bamboo", "purpleheart",
-			"oak", "birch" };
+	private static final String[] woods = {"冬青","紫杉","乌木","樱桃",
+			"柚木","罗文","柳树","桃心","竹子","紫心",
+			"橡木","桦木"  };
 	private static final Integer[] images = { ItemSpriteSheet.WAND_HOLLY,
 			ItemSpriteSheet.WAND_YEW, ItemSpriteSheet.WAND_EBONY,
 			ItemSpriteSheet.WAND_CHERRY, ItemSpriteSheet.WAND_TEAK,
@@ -270,7 +270,7 @@ public abstract class Wand extends KindOfWeapon {
 
 	@Override
 	public String name() {
-		return isKnown() ? name : wood + " wand";
+		return isKnown() ? name : wood + " 法杖";
 	}
 
 	@Override
@@ -477,7 +477,7 @@ public abstract class Wand extends KindOfWeapon {
 
 		@Override
 		public String prompt() {
-			return "Choose direction to zap";
+			return "选择施法位置";
 		}
 	};
 

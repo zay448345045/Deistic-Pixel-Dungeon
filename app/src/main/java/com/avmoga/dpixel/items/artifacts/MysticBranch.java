@@ -33,7 +33,7 @@ public class MysticBranch extends Artifact {
 		charge = 0;
 	}
 	private static final String TXT_MONSTER = "不能在非高草区域的种植,也不能在有生物的区域上种植";
-	private static final String TXT_ATTACK = "一个灵魂已被派去地牢复仇。";
+	private static final String TXT_ATTACK = "一个虚无缥缈的灵魂已被派去地牢复仇。";
 	private static final String AC_SUMMON = "复仇";
 	private static final String AC_PLANT = "种植";
 	
@@ -150,7 +150,7 @@ public String desc() {
 	if(Dungeon.hero.heroRace() == HeroRace.HUMAN){
 		desc += "你听见雕像向你轻声诉说，尽可能的告诉你这层地牢的人物的位置";
 	} else if(Dungeon.hero.heroRace() == HeroRace.GNOLL){
-		desc += "你认出的木质雕像是一个_SpiritHead_，它能够让你与这里的自然的灵魂交流。虽然它们的活动领域有限，但也许能为你提供一些信息，甚至以后还能给你提供一些攻击能力。\n\n";
+		desc += "你认出的木质雕像是一个_魂骨_，它能够让你与这里的自然的灵魂交流。虽然它们的活动领域有限，但也许能为你提供一些信息，甚至以后还能给你提供一些攻击能力。\n\n";
 				if(level < 2){
 					 desc += "也许你该试试在草地里穿梭来与更多灵魂达成联系，这也许能提升你的雕像的力量。";
 				}

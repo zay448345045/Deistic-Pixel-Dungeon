@@ -26,6 +26,7 @@ import com.avmoga.dpixel.items.artifacts.TalismanOfForesight;
 import com.avmoga.dpixel.items.artifacts.TimekeepersHourglass;
 import com.avmoga.dpixel.items.artifacts.UnstableSpellbook;
 import com.avmoga.dpixel.items.artifacts.WraithAmulet;
+import com.avmoga.dpixel.items.bags.ArtifactBox;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Bundle;
@@ -70,6 +71,7 @@ public class RingFour extends KindofMisc {
             TimekeepersHourglass.class,
             UnstableSpellbook.class,
             WraithAmulet.class,
+            ArtifactBox.class,
     };
     private static final String[] gems = {
             Messages.get(Ring.class, "diamond"),
@@ -88,6 +90,7 @@ public class RingFour extends KindofMisc {
             Messages.get(Ring.class, "amethyst"),
             Messages.get(Ring.class, "diamond"),
             Messages.get(Ring.class, "opal"),
+            Messages.get(Ring.class, "opal"),
     };
     private static final Integer[] images = {
             ItemSpriteSheet.RING_DIAMOND,
@@ -98,7 +101,7 @@ public class RingFour extends KindofMisc {
             ItemSpriteSheet.RING_SAPPHIRE, ItemSpriteSheet.RING_QUARTZ,
             ItemSpriteSheet.RING_AGATE, ItemSpriteSheet.RING_DIAMOND,
             ItemSpriteSheet.RING_OPAL, ItemSpriteSheet.RING_GARNET,
-            ItemSpriteSheet.RING_RUBY,
+            ItemSpriteSheet.RING_RUBY,ItemSpriteSheet.RING_RUBY,
     };
 
     private static ItemStatusHandler<RingFour> handler;

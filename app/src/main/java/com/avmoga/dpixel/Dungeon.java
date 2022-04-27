@@ -152,7 +152,7 @@ public class Dungeon {
 	public static boolean dewDraw = false;
 	public static boolean dewWater = false;
 	public static boolean wings = false;
-
+	public static int petHasteLevel = 0;
 	public static boolean sealedlevel = false;
 	public static long seed;
 	public static long seedForDepth(int depth){
@@ -271,7 +271,7 @@ public class Dungeon {
 		dewDraw = false;
 		dewWater = false;
 		wings = false;
-	    
+
 		pars = new int[25];
 		
 	}

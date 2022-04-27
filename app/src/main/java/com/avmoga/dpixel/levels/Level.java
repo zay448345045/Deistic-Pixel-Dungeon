@@ -117,7 +117,7 @@ public abstract class Level implements Bundlable {
 	public int width() {
 		return width;
 	}
-
+	public boolean[] heroFOV;
 	protected int width;
 	protected int height;
 	protected int length;

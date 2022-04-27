@@ -25,7 +25,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.avmoga.dpixel.Messages.Languages;
-import com.avmoga.dpixel.scenes.GameScene;
 import com.avmoga.dpixel.scenes.PixelScene;
 import com.avmoga.dpixel.scenes.TitleScene;
 import com.watabou.noosa.Game;
@@ -65,11 +64,6 @@ public class ShatteredPixelDungeon extends Game {
 						com.avmoga.dpixel.items.scrolls.ScrollOfMagicalInfusion.class,
 						"com.avmoga.dpixel.items.scrolls.ScrollOfWeaponUpgrade");
 
-	}
-
-	public static boolean brightness() {
-		return Preferences.INSTANCE.getBoolean(Preferences.KEY_BRIGHTNESS,
-				false);
 	}
 
 	public static void scale(int value) {
@@ -283,12 +277,7 @@ public class ShatteredPixelDungeon extends Game {
 		return Preferences.INSTANCE.getBoolean(Preferences.KEY_SOUND_FX, true);
 	}
 
-	public static void brightness(boolean value) {
-		Preferences.INSTANCE.put(Preferences.KEY_BRIGHTNESS, value);
-		if (scene() instanceof GameScene) {
-			((GameScene) scene()).brightness(value);
-		}
-	}
+
 	public static void flipTags(boolean value) {
 		Preferences.INSTANCE.put(Preferences.KEY_FLIPTAGS, value);
 	}

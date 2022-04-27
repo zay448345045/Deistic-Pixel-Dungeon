@@ -70,7 +70,7 @@ public class Bestiary {
 			chances = new float[] { 1,
 					1, 
 					1, 
-					0.1f };
+					0.03f };
 			classes = new Class<?>[] {Rat.class,
 					BrownBat.class, 
 					GreyRat.class, 

@@ -99,9 +99,8 @@ public class ScrollOfPsionicBlast extends Scroll {
 
 	@Override
 	public String desc() {
-		return "This scroll contains destructive energy that can be psionically channeled to tear apart "
-				+ "the minds of all visible creatures. The power unleashed by the scroll will also temporarily "
-				+ "blind, stun, and seriously harm the reader.";
+		return "这张卷轴蕴含着毁灭性的能量，一旦引导出来将撕裂视野内所有生物的心灵。\n\n" +
+				"这股力量的释放也会对阅读者产生严重伤害，并导致暂时性的失明和眩晕。";
 	}
 
 	@Override

@@ -55,7 +55,7 @@ public class SmartBomb extends Item {
 	// way
 	private static boolean lightingFuse = false;
 
-	private static final String AC_LIGHTTHROW = "Light & Throw";
+	private static final String AC_LIGHTTHROW = Messages.get(Bomb.class, "ac_lightthrow");
 	
 	
 	

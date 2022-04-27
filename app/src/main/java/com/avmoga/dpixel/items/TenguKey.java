@@ -41,7 +41,7 @@ public class TenguKey extends Item {
 	
 	public static final float TIME_TO_USE = 1;
 
-	public static final String AC_PORT = "回到过去";
+	public static final String AC_PORT = "传送";
 
 	private int specialLevel = 36;
 	private int returnDepth = -1;

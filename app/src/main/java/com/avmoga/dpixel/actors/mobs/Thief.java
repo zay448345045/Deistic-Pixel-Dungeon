@@ -51,10 +51,10 @@ public class Thief extends Mob {
 		defenseSkill = 8+adj(0);
 
 		EXP = 5;
-		
+
 		loot = new MasterThievesArmband().identify();
 		lootChance = 0.01f;
-		
+
 		lootOther = Generator.Category.BERRY;
 		lootChanceOther = 0.1f; // by default, see die()
 
@@ -87,7 +87,7 @@ public class Thief extends Mob {
 
 	@Override
 	public void die(Object cause) {
-		
+
 		super.die(cause);
 
 		if (item != null) {
@@ -138,9 +138,9 @@ public class Thief extends Mob {
 		if (item != null) {
 
 			item.updateQuickslot();
-			
+
 			GLog.w(TXT_STOLE, this.name, item.name());
-					
+
 			if (item instanceof Honeypot) {
 				this.item = ((Honeypot) item).shatter(this, this.pos);
 				item.detach(hero.belongings.backpack);

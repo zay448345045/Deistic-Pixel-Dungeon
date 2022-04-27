@@ -1,14 +1,13 @@
 package com.avmoga.dpixel.actors.buffs;
 
 
-import com.avmoga.dpixel.ui.BuffIndicator;
-import com.avmoga.dpixel.utils.GLog;
 import com.avmoga.dpixel.Badges;
 import com.avmoga.dpixel.Dungeon;
-import com.avmoga.dpixel.actors.buffs.Buff;
 import com.avmoga.dpixel.ResultDescriptions;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.plants.Sungrass.Health;
+import com.avmoga.dpixel.ui.BuffIndicator;
+import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -26,6 +25,11 @@ public class Decay extends Buff implements Hero.Doom {
 	@Override
 	public String toString() {
 		return "腐败";
+	}
+
+	@Override
+	public String desc() {
+		return "腐败魔法会无休止的侵蚀玩家的身体，时间越长，越致命\n\n据说只有阳春草的汁液能净化这种恶毒的魔法";
 	}
 	
 	public void set(int value) {

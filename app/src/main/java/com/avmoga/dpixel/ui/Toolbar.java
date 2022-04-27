@@ -38,7 +38,6 @@ import com.avmoga.dpixel.windows.WndInfoItem;
 import com.avmoga.dpixel.windows.WndInfoMob;
 import com.avmoga.dpixel.windows.WndInfoPlant;
 import com.avmoga.dpixel.windows.WndMessage;
-import com.avmoga.dpixel.windows.WndOptions;
 import com.avmoga.dpixel.windows.WndTradeItem;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Gizmo;
@@ -324,13 +323,7 @@ public class Toolbar extends Component {
 			} else if (objects.size() == 1) {
 				examineObject(objects.get(0));
 			} else {
-				GameScene.show(new WndOptions(Messages.get(GameScene.class, "choose_examine"),
-						Messages.get(GameScene.class, "multiple_examine"), names.toArray(new String[names.size()])) {
-					@Override
-					protected void onSelect(int index) {
-						examineObject(objects.get(index));
-					}
-				});
+				examineObject(objects.get(0));
 			}
 		}
 

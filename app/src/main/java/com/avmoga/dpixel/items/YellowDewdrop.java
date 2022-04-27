@@ -25,12 +25,13 @@ import com.avmoga.dpixel.actors.hero.HeroClass;
 import com.avmoga.dpixel.effects.Speck;
 import com.avmoga.dpixel.sprites.CharSprite;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
+import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 
-public class YellowDewdrop extends Item {
+public class YellowDewdrop extends Dewdrop {
 
 	private static final String TXT_VALUE = Messages.get(RedDewdrop.class, "value");
-
+	public int amountToFill = 2;
 	{
 		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.YELLOWDEWDROP;
@@ -44,23 +45,28 @@ public class YellowDewdrop extends Item {
 		DewVial vial = hero.belongings.getItem(DewVial.class);
 
 		if (vial == null || vial.isFull()) {
+			if (!(hero.HP >= hero.HT)) {
+				int value = 1 + (Dungeon.depth - 1) / 5;
+				if (hero.heroClass == HeroClass.HUNTRESS) {
+					value++;
+				}
 
-			int value = 2 + (Dungeon.depth - 1) / 5;
-			if (hero.heroClass == HeroClass.HUNTRESS) {
-				value++;
+				int effect = Math.min(hero.HT - hero.HP, value * quantity);
+				if (effect > 0) {
+					hero.HP += effect;
+					hero.sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
+					hero.sprite.showStatus(CharSprite.POSITIVE, TXT_VALUE, effect);
+				}
+			} else {
+				if (vial == null) {
+					GLog.w("你的生命值已满！");
+				} else {
+					GLog.w("你的生命值和露珠瓶已满，你不能拾取露珠了！");
+				}
+				return false;
 			}
-
-			int effect = Math.min(hero.HT - hero.HP, value * quantity);
-			if (effect > 0) {
-				hero.HP += effect;
-				hero.sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
-				hero.sprite.showStatus(CharSprite.POSITIVE, TXT_VALUE, effect);
-			}
-
-		} else if (vial != null) {
-
+		} else {
 			vial.collectDew(this);
-
 		}
 
 		Sample.INSTANCE.play(Assets.SND_DEWDROP);
