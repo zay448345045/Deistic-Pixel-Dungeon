@@ -30,7 +30,7 @@ public class v0_1_X_Changes{
     }
 
     public static void add_v0_7_0_Changes( ArrayList<ChangeInfo> changeInfos ) {
-        ChangeInfo changes = new ChangeInfo("CN-RCV3-V6", true, "");
+        ChangeInfo changes = new ChangeInfo("CN-RCV6", true, "");
         changes.hardlight(Window.TITLE_COLOR);
         changeInfos.add(changes);
 

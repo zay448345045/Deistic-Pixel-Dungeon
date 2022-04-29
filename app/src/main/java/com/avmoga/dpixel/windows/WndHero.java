@@ -528,11 +528,11 @@ public class WndHero extends WndTabbed {
 		  }
 	      heropet.cooldown=1;  
 		  item.detach(hero.belongings.backpack);
-		  GLog.n("Your pet eats the %s.",item.name());
+		  GLog.n("你的宠物吃了这个食物 %s.",item.name());
 		}else if (!nearby){
-			GLog.n("Your pet is too far away!");
+			GLog.n("你的宠物离你太远了！");
 		} else {
-		  GLog.n("Your pet rejects the %s.",item.name());
+		  GLog.n("你的宠物拒绝吃这个食物 %s.",item.name());
 		  
 		}		
 	}

@@ -41,7 +41,6 @@ import com.avmoga.dpixel.actors.buffs.Drowsy;
 import com.avmoga.dpixel.actors.buffs.Fury;
 import com.avmoga.dpixel.actors.buffs.Hunger;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
-import com.avmoga.dpixel.actors.buffs.LichenDrop;
 import com.avmoga.dpixel.actors.buffs.Light;
 import com.avmoga.dpixel.actors.buffs.Ooze;
 import com.avmoga.dpixel.actors.buffs.Paralysis;
@@ -59,7 +58,6 @@ import com.avmoga.dpixel.actors.mobs.DemonGoo;
 import com.avmoga.dpixel.actors.mobs.Eye;
 import com.avmoga.dpixel.actors.mobs.GoldThief;
 import com.avmoga.dpixel.actors.mobs.King;
-import com.avmoga.dpixel.actors.mobs.Lichen;
 import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.actors.mobs.Monk;
 import com.avmoga.dpixel.actors.mobs.RedWraith;
@@ -217,7 +215,7 @@ public class Hero extends Char {
 
 	public Hero() {
 		super();
-		name = "你";
+		name = Messages.get(this, "name");
 
 		HP = HT = 20;
 		STR = STARTING_STR;
@@ -1227,11 +1225,11 @@ public class Hero extends Char {
 
 		if (this.buff(Drowsy.class) != null) {
 			Buff.detach(this, Drowsy.class);
-			GLog.w("The pain helps you resist the urge to sleep.");
+			GLog.w("疼痛可以帮助你抵抗入睡的冲动。");
 		}
 
 		if (src instanceof DewVial || src instanceof DewVial2 || src instanceof ScrollOfRemoveCurse){
-			GLog.w("You are hurt by the divine energy!");
+			GLog.w("净化的光明正在迸发……");
 		}
 		int tenacity = 0;
 		for (Buff buff : buffs(RingOfTenacity.Tenacity.class)) {
@@ -1287,11 +1285,10 @@ public class Hero extends Char {
 			flashIntensity = Math.min(1/3f, flashIntensity); //cap intensity at 1/3
 			GameScene.flash( (int)(0xFF*flashIntensity) << 16 );
 			if (isAlive()) {
-				if (flashIntensity > 1/6f) {
-					Sample.INSTANCE.play(Assets.SND_READ);
-					//GLog.w("看来我今天要死在这里了！");
+				if (flashIntensity >= 1/6f) {
+					Sample.INSTANCE.play(Assets.HEALTH_CRITICAL, 1/3f + flashIntensity * 2f);
 				} else {
-					Sample.INSTANCE.play(Assets.SND_CURSED);
+					Sample.INSTANCE.play(Assets.HEALTH_WARN, 1/3f + flashIntensity * 4f);
 				}
 			}
 		}
@@ -1718,21 +1715,18 @@ public class Hero extends Char {
 	}
 
 	@Override
-	public void move(int step) {
-		super.move(step);
+	public void move( int step ) {
+		super.move( step );
 
 		if (!flying) {
 
 			if (Level.water[pos]) {
-				Sample.INSTANCE.play(Assets.SND_WATER, 1, 1,
-						Random.Float(0.8f, 1.25f));
+				Sample.INSTANCE.play( Assets.SND_WATER, 1, 1, Random.Float( 0.8f, 1.25f ) );
 			} else {
-				Sample.INSTANCE.play(Assets.SND_STEP);
+				Sample.INSTANCE.play( Assets.SND_STEP );
 			}
-			Dungeon.level.press(pos, this);
+			Dungeon.level.press( pos, this );
 		}
-
-		if (buff(LichenDrop.class) != null){Lichen.spawnAroundChance(pos);}
 	}
 
 	@Override
@@ -1870,7 +1864,7 @@ public class Hero extends Char {
 			sprite.showStatus(CharSprite.DEFAULT, TXT_SEARCH);
 			sprite.operate(pos);
 			if (foresight != null && foresight.isCursed()) {
-				GLog.n("You can't concentrate, searching takes a while.");
+				GLog.n("你无法集中注意力，搜索需要一段时间。");
 				spendAndNext(TIME_TO_SEARCH * 3);
 			} else {
 				spendAndNext(TIME_TO_SEARCH);

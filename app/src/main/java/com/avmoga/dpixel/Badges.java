@@ -104,7 +104,7 @@ public class Badges {
 				"一场游戏中酿造12瓶药水", 55), NO_MONSTERS_SLAIN(
 				"在不击杀怪物的情况下通过楼层", 28), GRIM_WEAPON(
 				"通过\"残酷\"武器附魔秒杀一个怪物", 29), PIRANHAS(
-				"=消灭6只食人鱼", 30), NIGHT_HUNTER(
+				"消灭6只食人鱼", 30), NIGHT_HUNTER(
 				"在夜间杀死 15 只怪物", 58), GAMES_PLAYED_1(
 				"进行10场游戏", 60, true), GAMES_PLAYED_2(
 				"进行50场游戏", 61, true), GAMES_PLAYED_3(

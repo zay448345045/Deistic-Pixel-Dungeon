@@ -96,7 +96,7 @@ public enum HeroClass {
 	//new Rapper().quantity(1).identify().collect();
 	//new AncientCoin().quantity(1).identify().collect();
 	//new WraithAmulet().quantity(1).identify().collect();
-	//new NeverGiveUpAmulet().quantity(1).identify().collect();
+	//new UnstableSpellbook().quantity(1).identify().collect();
 	//	new WandOfFirebolt().quantity(1).collect();
 	//Dungeon.gold = 6000;
 	//hero.STR = 27;

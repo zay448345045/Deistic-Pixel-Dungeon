@@ -116,7 +116,7 @@ public class ShatteredPixelDungeon extends Game {
 				Assets.SND_MASTERY, Assets.SND_PUFF, Assets.SND_ROCKS,
 				Assets.SND_BURNING, Assets.SND_FALLING, Assets.SND_GHOST,
 				Assets.SND_SECRET, Assets.SND_BONES, Assets.SND_BEE,
-				Assets.SND_DEGRADE, Assets.SND_MIMIC);
+				Assets.SND_DEGRADE, Assets.SND_MIMIC,Assets.HEALTH_WARN,Assets.HEALTH_CRITICAL);
 	}
 
 	@Override

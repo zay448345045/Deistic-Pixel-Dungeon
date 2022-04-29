@@ -590,6 +590,7 @@ public abstract class Mob extends Char {
 		return item;
 	}
 
+
 	public void explodeDew(int cell) {
 		
 		if (Dungeon.dewDraw){

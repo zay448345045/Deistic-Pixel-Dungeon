@@ -55,7 +55,11 @@ public class BGMPlayer {
         }else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 37)   {
             Music.INSTANCE.play(Assets.BGM_BOSSC, true);
         }else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 38)   {
-            Music.INSTANCE.play(Assets.BGM_GO, true);
+            Music.INSTANCE.play(Assets.BGM_BOSSB, true);
+        }else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 39)   {
+            Music.INSTANCE.play(Assets.BGM_BOSSD, true);
+        }else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 40)   {
+            Music.INSTANCE.play(Assets.BGM_BOSSA, true);
         }else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 41) {
             Music.INSTANCE.play(Assets.BGM_BOSSE, true);
         }

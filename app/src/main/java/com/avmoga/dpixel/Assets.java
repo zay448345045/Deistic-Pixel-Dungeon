@@ -258,6 +258,8 @@ public class Assets {
 	public static final String SND_DESCEND ="snd/snd_descend.mp3";
 	public static final String SND_EAT = 	"snd/snd_eat.mp3";
 	public static final String SND_READ = 	"snd/snd_read.mp3";
+	public static final String HEALTH_WARN      = "snd/health_warn.mp3";
+	public static final String HEALTH_CRITICAL  = "snd/health_critical.mp3";
 	public static final String SND_LULLABY ="snd/snd_lullaby.mp3";
 	public static final String SND_DRINK = 	"snd/snd_drink.mp3";
 	public static final String SND_SHATTER ="snd/snd_shatter.mp3";
@@ -290,7 +292,4 @@ public class Assets {
 	public static final String SND_BEE = 	"snd/snd_bee.mp3";
 	public static final String SND_DEGRADE ="snd/snd_degrade.mp3";
 	public static final String SND_MIMIC = 	"snd/snd_mimic.mp3";
-
-    public static final String HEALTH_CRITICAL="snd/health_warn.mp3";
-	public static final String HEALTH_WARN = "snd/health_critical.mp3";
 }
