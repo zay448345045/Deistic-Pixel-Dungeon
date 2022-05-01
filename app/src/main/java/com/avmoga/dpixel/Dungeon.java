@@ -63,6 +63,7 @@ import com.avmoga.dpixel.levels.LastShopLevel;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.levels.PrisonBossLevel;
 import com.avmoga.dpixel.levels.PrisonLevel;
+import com.avmoga.dpixel.levels.RatKingLevel;
 import com.avmoga.dpixel.levels.Room;
 import com.avmoga.dpixel.levels.SewerBossLevel;
 import com.avmoga.dpixel.levels.SewerLevel;
@@ -146,6 +147,7 @@ public class Dungeon {
 	public static boolean shadowyogkilled = false;
 	public static boolean crabkingkilled = false;
 	public static boolean banditkingkilled = false;
+	public static boolean banditRATkilled = false;
 	public static boolean skeletonkingkilled = false;
 	public static boolean tengukilled = false;
 	public static boolean tengudenkilled = false;
@@ -260,6 +262,7 @@ public class Dungeon {
 		shadowyogkilled = false;
 		crabkingkilled = false;
 		banditkingkilled = false;
+		banditRATkilled = false;
 		tengukilled = false;
 		tengudenkilled = false;
 		skeletonkingkilled = false;
@@ -502,6 +505,26 @@ public static Level newSkeletonBossLevel(){
 
 	return level;
 }
+
+	public static Level newRatKingLevel(){
+
+		Dungeon.level = null;
+		Actor.clear();
+		depth = 666;
+		if (depth > Statistics.realdeepestFloor) {
+			Statistics.realdeepestFloor = depth;}
+
+		Arrays.fill(visible, false);
+
+		Level level;
+		level = new RatKingLevel();
+
+		level.create();
+
+		Statistics.qualifiedForNoKilling = !bossLevel();
+
+		return level;
+	}
 public static Level newDebugLevel(){
 
 	Dungeon.level = null;
@@ -697,7 +720,7 @@ public static Level newThiefBossLevel(){
 	}
 
 	public static boolean bossLevelFW(int depth) {
-		return depth ==  37 ||depth ==  38 ||depth ==  39  ||depth ==  40;
+		return depth ==  37 ||depth ==  38 ||depth ==  39  ||depth ==  40 || depth ==  666;
 	}
 
 	public static boolean bossLevel() {
@@ -706,7 +729,7 @@ public static Level newThiefBossLevel(){
 
 	public static boolean bossLevel(int depth) {
 		return depth == 5 || depth == 10 || depth == 15 || depth == 20
-				|| depth == 25 ||  depth ==  36 || depth ==  41;
+				|| depth == 25 ||depth ==  35  || depth ==  41|| depth ==  36;
 	}
 	
 	public static boolean growLevel(int depth) {
@@ -842,6 +865,7 @@ public static Level newThiefBossLevel(){
 	private static final String TENGUDENKILL = "tengudenkilled";
 	private static final String SKELETONKILL = "skeletonkingkilled";
 	private static final String BANDITKILL = "banditkingkilled";
+	private static final String RATTKILL = "bandratgkilled";
 	private static final String SEALEDLEV = "sealedlevel";
 	private static final String SPORK = "sporkAvail";
 	private static final String DEWDRAW = "dewDraw";
@@ -909,6 +933,7 @@ public static Level newThiefBossLevel(){
 			bundle.put(TENGUKILL, tengukilled);
 			bundle.put(TENGUDENKILL, tengudenkilled);
 			bundle.put(BANDITKILL, banditkingkilled);
+			bundle.put(RATTKILL, banditRATkilled);
 			bundle.put(SKELETONKILL, skeletonkingkilled);
 			bundle.put(SEALEDLEV, sealedlevel);
 			bundle.put(SPORK, sporkAvail);
@@ -1123,6 +1148,7 @@ public static Level newThiefBossLevel(){
 		tengukilled = bundle.getBoolean(TENGUKILL);
 		tengudenkilled = bundle.getBoolean(TENGUDENKILL);
 		banditkingkilled = bundle.getBoolean(BANDITKILL);
+		banditRATkilled = bundle.getBoolean(RATTKILL);
 		skeletonkingkilled = bundle.getBoolean(SKELETONKILL);
 		sealedlevel = bundle.getBoolean(SEALEDLEV);
 		sporkAvail = bundle.getBoolean(SPORK);

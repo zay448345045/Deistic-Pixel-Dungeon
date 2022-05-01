@@ -36,7 +36,7 @@ import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
 public class SpectralRat extends Mob  implements Callback {
-
+	public static int count = 0;
 	private static final float TIME_TO_ZAP = 1f;
 
 	private static final String TXT_SHADOWBOLT_KILLED = Messages.get(SpectralRat.class, "kill");

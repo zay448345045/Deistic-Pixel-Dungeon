@@ -17,13 +17,19 @@
  */
 package com.avmoga.dpixel.sprites;
 
+import com.avmoga.dpixel.Assets;
+import com.avmoga.dpixel.items.weapon.missiles.ChestMimic;
+import com.avmoga.dpixel.levels.Level;
+import com.avmoga.dpixel.scenes.GameScene;
+import com.watabou.noosa.TextureFilm;
+import com.watabou.utils.Callback;
+
 import java.util.Calendar;
 
-import com.avmoga.dpixel.Assets;
-import com.watabou.noosa.TextureFilm;
-
 public class RatKingSprite extends MobSprite {
-
+	@SuppressWarnings("unused")
+	private static final float DURATION = 2f;
+	private Animation cast;
 	public boolean festive;
 
 	public RatKingSprite() {
@@ -53,5 +59,55 @@ public class RatKingSprite extends MobSprite {
 		die.frames(frames, c + 0);
 
 		play(idle);
+	}
+
+	@Override
+	public void move(int from, int to) {
+
+		place(to);
+
+		play(run);
+		turnTo(from, to);
+
+		isMoving = true;
+
+		if (Level.water[to]) {
+			GameScene.ripple(to);
+		}
+
+		ch.onMotionComplete();
+	}
+
+	@Override
+	public void attack(int cell) {
+		if (!Level.adjacent(cell, ch.pos)) {
+			//Char enemy = Actor.findChar(cell);
+			((MissileSprite) parent.recycle(MissileSprite.class)).reset(ch.pos,
+					cell, new ChestMimic(), new Callback() {
+						@Override
+						public void call() {
+							ch.onAttackComplete();
+						}
+					});
+
+
+			play(cast);
+			turnTo(ch.pos, cell);
+
+		} else {
+
+			super.attack(cell);
+
+		}
+	}
+
+	@Override
+	public void onComplete(Animation anim) {
+		if (anim == run) {
+			isMoving = false;
+			idle();
+		} else {
+			super.onComplete(anim);
+		}
 	}
 }

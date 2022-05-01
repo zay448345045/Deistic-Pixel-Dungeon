@@ -39,6 +39,7 @@ public class Assets {
 	public static final String BGM_BOSSD = "music/Boss4.ogg";
 	public static final String BGM_BOSSE = "music/Boss5.ogg";
 
+	public static final String BGM_DIEDSD = "music/Sy.ogg";
 
 	public static final String ARCS_BG = "arcs1.png";
 	public static final String ARCS_FG = "arcs2.png";

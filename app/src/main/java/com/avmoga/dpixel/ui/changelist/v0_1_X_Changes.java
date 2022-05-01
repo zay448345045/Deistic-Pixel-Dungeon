@@ -10,6 +10,8 @@ import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
 import com.avmoga.dpixel.sprites.KingSprite;
 import com.avmoga.dpixel.sprites.MrDestructo2dot0Sprite;
+import com.avmoga.dpixel.sprites.MrDestructoSprite;
+import com.avmoga.dpixel.sprites.RatKingSprite;
 import com.avmoga.dpixel.sprites.ShadowYogSprite;
 import com.avmoga.dpixel.sprites.SpiderSprite;
 import com.avmoga.dpixel.ui.Icons;
@@ -21,12 +23,43 @@ import java.util.ArrayList;
 public class v0_1_X_Changes{
 
     public static void addAllChanges( ArrayList<ChangeInfo> changeInfos ){
+        add_v0_8_0_Changes(changeInfos);
         add_v0_7_0_Changes(changeInfos);
         add_v0_6_0_Changes(changeInfos);
         add_v0_5_0_Changes(changeInfos);
         add_v0_4_0_Changes(changeInfos);
         add_v0_3_0_Changes(changeInfos);
         add_v0_1_0_Changes(changeInfos);
+    }
+
+    public static void add_v0_8_0_Changes( ArrayList<ChangeInfo> changeInfos ) {
+        ChangeInfo changes = new ChangeInfo("CN-RC", true, "");
+        changes.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes);
+
+        changes = new ChangeInfo(Messages.get(ChangesScene.class, "changes"), false, null);
+        changes.hardlight(0xffff00);
+        changeInfos.add(changes);
+
+        changes.addButton( new ChangeButton(new MrDestructoSprite(), ("新音乐"),
+                "暗影古神层实装\n\n" +
+                        "-Music-By-_Prohonor_"));
+
+        changes.addButton( new ChangeButton(new RatKingSprite(), ("新副本"),
+                "你居然抢我宝箱？\n\n" +
+                        "-_我在英灵殿等着你_"));
+
+        changes.addButton( new ChangeButton(Icons.get(Icons.LANG), "翻译校正",
+                "_-_ 校正翻译问题！"));
+
+
+        changes = new ChangeInfo( Messages.get( ChangesScene.class, "bugfixes"), false, null);
+        changes.hardlight( 0xffff00 );
+        changeInfos.add(changes);
+
+        changes.addButton( new ChangeButton((new Image(Assets.SPINNER, 144, 0, 16, 16)), "Bug修复汇总",
+                "_-_ 1.修复一些小的崩溃问题\n" +
+                        "2.低血量警告声音"));
     }
 
     public static void add_v0_7_0_Changes( ArrayList<ChangeInfo> changeInfos ) {

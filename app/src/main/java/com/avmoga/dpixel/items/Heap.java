@@ -52,6 +52,7 @@ import com.avmoga.dpixel.items.wands.Wand;
 import com.avmoga.dpixel.plants.Plant.Seed;
 import com.avmoga.dpixel.sprites.ItemSprite;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
+import com.avmoga.dpixel.sprites.MimicSprite;
 import com.avmoga.dpixel.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundlable;
@@ -64,11 +65,33 @@ import java.util.LinkedList;
 
 public class Heap implements Bundlable {
 
-	public String info() {
+	@Override
+	public String toString() {
 		switch (type) {
 			case CHEST:
 			case MIMIC:
+				return Messages.get(this, "chest");
+			case LOCKED_CHEST:
+				return Messages.get(this, "locked_chest");
+			case CRYSTAL_CHEST:
+				return Messages.get(this, "crystal_chest");
+			case TOMB:
+				return Messages.get(this, "tomb");
+			case SKELETON:
+				return Messages.get(this, "skeleton");
+			case REMAINS:
+				return Messages.get(this, "remains");
+			default:
+				return peek().toString();
+		}
+	}
+
+	public String info() {
+		switch (type) {
+			case CHEST:
 				return Messages.get(this, "chest_desc");
+			case MIMIC:
+				return "这个宝箱看起来有一点不对劲，直接打开可能不是一个好的选择";
 			case LOCKED_CHEST:
 				return Messages.get(this, "locked_chest_desc");
 			case CRYSTAL_CHEST:
@@ -114,6 +137,7 @@ public class Heap implements Bundlable {
 			return size() > 0 ? items.peek().image() : 0;
 		case CHEST:
 		case MIMIC:
+			new MimicSprite();
 		case SUPDROP:
 			return ItemSpriteSheet.CHEST;
 		case LOCKED_CHEST:

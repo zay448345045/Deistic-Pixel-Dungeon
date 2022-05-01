@@ -60,7 +60,7 @@ public class InterlevelScene extends PixelScene {
 	private static final String TXT_PORTTENGU = Messages.get(InterlevelScene.class, "porttengu");
 	private static final String TXT_PORTCOIN = Messages.get(InterlevelScene.class, "portcoin");
 	private static final String TXT_PORTBONE = Messages.get(InterlevelScene.class, "portbone");
-	private static final String TXT_JOURNAL = Messages.get(InterlevelScene.class, "journal");
+	private static final String TXT_RATKING = Messages.get(InterlevelScene.class, "ratking");
 	private static final String TXT_SOKOBANFAIL = Messages.get(InterlevelScene.class, "sokobanfail");
 	private static final String TXT_PALANTIR = Messages.get(InterlevelScene.class, "palantir");
 
@@ -69,7 +69,8 @@ public class InterlevelScene extends PixelScene {
 
 	public static enum Mode {
 		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, PORT1, PORT2, PORT3, PORT4,
-		PORTSEWERS, PORTPRISON, PORTCAVES, PORTCITY, PORTHALLS, PORTCRAB, PORTTENGU, PORTCOIN, PORTBONE, RETURNSAVE
+		PORTSEWERS, PORTPRISON, PORTCAVES, PORTCITY, PORTHALLS, PORTCRAB, PORTTENGU, PORTCOIN, PORTBONE, RETURNSAVE,
+		RATKING
 	};
 
 	public static Mode mode;
@@ -154,6 +155,9 @@ public class InterlevelScene extends PixelScene {
 		case  PORTCOIN:
 			text = TXT_PORTCOIN;
 		    break;
+			case  RATKING:
+				text = TXT_RATKING;
+				break;
 		case  PORTBONE:
 			text = TXT_PORTBONE;
 		    break;
@@ -237,6 +241,9 @@ public class InterlevelScene extends PixelScene {
 					case PORTBONE:
 						portal(13);
 						break;
+						case RATKING:
+							portal(14);
+							break;
 					}
 
 					if ((Dungeon.depth % 5) == 0) {
@@ -476,6 +483,9 @@ public class InterlevelScene extends PixelScene {
 		case 13:
 			level = Dungeon.newSkeletonBossLevel();
 			break;
+			case 14:
+				level = Dungeon.newRatKingLevel();
+				break;
 		default:
 			level = Dungeon.newLevel();
 		}

@@ -49,7 +49,7 @@ public class GreyRat extends Mob {
 		name = Messages.get(this, "name");
 		spriteClass = GreyRatSprite.class;
 
-		HP = HT = 9+(Dungeon.depth*Random.NormalIntRange(1, 3));
+		HP = HT = 15;
 		defenseSkill = 3+(Math.round((Dungeon.depth)/2));
 		
 		loot = new Meat();
@@ -61,15 +61,23 @@ public class GreyRat extends Mob {
 	}
 
 
-	
+
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(2, 5+Dungeon.depth);
+		if (Dungeon.depth == 666) {
+			return Random.NormalIntRange(10,20);
+		} else {
+			return Random.NormalIntRange(2 + Dungeon.depth / 2, 8 + (Dungeon.depth));
+		}
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 5+Dungeon.depth;
+		if (Dungeon.depth == 666) {
+			return 12;
+		} else {
+			return 11 + Dungeon.depth;
+		}
 	}
 
 	@Override

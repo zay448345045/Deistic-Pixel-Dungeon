@@ -310,6 +310,14 @@ public class Item implements Bundlable {
 		return this;
 	}
 
+	public Item dpgrade() {
+		this.level--;
+
+		updateQuickslot();
+
+		return this;
+	}
+
 
 	public Item upgrade() {
 

@@ -17,18 +17,18 @@
  */
 package com.avmoga.dpixel.levels.traps;
 
-import java.util.ArrayList;
-
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.mobs.Bestiary;
 import com.avmoga.dpixel.actors.mobs.Mob;
+import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.items.wands.WandOfBlink;
 import com.avmoga.dpixel.levels.Level;
-import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.scenes.GameScene;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
 
 public class SummoningTrap {
 
@@ -41,9 +41,9 @@ public class SummoningTrap {
 
 	public static void trigger(int pos, Char c) {
 
-		if (Dungeon.bossLevel()) {
-			return;
-		}
+		//if (Dungeon.bossLevel()) {
+		//	return;
+		//}
 
 		if (c != null) {
 			Actor.occupyCell(c);

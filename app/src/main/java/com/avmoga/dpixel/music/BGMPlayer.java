@@ -27,7 +27,7 @@ public class BGMPlayer {
             Music.INSTANCE.play(Assets.BGM_GO, true);
         } else if (d == 36) {
             Music.INSTANCE.play(Assets.BGM_GO, true);
-        } else if (d > 31 && d <= 35) {
+        } else if (d > 31 && d <= 37) {
             Music.INSTANCE.play(Assets.BGM_6,true);
         } else if (d > 36 && d <= 42) {
             Music.INSTANCE.play(Assets.BGM_7,true);
@@ -38,30 +38,30 @@ public class BGMPlayer {
 
     public static void playBoss() {
         int t = Dungeon.depth;
-        if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 5) {
+        if (Dungeon.bossLevel() && t == 5) {
             Music.INSTANCE.play(Assets.BGM_BOSSA, true);
-        } else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 10) {
+        } else if (Dungeon.bossLevel() && t == 10) {
             Music.INSTANCE.play(Assets.BGM_BOSSB, true);
-        } else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 15) {
+        } else if (Dungeon.bossLevel() && t == 15) {
             Music.INSTANCE.play(Assets.BGM_BOSSC, true);
-        } else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 20) {
+        } else if (Dungeon.bossLevel() && t == 20) {
             Music.INSTANCE.play(Assets.BGM_BOSSD, true);
-        }else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 25){
+        }else if (Dungeon.bossLevel() && t == 25){
             Music.INSTANCE.play(Assets.BGM_BOSSE, true);
-        }else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 35)   {
-            Music.INSTANCE.play(Assets.BGM_BOSSE, true);
-        }else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 36)   {
-            Music.INSTANCE.play(Assets.BGM_BOSSC, true);
-        }else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 37)   {
-            Music.INSTANCE.play(Assets.BGM_BOSSC, true);
-        }else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 38)   {
-            Music.INSTANCE.play(Assets.BGM_BOSSB, true);
-        }else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 39)   {
-            Music.INSTANCE.play(Assets.BGM_BOSSD, true);
-        }else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 40)   {
+        } else if (Dungeon.bossLevel() && t ==35 ) {
+            Music.INSTANCE.play(Assets.BGM_DIEDSD, true);
+        }else if (Dungeon.bossLevel() && t == 36)   {
             Music.INSTANCE.play(Assets.BGM_BOSSA, true);
-        }else if (Dungeon.bossLevel()||Dungeon.bossLevelFW() && t == 41) {
-            Music.INSTANCE.play(Assets.BGM_BOSSE, true);
+        }else if (Dungeon.bossLevelFW() && t == 37)   {
+            Music.INSTANCE.play(Assets.BGM_BOSSB, true);
+        }else if (Dungeon.bossLevelFW() && t == 38)   {
+            Music.INSTANCE.play(Assets.BGM_BOSSB, true);
+        }else if (Dungeon.bossLevelFW() && t == 39)   {
+            Music.INSTANCE.play(Assets.BGM_BOSSD, true);
+        }else if (Dungeon.bossLevelFW() && t == 40)   {
+            Music.INSTANCE.play(Assets.BGM_BOSSA, true);
+        }else if (Dungeon.bossLevelFW() && t == 41 ||t == 666 ) {
+            Music.INSTANCE.play(Assets.BGM_BOSSC, true);
         }
     }
 }

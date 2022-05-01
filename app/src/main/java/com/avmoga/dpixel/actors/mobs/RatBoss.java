@@ -27,30 +27,45 @@ import com.avmoga.dpixel.utils.GLog;
 import com.watabou.utils.Random;
 
 public class RatBoss extends Rat {
-	
-
 
 	{
 		name = "古老鼠王";
 		spriteClass = RatBossSprite.class;
-
-		HP = HT = 12+(Dungeon.depth*Random.NormalIntRange(2, 5));
+		if (Dungeon.depth == 666) {
+			HP = HT = 90;
+		} else {
+			HP = HT = 12 + (Dungeon.depth * Random.NormalIntRange(2, 5));
+		}
 		defenseSkill = 5+(Dungeon.depth/4);
-		
-		loot = new RatSkull();
-		lootChance = 0.7f;
+
+		if (Dungeon.depth == 666) {
+			loot = new RatSkull();
+			lootChance = 0f;
+		} else {
+			loot = new RatSkull();
+			lootChance = 0.7f;
+		}
 	}
+
 
 	private boolean spawnedRats = false;
 			
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(2+Dungeon.depth/2, 8+(Dungeon.depth));
+		if (Dungeon.depth == 666) {
+			return Random.NormalIntRange(20,40);
+		} else {
+			return Random.NormalIntRange(2 + Dungeon.depth / 2, 8 + (Dungeon.depth));
+		}
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 11+Dungeon.depth;
+		if (Dungeon.depth == 666) {
+			return 20;
+		} else {
+			return 11 + Dungeon.depth;
+		}
 	}
 
 	@Override
@@ -60,18 +75,32 @@ public class RatBoss extends Rat {
 
 	@Override
 	public void notice() {
-		super.notice();
+		//super.notice();
 		yell(Messages.get(this, "notice"));
-		if (!spawnedRats) {
-			Rat.spawnAround(pos);
-			GLog.n(Messages.get(this, "spawn"));
-			spawnedRats = true;
+		if (Dungeon.depth == 666) {
+			if (!spawnedRats) {
+				GreyRat.spawnAround(pos);
+				GLog.n(Messages.get(this, "spawn"));
+				spawnedRats = true;
+			}
+		} else {
+			if (!spawnedRats) {
+				Rat.spawnAround(pos);
+				GLog.n(Messages.get(this, "spawn"));
+				spawnedRats = true;
+			}
 		}
 	}
 
 
 	@Override
 	public String description() {
-		return Messages.get(this, "desc");
+		String desc = "";
+		if (Dungeon.depth == 666) {
+			desc += "曾经的鼠王，现在只会保卫现任老鼠王，使用它动用一切的力量来保证能顺利处决入侵者";
+		} else {
+			desc += Messages.get(this, "desc");
+		}
+		return desc;
 	}
 }

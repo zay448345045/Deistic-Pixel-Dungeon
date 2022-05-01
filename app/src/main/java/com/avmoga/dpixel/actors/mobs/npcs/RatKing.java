@@ -18,22 +18,28 @@
 package com.avmoga.dpixel.actors.mobs.npcs;
 
 
+import com.avmoga.dpixel.Assets;
 import com.avmoga.dpixel.Dungeon;
 import com.avmoga.dpixel.Messages.Messages;
 import com.avmoga.dpixel.Statistics;
 import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.actors.buffs.Buff;
+import com.avmoga.dpixel.effects.CellEmitter;
+import com.avmoga.dpixel.effects.particles.ElmoParticle;
+import com.avmoga.dpixel.items.DzewaRatKing;
 import com.avmoga.dpixel.items.Heap;
 import com.avmoga.dpixel.items.weapon.melee.Spork;
 import com.avmoga.dpixel.levels.Level;
 import com.avmoga.dpixel.sprites.RatKingSprite;
+import com.avmoga.dpixel.utils.GLog;
+import com.watabou.noosa.audio.Sample;
 
 public class RatKing extends NPC {
 
 	{
 		name = Messages.get(RatKing.class, "name");
 		spriteClass = RatKingSprite.class;
-
+		HP=HT=100;
 		state = SLEEPING;
 	}
 
@@ -83,7 +89,7 @@ public class RatKing extends NPC {
 
 		sprite.turnTo(pos, Dungeon.hero.pos);
 		if (state == SLEEPING) {
-			notice();
+			//notice();
 			yell(Messages.get(RatKing.class, "yone"));
 			yell(Messages.get(RatKing.class, "ytwo"));
 			state = WANDERING;
@@ -93,6 +99,12 @@ public class RatKing extends NPC {
 		} else if (checkChests < Dungeon.ratChests) {
 			Dungeon.sporkAvail = false;
 			yell(Messages.get(RatKing.class, "steal"));
+			destroy();
+			sprite.killAndErase();
+			CellEmitter.get(pos).burst(ElmoParticle.FACTORY, 6);
+			Sample.INSTANCE.play(Assets.SND_CURSED);
+			GLog.n("你偷了鼠王的东西，鼠王被你活生生气死了");
+			Dungeon.level.drop(new DzewaRatKing(), pos).sprite.drop();
 		} else if (spork != null) {
 			yell(Messages.get(RatKing.class, "found"));
 

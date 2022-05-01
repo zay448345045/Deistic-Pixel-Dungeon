@@ -6,7 +6,6 @@ import com.avmoga.dpixel.actors.Actor;
 import com.avmoga.dpixel.actors.buffs.Invisibility;
 import com.avmoga.dpixel.actors.hero.Hero;
 import com.avmoga.dpixel.actors.hero.HeroRace;
-import com.avmoga.dpixel.actors.mobs.Mob;
 import com.avmoga.dpixel.actors.mobs.npcs.MirrorImage;
 import com.avmoga.dpixel.items.Ankh;
 import com.avmoga.dpixel.items.Generator;
@@ -187,10 +186,9 @@ public class CommRelay extends Artifact {
 
 		@Override
 		public boolean act(){
-			if(isCursed()){
-				for(Mob mob : Dungeon.level.mobs){
-					mob.beckon(Dungeon.hero.pos);
-				}
+			if(isCursed()&& level < levelCap){
+				exp -= (500 * level);
+				dpgrade();
 			}
 			spend(TICK);
 

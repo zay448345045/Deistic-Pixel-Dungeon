@@ -150,7 +150,7 @@ public class StatusPane extends Component {
 		version.measure();
 		version.hardlight(0xCCCCCC);
 		version.x = width - -3 - keys.width()-3;
-		version.y = 35;
+		version.y = 42;
 		add(version);
 	}
 

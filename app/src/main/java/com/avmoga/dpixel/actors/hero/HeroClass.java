@@ -84,7 +84,7 @@ public enum HeroClass {
 	//new PotionOfMindVision().quantity(100).identify().collect();
 	//new PotionOfInvisibility().quantity(100).identify().collect();
 	//new PotionOfLiquidFlame().quantity(100).identify().collect();
-	//	//	//new WandOfFirebolt().quantity(1).identify().collect();
+	//new WandOfFirebolt().quantity(1).identify().collect();
 	//new Wave().quantity(100).identify().collect();
 	//new CurareDart().quantity(100).identify().collect();
 	//new Dart().quantity(100).identify().collect();
@@ -92,12 +92,12 @@ public enum HeroClass {
 	//	new Javelin().quantity(100).identify().collect();
 	//	new Shuriken().quantity(100).identify().collect();
 	//	new RiceBall().quantity(100).identify().collect();
-	//	new Tamahawk().quantity(100).identify().collect();
+	//	new SanChikarah().quantity(1).identify().collect();
 	//new Rapper().quantity(1).identify().collect();
 	//new AncientCoin().quantity(1).identify().collect();
 	//new WraithAmulet().quantity(1).identify().collect();
 	//new UnstableSpellbook().quantity(1).identify().collect();
-	//	new WandOfFirebolt().quantity(1).collect();
+	//	new DzewaRatKing().quantity(1).collect();
 	//Dungeon.gold = 6000;
 	//hero.STR = 27;
 	//hero.lvl = 31;

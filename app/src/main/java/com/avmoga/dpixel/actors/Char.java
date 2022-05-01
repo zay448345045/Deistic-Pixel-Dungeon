@@ -69,9 +69,16 @@ import com.watabou.utils.Random;
 import java.util.HashSet;
 
 public abstract class Char extends Actor {
-
-
-
+	protected HashSet<Property> properties = new HashSet<>();
+	public HashSet<Property> properties() {
+		return properties;
+	}
+	public enum Property {
+		BOSS,
+		UNDEAD,
+		EVIL,
+		IMMOVABLE
+	}
 	protected static final String TXT_HIT = "%s攻击了%s";
 	protected static final String TXT_KILL = "%s杀死了你...";
 	protected static final String TXT_DEFEAT = "%s 击败了 %s。";

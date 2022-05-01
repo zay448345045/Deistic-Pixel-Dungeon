@@ -53,7 +53,7 @@ public class Shell extends Mob implements Callback {
 		name = Messages.get(this, "name");
 		spriteClass = ShellSprite.class;
 
-		HP = HT = 600;
+		HP = HT = 200;
 		defenseSkill = 0;
 
 		EXP = 25;

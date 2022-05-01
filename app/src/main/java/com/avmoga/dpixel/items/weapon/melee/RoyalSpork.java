@@ -18,7 +18,9 @@
 package com.avmoga.dpixel.items.weapon.melee;
 
 import com.avmoga.dpixel.Messages.Messages;
+import com.avmoga.dpixel.actors.Char;
 import com.avmoga.dpixel.sprites.ItemSpriteSheet;
+import com.watabou.utils.Random;
 
 public class RoyalSpork extends MeleeWeapon {
 
@@ -30,6 +32,17 @@ public class RoyalSpork extends MeleeWeapon {
 	public RoyalSpork() {
 		super(1, 1f, 0.15f);
 	}
+	@Override
+	public void proc(Char attacker, Char defender, int damage) {
+
+		if (defender.properties().contains(Char.Property.EVIL))
+			defender.damage(Random.Int(damage, damage * 8), this);
+
+		if (enchantment != null)
+			enchantment.proc(this, attacker, defender, damage);
+
+	}
+
 
 	@Override
 	public String desc() {
