@@ -2,21 +2,23 @@ name: Android CI
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    path:
+     - 'action.on' # 只有 特定 文件的更改才构建
+#    branches: [ "master" ]
+#  pull_request:
+#    branches: [ "master" ]
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.10
 
     steps:
     - uses: actions/checkout@v4
-    - name: set up JDK 11
+    - name: set up JDK
       uses: actions/setup-java@v4
       with:
-        java-version: '16'
+        java-version: '23'
         distribution: 'temurin'
         cache: gradle
 
