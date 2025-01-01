@@ -1,13 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "30.0.2"
+    compileSdkVersion 35
+//29
+//    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.avmoga.dpixel.ling"
         minSdkVersion 14
-        targetSdkVersion 29
+//14
+        targetSdkVersion 35
+//29
     }
 
     allprojects {
