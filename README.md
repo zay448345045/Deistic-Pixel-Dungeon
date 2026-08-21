@@ -1,3 +1,5 @@
+[![Total Downloads](https://img.shields.io/github/downloads/zay448345045/Deistic-Pixel-Dungeon/total?style=for-the-badge&color=2ea44f&logo=github)](https://github.com/zay448345045/Deistic-Pixel-Dungeon/releases)
+
 # DeisticPixelDungeon
 Modification of Sprouted Pixel Dungeon by Dachhack
 > 自然之神的像素地牢，7年之约，正式版汉化即将到来
